@@ -21,15 +21,28 @@ h6 {
     margin: 0;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
+p {
+	margin: 0 0 1em;
 }
 
-img {
-    height: 100%;
-    /* width: 100%; */
-    object-fit: cover;
+a {
+	text-decoration: none;
+	color: inherit;
+	cursor: pointer;
+}
+
+ul, ol {
+    list-style: none;
+    padding: 0;
+}
+
+/* Dont stretch my Media */
+img,
+embed,
+video,
+object {
+	display: block;
+	max-width: 100%;
 }
 
 

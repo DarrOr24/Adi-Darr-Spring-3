@@ -7,7 +7,7 @@ header {
 .app-header {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
+    padding: 20px;
 }
 
 nav a {
@@ -22,4 +22,9 @@ nav a.active {
     color: darkblue;
     font-weight: bold;
     text-decoration: overline;
+}
+
+.app-header img {
+    height: 100px;
+    object-fit:none;
 }

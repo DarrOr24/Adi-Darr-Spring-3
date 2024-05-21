@@ -1,1 +1,18 @@
- /* note list */
+/* .note-list {
+    
+} */
+
+.note-list ul{
+    grid-area: node-list;
+   
+    
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5em;
+}
+
+.note-list ul > * {
+    border-radius: 20px;
+}
+
+

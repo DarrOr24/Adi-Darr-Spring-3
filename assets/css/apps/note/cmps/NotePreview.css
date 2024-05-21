@@ -1,0 +1,31 @@
+.note-preview {
+    /* border-radius: 20px; */
+    padding: 12px 16px;
+    width: 240px;
+    font-size: 18px;
+    
+}
+
+.note-preview header {
+    display: grid;
+    font-family: Roboto;
+    font-weight: 100;
+    font-size: 18px;
+    color: '#202124';
+    /* width: 238px; */
+    height: 38px;
+    line-height: 24px;
+    
+    
+}
+
+.note-preview header h2 {
+    justify-self: start;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.note-preview header img {
+    grid-column: 2;
+    justify-self: end;
+}

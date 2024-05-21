@@ -34,10 +34,25 @@ function _createNotes() {
     let notes = utilService.loadFromStorage(NOTE_KEY)
     if (!notes || !notes.length){
         notes = []
-        const noteTitles = ['Note1', 'Note2', 'Note3', 'Note4', 'Note5']
+        const noteTitles = ['Shopping List', 'Workout schedule', 'Passwords', 'Cookies', 'Important']
+
+        const coral = '#faafa8'
+        const peach = '#f39f76'
+        const sand = '#fff8b8'
+        const mint = '#e2f6d3'
+        const sage = '#b4ddd3'
+    //  const fog =  '#d4e4ed'
+    //  const storm= '#aeccdc'
+    //  const dusk= '#d3bfdb'
+    //  const blossom= '#f6e2dd'
+    //  const clay= '#e9e3d4'
+    //  const chalk= '#efeff1'
+        const noteColors = [coral, peach, sand, mint, sage]
+      
         for (let i = 0; i < 5; i++){
             const noteTitle = noteTitles[i]
-            notes.push(_createNote('NoteTxt', false, {'backgroundColor': utilService.getRandomColor()}, {'title': noteTitle, 'txt': utilService.makeLorem(20)}))
+            const noteColor =noteColors[i]
+            notes.push(_createNote('NoteTxt', false, {'backgroundColor': noteColor}, {'title': noteTitle, 'txt': utilService.makeLorem(20)}))
         }
         utilService.saveToStorage(NOTE_KEY, notes)
     }

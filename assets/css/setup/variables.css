@@ -2,8 +2,24 @@
     --main-bg-color: lightblue;
 
     /* Keep App */
-    --header-color: #74777B;
-    --icon-list-color: #D4D4D6;
-    --icon-list-color-hover: #606162;
+    /* note background color options */
+    --coral: #faafa8;
+    --peach: #f39f76;
+    --sand: #fff8b8;
+    --mint: #e2f6d3;
+    --sage: #b4ddd3;
+    --fog: #d4e4ed;
+    --storm: #aeccdc;
+    --dusk: #d3bfdb;
+    --blossom: #f6e2dd;
+    --clay: #e9e3d4;
+    --chalk: #efeff1;
+
+
+
+
+    
+
+    
 
 }

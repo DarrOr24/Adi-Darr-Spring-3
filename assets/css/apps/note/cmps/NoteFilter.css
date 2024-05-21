@@ -1,0 +1,21 @@
+.note-filter {
+    display: grid;
+    grid-auto-flow: column;
+    background-color: #efeff1;
+    color: #202124;
+    font-family: Roboto;
+    border-radius: 8px;
+    height: 27px;
+    width: 400px;
+    align-items: center;
+    font-size: 13px;
+}
+
+.note-filter img {
+    width: max-content;
+}
+
+.note-filter span {
+    justify-self: start;
+    width: 350px;
+}

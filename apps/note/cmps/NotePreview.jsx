@@ -1,8 +1,17 @@
 export function NotePreview({ note }){
+    const { info, style } = note
+    const { title, txt } = info
+    const { backgroundColor } = style
+    
     return (
-        <article className="note-preview">
-            <h2>{note.info.title}</h2>
-            <p>{note.info.txt} km/h</p>
+        <article className="note-preview" >
+            <header>
+                <h2>{title}</h2>
+                <img src="\assets\img\pin.svg" alt="" />
+            </header>
+            
+            <p>{txt} km/h</p>
         </article>
     ) 
 }
+

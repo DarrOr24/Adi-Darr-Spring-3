@@ -22,10 +22,16 @@ export function NoteIndex() {
     
     
     return <section className = "note-index main-layout">
-        <header>
+        <header className="note-index-header">
+            <img src="\assets\img\hamburger.svg" alt="" />
             <h1>Keep</h1>
             <NoteFilter />
         </header>
-        <NoteList notes={notes} onRemove={removeNote} />
+        <main>
+            <section className="side-menu">Side Menu</section>
+            <section className="add-note">New Note</section>
+            <NoteList notes={notes} onRemove={removeNote} />
+        </main>
+        
     </section>
 }

@@ -1,3 +1,4 @@
 export function NoteFilter() {
-    return <div>note filter</div>
+    return <section className="note-filter">
+        <img src="assets\img\magnifying_glass.svg" alt="" /><span>Search</span></section>
 }

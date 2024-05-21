@@ -1,1 +1,37 @@
- /* note index */
+.note-index {
+    color: #5f6368;
+}
+
+.note-index-header {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 48px 200px 650px; 
+    align-items: center;
+}
+
+.note-index-header h1{
+    font-weight: 500;
+    grid-column: 2;
+}
+
+.note-index-header img{
+    height: 20px;
+}
+
+.note-index main {
+    display: grid;
+    grid-template-areas: "side-menu add-note"
+                        "side-menu note-list";
+}
+
+.note-index main .side-menu {
+    grid-area: side-menu;
+}
+
+.note-index main .add-note {
+    grid-area: add-note;
+}
+
+.note-index main .note-list {
+    grid-area: note-list;
+}

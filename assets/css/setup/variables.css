@@ -1,3 +1,9 @@
 :root {
     --main-bg-color: lightblue;
+
+    /* Keep App */
+    --header-color: #74777B;
+    --icon-list-color: #D4D4D6;
+    --icon-list-color-hover: #606162;
+
 }

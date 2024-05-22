@@ -1,5 +1,6 @@
 .note-list ul >*:hover .action-icons{
     opacity:1;
+    cursor: pointer;
 }
 
 .action-icons {
@@ -30,6 +31,8 @@
     padding: 5px;
     border-radius: 8px;
     font-size: 12px;
+    transition-delay: 500ms;
+    transition: 500ms;
 }
 
 .action-icons .action-name.select {

@@ -16,3 +16,7 @@
     grid-template-rows: 1fr 30px;
 }
 
+.note-list ul >*:hover {
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+

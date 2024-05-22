@@ -1,7 +1,9 @@
 const { useState, useEffect } = React
 
+import { AddNote } from "../cmps/AddNote.jsx"
 import { NoteFilter } from "../cmps/NoteFilter.jsx"
 import { NoteList } from "../cmps/NoteList.jsx"
+import { NoteSideMenu } from "../cmps/NoteSideMenu.jsx"
 import { noteService } from "../services/note.service.js"
 
 export function NoteIndex() {
@@ -29,8 +31,9 @@ export function NoteIndex() {
             <NoteFilter />
         </header>
         <main>
-            <section className="side-menu">Side Menu</section>
-            <section className="add-note">New Note</section>
+           
+            <NoteSideMenu />
+            <AddNote />
             <NoteList notes={notes} onRemove={removeNote} />
         </main>
         

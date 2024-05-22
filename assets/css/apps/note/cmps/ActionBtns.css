@@ -1,5 +1,6 @@
 .note-list ul >*:hover .action-icons{
     opacity:1;
+    cursor: pointer;
 }
 
 .action-icons {

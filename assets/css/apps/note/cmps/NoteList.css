@@ -4,7 +4,7 @@
     
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.5em;
+    gap: 1em;
 }
 
 .note-list ul > * {
@@ -14,50 +14,5 @@
     padding: 12px 16px;
     display: grid;
     grid-template-rows: 1fr 30px;
-}
-
-.note-list ul >*:hover .action-icons{
-    opacity:1;
-}
-
-.action-icons {
-    align-self: end;
-    display: grid;
-    grid-auto-flow: column;
-    place-items: center;
-    opacity: 0;
-    transition: 500ms;
-}
-
-.action-icons div {
-    height: 35px;
-    width: 35px;
-    display: grid;
-    place-items: center;
-}
-
-.action-icons >*:not(:first-child):hover {
-    background-color: lightgray;
-    border-radius: 50%;
-}
-
-.action-icons >*:first-child{
-    position:absolute;
-    left:-16px;
-    top:-16px;
-}
-
-.action-icons >*:nth-child(2){
-    position:absolute;
-    right:12px;
-    top:8px;
-}
-
-.action-icons:hover{
-    opacity:1;
-}
-
-.action-icons img:last-of-type{
-    height: 24px;
 }
 

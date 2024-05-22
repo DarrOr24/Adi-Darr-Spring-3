@@ -1,0 +1,71 @@
+.note-list ul >*:hover .action-icons{
+    opacity:1;
+}
+
+.action-icons {
+    align-self: end;
+    display: grid;
+    grid-auto-flow: column;
+    place-items: center;
+    opacity: 0;
+    transition: 500ms;
+}
+
+.action-icons div {
+    position: relative;
+    height: 35px;
+    width: 35px;
+    display: grid;
+    place-items: center;
+
+}
+
+.action-icons .action-name {
+    opacity: 0;
+    position: absolute;
+    bottom: -25px;
+    width: max-content;
+    background-color: #595959;
+    color: white;
+    padding: 5px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.action-icons .action-name.select {
+    bottom: -17px;
+}
+
+
+
+.action-icons >*:not(:first-child):hover {
+    background-color: lightgray;
+    border-radius: 50%;
+}
+
+.action-icon:hover .action-name {
+    opacity: 1;
+}
+
+
+.action-icons >*:first-child{
+    position:absolute;
+    left:-20px;
+    top:-12px;
+}
+
+.action-icons >*:nth-child(2){
+    position:absolute;
+    right:12px;
+    top:8px;
+}
+
+
+.action-icons:hover .action-icons div img{
+    opacity:1;
+}
+
+.action-icons img:last-of-type{
+    height: 24px;
+}
+

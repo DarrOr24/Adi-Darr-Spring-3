@@ -9,7 +9,6 @@ export function AddNote({notes}){
                 <img src="assets\img\new_note_with_drawing.svg" alt="" />
                 <img src="assets\img\new_note_with_img.svg" alt="" />
             </div>
-
         </div>
 
         <div className="opened hidden">

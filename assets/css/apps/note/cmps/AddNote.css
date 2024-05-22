@@ -2,7 +2,7 @@
     margin-block-start: 1em;
     position: relative;
 }
-.add-note div {
+.add-note .closed, .add-note .opened {
     display: grid;
     width: 600px;
     margin-inline-start: 250px;

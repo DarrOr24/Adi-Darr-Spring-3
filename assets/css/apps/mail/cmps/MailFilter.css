@@ -1,0 +1,15 @@
+.mail-filter {
+    display: flex;
+    align-items: center;
+
+    padding: 10px;
+    margin-inline-start: 20px;
+
+    background-color: #efeff1;
+    border-radius: 2em;
+    height: 40px;
+    width: 400px;
+    align-items: center;
+    font-size: 1em;
+}
+

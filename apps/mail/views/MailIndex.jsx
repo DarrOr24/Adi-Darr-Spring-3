@@ -25,9 +25,14 @@ export function MailIndex() {
     }
 
     return (
-        <section className="mail-index ">
+        <section className="mail-index">
             <MailHeader />
-            <MailList emails={emails} onRemove={removeEmail} />
+            <main>
+                <section className="side-menu">Side Menu</section>
+                <section className="mail-list">
+                    <MailList emails={emails} onRemove={removeEmail} />
+                </section>
+            </main>
         </section>
     )
 }

@@ -48,7 +48,7 @@ function _createEmails() {
                 id: utilService.makeId(),
                 subject: utilService.makeLorem(2),
                 body: utilService.makeLorem(20),
-                isRead: false,
+                isRead: Math.random() > 0.7,
                 sentAt : 1551133930594,
                 removedAt : null,
                 from: 'momo@momo.com',

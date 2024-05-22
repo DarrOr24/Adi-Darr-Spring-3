@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    background: lightcyan;
+    background: var(--clay);
     border-bottom: 2px solid white;
 }
 
@@ -15,9 +15,9 @@ nav a:active {
 }
 
 nav a.active {
-    color: darkblue;
+    color: var(--coral);
     font-weight: bold;
-    text-decoration: overline;
+    /* text-decoration: overline; */
 }
 
 .app-header img {

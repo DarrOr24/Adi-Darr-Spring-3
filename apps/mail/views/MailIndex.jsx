@@ -7,17 +7,17 @@ import { MailHeader } from '../cmps/MailHeader.jsx'
 
 export function MailIndex() {
     
-    const [ emails, setEmails ] = useState([])
+    const [ mails, setMails ] = useState([])
 
     useEffect(() => {
         mailService.query()
-            .then(emails => setEmails(emails))
+            .then(mails => setMails(mails))
     }, [])
 
-    function removeEmail(emailId) {
-        mailService.remove(emailId)
+    function removeMail(mailId) {
+        mailService.remove(mailId)
             .then(() => {
-                setEmails(prevEmails => prevEmails.filter(email => email.id !== emailId))
+                setMails(prevMails => prevMails.filter(mail => mail.id !== mailId))
             })
             .catch(err => {
                 console.log('err:', err)
@@ -30,7 +30,7 @@ export function MailIndex() {
             <main>
                 <section className="side-menu">Side Menu</section>
                 <section className="mail-list">
-                    <MailList emails={emails} onRemove={removeEmail} />
+                    <MailList mails={mails} onRemove={removeMail} />
                 </section>
             </main>
         </section>

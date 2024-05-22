@@ -1,7 +1,7 @@
 import { utilService } from '../../../services/util.service.js'
 
-export function MailPreview({ email }) {
-    const sentDate = new Date(email.sentAt)
+export function MailPreview({ mail }) {
+    const sentDate = new Date(mail.sentAt)
     const day = sentDate.getDate()
     const monthName =  utilService.getMonthName(sentDate)
 
@@ -11,9 +11,9 @@ export function MailPreview({ email }) {
     
     return (
         <article className="mail-preview">
-            <h3>{email.from}</h3>
-            <h3>{email.subject}</h3>
-            <p>{email.body}</p>
+            <h3>{mail.from}</h3>
+            <h3>{mail.subject}</h3>
+            <p>{mail.body}</p>
             <p>{monthName} {day} {formattedTime}</p>
         </article>
     )

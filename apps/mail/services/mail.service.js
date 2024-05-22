@@ -1,8 +1,8 @@
 import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/async-storage.service.js'
 
-const EMAIL_KEY = 'emailDB'
-_createEmails()
+const MAIL_KEY = 'mailDB'
+_createMails()
 
 export const mailService = {
     query,
@@ -12,39 +12,39 @@ export const mailService = {
 }
 
 function query(filterBy = {}) {
-    return storageService.query(EMAIL_KEY)
-        .then(emails => {
+    return storageService.query(MAIL_KEY)
+        .then(mails => {
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')
-                emails = emails.filter(email => regExp.test(email.subject))
+                mails = mails.filter(mail => regExp.test(mail.subject))
             }
-            return emails
+            return mails
         })
 }
 
-function get(emailId) {
-    return storageService.get(EMAIL_KEY, emailId)
+function get(mailId) {
+    return storageService.get(MAIL_KEY, mailId)
 }
 
-function remove(emailId) {
-    return storageService.remove(EMAIL_KEY, emailId)
+function remove(mailId) {
+    return storageService.remove(MAIL_KEY, mailId)
 }
 
-function save(email) {
-    if (email.id) {
-        return storageService.put(EMAIL_KEY, email)
+function save(mail) {
+    if (mail.id) {
+        return storageService.put(MAIL_KEY, mail)
     } else {
-        return storageService.post(EMAIL_KEY, email)
+        return storageService.post(MAIL_KEY, mail)
     }
 }
 
-function _createEmails() {
-    let emails = utilService.loadFromStorage(EMAIL_KEY)
+function _createMails() {
+    let mails = utilService.loadFromStorage(MAIL_KEY)
     
-    if (!emails || !emails.length) {
-        emails = []
+    if (!mails || !mails.length) {
+        mails = []
         for (let i = 0; i < 20; i++) {
-            const email = {
+            const mail = {
                 id: utilService.makeId(),
                 subject: utilService.makeLorem(2),
                 body: utilService.makeLorem(20),
@@ -54,8 +54,8 @@ function _createEmails() {
                 from: 'momo@momo.com',
                 to: 'user@appsus.com'
             }
-            emails.push(email)
+            mails.push(mail)
         }
-        utilService.saveToStorage(EMAIL_KEY, emails)
+        utilService.saveToStorage(MAIL_KEY, mails)
     }
 }

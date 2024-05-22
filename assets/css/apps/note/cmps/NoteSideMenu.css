@@ -19,6 +19,13 @@
     border-top-right-radius: 25px;
 }
 
+.side-menu li:not(.selected):hover{
+    background-color: var(--chalk); 
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+    cursor: pointer;
+}
+
 
 
 

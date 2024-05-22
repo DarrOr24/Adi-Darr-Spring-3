@@ -4,7 +4,7 @@ export function AppHeader() {
 
     return <header className="app-header main-layout full">
         <Link to="/">
-            <h3>LOGO!</h3>
+            <h3>Mail&Keep&Read</h3>
         </Link>
         
         <nav>

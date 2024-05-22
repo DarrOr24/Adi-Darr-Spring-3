@@ -1,8 +1,9 @@
 .note-preview {
     /* border-radius: 20px; */
-    padding: 12px 16px;
+    
     width: 240px;
     font-size: 18px;
+    height: max-content;
     
 }
 

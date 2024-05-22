@@ -41,13 +41,14 @@ function _createNotes() {
         const sand = '#fff8b8'
         const mint = '#e2f6d3'
         const sage = '#b4ddd3'
-    //  const fog =  '#d4e4ed'
-    //  const storm= '#aeccdc'
-    //  const dusk= '#d3bfdb'
-    //  const blossom= '#f6e2dd'
-    //  const clay= '#e9e3d4'
-    //  const chalk= '#efeff1'
-        const noteColors = [coral, peach, sand, mint, sage]
+        const fog =  '#d4e4ed'
+        const storm= '#aeccdc'
+        const dusk= '#d3bfdb'
+        const blossom= '#f6e2dd'
+        const clay= '#e9e3d4'
+        const chalk= '#efeff1'
+        const white = 'white'
+        const noteColors = [chalk, white, storm, clay, white]
       
         for (let i = 0; i < 5; i++){
             const noteTitle = noteTitles[i]

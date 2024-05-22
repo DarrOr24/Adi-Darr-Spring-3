@@ -23,7 +23,8 @@ export function NoteIndex() {
     
     return <section className = "note-index main-layout">
         <header className="note-index-header">
-            <img src="\assets\img\hamburger.svg" alt="" />
+            <img src="assets\img\hamburger.svg" alt="" />
+            <img src="assets\img\keep-icon.png" alt="" />
             <h1>Keep</h1>
             <NoteFilter />
         </header>

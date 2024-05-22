@@ -1,3 +1,4 @@
+import { ActionBtns } from "./ActionBtns.jsx"
 import { NotePreview } from "./NotePreview.jsx"
 
 export function NoteList({ notes, onRemove }) {
@@ -7,9 +8,8 @@ export function NoteList({ notes, onRemove }) {
             {notes.map(note => 
             <li key={note.id } style={{backgroundColor: note.style.backgroundColor}}>
                 <NotePreview note={note} />
-                <section className ="action-icons">
-                    <button onClick={() => onRemove(note.id)}>x</button>
-                </section>
+                <ActionBtns note={note} />
+                
             </li>)}
         </ul>
     </section>

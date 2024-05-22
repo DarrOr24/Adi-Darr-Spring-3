@@ -18,5 +18,10 @@
 
 .note-list ul >*:hover {
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    cursor: pointer;
+}
+
+.note-list ul li .selected {
+    background-color: red;
 }
 

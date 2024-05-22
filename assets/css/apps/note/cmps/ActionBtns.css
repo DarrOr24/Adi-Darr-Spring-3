@@ -10,6 +10,7 @@
     place-items: center;
     opacity: 0;
     transition: 500ms;
+    
 }
 
 .action-icons div {
@@ -18,6 +19,7 @@
     width: 35px;
     display: grid;
     place-items: center;
+    z-index: 1;
 
 }
 

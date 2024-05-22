@@ -7,7 +7,7 @@ _createNotes()
 
 export const noteService = {
     query,
-    // get,
+    get,
     // remove,
     // save,
 }
@@ -69,6 +69,15 @@ function _createNote(type, isPinned, style, info){
                     info
                 }
    return note
+}
+
+function get(noteId) {
+    return storageService.get(NOTE_KEY, noteId)
+    .then(note => {
+        // note = _setNextPrevCarId(note)
+        return note
+    })
+   
 }
 
 

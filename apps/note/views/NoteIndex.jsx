@@ -33,7 +33,7 @@ export function NoteIndex() {
         <main>
            
             <NoteSideMenu />
-            <AddNote />
+            <AddNote notes={notes} />
             <NoteList notes={notes} onRemove={removeNote} />
         </main>
         

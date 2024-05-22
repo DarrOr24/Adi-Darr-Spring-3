@@ -1,0 +1,43 @@
+.add-note {
+    margin-block-start: 1em;
+    position: relative;
+}
+.add-note div {
+    display: grid;
+    width: 600px;
+    margin-inline-start: 250px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.548);
+    padding-inline-start: 1em;
+    border-radius: 8px;
+
+}
+
+.add-note .closed {
+    height: 40px;
+    grid-template-columns: 450px 1fr;
+    align-items: center;
+}
+
+.add-note .closed div {
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.add-note .closed img {
+    justify-self: center;
+}
+
+
+
+.add-note .opened {
+    position: absolute;
+    background-color: white;
+    z-index: 1;
+    top: 0;
+    height: 150px;
+    display: grid;
+}
+
+.add-note .hidden {
+    display: none;
+}

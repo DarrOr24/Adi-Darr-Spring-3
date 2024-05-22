@@ -4,6 +4,7 @@ import { mailService } from '../services/mail.service.js'
 
 import { MailList } from '../cmps/MailList.jsx'
 import { MailHeader } from '../cmps/MailHeader.jsx'
+import { MailSideMenu } from '../cmps/MailSideMenu.jsx'
 
 export function MailIndex() {
     
@@ -28,7 +29,9 @@ export function MailIndex() {
         <section className="mail-index">
             <MailHeader />
             <main>
-                <section className="side-menu">Side Menu</section>
+                <section className="side-menu">
+                    <MailSideMenu />
+                </section>
                 <section className="mail-list">
                     <MailList mails={mails} onRemove={removeMail} />
                 </section>

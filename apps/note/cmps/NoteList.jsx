@@ -24,13 +24,14 @@ export function NoteList({ notes, onRemove, onEdit }) {
         
     }
 
+
     let isSelected = (selectedNote !== null)
     return <section className="note-list">
         <ul>
             {notes.map(note => 
             <li  key={note.id }  onClick = {()=>onClickNote(note)} style={{backgroundColor: note.style.backgroundColor}}>
-                <NotePreview note={note} />
-                <ActionBtns note={note} onRemove={onRemove} />
+                <NotePreview note={note} onRemove = {onRemove} />
+                {/* <ActionBtns note={note} onRemove={onRemove} /> */}
                
             </li>)}
             {isSelected && <NoteEdit2 note = {selectedNote} onClose={closeNoteEdit}/>} 

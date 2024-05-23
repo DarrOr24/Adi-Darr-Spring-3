@@ -7,8 +7,8 @@ export function ActionBtns( {note, onRemove} ){
     }
 
     return <section className ="action-icons">
-                    <div className="action-icon">
-                        <img src="assets\img\check.svg" alt="" />
+                    <div className="action-icon select">
+                        <img  src="assets\img\check.svg" alt="" />
                         <span className="action-name select">Select Note</span>
                     </div>
                     <div className="action-icon">
@@ -36,9 +36,9 @@ export function ActionBtns( {note, onRemove} ){
                         <span className="action-name">Delete</span>
                     </div>
                     <div onClick = {onClickMore}className="action-icon">
-                        <img src="assets\img\more.svg" alt="" />
-                        <span className="action-name">More</span>
+                        <img height="24" width="24" src="assets\img\more.svg" alt="" />
+                        <span  className="action-name">More</span>
                     </div>
-                    {/* <button onClick={() => onRemove(note.id)}>x</button> */}
+                    
             </section>
 }

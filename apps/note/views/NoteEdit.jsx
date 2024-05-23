@@ -32,6 +32,8 @@ export function NoteEdit(){
             })
     }
 
+   
+
     if (isLoading) return <h3>Loading...</h3>
     return (
         <section className="note-edit" >

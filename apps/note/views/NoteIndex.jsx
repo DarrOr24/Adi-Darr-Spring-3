@@ -52,7 +52,7 @@ export function NoteIndex() {
            
             <NoteSideMenu />
             <AddNote notes={notes} />
-            {isNotes && <NoteList notes={notes} onRemove={removeNote}  />}
+            {isNotes && <NoteList notes={notes} onRemove={removeNote} />}
             {!isNotes && <h2>No notes!!  Done with the chores for today...</h2>} 
         </main>
         

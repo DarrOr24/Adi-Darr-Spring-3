@@ -1,4 +1,10 @@
-export function ActionBtns( {note} ){
+export function ActionBtns( {note, onRemove} ){
+
+    function onClickMore(ev){
+       ev.stopPropagation()
+       console.log('oh yeah')
+        
+    }
 
     return <section className ="action-icons">
                     <div className="action-icon">
@@ -25,11 +31,11 @@ export function ActionBtns( {note} ){
                         <img src="assets\img\add_image.svg" alt="" />
                         <span className="action-name">Add image</span>
                     </div>
-                    <div className="action-icon">
-                        <img src="assets\img\archive.svg" alt="" />
-                        <span className="action-name">Archive</span>
+                    <div onClick={(ev) => onRemove(ev, note.id) } className="action-icon">
+                        <img src="assets\img\trash.svg" alt="" />
+                        <span className="action-name">Delete</span>
                     </div>
-                    <div className="action-icon">
+                    <div onClick = {onClickMore}className="action-icon">
                         <img src="assets\img\more.svg" alt="" />
                         <span className="action-name">More</span>
                     </div>

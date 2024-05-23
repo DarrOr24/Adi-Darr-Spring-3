@@ -3,7 +3,6 @@ const { Link } = ReactRouterDOM
 const { useNavigate } = ReactRouter
 
 import { ActionBtns } from "./ActionBtns.jsx"
-
 import { NotePreview } from "./NotePreview.jsx"
 
 export function NoteList({ notes, onRemove }) {
@@ -16,6 +15,11 @@ export function NoteList({ notes, onRemove }) {
         
     }
 
+    // function removeNote(ev, noteId){
+    //     ev.stopPropagation()
+        
+    // }
+
  
 
     return <section className="note-list">
@@ -23,7 +27,7 @@ export function NoteList({ notes, onRemove }) {
             {notes.map(note => 
             <li  key={note.id }  onClick = {()=>onClickNote(note)} style={{backgroundColor: note.style.backgroundColor}}>
                 <NotePreview note={note} />
-                <ActionBtns note={note} />
+                <ActionBtns note={note} onRemove={onRemove} />
                
             </li>)}
         </ul>

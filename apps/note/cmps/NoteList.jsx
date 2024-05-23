@@ -3,9 +3,9 @@ const { Link } = ReactRouterDOM
 const { useNavigate } = ReactRouter
 
 
-import { ActionBtns } from "./ActionBtns.jsx"
 import { NoteEdit2 } from "./NoteEdit2.jsx"
 import { NotePreview } from "./NotePreview.jsx"
+
 
 export function NoteList({ notes, onRemove, onEdit }) {
 
@@ -14,9 +14,7 @@ export function NoteList({ notes, onRemove, onEdit }) {
 
     function onClickNote(note){
         setSelectedNote(note)
-        
-        // navigate(`/note/edit/${note.id}`)
-        
+        // navigate(`/note/edit/${note.id}`) 
     }
 
     function closeNoteEdit(){ 
@@ -31,8 +29,7 @@ export function NoteList({ notes, onRemove, onEdit }) {
             {notes.map(note => 
             <li  key={note.id }  onClick = {()=>onClickNote(note)} style={{backgroundColor: note.style.backgroundColor}}>
                 <NotePreview note={note} onRemove = {onRemove} />
-                {/* <ActionBtns note={note} onRemove={onRemove} /> */}
-               
+                
             </li>)}
             {isSelected && <NoteEdit2 note = {selectedNote} onClose={closeNoteEdit}/>} 
         </ul>

@@ -2,7 +2,7 @@ import { ActionBtns } from "./ActionBtns.jsx"
 
 const { useState } = React
 
-export function NotePreview({ note, onRemove }){
+export function NotePreview({ note, onRemove}){
     const { info, style } = note
     const { title, txt } = info
     const { backgroundColor } = style
@@ -17,10 +17,12 @@ export function NotePreview({ note, onRemove }){
     return (
         <article onClick = {openEdit} className={`note-preview ${openNote}`} >
             <h2>{title}</h2>
-            <p>{txt} km/h</p>
+            <p >{txt} km/h</p>
             <ActionBtns note={note} onRemove={onRemove} />
             
         </article>
     ) 
 }
+
+
 

@@ -14,7 +14,7 @@ export function NoteList({ notes, onRemove, onEdit }) {
 
     function onClickNote(note){
         setSelectedNote(note)
-        // navigate(`/note/edit/${note.id}`) 
+        navigate(`/note/edit/${note.id}`) 
     }
 
     function closeNoteEdit(){ 

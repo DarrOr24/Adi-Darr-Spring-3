@@ -16,9 +16,7 @@ export function AddNote(){
     }
 
     const navigate = useNavigate()
-
     const [ openNote, setOpenNote ] = useState(false)
-    
     const [ note, setNote ] = useState(emptyNote)
 
     useEffect(() => {
@@ -46,7 +44,6 @@ export function AddNote(){
             .catch(() => {
                 console.log('error')
                 // showErrorMsg('Couldnt save')
-                // navigate('/car')
             })
             .finally(() => navigate('/note'))
     }
@@ -76,7 +73,7 @@ export function AddNote(){
     return <section className = "add-note">
             
             {openNote && <AddNoteHeader />}
-            {!openNote && <p onClick={onClickNote}>Take a note...</p>}
+            {!openNote && <p className="take-a-note" onClick={onClickNote}>Take a note...</p>}
 
             {openNote && <NewNoteForm note={note} handleChangeInfo={handleChangeInfo} onSave={onSave} /> }
 

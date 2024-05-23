@@ -1,42 +1,35 @@
 .add-note {
     margin-block-start: 1em;
-    position: relative;
-}
-.add-note .closed, .add-note .opened {
-    display: grid;
     width: 600px;
     margin-inline-start: 250px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.548);
-    padding-inline-start: 1em;
+    padding: 0.5em;
     border-radius: 8px;
 
+    display: grid;
+    grid-template-areas: "header header"
+                         " p side-bar"
+                        "bottom-menu bottom-menu";
+    grid-template-columns: 3fr 1fr;
+    row-gap: 0.5em;
+    
 }
 
-.add-note .closed {
-    height: 40px;
-    grid-template-columns: 450px 1fr;
+
+
+
+
+.add-note p {
+    grid-area:p;
+    display: grid;
     align-items: center;
 }
 
-.add-note .closed div {
-    display: grid;
-    grid-auto-flow: column;
+.add-note .bottom-menu {
+    grid-area: bottom-menu;
+    
 }
 
-.add-note .closed img {
-    justify-self: center;
-}
-
-
-
-.add-note .opened {
-    position: absolute;
-    background-color: white;
-    z-index: 1;
-    top: 0;
-    height: 150px;
-    display: grid;
-}
 
 .add-note .hidden {
     display: none;

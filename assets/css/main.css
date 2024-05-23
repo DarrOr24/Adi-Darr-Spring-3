@@ -24,6 +24,9 @@
 @import './apps/note/cmps/NoteSideMenu.css';
 @import './apps/note/cmps/AddNote.css';
 @import './apps/note/cmps/NoteEdit.css';
+@import './apps/note/cmps/ActionIconsNewNote.css';
+@import './apps/note/cmps/AddNoteSideMenu.css';
+@import './apps/note/cmps/AddNoteHeader.css';
 
 /* Email */
 @import './apps/mail/views/MailIndex.css';

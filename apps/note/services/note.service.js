@@ -9,7 +9,7 @@ export const noteService = {
     query,
     get,
     remove,
-    // save,
+    save,
 }
 
 window.ns = noteService
@@ -82,6 +82,14 @@ function get(noteId) {
 
 function remove(noteId) {
     return storageService.remove(NOTE_KEY, noteId)
+}
+
+function save(note) {
+    if (note.id) {
+        return storageService.put(NOTE_KEY, note)
+    } else {
+        return storageService.post(NOTE_KEY, note)
+    }
 }
 
 

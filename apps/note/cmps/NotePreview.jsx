@@ -17,7 +17,7 @@ export function NotePreview({ note, onRemove}){
     return (
         <article onClick = {openEdit} className={`note-preview ${openNote}`} >
             <h2>{title}</h2>
-            <p >{txt} km/h</p>
+            <p >{txt}</p>
             <ActionBtns note={note} onRemove={onRemove} />
             
         </article>

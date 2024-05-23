@@ -1,9 +1,3 @@
-import { noteService } from "../services/note.service.js"
-
-const { useState, useEffect } = React
-const { useParams, useNavigate } = ReactRouter
-
-const { Link } = ReactRouterDOM
 
 export function NoteEdit2({ note, onClose }){
     

@@ -40,7 +40,7 @@ export function NoteIndex() {
     
 
     const isNotes = notes.length > 0
-     
+    if (isLoading) return <div className="loader"></div>
     return <section className = "note-index main-layout">
         <header className="note-index-header">
             <img src="assets\img\hamburger.svg" alt="" />
@@ -49,7 +49,6 @@ export function NoteIndex() {
             <NoteFilter />
         </header>
         <main>
-           
             <NoteSideMenu />
             <AddNote notes={notes} />
             {isNotes && <NoteList notes={notes} onRemove={removeNote} />}

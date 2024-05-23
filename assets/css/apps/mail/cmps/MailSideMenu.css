@@ -1,10 +1,22 @@
-.mail-side-menu {
+.mail-side-menu .add-book {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin:  10px auto;
+    background-color: #c2e7ff;
+    border: 0;
+    border-radius: 1em;
+    height: 56px;
+    padding: 24px;
+}
+
+.mail-side-menu .menu {
     display: grid;
     grid-template-rows: repeat(5, 50px);
     margin-inline-end: 1em;
 }
 
-.mail-side-menu li {
+.mail-side-menu .menu li {
     display: grid;
     grid-template-columns: 30px 1fr;
     column-gap: 1em;
@@ -14,14 +26,14 @@
     color: #202124;
 }
 
-.mail-side-menu .selected {
+.mail-side-menu .menu .selected {
     background-color: #d3e3fd;
     color: #001d35;
     border-bottom-right-radius: 25px;
     border-top-right-radius: 25px;
 }
 
-.mail-side-menu li:not(.selected):hover{
+.mail-side-menu .menu li:not(.selected):hover{
     background-color: var(--chalk); 
     border-bottom-right-radius: 25px;
     border-top-right-radius: 25px;

@@ -1,32 +1,17 @@
+
 .note-preview {
     /* border-radius: 20px; */
-    
-    width: 240px;
+    display: grid;
+    /* width: 240px; */
     font-size: 18px;
-    height: max-content;
+    position: relative;
     
 }
 
-.note-preview header {
-    display: grid;
-    font-family: Roboto;
-    font-weight: 100;
-    font-size: 18px;
-    color: '#202124';
-    /* width: 238px; */
+.note-preview  h2 {
     height: 38px;
     line-height: 24px;
-    
-    
-}
-
-.note-preview header h2 {
-    justify-self: start;
     font-size: 18px;
     font-weight: 500;
 }
 
-.note-preview header img {
-    grid-column: 2;
-    justify-self: end;
-}

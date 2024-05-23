@@ -7,9 +7,9 @@ _createNotes()
 
 export const noteService = {
     query,
-    // get,
-    // remove,
-    // save,
+    get,
+    remove,
+    save,
 }
 
 window.ns = noteService
@@ -69,6 +69,27 @@ function _createNote(type, isPinned, style, info){
                     info
                 }
    return note
+}
+
+function get(noteId) {
+    return storageService.get(NOTE_KEY, noteId)
+    .then(note => {
+        // note = _setNextPrevCarId(note)
+        return note
+    })
+   
+}
+
+function remove(noteId) {
+    return storageService.remove(NOTE_KEY, noteId)
+}
+
+function save(note) {
+    if (note.id) {
+        return storageService.put(NOTE_KEY, note)
+    } else {
+        return storageService.post(NOTE_KEY, note)
+    }
 }
 
 

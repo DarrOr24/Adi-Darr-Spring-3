@@ -5,20 +5,18 @@ const { useNavigate } = ReactRouter
 import { ActionBtns } from "./ActionBtns.jsx"
 import { NotePreview } from "./NotePreview.jsx"
 
-export function NoteList({ notes, onRemove }) {
+export function NoteList({ notes, onRemove, onEdit }) {
 
     const [ selectedNote, setSelectedNote ] = useState(null)
     const navigate = useNavigate()
 
     function onClickNote(note){
-        navigate(`/note/details/${note.id}`)
+        
+        navigate(`/note/edit/${note.id}`)
         
     }
 
-    // function removeNote(ev, noteId){
-    //     ev.stopPropagation()
-        
-    // }
+    
 
  
 

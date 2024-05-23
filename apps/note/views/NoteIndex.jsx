@@ -1,4 +1,5 @@
 const { useState, useEffect } = React
+const { Link, useSearchParams } = ReactRouterDOM
 
 import { AddNote } from "../cmps/AddNote.jsx"
 import { NoteFilter } from "../cmps/NoteFilter.jsx"
@@ -35,6 +36,8 @@ export function NoteIndex() {
             .finally(() => setIsLoading(false))
         
     }
+
+    
 
     const isNotes = notes.length > 0
      

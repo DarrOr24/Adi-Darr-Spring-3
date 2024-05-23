@@ -23,7 +23,7 @@
 @import './apps/note/cmps/ActionBtns.css';
 @import './apps/note/cmps/NoteSideMenu.css';
 @import './apps/note/cmps/AddNote.css';
-@import './apps/note/cmps/NoteDetails.css';
+@import './apps/note/cmps/NoteEdit.css';
 
 /* Email */
 @import './apps/mail/views/MailIndex.css';

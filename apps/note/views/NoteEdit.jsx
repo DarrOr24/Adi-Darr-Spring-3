@@ -5,7 +5,7 @@ const { Link } = ReactRouterDOM
 
 import { noteService } from "../services/note.service.js"
 
-export function NoteDetails(){
+export function NoteEdit(){
     const [note, setNote] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
 
@@ -34,7 +34,7 @@ export function NoteDetails(){
 
     if (isLoading) return <h3>Loading...</h3>
     return (
-        <section className="note-details" >
+        <section className="note-edit" >
             <article style={{backgroundColor: note.style.backgroundColor}}>
                 <h3>{note.info.title}</h3>
                 <p>{note.info.txt}</p>

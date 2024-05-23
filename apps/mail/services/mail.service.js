@@ -9,6 +9,7 @@ export const mailService = {
     get,
     remove,
     save,
+    getFilterFromSearchParams,
 }
 
 function query(filterBy = {}) {
@@ -16,7 +17,7 @@ function query(filterBy = {}) {
         .then(mails => {
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')
-                mails = mails.filter(mail => regExp.test(mail.subject))
+                mails = mails.filter(mail => regExp.test(mail.subject) || regExp.test(mail.body))
             }
             return mails
         })
@@ -35,6 +36,12 @@ function save(mail) {
         return storageService.put(MAIL_KEY, mail)
     } else {
         return storageService.post(MAIL_KEY, mail)
+    }
+}
+
+function getFilterFromSearchParams(searchParams) {
+    return {
+        txt: searchParams.get('txt') || '',
     }
 }
 

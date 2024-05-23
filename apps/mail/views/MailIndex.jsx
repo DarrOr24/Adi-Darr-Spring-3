@@ -1,20 +1,24 @@
 const { useState, useEffect } = React
-const { Outlet } = ReactRouterDOM
+const { Outlet, useSearchParams } = ReactRouterDOM
 
 import { mailService } from '../services/mail.service.js'
 
 // import { MailList } from '../cmps/MailList.jsx'
 import { MailHeader } from '../cmps/MailHeader.jsx'
 import { MailSideMenu } from '../cmps/MailSideMenu.jsx'
+import { MailFilter } from '../cmps/MailFilter.jsx'
 
 export function MailIndex() {
     
     const [ mails, setMails ] = useState([])
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [ filterBy, setFilterBy ] = useState(mailService.getFilterFromSearchParams(searchParams))
 
     useEffect(() => {
-        mailService.query()
+        setSearchParams(filterBy)
+        mailService.query(filterBy)
             .then(mails => setMails(mails))
-    }, [])
+    }, [filterBy])
 
     function removeMail(mailId) {
         mailService.remove(mailId)
@@ -26,9 +30,15 @@ export function MailIndex() {
             })
     }
 
+    function onSetFilterBy(newFilter) {
+        setFilterBy(newFilter)
+    }
+
+    if (!mails) return <div>Loading...</div>
     return (
         <section className="mail-index">
             <MailHeader />
+            <MailFilter filterBy={filterBy} onFilter={onSetFilterBy}/>
             <main>
                 <section className="mail-side-menu">
                     <MailSideMenu />

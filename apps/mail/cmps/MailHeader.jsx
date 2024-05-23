@@ -6,7 +6,7 @@ export function MailHeader() {
             <img src="assets/img/hamburger.svg" alt="" />
             <img src="assets/img/gmail.svg"></img>
             <h1>Gmail</h1>
-            <MailFilter/>
+            {/* <MailFilter/> */}
         </header>
     )
 }

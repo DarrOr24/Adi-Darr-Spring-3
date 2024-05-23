@@ -7,7 +7,11 @@ import { Home } from "./views/Home.jsx"
 import { MailIndex } from "./apps/mail/views/MailIndex.jsx"
 import { MailList } from "./apps/mail/cmps/MailList.jsx"
 import { MailDetails } from "./apps/mail/cmps/MailDetails.jsx"
+import { AddMail } from "./apps/mail/cmps/AddMail.jsx"
+
 import { NoteIndex } from "./apps/note/views/NoteIndex.jsx"
+import { AddNote } from "./apps/note/cmps/AddNote.jsx"
+import { NoteEdit2 } from "./apps/note/cmps/NoteEdit2.jsx"
 
 
 

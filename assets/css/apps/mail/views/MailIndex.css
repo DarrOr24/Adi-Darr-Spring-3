@@ -1,4 +1,7 @@
- 
+.mail-index {
+    background-color: #f6f8fc;
+}
+
 .mail-index main {
     display: grid;
     grid-template-columns: 1fr 4fr;

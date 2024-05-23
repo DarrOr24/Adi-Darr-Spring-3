@@ -1,6 +1,6 @@
 export function MailSideMenu(){
     
-    return <ul className = "side-menu">
+    return <ul className = "mail-side-menu">
         <li className="selected">
             <p>Inbox</p>
         </li>

@@ -5,22 +5,29 @@ import { AppHeader } from "./cmps/AppHeader.jsx"
 import { About } from "./views/About.jsx"
 import { Home } from "./views/Home.jsx"
 import { MailIndex } from "./apps/mail/views/MailIndex.jsx"
-import { MailDetails } from "./apps/mail/views/MailDetails.jsx"
+import { MailList } from "./apps/mail/cmps/MailList.jsx"
+import { MailDetails } from "./apps/mail/cmps/MailDetails.jsx"
 import { NoteIndex } from "./apps/note/views/NoteIndex.jsx"
 
 
 
 export function App() {
-    return <Router>
-        <section className="app main-layout full">
-            <AppHeader />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/mail" element={<MailIndex />} />
-                <Route path="/mail/:mailId" element={ <MailDetails /> }/>
-                <Route path="/note" element={<NoteIndex />} />
-            </Routes>
-        </section>
-    </Router>
+    return (
+        <Router>
+            <section className="app main-layout full">
+                <AppHeader />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/mail" element={<MailIndex />}>
+                        <Route index element={<MailList />} />
+                        <Route path=":mailId" element={<MailDetails />} />
+                    </Route>
+                    {/* <Route path="/mail" element={<MailIndex />} />
+                    <Route path="/mail/:mailId" element={ <MailDetails /> }/> */}
+                    <Route path="/note" element={<NoteIndex />} />
+                </Routes>
+            </section>
+        </Router>
+    )
 }

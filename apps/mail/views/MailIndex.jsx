@@ -1,8 +1,9 @@
 const { useState, useEffect } = React
+const { Outlet } = ReactRouterDOM
 
 import { mailService } from '../services/mail.service.js'
 
-import { MailList } from '../cmps/MailList.jsx'
+// import { MailList } from '../cmps/MailList.jsx'
 import { MailHeader } from '../cmps/MailHeader.jsx'
 import { MailSideMenu } from '../cmps/MailSideMenu.jsx'
 
@@ -29,11 +30,12 @@ export function MailIndex() {
         <section className="mail-index">
             <MailHeader />
             <main>
-                <section className="side-menu">
+                <section className="mail-side-menu">
                     <MailSideMenu />
                 </section>
                 <section className="mail-list">
-                    <MailList mails={mails} onRemove={removeMail} />
+                    <Outlet context={{ mails, removeMail }} />
+                    {/* <MailList mails={mails} onRemove={removeMail} /> */}
                 </section>
             </main>
         </section>

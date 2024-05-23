@@ -5,10 +5,11 @@
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.548);
     padding: 0.5em;
     border-radius: 8px;
+    height: max-content;
 
     display: grid;
     grid-template-areas: "header header"
-                         " p side-bar"
+                         " txt side-bar"
                         "bottom-menu bottom-menu";
     grid-template-columns: 3fr 1fr;
     row-gap: 0.5em;
@@ -19,8 +20,8 @@
 
 
 
-.add-note p {
-    grid-area:p;
+.add-note .take-a-note {
+    grid-area:txt;
     display: grid;
     align-items: center;
 }

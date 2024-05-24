@@ -48,7 +48,6 @@ export function AddNote({onAdd}){
             .then((newNote) => {
                 onAdd(newNote)
                 setOpenNote(false)
-                
             })
             
             .catch(() => {

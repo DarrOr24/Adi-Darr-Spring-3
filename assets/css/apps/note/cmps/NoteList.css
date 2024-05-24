@@ -3,17 +3,14 @@
     grid-area: node-list;
     margin-block-start: 2em;
     
-    /* columns: 3; */
+ 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     row-gap: 1em;
     gap: 1em;  
 }
 
-.note-list ul > * {
-    
-    /* break-inside: avoid; */
-    /* margin-block-end: 1em; */
+/* .note-list ul > * {
     position: relative;
     border-radius: 8px;
     border: 1px solid lightgray;
@@ -30,4 +27,4 @@
 
 
 
-
+ */

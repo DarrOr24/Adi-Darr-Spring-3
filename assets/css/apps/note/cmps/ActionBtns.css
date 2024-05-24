@@ -45,8 +45,8 @@
 
 .action-icons >*:first-child{
     position:absolute;
-    left:-30px;
-    top:-30px;
+    left:-15px;
+    top:-15px;
 }
 
 .color-menu {

@@ -17,7 +17,6 @@ export function ActionBtns( {note, onRemove, onSetNoteColor} ){
         // (colorMenu) ? setColorMenu(false) : setColorMenu(true)
         if(!colorMenu) setColorMenu(true)
         else setColorMenu(false)
-        console.log('hi')
     }
 
     

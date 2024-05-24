@@ -41,6 +41,13 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit }){
         
     }
 
+    function setNoteColor(color){
+        setNote(prevNote => ({
+            ...prevNote,
+            style: { ...prevNote.style, backgroundColor: color }
+        }))
+    }
+
     function handleChangeInfo({ target }) {
         const { type, name: prop } = target
         let { value } = target
@@ -71,7 +78,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit }){
                 <NotePin />
         
                 <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/> 
-                <ActionBtns />       
+                <ActionBtns note={note} onSetNoteColor={setNoteColor} />       
 
             </article>
             

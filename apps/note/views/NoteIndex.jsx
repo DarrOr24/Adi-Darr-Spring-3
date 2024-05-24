@@ -7,6 +7,8 @@ import { NoteList } from "../cmps/NoteList.jsx"
 import { NoteSideMenu } from "../cmps/NoteSideMenu.jsx"
 import { noteService } from "../services/note.service.js"
 
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+
 export function NoteIndex() {
 
     const [notes, setNotes] = useState([])
@@ -23,9 +25,9 @@ export function NoteIndex() {
     }
 
     function addEditNote(note){
-        console.log(note)
         noteService.query()
             .then(notes => setNotes(notes))
+            .then(() => showSuccessMsg(`Note (${note.id}) was edited`))   
     }
 
     function removeNote(ev, noteId){
@@ -37,7 +39,7 @@ export function NoteIndex() {
                 // utilService.animateCSS('fadeAway')
                 //     .then(() => setCars(prevCars => prevCars.filter(car => car.id !== carId)))
                 setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
-                // showSuccessMsg(`Car (${carId}) removed successfully!`)
+                // showSuccessMsg(`Note (${noteId}) removed successfully!`)
             })
             .catch(err => {
                 console.log('err:', err)

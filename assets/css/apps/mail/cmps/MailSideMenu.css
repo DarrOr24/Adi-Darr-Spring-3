@@ -21,7 +21,6 @@
     grid-template-columns: 30px 1fr;
     column-gap: 1em;
     align-items: center;
-    /* height: 100px; */
     width: 200px;
     color: #202124;
 }

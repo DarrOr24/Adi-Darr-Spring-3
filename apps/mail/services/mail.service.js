@@ -9,6 +9,7 @@ export const mailService = {
     get,
     remove,
     save,
+    getEmptyMail,
     getFilterFromSearchParams,
 }
 
@@ -38,6 +39,20 @@ function save(mail) {
         return storageService.post(MAIL_KEY, mail)
     }
 }
+
+function getEmptyMail() {
+    const mail = {
+        subject: '',
+        body: '',
+        isRead: false,
+        sentAt : Date.now(),
+        removedAt : null,
+        from: 'momo@momo.com',
+        to: '',
+    }
+
+    return mail
+} 
 
 function getFilterFromSearchParams(searchParams) {
     return {

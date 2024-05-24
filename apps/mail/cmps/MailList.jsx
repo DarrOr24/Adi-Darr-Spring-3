@@ -3,8 +3,9 @@ const { Link, useOutletContext } = ReactRouterDOM
 
 import { MailPreview } from './MailPreview.jsx'
 
-export function MailList() {
-    const { mails, removeMail } = useOutletContext()
+export function MailList({ mails, removeMail }) {
+// export function MailList() {
+//     const { mails, removeMail } = useOutletContext()
 
     return (
         <section className="mail-list">

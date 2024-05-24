@@ -1,9 +1,12 @@
 const { useState, useEffect } = React
-const { Outlet, useSearchParams } = ReactRouterDOM
+// const { Outlet, useSearchParams } = ReactRouterDOM
+const { Outlet, useSearchParams, Routes, Route } = ReactRouterDOM
 
 import { mailService } from '../services/mail.service.js'
 
-// import { MailList } from '../cmps/MailList.jsx'
+import { MailList } from '../cmps/MailList.jsx'
+import { MailDetails } from '../cmps/MailDetails.jsx'
+// 
 import { MailHeader } from '../cmps/MailHeader.jsx'
 import { MailSideMenu } from '../cmps/MailSideMenu.jsx'
 import { MailFilter } from '../cmps/MailFilter.jsx'
@@ -44,7 +47,11 @@ export function MailIndex() {
                     <MailSideMenu />
                 </section>
                 <section className="mail-list">
-                    <Outlet context={{ mails, removeMail }} />
+                    {/* <Outlet context={{ mails, removeMail }} /> */}
+                    <Routes>
+                        <Route path="/" element={<MailList mails={mails} removeMail={removeMail} />} />
+                        <Route path=":mailId" element={<MailDetails />} />
+                    </Routes>
                     {/* <MailList mails={mails} onRemove={removeMail} /> */}
                 </section>
             </main>

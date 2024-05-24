@@ -28,6 +28,13 @@ export function AddNote({onAdd}){
         if (!openNote)  setOpenNote(true)
     }
 
+    function setNoteColor(color){
+        console.log(color)
+        setNote(prevNote => ({
+            ...prevNote,
+            style: { ...prevNote.style, backgroundColor: color }
+        }))
+    }
 
     function onSave(ev) {
         ev.preventDefault()
@@ -76,7 +83,7 @@ export function AddNote({onAdd}){
     }
 
     
-    return <section className = "add-note">
+    return <section className = "add-note" style={{backgroundColor: note.style.backgroundColor}}>
             
             {!openNote && 
                 <div className="take-a-note">
@@ -88,7 +95,7 @@ export function AddNote({onAdd}){
         
             {openNote && <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/> }
                     
-            {openNote &&  <ActionBtns />} 
+            {openNote &&  <ActionBtns note={note}  onSetNoteColor={setNoteColor} />} 
            
       
     </section>

@@ -24,3 +24,7 @@
     border: 1px solid lightgray;
    
 }
+
+.note-color-menu .colors div:hover{
+   border-color: black;
+}

@@ -5,7 +5,6 @@ const { useNavigate } = ReactRouter
 
 import { noteService } from "../services/note.service.js";
 import { ActionBtns } from "./ActionBtns.jsx";
-import { ActionBtnsNewNote } from "./ActionBtnsNewNote.jsx";
 import { AddNoteSideMenu } from "./AddNoteSideMenu.jsx";
 import { NoteForm } from "./NoteForm.jsx";
 import { NotePin } from "./NotePin.jsx";

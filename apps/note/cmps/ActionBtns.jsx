@@ -2,7 +2,7 @@ import { NoteColorMenu } from "./NoteColorMenu.jsx"
 
 const { useState } = React
 
-export function ActionBtns( {note, onRemove} ){
+export function ActionBtns( {note, onRemove, onSetNoteColor} ){
 
     const [ colorMenu, setColorMenu ] = useState(false)
 
@@ -20,10 +20,7 @@ export function ActionBtns( {note, onRemove} ){
         console.log('hi')
     }
 
-    function setNoteColor(color){
-        console.log(color)
-    }
-
+    
     return <section className ="action-icons">
                     <div className="action-icon select">
                         <img  src="assets\img\check.svg" alt="" />
@@ -41,7 +38,7 @@ export function ActionBtns( {note, onRemove} ){
                     <div onClick={openColorMenu} className="action-icon color">
                         <img src="assets\img\background_options.svg" alt="" />
                         <span className="action-name">Background options</span>
-                        {colorMenu && <NoteColorMenu onSetNoteColor={setNoteColor} />}
+                        {colorMenu && <NoteColorMenu onSetNoteColor={onSetNoteColor} />}
                     </div>
                     <div className="action-icon">
                         <img src="assets\img\add_image.svg" alt="" />

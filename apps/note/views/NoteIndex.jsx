@@ -25,6 +25,7 @@ export function NoteIndex() {
     }
 
     function addEditNote(note){
+        
         noteService.query()
             .then(notes => setNotes(notes)) 
     }

@@ -40,6 +40,7 @@ export function AddNote({onAdd}){
         ev.preventDefault()
         if((!note.info.title)&&(!note.info.txt)){ //if note is empty
             setOpenNote(false)
+            setNote(emptyNote)
             navigate(`/note`)
             return 
         }

@@ -14,6 +14,7 @@ export function NotePreview({ note, onRemove, onEdit}){
 
     const navigate = useNavigate()
     const [ openNote, setOpenNote ] = useState(false)
+    const [ updatedNote, setUpdatedNote ] = useState(note)
     
 
     function openEdit(){  
@@ -27,30 +28,31 @@ export function NotePreview({ note, onRemove, onEdit}){
         
     }
 
+   
+
    function setNoteColor(color){
+        setUpdatedNote(prevNote => ({
+            ...prevNote,
+            style: { ...prevNote.style, backgroundColor: color }
+        }))
+
+        
         note.style.backgroundColor = color
-        noteService.save(note)
-            .then(() => onEdit())
-            
-            .catch(() => {
-                console.log('error')
-                // showErrorMsg('Couldnt save')
-            })
-            .finally(() => navigate('/note'))
+        noteService.save(updatedNote)
    }
 
    
     return  <section>
 
                 {!openNote && 
-                    <article onClick = {openEdit} className="note-preview" style={{backgroundColor: note.style.backgroundColor}} >
+                    <article onClick = {openEdit} className="note-preview" style={{backgroundColor: updatedNote.style.backgroundColor}} >
                         <h2>{title}</h2>
                         <p >{txt}</p>
                         <NotePin />
                         <ActionBtns note={note} onRemove={onRemove} onSetNoteColor={setNoteColor} />
                     </article>}
 
-                {openNote && <NoteEdit2 noteToEdit = {note} onClose={closeNoteEdit} onEdit={onEdit} />}
+                {openNote && <NoteEdit2 noteToEdit = {updatedNote} onClose={closeNoteEdit} onEdit={onEdit} onSetColorNote={setNoteColor} />}
                 
     </section>
     

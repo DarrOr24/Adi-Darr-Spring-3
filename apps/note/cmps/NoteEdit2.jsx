@@ -8,7 +8,7 @@ import { ActionBtns } from "./ActionBtns.jsx";
 import { NoteForm } from "./NoteForm.jsx";
 import { NotePin } from "./NotePin.jsx";
 
-export function NoteEdit2({ noteToEdit, onClose, onEdit }){
+export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote }){
 
     
     const navigate = useNavigate()
@@ -28,6 +28,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit }){
             noteService.save(note)
             .then((editedNote) => {
                 onEdit(editedNote)
+                console.log(editedNote.style.backgroundColor)
                 onClose()
                 // setNote(emptyNote)
             })
@@ -46,6 +47,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit }){
             ...prevNote,
             style: { ...prevNote.style, backgroundColor: color }
         }))
+        onSetColorNote(color) 
     }
 
     function handleChangeInfo({ target }) {

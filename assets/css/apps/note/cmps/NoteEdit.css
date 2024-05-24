@@ -21,6 +21,24 @@
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.548);
     border-radius: 8px;
     z-index: 2;
-    height: 300px;
+    height: 250px;
     width: 300px;
 }
+
+.note-edit .note-form form input {
+    border: none;
+    width: 200px;
+}
+
+.note-edit .note-form button {
+    bottom: 7px;
+    right: 10px;
+}
+
+.note-edit .action-icons-new-note{
+    width: 220px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+

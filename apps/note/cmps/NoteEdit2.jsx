@@ -17,10 +17,10 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit }){
     
     function onSave(ev) {
         ev.preventDefault()
-        console.log(note)
         if((!note.info.title)&&(!note.info.txt)){ //if note is empty
+            console.log('note is empty')
             onClose()
-            navigate(`/note`)
+            // navigate(`/note`)
             return 
         }
         

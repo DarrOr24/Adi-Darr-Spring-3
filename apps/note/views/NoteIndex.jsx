@@ -26,8 +26,7 @@ export function NoteIndex() {
 
     function addEditNote(note){
         noteService.query()
-            .then(notes => setNotes(notes))
-            .then(() => showSuccessMsg(`Note (${note.id}) was edited`))   
+            .then(notes => setNotes(notes)) 
     }
 
     function removeNote(ev, noteId){
@@ -36,8 +35,6 @@ export function NoteIndex() {
         setIsLoading(true)
         noteService.remove(noteId)
             .then(() => {
-                // utilService.animateCSS('fadeAway')
-                //     .then(() => setCars(prevCars => prevCars.filter(car => car.id !== carId)))
                 setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
                 // showSuccessMsg(`Note (${noteId}) removed successfully!`)
             })

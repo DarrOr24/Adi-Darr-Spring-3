@@ -3,9 +3,13 @@ export function NoteForm({note, handleChangeInfo, onSave}){
         <form onSubmit = {onSave}>
            
             <input
-                onChange={handleChangeInfo} value={note.info.title}
-                id="title" name="title"
-                type="text" placeholder="Title" />
+                onChange={handleChangeInfo} 
+                value={note.info.title}
+                id="title" 
+                name="title"
+                type="text" 
+                placeholder="Title"
+                 />
 
             <textarea
                 name="txt"

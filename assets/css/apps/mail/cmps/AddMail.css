@@ -52,7 +52,7 @@
    margin: 10px;
 }
 
-.mail-modal .btn-toggle-modal {
+.mail-modal .btn-close {
     position: absolute;
     right: 0;
     top: 0;
@@ -61,7 +61,7 @@
     border: 0;
 }
 
-.mail-modal .btn-toggle-modal:hover {
+.mail-modal .btn-close:hover {
     background-color: var(--chalk);
     cursor: pointer;
 }

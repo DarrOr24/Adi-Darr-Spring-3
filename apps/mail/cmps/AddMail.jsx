@@ -44,12 +44,16 @@ export function AddMail() {
             .finally(() => navigate('/mail'))
     }
 
+    function closeForm() {
+        navigate('/mail')
+    }
+
     return (
         <section className="add-mail">
             <form onSubmit={onSave} className='add-form'>
                 <div className='mail-modal'>
-                    <h2>New Massage</h2>
-                    <button className='btn-toggle-modal'>x</button>
+                    <h2>New Message</h2>
+                    <button type="button" className='btn-close' onClick={closeForm}>x</button>
                     <div className="mail-input">
                         <label htmlFor="to">To </label>
                         <input onChange={handleChange} value={mail.to}

@@ -49,6 +49,11 @@
     top:-30px;
 }
 
+.color-menu {
+    position: absolute;
+    z-index: 3;
+}
+
 
 
 

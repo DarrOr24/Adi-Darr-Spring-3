@@ -35,7 +35,7 @@ export function AddNote({onAdd}){
 
     function onSave(ev) {
         ev.preventDefault()
-        if((!note.info.title)&&(!note.info.text)){ //if note is empty
+        if((!note.info.title)&&(!note.info.txt)){ //if note is empty
             setOpenNote(false)
             navigate(`/note`)
             return 
@@ -46,6 +46,7 @@ export function AddNote({onAdd}){
             .then((newNote) => {
                 onAdd(newNote)
                 setOpenNote(false)
+                setNote(emptyNote)
             })
             
             .catch(() => {

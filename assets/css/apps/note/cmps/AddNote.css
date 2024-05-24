@@ -34,5 +34,13 @@
     width: 200px;
 }
 
+.add-note .trash, .add-note .select {
+    display: none;
+}
+
+.add-note .action-icons {
+    width: 250px;
+}
+
 
 

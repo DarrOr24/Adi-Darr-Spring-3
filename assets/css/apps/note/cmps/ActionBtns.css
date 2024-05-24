@@ -1,14 +1,9 @@
-.note-preview:hover .action-icons{
-    opacity: 1;
-    cursor: pointer;
-}
-
 .action-icons {
     align-self: end;
     display: grid;
     grid-auto-flow: column;
     place-items: center;
-    opacity: 0;
+    opacity: 1;
     transition: 500ms;
 }
 
@@ -45,19 +40,16 @@
 .action-icon:not(.select):hover {
     background-color: lightgray;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .action-icons >*:first-child{
     position:absolute;
     left:-30px;
-    bottom:-30px;
+    top:-30px;
 }
 
-.action-icons >*:nth-child(2){
-    position:absolute;
-    right:0;
-    top:0;
-}
+
 
 
 

@@ -42,3 +42,10 @@
     left: 0;
 }
 
+.note-edit .trash, .note-edit .select {
+    display:none;
+}
+
+.note-edit .action-icons {
+    width: 170px;
+}

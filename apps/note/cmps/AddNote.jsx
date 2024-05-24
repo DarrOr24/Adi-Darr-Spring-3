@@ -4,6 +4,7 @@ const { useNavigate } = ReactRouter
 
 
 import { noteService } from "../services/note.service.js";
+import { ActionBtns } from "./ActionBtns.jsx";
 import { ActionBtnsNewNote } from "./ActionBtnsNewNote.jsx";
 import { AddNoteSideMenu } from "./AddNoteSideMenu.jsx";
 import { NoteForm } from "./NoteForm.jsx";
@@ -88,7 +89,8 @@ export function AddNote({onAdd}){
         
             {openNote && <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/> }
                     
-            {openNote && <ActionBtnsNewNote  />} 
+            {openNote &&  <ActionBtns />} 
+           
       
     </section>
 }

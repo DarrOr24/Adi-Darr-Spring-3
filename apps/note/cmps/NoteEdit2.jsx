@@ -4,6 +4,7 @@ const { useNavigate } = ReactRouter
 
 
 import { noteService } from "../services/note.service.js";
+import { ActionBtns } from "./ActionBtns.jsx";
 import { ActionBtnsNewNote } from "./ActionBtnsNewNote.jsx";
 import { NoteForm } from "./NoteForm.jsx";
 import { NotePin } from "./NotePin.jsx";
@@ -71,8 +72,8 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit }){
                 <NotePin />
         
                 <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/> 
-                            
-                <ActionBtnsNewNote  />
+                <ActionBtns />       
+
             </article>
             
             

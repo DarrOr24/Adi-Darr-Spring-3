@@ -16,7 +16,21 @@
 }
 
 .note-preview p{
-    width: 240px;
+    width: 220px;
     text-wrap: wrap;
+}
+
+.note-preview .note-pin, .note-preview .action-icons {
+    opacity: 0;
+}
+
+.note-preview:hover .note-pin{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.note-preview:hover .action-icons{
+    opacity: 1;
+    cursor: pointer;
 }
 

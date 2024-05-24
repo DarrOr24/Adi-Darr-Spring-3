@@ -36,8 +36,6 @@ export function NotePreview({ note, onRemove, onEdit}){
             style: { ...prevNote.style, backgroundColor: color }
         }))
 
-        
-        note.style.backgroundColor = color
         noteService.save(updatedNote)
    }
 

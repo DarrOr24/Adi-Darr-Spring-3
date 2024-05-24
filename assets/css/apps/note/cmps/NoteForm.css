@@ -1,3 +1,6 @@
+.note-form {
+    font: Roboto;
+}
 .note-form button {
     position: absolute;
     bottom: 12px;

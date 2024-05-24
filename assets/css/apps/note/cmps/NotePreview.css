@@ -4,8 +4,11 @@
     border: 1px solid lightgray;
     padding: 12px 16px;
     display: grid;
-    width: 260px;
     height: max-content;
+    display: grid;
+    
+    font-size: 18px;
+    position: relative;
 }
 
 .note-preview:hover {
@@ -13,17 +16,6 @@
     cursor: pointer;
 }
 
-
-
-
-.note-preview {
-    /* border-radius: 20px; */
-    display: grid;
-    /* width: 240px; */
-    font-size: 18px;
-    position: relative;
-    
-}
 
 .note-preview  h2 {
     height: 38px;

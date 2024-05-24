@@ -1,4 +1,5 @@
 .add-note {
+    position: relative;
     margin-block-start: 1em;
     width: 600px;
     margin-inline-start: 250px;
@@ -6,32 +7,67 @@
     padding: 0.5em;
     border-radius: 8px;
     height: max-content;
-
-    display: grid;
-    grid-template-areas: "header header"
-                         " txt side-bar"
-                        "bottom-menu bottom-menu";
-    grid-template-columns: 3fr 1fr;
     row-gap: 0.5em;
+}
+
+.add-note .pin {
+    position: absolute;
+    right:0;
+    top:0;
+    height: 35px;
+    width: 35px;
+    display: grid;
+    place-self: center;
+
+}
+
+.take-a-note {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
     
 }
 
-
-
-
-
-.add-note .take-a-note {
-    grid-area:txt;
+.take-a-note p{
     display: grid;
     align-items: center;
 }
 
-.add-note .bottom-menu {
-    grid-area: bottom-menu;
-    
+
+.take-a-note .side-bar {
+    display: grid;
+    grid-auto-flow: column;
+    place-items: center;
+    width: 200px;
+}
+
+.new-note button {
+    position: absolute;
+    bottom: 12px;
+    right: 240px;
+    font: Roboto;
+    border: none;
+    background-color: white;
+    font-size: 16px;
+}
+
+.new-note button:hover{
+    cursor: pointer;
+}
+
+.new-note form {
+    display: grid;
+    row-gap: 0.5em;
+}
+
+.new-note form input {
+    border: none;
+    width: 400px;
+}
+
+.new-note form input:first-of-type{
+    font-size: 18px;
 }
 
 
-.add-note .hidden {
-    display: none;
-}
+
+

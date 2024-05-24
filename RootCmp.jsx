@@ -31,13 +31,12 @@ export function App() {
                     <Route path="/mail/:mailId" element={ <MailDetails /> }/> */}
                     <Route path='/mail/new' element={<AddMail />} />
                     
-                    {/* <Route path="/note" element={<NoteIndex />} /> */}
-                {/* <Route path="/note/edit/:noteId" element={<NoteEdit/>} /> */}
+                  
                 <Route path="/note" element={<NoteIndex />}>
                     <Route path="/note/add" element={<AddNote />} />   
                     <Route path="/note/edit/:noteId" element={<NoteEdit2 />} />
-
                 </Route>
+                    
 
                 
                 </Routes>

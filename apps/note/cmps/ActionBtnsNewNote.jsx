@@ -1,4 +1,4 @@
-export function ActionBtnsNewNote({onClose}){
+export function ActionBtnsNewNote(){
 
     function onClickMore(ev){
        ev.stopPropagation()
@@ -29,7 +29,7 @@ export function ActionBtnsNewNote({onClose}){
                         <span className="action-name">More</span>
                     </div>
 
-                    <div onClick ={onClose} className="closeBtn">Close</div>
-                    
+                    {/* <div onClick ={onClose} className="closeBtn">Close</div> */}
+
             </section>
 }

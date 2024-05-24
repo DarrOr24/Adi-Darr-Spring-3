@@ -20,7 +20,7 @@
     width: 35px;
 }
 
-.action-icons .action-name {
+.action-name {
     opacity: 0;
     position: absolute;
     bottom: -25px;

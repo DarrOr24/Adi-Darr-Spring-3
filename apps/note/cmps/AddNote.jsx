@@ -35,8 +35,6 @@ export function AddNote({onAdd}){
 
     function onSave(ev) {
         ev.preventDefault()
-        console.log(note)
-
         if((!note.info.title)&&(!note.info.text)){ //if note is empty
             setOpenNote(false)
             navigate(`/note`)

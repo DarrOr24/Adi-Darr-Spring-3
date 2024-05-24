@@ -6,6 +6,8 @@ const { useNavigate } = ReactRouter
 import { noteService } from "../services/note.service.js";
 import { ActionBtnsNewNote } from "./ActionBtnsNewNote.jsx";
 import { AddNoteSideMenu } from "./AddNoteSideMenu.jsx";
+import { NoteForm } from "./NoteForm.jsx";
+import { NotePin } from "./NotePin.jsx";
 
 export function AddNote({onAdd}){
     
@@ -82,46 +84,13 @@ export function AddNote({onAdd}){
                     <AddNoteSideMenu />
                 </div> }
 
-            {openNote && <PinIcon />}
-            {openNote && <NewNoteForm note={note} handleChangeInfo={handleChangeInfo} onSave={onSave} /> }
-
+            {openNote && <NotePin />}
+        
+            {openNote && <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/> }
+                    
             {openNote && <ActionBtnsNewNote  />} 
       
     </section>
 }
 
-function NewNoteForm({note, handleChangeInfo, onSave}){
-    return <section className = "new-note">
-        <form onSubmit = {onSave}>
-           
-            <input
-                onChange={handleChangeInfo} value={note.info.title}
-                id="title" name="title"
-                type="text" placeholder="Title" />
-
-            <textarea
-                name="txt"
-                type="txt" 
-                placeholder="Take a note..."
-                cols='20'
-                rows='10'
-                value={note.info.txt}
-                onChange={handleChangeInfo}
-            ></textarea>
-
-            <button>Close</button>
-        </form>    
-    </section >
-
-}
-
-
-
-function PinIcon(){
-    return <div className="action-icon pin">
-                <img src="assets\img\pin.svg" alt="" />
-                <span className="action-name">Pin Note</span>
-        </div>
-    
-}
 

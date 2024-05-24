@@ -1,9 +1,9 @@
-.add-note .side-bar:hover{
+.side-bar:hover{
     opacity:1;
     cursor: pointer;
 }
 
-.add-note .side-bar {
+.side-bar {
     grid-area: side-bar;
     align-self: start;
     display: grid;
@@ -12,17 +12,17 @@
     width: 200px;
 }
 
-.add-note .side-bar .action-icon {
-    position: relative;
+.side-bar .action-icon {
+    /* position: relative; */
     height: 35px;
     width: 35px;
     display: grid;
     place-items: center;
-    z-index: 1;
+    
 
 }
 
-.add-note .side-bar .action-name {
+.side-bar .action-name {
     opacity: 0;
     position: absolute;
     bottom: -25px;
@@ -37,7 +37,7 @@
 }
 
 
-.add-note .side-bar >*:hover {
+.side-bar >*:hover {
     background-color: lightgray;
     border-radius: 50%;
 }

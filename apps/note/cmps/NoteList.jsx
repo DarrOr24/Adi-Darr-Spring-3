@@ -31,7 +31,7 @@ export function NoteList({ notes, onRemove, onEdit }) {
                 <NotePreview note={note} onRemove = {onRemove} />
                 
             </li>)}
-            {isSelected && <NoteEdit2 note = {selectedNote} onClose={closeNoteEdit}/>} 
+            {isSelected && <NoteEdit2 noteToEdit = {selectedNote} onClose={closeNoteEdit} onEdit={onEdit}/>} 
         </ul>
 
         

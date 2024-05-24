@@ -1,15 +1,78 @@
+const { useState, useEffect } = React
 
-export function NoteEdit2({ note, onClose }){
+const { useNavigate } = ReactRouter
+
+
+import { noteService } from "../services/note.service.js";
+import { ActionBtnsNewNote } from "./ActionBtnsNewNote.jsx";
+import { NoteForm } from "./NoteForm.jsx";
+import { NotePin } from "./NotePin.jsx";
+
+export function NoteEdit2({ noteToEdit, onClose, onEdit }){
+
+    
+    const navigate = useNavigate()
+    const [ note, setNote ] = useState(noteToEdit)
+
+    
+    function onSave(ev) {
+        ev.preventDefault()
+        console.log(note)
+        if((!note.info.title)&&(!note.info.txt)){ //if note is empty
+            onClose()
+            navigate(`/note`)
+            return 
+        }
+        
+        else{
+            noteService.save(note)
+            .then((editedNote) => {
+                onEdit(editedNote)
+                onClose()
+                // setNote(emptyNote)
+            })
+            
+            .catch(() => {
+                console.log('error')
+                // showErrorMsg('Couldnt save')
+            })
+            .finally(() => navigate('/note'))
+        }
+        
+    }
+
+    function handleChangeInfo({ target }) {
+        const { type, name: prop } = target
+        let { value } = target
+
+        switch (type) {
+            case 'range':
+            case 'number':
+                value = +value
+                break;
+
+            case 'checkbox':
+                value = target.checked
+                break;
+        }
+        
+        setNote(prevNote => ({
+            ...prevNote,
+            info: { ...prevNote.info, [prop]: value }
+        }))
+    }
     
 
     return (
         <section className="note-edit" >
+
             <div className="screen"></div>
             <article style={{backgroundColor: note.style.backgroundColor}}>
-                <h3>{note.info.title}</h3>
-                <p>{note.info.txt}</p>
-            
-                <button onClick={onClose}>Back</button>
+                <NotePin />
+        
+                <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/> 
+                            
+                <ActionBtnsNewNote  />
             </article>
             
             
@@ -19,3 +82,7 @@ export function NoteEdit2({ note, onClose }){
 
     
 }
+
+
+
+    

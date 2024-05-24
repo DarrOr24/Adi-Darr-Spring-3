@@ -41,18 +41,17 @@
     background-color: lightgray;
     border-radius: 50%;
     cursor: pointer;
+    
 }
 
 .action-icons >*:first-child{
     position:absolute;
-    left:-15px;
-    top:-15px;
+    left:-16px;
+    top:-16px;
+    
 }
 
-.color-menu {
-    position: absolute;
-    z-index: 3;
-}
+
 
 
 

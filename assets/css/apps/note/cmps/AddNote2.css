@@ -1,0 +1,23 @@
+.add-note2 {
+    
+   position: absolute;
+   right: 45px;
+   background-color: white;
+   z-index: 10;
+    margin-block-start: 1em;
+    width: 600px;
+    margin-inline-start: 250px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.548);
+    padding: 0.5em;
+    border-radius: 8px;
+    height: max-content;
+
+    display: grid;
+    
+    
+    row-gap: 0.5em;
+    
+}
+
+
+

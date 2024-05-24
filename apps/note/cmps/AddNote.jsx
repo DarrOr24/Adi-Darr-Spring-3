@@ -2,11 +2,12 @@ const { useState, useEffect } = React
 
 const { useNavigate } = ReactRouter
 
+
 import { noteService } from "../services/note.service.js";
 import { ActionBtnsNewNote } from "./ActionBtnsNewNote.jsx";
 import { AddNoteSideMenu } from "./AddNoteSideMenu.jsx";
 
-export function AddNote(){
+export function AddNote({onAdd}){
     
     const emptyNote = {
         info: {title: '', txt: '' },
@@ -30,22 +31,31 @@ export function AddNote(){
         if (!openNote)  setOpenNote(true)
     }
 
-    function closeNote(){
-        setOpenNote(false)
-        navigate(`/note`)
-    }
+    
 
     function onSave(ev) {
         ev.preventDefault()
-        console.log(note)
+        if((!note.info.title)&&(!note.info.txt)){ //if note is empty
+            setOpenNote(false)
+            navigate(`/note`)
+            return 
+        }
         
-        noteService.save(note)
-            .then(setOpenNote(false))
+        else{
+            noteService.save(note)
+            .then((newNote) => {
+                onAdd(newNote)
+                setOpenNote(false)
+                setNote(emptyNote)
+            })
+            
             .catch(() => {
                 console.log('error')
                 // showErrorMsg('Couldnt save')
             })
             .finally(() => navigate('/note'))
+        }
+        
     }
 
     function handleChangeInfo({ target }) {
@@ -72,47 +82,49 @@ export function AddNote(){
     
     return <section className = "add-note">
             
-            {openNote && <AddNoteHeader />}
-            {!openNote && <p className="take-a-note" onClick={onClickNote}>Take a note...</p>}
+            {openNote && <PinIcon />}
+            
+            {!openNote && 
+                <div className="take-a-note">
+                    <p  onClick={onClickNote}>Take a note...</p>
+                    <AddNoteSideMenu />
+                </div> }
 
             {openNote && <NewNoteForm note={note} handleChangeInfo={handleChangeInfo} onSave={onSave} /> }
 
-            {!openNote && <AddNoteSideMenu />}
-            {openNote && <ActionBtnsNewNote onClose={closeNote} />} 
+            {openNote && <ActionBtnsNewNote  />} 
       
     </section>
 }
 
 function NewNoteForm({note, handleChangeInfo, onSave}){
     return <section className = "new-note">
-    <form onSubmit = {onSave}>
-       <label htmlFor="title">Title</label>
-       <input
-           onChange={handleChangeInfo} value={note.info.title}
-           id="title" name="title"
-           type="text" placeholder="Title" />
+        <form onSubmit = {onSave}>
+           
+            <input
+                onChange={handleChangeInfo} value={note.info.title}
+                id="title" name="title"
+                type="text" placeholder="Title" />
 
-       <label htmlFor="txt">Subject</label>
-       <input
-           onChange={handleChangeInfo} value={note.info.txt}
-           id="txt" name="txt"
-           type="txt" placeholder="Take a note..." />
+            
+            <input
+                onChange={handleChangeInfo} value={note.info.txt}
+                id="txt" name="txt"
+                type="txt" placeholder="Take a note..." />
 
-       <button>Save</button>
-   </form>    
-</section >
+            <button>Close</button>
+        </form>    
+    </section >
 
 }
 
 
 
-function AddNoteHeader(){
-    return <header>
-        <h4>Title</h4>
-        <div className="action-icon">
-            <img src="assets\img\pin.svg" alt="" />
-            <span className="action-name">Pin Note</span>
+function PinIcon(){
+    return <div className="action-icon pin">
+                <img src="assets\img\pin.svg" alt="" />
+                <span className="action-name">Pin Note</span>
         </div>
-    </header>
+    
 }
 

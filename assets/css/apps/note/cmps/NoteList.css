@@ -1,25 +1,33 @@
 
 .note-list ul{
     grid-area: node-list;
+    margin-block-start: 2em;
     
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1em;
+    /* display: grid;
+    grid-template-columns: repeat(3, 1fr); */
+    columns: 3;
+    /* row-gap: 1em; */
+    /* gap: 1em;   */
 }
 
 .note-list ul > * {
+    
+    break-inside: avoid;
+    margin-block-end: 1em;
     position: relative;
     border-radius: 8px;
     border: 1px solid lightgray;
     padding: 12px 16px;
     display: grid;
     width: 260px;
+    height: max-content;
 }
 
 .note-list ul >*:hover {
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     cursor: pointer;
 }
+
 
 
 

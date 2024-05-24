@@ -18,6 +18,10 @@ export function NoteIndex() {
             .then(notes => setNotes(notes))
     }, [])
 
+    function addNewNote(note){
+        setNotes([...notes, note])
+    }
+
     function removeNote(ev, noteId){
         ev.stopPropagation()
         console.log('oh yeah!!  double callback!!')
@@ -50,7 +54,7 @@ export function NoteIndex() {
         </header>
         <main>
             <NoteSideMenu />
-            <AddNote notes={notes} />
+            <AddNote notes={notes} onAdd={addNewNote} />
             {isNotes && <NoteList notes={notes} onRemove={removeNote} />}
             {!isNotes && <h2>No notes!!  Done with the chores for today...</h2>} 
         </main>

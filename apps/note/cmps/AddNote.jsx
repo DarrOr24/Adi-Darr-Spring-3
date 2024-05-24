@@ -20,18 +20,12 @@ export function AddNote({onAdd}){
     const [ openNote, setOpenNote ] = useState(false)
     const [ note, setNote ] = useState(emptyNote)
 
-    useEffect(() => {
-        
-
-    }, [note])
-
-    
+   
     function onClickNote(){
          navigate(`/note/add`)
         if (!openNote)  setOpenNote(true)
     }
 
-    
 
     function onSave(ev) {
         ev.preventDefault()
@@ -82,14 +76,13 @@ export function AddNote({onAdd}){
     
     return <section className = "add-note">
             
-            {openNote && <PinIcon />}
-            
             {!openNote && 
                 <div className="take-a-note">
                     <p  onClick={onClickNote}>Take a note...</p>
                     <AddNoteSideMenu />
                 </div> }
 
+            {openNote && <PinIcon />}
             {openNote && <NewNoteForm note={note} handleChangeInfo={handleChangeInfo} onSave={onSave} /> }
 
             {openNote && <ActionBtnsNewNote  />} 
@@ -106,11 +99,15 @@ function NewNoteForm({note, handleChangeInfo, onSave}){
                 id="title" name="title"
                 type="text" placeholder="Title" />
 
-            
-            <input
-                onChange={handleChangeInfo} value={note.info.txt}
-                id="txt" name="txt"
-                type="txt" placeholder="Take a note..." />
+            <textarea
+                name="txt"
+                type="txt" 
+                placeholder="Take a note..."
+                cols='20'
+                rows='10'
+                value={note.info.txt}
+                onChange={handleChangeInfo}
+            ></textarea>
 
             <button>Close</button>
         </form>    

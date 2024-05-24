@@ -41,9 +41,8 @@ export function NoteIndex() {
         
     }
 
-    
-
     const isNotes = notes.length > 0
+    
     if (isLoading) return <div className="loader"></div>
     return <section className = "note-index main-layout">
         <header className="note-index-header">

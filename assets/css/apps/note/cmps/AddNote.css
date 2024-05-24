@@ -68,6 +68,14 @@
     font-size: 18px;
 }
 
+.new-note form textarea{
+    border: none;
+}
+
+.new-note form input:focus, .new-note form textarea:focus{
+    outline: none;
+}
+
 
 
 

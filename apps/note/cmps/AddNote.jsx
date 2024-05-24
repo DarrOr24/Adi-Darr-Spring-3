@@ -7,7 +7,7 @@ import { noteService } from "../services/note.service.js";
 import { ActionBtnsNewNote } from "./ActionBtnsNewNote.jsx";
 import { AddNoteSideMenu } from "./AddNoteSideMenu.jsx";
 
-export function AddNote(){
+export function AddNote({onAdd}){
     
     const emptyNote = {
         info: {title: '', txt: '' },
@@ -31,10 +31,7 @@ export function AddNote(){
         if (!openNote)  setOpenNote(true)
     }
 
-    function closeNote(){
-        setOpenNote(false)
-        navigate(`/note`)
-    }
+    
 
     function onSave(ev) {
         ev.preventDefault()
@@ -48,7 +45,12 @@ export function AddNote(){
         
         else{
             noteService.save(note)
-            .then(setOpenNote(false))
+            .then((newNote) => {
+                onAdd(newNote)
+                setOpenNote(false)
+                
+            })
+            
             .catch(() => {
                 console.log('error')
                 // showErrorMsg('Couldnt save')
@@ -84,8 +86,6 @@ export function AddNote(){
             
             {openNote && <PinIcon />}
             
-            {/* {!openNote && <p className="take-a-note" onClick={onClickNote}>Take a note...</p>}
-            {!openNote && <AddNoteSideMenu />} */}
             {!openNote && 
                 <div className="take-a-note">
                     <p  onClick={onClickNote}>Take a note...</p>

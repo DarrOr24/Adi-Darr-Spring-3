@@ -29,7 +29,6 @@ export function AddNote({onAdd}){
     }
 
     function setNoteColor(color){
-        console.log(color)
         setNote(prevNote => ({
             ...prevNote,
             style: { ...prevNote.style, backgroundColor: color }

@@ -28,9 +28,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote }){
             noteService.save(note)
             .then((editedNote) => {
                 onEdit(editedNote)
-                console.log(editedNote.style.backgroundColor)
                 onClose()
-                // setNote(emptyNote)
             })
             
             .catch(() => {

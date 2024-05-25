@@ -8,7 +8,7 @@ import { ActionBtns } from "./ActionBtns.jsx";
 import { NoteForm } from "./NoteForm.jsx";
 import { NotePin } from "./NotePin.jsx";
 
-export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote }){
+export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNote }){
 
     const navigate = useNavigate()
     const [ note, setNote ] = useState(noteToEdit)
@@ -77,7 +77,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote }){
 
             <div className="screen"></div>
             <article style={{backgroundColor: note.style.backgroundColor}}>
-                <NotePin />
+                <NotePin note={note} onPinNote ={onPinNote}/>
         
                 <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/> 
                 <ActionBtns note={note} onSetNoteColor={setNoteColor} />       

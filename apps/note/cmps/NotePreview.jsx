@@ -55,7 +55,7 @@ export function NotePreview({ note, onRemove, onEdit, onPinNote}){
                         <ActionBtns note={note} onRemove={onRemove} onSetNoteColor={setNoteColor} />
                     </article>}
 
-                {openNote && <NoteEdit2 noteToEdit = {updatedNote} onClose={closeNoteEdit} onEdit={editPreview} onSetColorNote={setNoteColor} />}
+                {openNote && <NoteEdit2 noteToEdit = {updatedNote} onClose={closeNoteEdit} onEdit={editPreview} onSetColorNote={setNoteColor} onPinNote={onPinNote} />}
                 
     </section>
     

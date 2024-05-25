@@ -20,18 +20,21 @@ export function NoteIndex() {
             .then(notes => setNotes(notes))
     }, [])
 
-    function addNewNote(note){
+    function addNewNote(note){//Note already saved to service
         setNotes([...notes, note])
     }
 
-    function addEditNote(noteToEdit){
+    function addEditNote(noteToEdit){ //Note already saved to service
+        noteService.save(noteToEdit)
         const idx =  notes.findIndex(note => note.id === noteToEdit.id)
         setNotes(notes.toSpliced(idx, 1, noteToEdit))
+
+        
     }
 
     function removeNote(ev, noteId){
         ev.stopPropagation()
-        console.log('oh yeah!!  double callback!!')
+        console.log('oh yeah!!  triple callback!!')
         setIsLoading(true)
         noteService.remove(noteId)
             .then(() => {

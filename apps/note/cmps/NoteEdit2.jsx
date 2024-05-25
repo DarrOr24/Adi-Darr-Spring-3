@@ -25,7 +25,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote }){
         }
         
         else{
-            
+            console.log(note.info.title)
             noteService.save(note)
             .then((note) => {
                 // console.log(note.info.title)
@@ -69,6 +69,8 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote }){
             ...prevNote,
             info: { ...prevNote.info, [prop]: value }
         }))
+
+        
     }
     
 

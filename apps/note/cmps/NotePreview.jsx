@@ -9,14 +9,15 @@ import { NotePin } from "./NotePin.jsx"
 
 export function NotePreview({ note, onRemove, onEdit}){
     
-    const { info, style } = note
-    const { title, txt } = info
-    const { backgroundColor } = style
+    
 
     const navigate = useNavigate()
     const [ openNote, setOpenNote ] = useState(false)
     const [ updatedNote, setUpdatedNote ] = useState(note)
-    
+
+    const { info, style } = updatedNote
+    const { title, txt } = info
+    const { backgroundColor } = style
 
     function openEdit(){  
         setOpenNote(true)
@@ -28,34 +29,34 @@ export function NotePreview({ note, onRemove, onEdit}){
         navigate('/note')
     }
 
+    function editPreview(noteFromEditing){
+        setUpdatedNote(noteFromEditing)
+        onEdit(noteFromEditing)
+
+    }
+
 
    function setNoteColor(color){
-        // console.log(color)
         setUpdatedNote(prevNote => ({
             ...prevNote,
             style: { ...prevNote.style, backgroundColor: color }
         }))
-        //Need to spread when saving because setting the updated note take long
-        noteService.save({...updatedNote, style: { ...updatedNote.style, backgroundColor: color }})
-        .then((item) => {
-            // console.log(item.style.backgroundColor)
-            onEdit(item)
-        })
-           
+
+        onEdit({...updatedNote, style: {...updatedNote.style, backgroundColor:color}}) 
    }
 
    
     return  <section>
 
                 {!openNote && 
-                    <article onClick = {openEdit} className="note-preview" style={{backgroundColor: updatedNote.style.backgroundColor}} >
+                    <article onClick = {openEdit} className="note-preview" style={{backgroundColor: backgroundColor}} >
                         <h2>{title}</h2>
                         <p >{txt}</p>
                         <NotePin />
                         <ActionBtns note={note} onRemove={onRemove} onSetNoteColor={setNoteColor} />
                     </article>}
 
-                {openNote && <NoteEdit2 noteToEdit = {updatedNote} onClose={closeNoteEdit} onEdit={onEdit} onSetColorNote={setNoteColor} />}
+                {openNote && <NoteEdit2 noteToEdit = {updatedNote} onClose={closeNoteEdit} onEdit={editPreview} onSetColorNote={setNoteColor} />}
                 
     </section>
     

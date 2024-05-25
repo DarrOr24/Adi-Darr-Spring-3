@@ -4,15 +4,16 @@ const { useState, useEffect } = React
 
 export function NotePin({note: noteToPin ,onPinNote}){
         
-
         const [ note, setNote ] =useState(noteToPin)
         const [isPin, setIsPin] = useState(noteToPin.isPinned)
         
         const [noteClass, setNoteClass] = useState('')
+       
         
         useEffect(() => {
                 if (isPin) setNoteClass('pinned')
             }, [])
+                
 
         function togglePin(ev){
                 ev.stopPropagation()
@@ -20,6 +21,7 @@ export function NotePin({note: noteToPin ,onPinNote}){
                 if(noteClass) setNoteClass('')
                 else setNoteClass('pinned')
 
+        
                 setNote(prevNote =>({...prevNote, isPinned: !isPin}) )
                 setIsPin(prevIsPin => !prevIsPin)
 

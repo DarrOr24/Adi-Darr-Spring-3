@@ -1,19 +1,30 @@
-const { useState } = React
+import { noteService } from "../services/note.service.js"
 
-export function NotePin({note ,onPinNote}){
+const { useState, useEffect } = React
 
-        const [ isPinned, setIsPinned ] = useState(note.isPinned)
+export function NotePin({note: noteToPin ,onPinNote}){
+
+        const [ note, setNote ] =useState(noteToPin)
+        const [isPin, setIsPin] = useState(note.isPinned)
+        
+        useEffect(() => {
+                isNotePinned()
+            }, [isPin])
 
         function togglePin(ev){
                 ev.stopPropagation()
-                onPinNote(note)
-                setIsPinned(prevIsPinned => !prevIsPinned)
-                
+                setIsPin(prevIsPin => !prevIsPin)
+                setNote(prevNote =>({...prevNote, isPinned: isPin}) )
+                isNotePinned()
+                // onPinNote(note)
+                noteService.save(note)
+                .then((updatedNote) => onPinNote(updatedNote))
+               
 
         }
 
         function isNotePinned(){
-                return isPinned ? 'pinned' : ''
+                return isPin ? 'pinned' : ''
 
         }
 

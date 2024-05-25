@@ -27,9 +27,7 @@ export function NoteIndex() {
     function addEditNote(noteToEdit){ //Note already saved to service
         noteService.save(noteToEdit)
         const idx =  notes.findIndex(note => note.id === noteToEdit.id)
-        setNotes(notes.toSpliced(idx, 1, noteToEdit))
-
-        
+        setNotes(notes.toSpliced(idx, 1, noteToEdit)) 
     }
 
     function removeNote(ev, noteId){

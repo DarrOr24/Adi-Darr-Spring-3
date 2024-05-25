@@ -1,6 +1,7 @@
 const { useState } = React
 const { useNavigate } = ReactRouter
 
+import { utilService } from "../../../services/util.service.js";
 import { noteService } from "../services/note.service.js";
 import { ActionBtns } from "./ActionBtns.jsx"
 import { NoteEdit2 } from "./NoteEdit2.jsx"
@@ -25,18 +26,22 @@ export function NotePreview({ note, onRemove, onEdit}){
     function closeNoteEdit(){ 
         setOpenNote(false)
         navigate('/note')
-        
     }
 
-   
 
    function setNoteColor(color){
+        // console.log(color)
         setUpdatedNote(prevNote => ({
             ...prevNote,
             style: { ...prevNote.style, backgroundColor: color }
         }))
-
-        noteService.save(updatedNote)
+        //Need to spread when saving because setting the updated note take long
+        noteService.save({...updatedNote, style: { ...updatedNote.style, backgroundColor: color }})
+        .then((item) => {
+            // console.log(item.style.backgroundColor)
+            onEdit(item)
+        })
+           
    }
 
    

@@ -25,9 +25,11 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote }){
         }
         
         else{
+            
             noteService.save(note)
-            .then((editedNote) => {
-                onEdit(editedNote)
+            .then((note) => {
+                // console.log(note.info.title)
+                onEdit(note)
                 onClose()
             })
             

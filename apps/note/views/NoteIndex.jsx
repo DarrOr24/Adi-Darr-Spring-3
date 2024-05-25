@@ -25,12 +25,8 @@ export function NoteIndex() {
     }
 
     function addEditNote(noteToEdit){
-
         const idx =  notes.findIndex(note => note.id === noteToEdit.id)
-        const newNotes = notes.splice(idx, 1, noteToEdit)
-        setNotes(newNotes)
-        // noteService.query()
-        //     .then(notes => setNotes(notes)) 
+        setNotes(notes.toSpliced(idx, 1, noteToEdit))
     }
 
     function removeNote(ev, noteId){

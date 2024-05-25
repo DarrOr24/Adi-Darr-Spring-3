@@ -10,11 +10,10 @@ import { NotePin } from "./NotePin.jsx";
 
 export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote }){
 
-    
     const navigate = useNavigate()
     const [ note, setNote ] = useState(noteToEdit)
 
-    
+
     function onSave(ev) {
         ev.preventDefault()
         if((!note.info.title)&&(!note.info.txt)){ //if note is empty
@@ -25,7 +24,6 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote }){
         }
         
         else{
-            console.log(note.info.title)
             noteService.save(note)
             .then((note) => {
                 // console.log(note.info.title)

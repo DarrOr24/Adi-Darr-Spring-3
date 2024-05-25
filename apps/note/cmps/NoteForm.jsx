@@ -1,4 +1,9 @@
 export function NoteForm({note, handleChangeInfo, onSave}){
+
+    const isNoteTxt = (note.type === 'NoteTxt')
+    const isNoteImg = (note.type === 'NoteImg')
+
+
     return <section className = "note-form">
         <form onSubmit = {onSave}>
            
@@ -11,7 +16,7 @@ export function NoteForm({note, handleChangeInfo, onSave}){
                 placeholder="Title"
                  />
 
-            <textarea
+           {isNoteTxt && <textarea
                 name="txt"
                 type="txt" 
                 placeholder="Take a note..."
@@ -19,7 +24,9 @@ export function NoteForm({note, handleChangeInfo, onSave}){
                 rows='10'
                 value={note.info.txt}
                 onChange={handleChangeInfo}
-            ></textarea>
+            ></textarea> } 
+
+            {isNoteImg && <img height="150" src={note.info.url} alt="" />}
 
             <button>Close</button>
         </form>    

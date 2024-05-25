@@ -5,7 +5,7 @@ import { utilService } from "../../../services/util.service.js";
 import { noteService } from "../services/note.service.js";
 import { ActionBtns } from "./ActionBtns.jsx"
 import { NoteEdit2 } from "./NoteEdit2.jsx"
-import { NoteImg } from "./NoteImg.js";
+import { NoteImg } from "./NoteImg.jsx";
 import { NotePin } from "./NotePin.jsx"
 import { NoteTxt } from "./NoteTxt.jsx";
 

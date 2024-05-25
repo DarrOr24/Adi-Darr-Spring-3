@@ -51,7 +51,7 @@ function _createNotes() {
         const white = 'white'
         const noteColors = [chalk, white, storm, clay, white]
       
-        for (let i = 0; i < 3; i++){
+        for (let i = 0; i < 2; i++){
             const noteTitle = noteTitles[i]
             const noteColor =noteColors[i]
             notes.push(_createNote('NoteTxt', false, {'backgroundColor': noteColor}, {'title': noteTitle, 'txt': utilService.makeLorem(20)}))
@@ -59,7 +59,7 @@ function _createNotes() {
 
         const url = `assets/img/sweet_noga.jpg`
         const noteImg = _createNote('NoteImg', false, {'backgroundColor': chalk}, {'url':url, 'title': 'My Sweet Noga'})
-        notes.unshift(noteImg)
+        notes.push(noteImg)
            
         utilService.saveToStorage(NOTE_KEY, notes)
     }

@@ -8,3 +8,11 @@
     place-self: center;
 
 }
+
+.note-preview .note-pin {
+    opacity: 0;
+}
+
+.note-preview .note-pin.pinned{
+    opacity: 1;
+}

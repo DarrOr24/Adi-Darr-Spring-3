@@ -48,6 +48,12 @@ export function NoteIndex() {
         
     }
 
+    function pinNote(noteToPin){
+        console.log(noteToPin)
+        
+        
+    }
+
     function onSetFilterBy(newFilter) {
         setFilterBy({ ...newFilter })
     }
@@ -64,7 +70,7 @@ export function NoteIndex() {
         <main>
             <NoteSideMenu />
             <AddNote notes={notes} onAdd={addNewNote} />
-            {isNotes && <NoteList notes={notes} onRemove={removeNote} onEdit={addEditNote} />}
+            {isNotes && <NoteList notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} />}
             {!isNotes && <h2>No notes!!  Done with the chores for today...</h2>} 
         </main>
         

@@ -29,7 +29,7 @@
     text-wrap: wrap;
 }
 
-.note-preview .note-pin, .note-preview .action-icons {
+.note-preview .action-icons {
     opacity: 0;
 }
 

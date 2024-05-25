@@ -48,8 +48,8 @@ export function NoteIndex() {
         
     }
 
-    function pinNote(noteToPin){
-        console.log('noteToPin:', noteToPin.isPinned)
+    function pinNote(note){
+        console.log(note.isPinned)
         
         
     }

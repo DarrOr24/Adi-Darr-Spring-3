@@ -13,6 +13,11 @@
     opacity: 0;
 }
 
-.note-preview .note-pin.pinned{
+.note-pin.pinned{
     opacity: 1;
+    background-color: var(--blossom);
+    border-radius: 50%;
 }
+
+
+

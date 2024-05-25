@@ -57,7 +57,7 @@ function _createNotes() {
             notes.push(_createNote('NoteTxt', false, {'backgroundColor': noteColor}, {'title': noteTitle, 'txt': utilService.makeLorem(20)}))
         }
 
-        const url = `assets/img/sweet_noga.jpg`
+        const url = `assets/img/sweet_noga.png`
         const noteImg = _createNote('NoteImg', false, {'backgroundColor': chalk}, {'url':url, 'title': 'My Sweet Noga'})
         notes.push(noteImg)
            

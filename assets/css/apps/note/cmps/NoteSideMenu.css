@@ -6,11 +6,14 @@
 
 .side-menu li {
     display: grid;
-    grid-template-columns: 30px 1fr;
-    column-gap: 1em;
+    grid-auto-flow: column;
     align-items: center;
-    /* height: 100px; */
-    width: 150px;
+    grid-template-columns: 30px minmax(auto, 1fr);
+}
+
+.side-menu li img{
+    width: max-content;
+    justify-self: start;
 }
 
 .side-menu .selected {
@@ -19,11 +22,20 @@
     border-top-right-radius: 25px;
 }
 
-.side-menu li:not(.selected):hover{
+.side-menu li:not(.selected, .hamburger):hover{
     background-color: var(--chalk); 
     border-bottom-right-radius: 25px;
     border-top-right-radius: 25px;
+}
+
+.side-menu li:hover{
     cursor: pointer;
+}
+
+.side-menu .hamburger{
+    position: absolute;
+    top:20px;
+    
 }
 
 

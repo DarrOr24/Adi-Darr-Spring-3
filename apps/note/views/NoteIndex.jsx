@@ -69,7 +69,7 @@ export function NoteIndex() {
         </header>
         <main>
             <NoteSideMenu />
-            <AddNote notes={notes} onAdd={addNewNote} />
+            <AddNote notes={notes} onAdd={addNewNote} onPinNote ={pinNote} />
             {isNotes && <NoteList notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} />}
             {!isNotes && <h2>No notes!!  Done with the chores for today...</h2>} 
         </main>

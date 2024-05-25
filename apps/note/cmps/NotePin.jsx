@@ -22,9 +22,15 @@ export function NotePin({note: noteToPin ,onPinNote}){
 
                 setNote(prevNote =>({...prevNote, isPinned: !isPin}) )
                 setIsPin(prevIsPin => !prevIsPin)
+
+
+                if(note.id){ //to avoid saving unsaved notes in addnote form
+                        noteService.save(note)
+                        .then((updatedNote) => onPinNote(updatedNote))
+                }
+
+                else{onPinNote(!isPin)} //To make sure I am sending the current state
                 
-                noteService.save(note)
-                .then((updatedNote) => onPinNote(updatedNote))
         }
 
        

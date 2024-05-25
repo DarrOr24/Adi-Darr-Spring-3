@@ -9,13 +9,14 @@ import { AddNoteSideMenu } from "./AddNoteSideMenu.jsx";
 import { NoteForm } from "./NoteForm.jsx";
 import { NotePin } from "./NotePin.jsx";
 
-export function AddNote({onAdd}){
+export function AddNote({onAdd, onPinNote}){
     
     const emptyNote = {
         info: {title: '', txt: '' },
         isPinned: false,
         style: {backgroundColor: 'white'},
-        type: 'NoteTxt'
+        type: 'NoteTxt',
+        time: Date.now()
     }
 
     const navigate = useNavigate()
@@ -33,6 +34,16 @@ export function AddNote({onAdd}){
             ...prevNote,
             style: { ...prevNote.style, backgroundColor: color }
         }))
+    }
+
+    function isPinned(isPin){
+        console.log(isPin) //the previous value is showing because it was not saved
+        
+        setNote(prevNote => ({
+            ...prevNote,
+            isPinned: isPin
+        }))
+ 
     }
 
     function onSave(ev) {
@@ -91,7 +102,7 @@ export function AddNote({onAdd}){
                     <AddNoteSideMenu />
                 </div> }
 
-            {openNote && <NotePin />}
+            {openNote && <NotePin note={note} onPinNote ={isPinned}/>}
         
             {openNote && <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/> }
                     

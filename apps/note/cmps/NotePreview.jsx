@@ -5,6 +5,7 @@ import { utilService } from "../../../services/util.service.js";
 import { noteService } from "../services/note.service.js";
 import { ActionBtns } from "./ActionBtns.jsx"
 import { NoteEdit2 } from "./NoteEdit2.jsx"
+import { NoteImg } from "./NoteImg.js";
 import { NotePin } from "./NotePin.jsx"
 import { NoteTxt } from "./NoteTxt.jsx";
 
@@ -56,6 +57,7 @@ export function NotePreview({ note, onRemove, onEdit}){
                 {!openNote && 
                     <article onClick = {openEdit} className="note-preview" style={{backgroundColor: backgroundColor}} >
                         {isNoteTxt && <NoteTxt note={note} /> } 
+                        {isNoteImg && <NoteImg note={note}/> }
                         <NotePin />
                         <ActionBtns note={note} onRemove={onRemove} onSetNoteColor={setNoteColor} />
                     </article>}

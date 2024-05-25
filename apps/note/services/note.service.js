@@ -20,6 +20,7 @@ function query(filterBy = {}) {
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')
                 notes = notes.filter(note => regExp.test(note.info.title))
+                
             }
 
             // if (filterBy.minSpeed) {

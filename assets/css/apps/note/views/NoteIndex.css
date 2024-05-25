@@ -1,28 +1,26 @@
 .note-index {
     color: #5f6368;
+    position: relative;
 }
 
 .note-index-header {
     display: grid;
     grid-auto-flow: column;
-    grid-template-columns: 30px 50px 150px 650px; 
+    grid-template-columns: 80px 150px 650px; 
     align-items: center;
     border-bottom: 2px solid lightgrey;
 }
 
+.note-index-header img {
+    justify-self: end;
+}
+
 .note-index-header h1{
     font-weight: 400;
-    grid-column: 3;
+    
 }
 
-.note-index-header img:first-of-type{
-    height: 20px;
-    place-self: center;
-}
 
-.note-index-header img:nth-of-type(2){
-    height: 50px;
-}
 
 .note-index main {
     display: grid;

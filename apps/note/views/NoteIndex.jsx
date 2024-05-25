@@ -13,12 +13,13 @@ export function NoteIndex() {
 
     const [notes, setNotes] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+    const [ filterBy, setFilterBy ] = useState({})
     
 
     useEffect(() => {
-        noteService.query()
+        noteService.query(filterBy)
             .then(notes => setNotes(notes))
-    }, [])
+    }, [filterBy])
 
     function addNewNote(note){//Note already saved to service
         setNotes([...notes, note])
@@ -47,15 +48,18 @@ export function NoteIndex() {
         
     }
 
+    function onSetFilterBy(newFilter) {
+        setFilterBy({ ...newFilter })
+    }
+
     const isNotes = notes.length > 0
     
     if (isLoading) return <div className="loader"></div>
     return <section className = "note-index main-layout">
         <header className="note-index-header">
-            <img src="assets\img\hamburger.svg" alt="" />
-            <img src="assets\img\keep-icon.png" alt="" />
+            <img height="50" src="assets\img\keep-icon.png" alt="" />
             <h1>Keep</h1>
-            <NoteFilter />
+            <NoteFilter filterBy={filterBy} onFilter={onSetFilterBy} />
         </header>
         <main>
             <NoteSideMenu />

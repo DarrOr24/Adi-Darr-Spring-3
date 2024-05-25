@@ -13,12 +13,13 @@ export function NoteIndex() {
 
     const [notes, setNotes] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+    const [ filterBy, setFilterBy ] = useState({})
     
 
     useEffect(() => {
-        noteService.query()
+        noteService.query(filterBy)
             .then(notes => setNotes(notes))
-    }, [])
+    }, [filterBy])
 
     function addNewNote(note){//Note already saved to service
         setNotes([...notes, note])
@@ -27,9 +28,7 @@ export function NoteIndex() {
     function addEditNote(noteToEdit){ //Note already saved to service
         noteService.save(noteToEdit)
         const idx =  notes.findIndex(note => note.id === noteToEdit.id)
-        setNotes(notes.toSpliced(idx, 1, noteToEdit))
-
-        
+        setNotes(notes.toSpliced(idx, 1, noteToEdit))  
     }
 
     function removeNote(ev, noteId){
@@ -49,6 +48,10 @@ export function NoteIndex() {
         
     }
 
+    function onSetFilterBy(newFilter) {
+        setFilterBy({ ...newFilter })
+    }
+
     const isNotes = notes.length > 0
     
     if (isLoading) return <div className="loader"></div>
@@ -56,7 +59,7 @@ export function NoteIndex() {
         <header className="note-index-header">
             <img height="50" src="assets\img\keep-icon.png" alt="" />
             <h1>Keep</h1>
-            <NoteFilter />
+            <NoteFilter filterBy={filterBy} onFilter={onSetFilterBy} />
         </header>
         <main>
             <NoteSideMenu />

@@ -11,20 +11,12 @@ import { NoteTxt } from "./NoteTxt.jsx";
 
 export function NotePreview({ note, onRemove, onEdit}){
     
-    
-
     const navigate = useNavigate()
     const [ openNote, setOpenNote ] = useState(false)
     const [ updatedNote, setUpdatedNote ] = useState(note)
    
-
-
-    const { info, style } = updatedNote
-    const { title, txt } = info
+    const {  style } = updatedNote
     const { backgroundColor } = style
-
-    const isNoteTxt = (note.type === 'NoteTxt')
-    const isNoteImg = (note.type === 'NoteImg')
 
     function openEdit(){  
         setOpenNote(true)
@@ -39,7 +31,6 @@ export function NotePreview({ note, onRemove, onEdit}){
     function editPreview(noteFromEditing){
         setUpdatedNote(noteFromEditing)
         onEdit(noteFromEditing)
-
     }
 
 
@@ -52,12 +43,11 @@ export function NotePreview({ note, onRemove, onEdit}){
         onEdit({...updatedNote, style: {...updatedNote.style, backgroundColor:color}}) 
    }
 
-   
     return  <section>
                 {!openNote && 
                     <article onClick = {openEdit} className="note-preview" style={{backgroundColor: backgroundColor}} >
-                        {isNoteTxt && <NoteTxt note={note} /> } 
-                        {isNoteImg && <NoteImg note={note}/> }
+                        
+                        <DynamicCmp note={note} />
                         <NotePin />
                         <ActionBtns note={note} onRemove={onRemove} onSetNoteColor={setNoteColor} />
                     </article>}
@@ -66,7 +56,16 @@ export function NotePreview({ note, onRemove, onEdit}){
                 
     </section>
     
+}
+
+function DynamicCmp({note}){
     
+    switch (note.type) {
+        case 'NoteTxt':
+            return <NoteTxt note={note} />
+        case 'NoteImg':
+            return <NoteImg note={note}/>
+    }
 }
 
 

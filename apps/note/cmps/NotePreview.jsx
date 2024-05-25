@@ -6,6 +6,7 @@ import { noteService } from "../services/note.service.js";
 import { ActionBtns } from "./ActionBtns.jsx"
 import { NoteEdit2 } from "./NoteEdit2.jsx"
 import { NotePin } from "./NotePin.jsx"
+import { NoteTxt } from "./NoteTxt.jsx";
 
 export function NotePreview({ note, onRemove, onEdit}){
     
@@ -14,10 +15,15 @@ export function NotePreview({ note, onRemove, onEdit}){
     const navigate = useNavigate()
     const [ openNote, setOpenNote ] = useState(false)
     const [ updatedNote, setUpdatedNote ] = useState(note)
+   
+
 
     const { info, style } = updatedNote
     const { title, txt } = info
     const { backgroundColor } = style
+
+    const isNoteTxt = (note.type === 'NoteTxt')
+    const isNoteImg = (note.type === 'NoteImg')
 
     function openEdit(){  
         setOpenNote(true)
@@ -47,11 +53,9 @@ export function NotePreview({ note, onRemove, onEdit}){
 
    
     return  <section>
-
                 {!openNote && 
                     <article onClick = {openEdit} className="note-preview" style={{backgroundColor: backgroundColor}} >
-                        <h2>{title}</h2>
-                        <p >{txt}</p>
+                        {isNoteTxt && <NoteTxt note={note} /> } 
                         <NotePin />
                         <ActionBtns note={note} onRemove={onRemove} onSetNoteColor={setNoteColor} />
                     </article>}

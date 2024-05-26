@@ -20,10 +20,10 @@ export function NotePin({note: noteToPin ,onPinNote}){
                         stat = true
                 }
 
-                setNote(prevNote =>({...prevNote, isPinned: stat}) )
+                setNote(prevNote =>({...prevNote, isPinned: stat, pinTime: (stat = 'pinned')? Date.now() : ''}) )
                 
                 if(note.id){
-                        noteService.save({...note, isPinned: stat})
+                        noteService.save({...note, isPinned: stat, pinTime: (stat = 'pinned')? Date.now() : ''})
                         .then(onPinNote)
                        
                 }

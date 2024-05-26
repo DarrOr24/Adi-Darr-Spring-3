@@ -1,10 +1,3 @@
-/* .note-edit {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(231, 186, 186, 0.315);
-    transition: opacity 0.6s;
-} */
-
 .note-edit .screen {
     position: fixed;
     inset: 0;
@@ -21,6 +14,33 @@
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.548);
     border-radius: 8px;
     z-index: 2;
-    height: 300px;
+    height: 250px;
     width: 300px;
+    font: Robotica;
+    
+}
+
+.note-edit .note-form form input {
+    border: none;
+    width: 200px;
+}
+
+.note-edit .note-form button {
+    bottom: 7px;
+    right: 10px;
+}
+
+.note-edit .action-icons-new-note{
+    width: 220px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.note-edit .trash, .note-edit .select, .note-edit .duplicate {
+    display:none;
+}
+
+.note-edit .action-icons {
+    width: 170px;
 }

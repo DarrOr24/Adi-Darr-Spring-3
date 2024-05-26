@@ -1,11 +1,13 @@
-const { useState, useEffect } = React
+const { useState } = React
 
 const { useNavigate } = ReactRouter
 
 
 import { noteService } from "../services/note.service.js";
-import { ActionBtnsNewNote } from "./ActionBtnsNewNote.jsx";
+import { ActionBtns } from "./ActionBtns.jsx";
 import { AddNoteSideMenu } from "./AddNoteSideMenu.jsx";
+import { NoteForm } from "./NoteForm.jsx";
+import { NotePin } from "./NotePin.jsx";
 
 export function AddNote({onAdd}){
     
@@ -13,30 +15,42 @@ export function AddNote({onAdd}){
         info: {title: '', txt: '' },
         isPinned: false,
         style: {backgroundColor: 'white'},
-        type: 'NoteTxt'
+        type: 'NoteTxt',
+        time: Date.now()
     }
 
     const navigate = useNavigate()
     const [ openNote, setOpenNote ] = useState(false)
     const [ note, setNote ] = useState(emptyNote)
 
-    useEffect(() => {
-        
-
-    }, [note])
-
-    
+   
     function onClickNote(){
          navigate(`/note/add`)
         if (!openNote)  setOpenNote(true)
     }
 
-    
+    function setNoteColor(color){
+        setNote(prevNote => ({
+            ...prevNote,
+            style: { ...prevNote.style, backgroundColor: color }
+        }))
+    }
+
+    function isPinned(isPin){
+        console.log(isPin) //the previous value is showing because it was not saved
+        
+        setNote(prevNote => ({
+            ...prevNote,
+            isPinned: isPin
+        }))
+ 
+    }
 
     function onSave(ev) {
         ev.preventDefault()
         if((!note.info.title)&&(!note.info.txt)){ //if note is empty
             setOpenNote(false)
+            setNote(emptyNote)
             navigate(`/note`)
             return 
         }
@@ -80,9 +94,7 @@ export function AddNote({onAdd}){
     }
 
     
-    return <section className = "add-note">
-            
-            {openNote && <PinIcon />}
+    return <section className = "add-note" style={{backgroundColor: note.style.backgroundColor}}>
             
             {!openNote && 
                 <div className="take-a-note">
@@ -90,41 +102,14 @@ export function AddNote({onAdd}){
                     <AddNoteSideMenu />
                 </div> }
 
-            {openNote && <NewNoteForm note={note} handleChangeInfo={handleChangeInfo} onSave={onSave} /> }
-
-            {openNote && <ActionBtnsNewNote  />} 
+            {openNote && <NotePin note={note} onPinNote ={isPinned}/>}
+        
+            {openNote && <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/> }
+                    
+            {openNote &&  <ActionBtns note={note}  onSetNoteColor={setNoteColor} />} 
+           
       
     </section>
 }
 
-function NewNoteForm({note, handleChangeInfo, onSave}){
-    return <section className = "new-note">
-        <form onSubmit = {onSave}>
-           
-            <input
-                onChange={handleChangeInfo} value={note.info.title}
-                id="title" name="title"
-                type="text" placeholder="Title" />
-
-            
-            <input
-                onChange={handleChangeInfo} value={note.info.txt}
-                id="txt" name="txt"
-                type="txt" placeholder="Take a note..." />
-
-            <button>Close</button>
-        </form>    
-    </section >
-
-}
-
-
-
-function PinIcon(){
-    return <div className="action-icon pin">
-                <img src="assets\img\pin.svg" alt="" />
-                <span className="action-name">Pin Note</span>
-        </div>
-    
-}
 

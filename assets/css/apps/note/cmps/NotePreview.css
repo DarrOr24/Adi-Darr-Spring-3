@@ -1,12 +1,21 @@
-
 .note-preview {
-    /* border-radius: 20px; */
+    position: relative;
+    border-radius: 8px;
+    border: 1px solid lightgray;
+    padding: 12px 16px;
     display: grid;
-    /* width: 240px; */
+    height: max-content;
+    display: grid;
+    
     font-size: 18px;
     position: relative;
-    
 }
+
+.note-preview:hover {
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    cursor: pointer;
+}
+
 
 .note-preview  h2 {
     height: 38px;
@@ -14,4 +23,29 @@
     font-size: 18px;
     font-weight: 500;
 }
+
+.note-preview p{
+    width: 220px;
+    text-wrap: wrap;
+}
+
+.note-preview .action-icons {
+    opacity: 0;
+}
+
+.note-preview:hover .note-pin{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.note-preview:hover .action-icons{
+    opacity: 1;
+    cursor: pointer;
+}
+
+
+
+
+
+
 

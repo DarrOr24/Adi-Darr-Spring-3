@@ -10,15 +10,9 @@
     row-gap: 0.5em;
 }
 
-.add-note .pin {
-    position: absolute;
+.add-note .note-pin {
     right:0;
     top:0;
-    height: 35px;
-    width: 35px;
-    display: grid;
-    place-self: center;
-
 }
 
 .take-a-note {
@@ -40,34 +34,13 @@
     width: 200px;
 }
 
-.new-note button {
-    position: absolute;
-    bottom: 12px;
-    right: 240px;
-    font: Roboto;
-    border: none;
-    background-color: white;
-    font-size: 16px;
+.add-note .trash, .add-note .select, .add-note .duplicate {
+    display: none;
 }
 
-.new-note button:hover{
-    cursor: pointer;
+.add-note .action-icons {
+    width: 250px;
 }
-
-.new-note form {
-    display: grid;
-    row-gap: 0.5em;
-}
-
-.new-note form input {
-    border: none;
-    width: 400px;
-}
-
-.new-note form input:first-of-type{
-    font-size: 18px;
-}
-
 
 
 

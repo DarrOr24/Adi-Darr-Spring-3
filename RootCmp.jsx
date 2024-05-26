@@ -4,6 +4,10 @@ const Router = ReactRouterDOM.HashRouter
 import { AppHeader } from "./cmps/AppHeader.jsx"
 import { About } from "./views/About.jsx"
 import { Home } from "./views/Home.jsx"
+
+import { UserMsg } from "./cmps/UserMsg.jsx"
+import { eventBusService } from "./services/event-bus.service.js"
+
 import { MailIndex } from "./apps/mail/views/MailIndex.jsx"
 import { AddMail } from "./apps/mail/cmps/AddMail.jsx"
 
@@ -29,8 +33,8 @@ export function App() {
                         <Route path="/note/add" element={<AddNote />} />   
                         <Route path="/note/edit/:noteId" element={<NoteEdit2 />} />
                     </Route>
-                    
                 </Routes>
+                <UserMsg />
             </section>
         </Router>
     )

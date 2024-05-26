@@ -20,18 +20,15 @@ function query(filterBy = {}) {
         .then(notes => {
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')
-                notes = notes.filter(note => regExp.test(note.info.title))
+                notes = notes.filter(note => regExp.test(note.info.title ) || regExp.test(note.info.txt))
                 
             }
 
-            // if (filterBy.minSpeed) {
-            //     notes = notes.filter(note => note.maxSpeed >= filterBy.minSpeed)
-            // }
-            // const sortedArr = notes.sort((note1, note2) => note1.timeStamp - note2.timeStamp)
-            // const unpinnedNotes = sortedArr.filter(note => note.isPinned === false)
-            // const pinnedNotes = sortedArr.filter(note => note.isPinned === true)
-            // const notes = [...pinnedNotes, ...unpinnedNotes]
-            
+            const pinnedNotes = notes.filter(note => note.isPinned === true)
+            pinnedNotes.sort((note2, note1) => note1.pinTime - note2.pinTime)
+            console.log(pinnedNotes)
+            const unpinnedNotes =notes.filter(note => note.isPinned === false)
+            notes = [...pinnedNotes, ...unpinnedNotes]
 
             return notes
         })
@@ -66,11 +63,7 @@ function _createNotes() {
         const url = `assets/img/sweet_noga.png`
         const noteImg = _createNote('NoteImg', true, {'backgroundColor': chalk}, {'url':url, 'title': 'My Sweet Noga'})
         notes.push(noteImg)
-
-        const pinnedNotes = notes.filter(note => note.isPinned === true)
-        const unpinnedNotes = notes.filter(note => note.isPinned === false)
-        notes = [...pinnedNotes, ...unpinnedNotes]
-           
+     
         utilService.saveToStorage(NOTE_KEY, notes)
     }
 }
@@ -84,9 +77,11 @@ function _createNote(type, isPinned, style, info){
                     id:  utilService.makeId(),        
                     type, 
                     isPinned, 
+                    pinTime: (isPinned)? Date.now() : '',
                     style, 
                     info,
-                    time: Date.now() 
+                    time: Date.now(),
+                    updatedAt: Date.now()
                 }
    return note
 }
@@ -108,7 +103,7 @@ function save(note) {
     if (note.id) {
         return storageService.put(NOTE_KEY, note)
     } else {
-        if(note.isPinned) return storageService.postFirst(NOTE_KEY, note)
+        // if(note.isPinned) return storageService.postFirst(NOTE_KEY, note)
         return storageService.post(NOTE_KEY, note)
     }
 }

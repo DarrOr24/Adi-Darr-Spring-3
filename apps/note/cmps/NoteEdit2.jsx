@@ -24,7 +24,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
         }
         
         else{
-            noteService.save(note)
+            noteService.save({...note, updatedAt: Date.now()})
             .then((note) => {
                 // console.log(note.info.title)
                 onEdit(note)
@@ -46,6 +46,14 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
             style: { ...prevNote.style, backgroundColor: color }
         }))
         onSetColorNote(color) 
+    }
+
+    function isNotePinned(noteFromPin){
+        setNote(prevNote => ({
+            ...prevNote,
+            isPinned: noteFromPin.isPinned,
+            pinTime: noteFromPin.pinTime
+        }))
     }
 
     function handleChangeInfo({ target }) {
@@ -77,7 +85,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
 
             <div className="screen"></div>
             <article style={{backgroundColor: note.style.backgroundColor}}>
-                <NotePin note={note} onPinNote ={onPinNote}/>
+                <NotePin note={note} onPinNote ={isNotePinned}/>
         
                 <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/> 
                 <ActionBtns note={note} onSetNoteColor={setNoteColor} />       

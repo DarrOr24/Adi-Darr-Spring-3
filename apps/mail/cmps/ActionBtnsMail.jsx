@@ -5,7 +5,7 @@ export function ActionBtnsMail({ mail, removeMail, toggleReadStatus}) {
     }
 
     return (
-        <section className="mail-actions">
+        <section className="mail-action-btn">
             <div className="action-icon" onClick={() => removeMail(mail.id)}>
                 <img src="assets/img/trash.svg" alt="Trash" />
                 <span className="action-name">Delete</span>

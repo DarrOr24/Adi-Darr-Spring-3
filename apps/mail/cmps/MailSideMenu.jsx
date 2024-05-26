@@ -13,7 +13,7 @@ export function MailSideMenu({ unreadCount }){
             <ul className = "menu">
                 <Link to="/mail">
                     <li className="selected">
-                        <i class="fa-solid fa-inbox"></i>
+                        <i className="fa-solid fa-inbox"></i>
                         <span>Inbox</span>
                         <span>{unreadCount()}</span>
                     </li>

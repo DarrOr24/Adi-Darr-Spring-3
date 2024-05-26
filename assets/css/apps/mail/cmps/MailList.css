@@ -1,11 +1,15 @@
  .mail-list {
-    /* background-color: #c2dbff; */
     background-color: #f2f6fc;
     border-radius: 1em;
 }
 
-/* .mail-list ul {
-    display: grid;
+.mail-list li .mail-action-btn {
+    opacity: 0;
+}
+
+.mail-list li:hover .mail-action-btn {
+    opacity: 1;
+    cursor: pointer;
 } */
 
 .mail-list li {

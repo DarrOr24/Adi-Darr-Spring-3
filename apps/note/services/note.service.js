@@ -7,10 +7,10 @@ _createNotes()
 
 export const noteService = {
     query,
+    sortNotes,
     get,
     remove,
-    save,
-    saveAll
+    save
 }
 
 window.ns = noteService
@@ -24,14 +24,19 @@ function query(filterBy = {}) {
                 
             }
 
-            const pinnedNotes = notes.filter(note => note.isPinned === true)
-            pinnedNotes.sort((note2, note1) => note1.pinTime - note2.pinTime)
-            console.log(pinnedNotes)
-            const unpinnedNotes =notes.filter(note => note.isPinned === false)
-            notes = [...pinnedNotes, ...unpinnedNotes]
-
+            notes = sortNotes(notes)
+            
             return notes
         })
+}
+
+function sortNotes(notesArr){
+    const pinnedNotes = notesArr.filter(note => note.isPinned === true)
+    pinnedNotes.sort((note2, note1) => note1.pinTime - note2.pinTime)
+    const unpinnedNotes =notesArr.filter(note => note.isPinned === false)
+    unpinnedNotes.sort((note1, note2) => note1.time - note2.time)
+    console.log(unpinnedNotes)
+    return [...pinnedNotes, ...unpinnedNotes]
 }
 
 function _createNotes() {
@@ -57,22 +62,19 @@ function _createNotes() {
         for (let i = 0; i < 2; i++){
             const noteTitle = noteTitles[i]
             const noteColor =noteColors[i]
-            notes.push(_createNote('NoteTxt', false, {'backgroundColor': noteColor}, {'title': noteTitle, 'txt': utilService.makeLorem(20)}))
+            notes.push(_createNote('NoteTxt', false, {'backgroundColor': noteColor}, {'title': noteTitle, 'txt': utilService.makeLorem(20)}, Date.now()+i))
         }
 
         const url = `assets/img/sweet_noga.png`
-        const noteImg = _createNote('NoteImg', true, {'backgroundColor': chalk}, {'url':url, 'title': 'My Sweet Noga'})
+        const noteImg = _createNote('NoteImg', true, {'backgroundColor': chalk}, {'url':url, 'title': 'My Sweet Noga'}, Date.now()+2)
         notes.push(noteImg)
      
         utilService.saveToStorage(NOTE_KEY, notes)
     }
 }
 
-function saveAll(notes){
-    utilService.saveToStorage(NOTE_KEY, notes)
-}
 
-function _createNote(type, isPinned, style, info){
+function _createNote(type, isPinned, style, info, time = Date.now()){
     const note = {
                     id:  utilService.makeId(),        
                     type, 
@@ -80,8 +82,8 @@ function _createNote(type, isPinned, style, info){
                     pinTime: (isPinned)? Date.now() : '',
                     style, 
                     info,
-                    time: Date.now(),
-                    updatedAt: Date.now()
+                    time,
+                    updatedAt: time
                 }
    return note
 }

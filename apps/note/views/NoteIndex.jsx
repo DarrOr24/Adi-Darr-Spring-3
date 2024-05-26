@@ -28,8 +28,7 @@ export function NoteIndex() {
 
     function addEditNote(noteToEdit){ //Note already saved to service
         noteService.save(noteToEdit)
-
-        placeNote(noteToEdit)
+        .then (placeNote)
 
     }
 
@@ -50,29 +49,30 @@ export function NoteIndex() {
         
     }
 
-    function placeNote(noteToEdit){
+    function pinNote(noteFromPin){
+        noteService.save({...noteFromPin, pinTime: (noteFromPin.isPinned) ? Date.now() : ''})
+        .then(placeNote)
 
-        if(noteToEdit.id) noteService.save(noteToEdit)
-        const notesCopy = notes.slice()
-        
-        if(noteToEdit.isPinned){
-            if(noteToEdit.id) noteService.save({...noteToEdit, pinTime: Date.now()})//update pin time
-            var newNotes = notesCopy.filter(note => note.id !== noteToEdit.id)
-            newNotes.unshift(noteToEdit)
-            setNotes(newNotes)
-        }
-        
-        if(!noteToEdit.isPinned){
-            //Not updated on the notes
-            var newNotes = notesCopy.filter(note => note.id !== noteToEdit.id) //get the note out of the array
-            const unpinnedNotes = newNotes.filter(note => note.isPinned === false)
-            unpinnedNotes.push(noteToEdit) //add the note to the unpinned notes
-            unpinnedNotes.sort((note1, note2) => note1.time - note2.time)
-            const pinnedNotes = newNotes.filter(note => note.isPinned === true)
-            newNotes =[...pinnedNotes, ...unpinnedNotes]
-            setNotes(newNotes)
-        }     
     }
+
+    
+    
+    function placeNote(noteToPlace){
+        console.log('note reached index', noteToPlace.isPinned)
+        //Note already saved in the service
+
+        //First take her out and set her again with all the notes
+        const restOfNotes = notes.filter(note => note.id !== noteToPlace.id)
+        
+        const unsortedNotes = [...restOfNotes, noteToPlace]
+        
+        // Now sort the array
+        // const sortedNotes = sortNotes(unsortedNotes)
+        const sortedNotes = noteService.sortNotes(unsortedNotes)
+
+        setNotes(sortedNotes)
+    }
+
 
     function duplicateNote(noteToDuplicate){
         const newNote = structuredClone(noteToDuplicate)
@@ -103,7 +103,7 @@ export function NoteIndex() {
         <main>
             <NoteSideMenu />
             <AddNote notes={notes} onAdd={addNewNote} onPinNote ={placeNote} />
-            {isNotes && <NoteList notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={placeNote} onDuplicate={duplicateNote} />}
+            {isNotes && <NoteList notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} onDuplicate={duplicateNote} />}
             {!isNotes && <h2>No notes!!  Done with the chores for today...</h2>} 
         </main>
         

@@ -20,7 +20,7 @@ function query(filterBy = {}) {
         .then(notes => {
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')
-                notes = notes.filter(note => regExp.test(note.info.title))
+                notes = notes.filter(note => regExp.test(note.info.title ) || regExp.test(note.info.txt))
                 
             }
 

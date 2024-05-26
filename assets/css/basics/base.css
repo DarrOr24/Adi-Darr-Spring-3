@@ -1,5 +1,6 @@
 * {
 	box-sizing: border-box;
+    font-family: Roboto;
 }
 
 html {
@@ -9,7 +10,7 @@ html {
 
 body {
     margin: 0;
-    font-family: Roboto;
+  
 }
 
 h1,

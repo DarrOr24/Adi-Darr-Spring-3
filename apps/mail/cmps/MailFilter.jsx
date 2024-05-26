@@ -22,7 +22,19 @@ export function MailFilter({ filterBy, onFilter }) {
                 <img src="assets/img/magnifying_glass.svg" alt="" />
                 <input onChange={handleChange} value={filterByToEdit.txt} name="txt" type="text" placeholder="Search mail"/>
             </div>
-        
+            <div className="search-options">
+                <label htmlFor="read-status">Read Status: </label>
+                <select
+                    id="read-status"
+                    name="isRead"
+                    value={filterByToEdit.isRead}
+                    onChange={handleChange}
+                >
+                    <option value="">All</option>
+                    <option value="true">Read</option>
+                    <option value="false">Unread</option>
+                </select>
+            </div>
             <div className="action-icon search-options">
                 <img src="assets/img/search_options.svg" alt="Search options" />
                 <span className="action-name">Show search options</span>
@@ -30,3 +42,5 @@ export function MailFilter({ filterBy, onFilter }) {
         </section>
     )
 }
+
+

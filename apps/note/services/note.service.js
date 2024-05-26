@@ -86,7 +86,8 @@ function _createNote(type, isPinned, style, info){
                     isPinned, 
                     style, 
                     info,
-                    time: Date.now() 
+                    time: Date.now(),
+                    updatedAt: Date.now()
                 }
    return note
 }

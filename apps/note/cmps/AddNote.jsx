@@ -16,7 +16,8 @@ export function AddNote({onAdd}){
         isPinned: false,
         style: {backgroundColor: 'white'},
         type: 'NoteTxt',
-        time: Date.now()
+        time: Date.now(),
+        updatedAt: Date.now()
     }
 
     const navigate = useNavigate()

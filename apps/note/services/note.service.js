@@ -64,8 +64,12 @@ function _createNotes() {
         }
 
         const url = `assets/img/sweet_noga.png`
-        const noteImg = _createNote('NoteImg', false, {'backgroundColor': chalk}, {'url':url, 'title': 'My Sweet Noga'})
+        const noteImg = _createNote('NoteImg', true, {'backgroundColor': chalk}, {'url':url, 'title': 'My Sweet Noga'})
         notes.push(noteImg)
+
+        const pinnedNotes = notes.filter(note => note.isPinned === true)
+        const unpinnedNotes = notes.filter(note => note.isPinned === false)
+        notes = [...pinnedNotes, ...unpinnedNotes]
            
         utilService.saveToStorage(NOTE_KEY, notes)
     }

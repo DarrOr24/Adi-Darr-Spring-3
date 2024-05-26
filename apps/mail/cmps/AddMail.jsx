@@ -1,23 +1,11 @@
-const { useState, useEffect } = React
-const { useParams, useNavigate } = ReactRouter
+const { useState } = React
+const { useNavigate } = ReactRouter
 
 import { mailService } from "../services/mail.service.js"
 
 export function AddMail() {
     const [mail, setMail] = useState(mailService.getEmptyMail())
-    
-    // const params = useParams()
     const navigate = useNavigate()
-    
-    // useEffect(() => {
-    //     if(!params.mailId) return
-
-    //     mailService.get(params.mailId)
-    //         .then((mail) => {
-    //         setMail(mail)
-            // console.log('mail:', mail)
-    //     })
-    // }, [])
 
     function handleChange({ target }) {
         const { type, name: prop } = target

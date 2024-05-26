@@ -18,9 +18,15 @@ export function MailFilter({ filterBy, onFilter }) {
 
     return (
         <section className="mail-filter">
-            <img src="assets/img/magnifying_glass.svg" alt="" />
-            <input onChange={handleChange} value={filterByToEdit.txt} name="txt" type="text" placeholder="Search mail"/>
-            {/* <span>Search mail</span> */}
+            <div className="search">
+                <img src="assets/img/magnifying_glass.svg" alt="" />
+                <input onChange={handleChange} value={filterByToEdit.txt} name="txt" type="text" placeholder="Search mail"/>
+            </div>
+        
+            <div className="action-icon search-options">
+                <img src="assets/img/search_options.svg" alt="Search options" />
+                <span className="action-name">Show search options</span>
+            </div>
         </section>
     )
 }

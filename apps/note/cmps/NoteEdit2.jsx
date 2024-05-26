@@ -54,6 +54,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
             isPinned: noteFromPin.isPinned,
             pinTime: noteFromPin.pinTime
         }))
+
     }
 
     function handleChangeInfo({ target }) {

@@ -42,7 +42,8 @@ export function AddNote({onAdd}){
         
         setNote(prevNote => ({
             ...prevNote,
-            isPinned: isPin
+            isPinned: isPin,
+            pinTime: (isPin) ? Date.now() : ''
         }))
  
     }

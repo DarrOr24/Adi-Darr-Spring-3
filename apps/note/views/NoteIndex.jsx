@@ -28,8 +28,9 @@ export function NoteIndex() {
 
     function addEditNote(noteToEdit){ //Note already saved to service
         noteService.save(noteToEdit)
-        const idx =  notes.findIndex(note => note.id === noteToEdit.id)
-        setNotes(notes.toSpliced(idx, 1, noteToEdit)) 
+
+        placeNote(noteToEdit)
+
     }
 
     function removeNote(ev, noteId){
@@ -49,16 +50,15 @@ export function NoteIndex() {
         
     }
 
-    function pinNote(noteToEdit){
-        console.log(noteToEdit.isPinned)
-        // if(noteToEdit.id) noteService.save({...noteToEdit, pinTime: Date.now()})
+    function placeNote(noteToEdit){
+
+        if(noteToEdit.id) noteService.save(noteToEdit)
         const notesCopy = notes.slice()
         
         if(noteToEdit.isPinned){
-            //note already saved to storage in NotePin
+            if(noteToEdit.id) noteService.save({...noteToEdit, pinTime: Date.now()})//update pin time
             var newNotes = notesCopy.filter(note => note.id !== noteToEdit.id)
             newNotes.unshift(noteToEdit)
-            // noteService.saveAll(newNotes)
             setNotes(newNotes)
         }
         
@@ -70,7 +70,6 @@ export function NoteIndex() {
             unpinnedNotes.sort((note1, note2) => note1.time - note2.time)
             const pinnedNotes = newNotes.filter(note => note.isPinned === true)
             newNotes =[...pinnedNotes, ...unpinnedNotes]
-            // noteService.saveAll(newNotes)
             setNotes(newNotes)
         }     
     }
@@ -103,8 +102,8 @@ export function NoteIndex() {
         </header>
         <main>
             <NoteSideMenu />
-            <AddNote notes={notes} onAdd={addNewNote} onPinNote ={pinNote} />
-            {isNotes && <NoteList notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} onDuplicate={duplicateNote} />}
+            <AddNote notes={notes} onAdd={addNewNote} onPinNote ={placeNote} />
+            {isNotes && <NoteList notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={placeNote} onDuplicate={duplicateNote} />}
             {!isNotes && <h2>No notes!!  Done with the chores for today...</h2>} 
         </main>
         

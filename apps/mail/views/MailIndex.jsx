@@ -15,17 +15,32 @@ export function MailIndex() {
     const [ mails, setMails ] = useState([])
     const [searchParams, setSearchParams] = useSearchParams()
     const [ filterBy, setFilterBy ] = useState(mailService.getFilterFromSearchParams(searchParams))
+    const [status, setStatus] = useState('inbox')
+    const [unreadCount, setUnreadCount] = useState(0)
+   
+
+    // useEffect(() => {
+    //     setSearchParams(filterBy)
+    //     mailService.query(filterBy)
+    //         .then(mails => setMails(mails))
+    // }, [filterBy])
 
     useEffect(() => {
         setSearchParams(filterBy)
-        mailService.query(filterBy)
+        const criteria = { ...filterBy, status }
+        mailService.query(criteria)
             .then(mails => setMails(mails))
-    }, [filterBy])
+        
+        mailService.countUnreadInboxMails()
+            .then(count => setUnreadCount(count))
+    }, [filterBy, status])
 
     function removeMail(mailId) {
         mailService.remove(mailId)
             .then(() => {
                 setMails(prevMails => prevMails.filter(mail => mail.id !== mailId))
+                mailService.countUnreadInboxMails()
+                    .then(count => setUnreadCount(count))
             })
             .catch(err => {
                 console.log('err:', err)
@@ -42,6 +57,8 @@ export function MailIndex() {
         mailService.save(updatedMail)
             .then(savedMail => {
                 setMails(prevMails => prevMails.map(mail => mail.id === savedMail.id ? savedMail : mail))
+                mailService.countUnreadInboxMails()
+                    .then(count => setUnreadCount(count))
                 console.log('Mail has successfully saved!', savedMail)
             })
             .catch(() => {
@@ -54,8 +71,8 @@ export function MailIndex() {
         setFilterBy(newFilter)
     }
 
-    function unreadCount() {
-        return mails.filter(mail => !mail.isRead).length
+    function onSetStatus(newStatus) {
+        setStatus(newStatus)
     }
 
     if (!mails) return <div>Loading...</div>
@@ -65,13 +82,16 @@ export function MailIndex() {
             <MailFilter filterBy={filterBy} onFilter={onSetFilterBy}/>
             <main>
                 <section className="mail-side-menu">
-                    <MailSideMenu unreadCount={unreadCount} />
+                    <MailSideMenu unreadCount={unreadCount} onSetStatus={onSetStatus} />
                 </section>
                 <section className="mail-list">
                     {/* <Outlet context={{ mails, removeMail }} /> */}
                     <Routes>
                         <Route path="/" element={<MailList mails={mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus}/>} />
                         <Route path=":mailId" element={<MailDetails toggleReadStatus={toggleReadStatus}/>} />
+                        <Route path="sent" element={<MailList mails={mails} />} />
+                        <Route path="sent/:mailId" element={<MailDetails toggleReadStatus={toggleReadStatus} />} />
+                        <Route path="trash" element={<MailList mails={mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus} />} /> 
                     </Routes>
                 </section>
             </main>

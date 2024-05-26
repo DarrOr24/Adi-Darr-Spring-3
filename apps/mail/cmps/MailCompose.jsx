@@ -3,7 +3,7 @@ const { useNavigate } = ReactRouter
 
 import { mailService } from "../services/mail.service.js"
 
-export function AddMail() {
+export function MailCompose() {
     const [mail, setMail] = useState(mailService.getEmptyMail())
     const navigate = useNavigate()
 
@@ -37,8 +37,8 @@ export function AddMail() {
     }
 
     return (
-        <section className="add-mail">
-            <form onSubmit={onSave} className='add-form'>
+        <section className="mail-Compose">
+            <form onSubmit={onSave} className='mail-form'>
                 <div className='mail-modal'>
                     <h2>New Message</h2>
                     <button type="button" className='btn-close' onClick={closeForm}>x</button>

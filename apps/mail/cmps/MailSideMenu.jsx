@@ -1,30 +1,42 @@
+const { useState } = React
 const { Link } = ReactRouterDOM
 
-export function MailSideMenu({ unreadCount }){
+export function MailSideMenu({ unreadCount, onSetStatus }){
+    const [selectedFolder, setSelectedFolder] = useState('inbox')
     
+    function handleFolderClick(folder) {
+        setSelectedFolder(folder)
+        onSetStatus(folder)
+    }
     return (
         <section className = "mail-side-menu">
             <Link to="/mail/new">
-                <button className='add-book'>
+                <button className='mail-compose'>
                     <img src="assets\img\edit_labels.svg" alt="" />
                     Compose
                 </button>
             </Link>
             <ul className = "menu">
-                <Link to="/mail">
-                    <li className="selected">
-                        <i className="fa-solid fa-inbox"></i>
-                        <span>Inbox</span>
-                        <span>{unreadCount()}</span>
-                    </li>
-                </Link>
-                    
-                <li>
-                    <p>Sent</p>
+                <li className={selectedFolder === 'inbox' ? 'selected' : ''} 
+                    onClick={() => handleFolderClick('inbox')} >
+                        <Link to="/mail">
+                            <i className="fa-solid fa-inbox"></i>
+                            <span>Inbox</span>
+                            <span>{unreadCount}</span>
+                        </Link>
                 </li>
-                <li>
-                    <img src="assets\img\trash.svg" alt="" />
-                    <p>Trash</p>
+                    
+                <li className={selectedFolder === 'sent' ? 'selected' : ''} 
+                    onClick={() => handleFolderClick('sent')}>
+                        <Link to="/mail/sent">
+                            <i className="fa-solid fa-paper-plane"></i>
+                            <p>Sent</p>
+                        </Link>
+                </li>
+                <li className={selectedFolder === 'trash' ? 'selected' : ''} 
+                    onClick={() => handleFolderClick('trash')}>
+                        <img src="assets\img\trash.svg" alt="" />
+                        <p>Trash</p>
                 </li>
             </ul>
         </section>

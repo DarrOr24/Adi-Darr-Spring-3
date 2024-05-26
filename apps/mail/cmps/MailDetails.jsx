@@ -52,7 +52,10 @@ export function MailDetails({ toggleReadStatus }) {
     return (
         <section className="mail-details">
             <div>
-                <Link to="/mail"><button>Back to Inbox</button></Link>
+                <Link to="/mail">
+                    <img src="assets/img/back.svg" alt="" />
+                    {/* <button>Back to Inbox</button> */}
+                </Link>
             </div>
             <div className="subject">{mail.subject}</div>
             <div className="details">

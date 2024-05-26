@@ -1,4 +1,4 @@
-.mail-side-menu .add-book {
+.mail-side-menu .mail-compose {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -17,9 +17,10 @@
 
 .mail-side-menu .menu li {
     display: grid;
-    grid-template-columns: 30px 1fr 20px;
+   
+    grid-template-columns: 30px 1fr 20px; 
     column-gap: 1em;
-    align-items: center;
+    align-items: center; 
     width: 200px;
     padding: 10px;
     color: #202124;

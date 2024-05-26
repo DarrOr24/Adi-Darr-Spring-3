@@ -2,6 +2,12 @@ import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/async-storage.service.js'
 
 const MAIL_KEY = 'mailDB'
+
+const loggedinUser = {
+    email: 'user@appsus.com',
+    fullname: 'Mahatma Appsus'
+}
+
 _createMails()
 
 export const mailService = {
@@ -11,11 +17,21 @@ export const mailService = {
     save,
     getEmptyMail,
     getFilterFromSearchParams,
+    loggedinUser,
+    countUnreadInboxMails,
 }
 
 function query(filterBy = {}) {
     return storageService.query(MAIL_KEY)
         .then(mails => {
+            if (filterBy.status) {
+                if (filterBy.status === 'inbox') {
+                    mails = mails.filter(mail => mail.to === loggedinUser.email && !mail.removedAt)
+                } else if (filterBy.status === 'sent') {
+                    mails = mails.filter(mail => mail.from === loggedinUser.email && !mail.removedAt)
+                }
+            }
+
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')
                 mails = mails.filter(mail => regExp.test(mail.subject) || regExp.test(mail.body))
@@ -24,6 +40,14 @@ function query(filterBy = {}) {
                 mails = mails.filter(mail => mail.isRead === (filterBy.isRead === 'true'))
             }
             return mails
+        })
+}
+
+function countUnreadInboxMails() {
+    return storageService.query(MAIL_KEY)
+        .then(mails => {
+            const unreadCount = mails.filter(mail => mail.to === loggedinUser.email && !mail.isRead && !mail.removedAt).length
+            return unreadCount
         })
 }
 
@@ -47,10 +71,10 @@ function getEmptyMail() {
     const mail = {
         subject: '',
         body: '',
-        isRead: false,
+        isRead: true,
         sentAt : Date.now(),
         removedAt : null,
-        from: 'momo@momo.com',
+        from: loggedinUser.email,
         to: '',
     }
 
@@ -77,7 +101,7 @@ function _createMails() {
                 sentAt : 1551133930594,
                 removedAt : null,
                 from: 'momo@momo.com',
-                to: 'user@appsus.com'
+                to: loggedinUser.email
             }
             mails.push(mail)
         }

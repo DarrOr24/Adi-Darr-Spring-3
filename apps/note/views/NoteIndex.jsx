@@ -22,7 +22,8 @@ export function NoteIndex() {
     }, [filterBy])
 
     function addNewNote(note){//Note already saved to service
-        setNotes([...notes, note])
+        if (!note.isPinned) setNotes([...notes, note])
+        else setNotes([note, ...notes])
     }
 
     function addEditNote(noteToEdit){ //Note already saved to service
@@ -48,8 +49,34 @@ export function NoteIndex() {
         
     }
 
-    function pinNote(note){
-        console.log(note.isPinned)
+    function pinNote(noteToEdit){
+        //First update the notes without rendering from the storage
+        const notesCopy = notes.slice()
+        
+        if(noteToEdit.isPinned){
+            var newNotes = notesCopy.filter(note => note.id !== noteToEdit.id)
+            newNotes.unshift(noteToEdit)
+            noteService.saveAll(newNotes)
+            setNotes(newNotes)
+        }
+        //Here I first take out of the notes (not updated yet) the note that is unpinned
+        //then I filter out all the unpinned notes (from notesCopy) from the array and add the recentely unpinned note
+        //then I sort the unpinned notes array according to the timestamp
+        //I filter all the pinned note from (notesCopy)
+        //Make a new array by spreading first the pinned notes then the unpinned notes
+        if(!noteToEdit.isPinned){
+            //Not updated on the notes
+            var newNotes = notesCopy.filter(note => note.id !== noteToEdit.id) //get the note out of the array
+            const unpinnedNotes = newNotes.filter(note => note.isPinned === false)
+            unpinnedNotes.push(noteToEdit) //add the note to the unpinned notes
+            unpinnedNotes.sort((note1, note2) => note1.time - note2.time)
+            const pinnedNotes = newNotes.filter(note => note.isPinned === true)
+            newNotes =[...pinnedNotes, ...unpinnedNotes]
+            noteService.saveAll(newNotes)
+            setNotes(newNotes)
+        }    
+        
+
         
         
     }

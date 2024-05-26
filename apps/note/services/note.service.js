@@ -10,6 +10,7 @@ export const noteService = {
     get,
     remove,
     save,
+    saveAll
 }
 
 window.ns = noteService
@@ -26,6 +27,11 @@ function query(filterBy = {}) {
             // if (filterBy.minSpeed) {
             //     notes = notes.filter(note => note.maxSpeed >= filterBy.minSpeed)
             // }
+            // const sortedArr = notes.sort((note1, note2) => note1.timeStamp - note2.timeStamp)
+            // const unpinnedNotes = sortedArr.filter(note => note.isPinned === false)
+            // const pinnedNotes = sortedArr.filter(note => note.isPinned === true)
+            // const notes = [...pinnedNotes, ...unpinnedNotes]
+            
 
             return notes
         })
@@ -65,6 +71,9 @@ function _createNotes() {
     }
 }
 
+function saveAll(notes){
+    utilService.saveToStorage(NOTE_KEY, notes)
+}
 
 function _createNote(type, isPinned, style, info){
     const note = {
@@ -95,6 +104,7 @@ function save(note) {
     if (note.id) {
         return storageService.put(NOTE_KEY, note)
     } else {
+        if(note.isPinned) return storageService.postFirst(NOTE_KEY, note)
         return storageService.post(NOTE_KEY, note)
     }
 }

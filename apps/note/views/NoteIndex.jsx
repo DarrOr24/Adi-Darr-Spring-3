@@ -62,7 +62,7 @@ export function NoteIndex() {
         //Here I first take out of the notes (not updated yet) the note that is unpinned
         //then I filter out all the unpinned notes (from notesCopy) from the array and add the recentely unpinned note
         //then I sort the unpinned notes array according to the timestamp
-        //I filter all the pinned note from (notesCopy)
+        //I filter all the pinned notes from (notesCopy)
         //Make a new array by spreading first the pinned notes then the unpinned notes
         if(!noteToEdit.isPinned){
             //Not updated on the notes
@@ -74,11 +74,7 @@ export function NoteIndex() {
             newNotes =[...pinnedNotes, ...unpinnedNotes]
             noteService.saveAll(newNotes)
             setNotes(newNotes)
-        }    
-        
-
-        
-        
+        }     
     }
 
     function duplicateNote(noteToDuplicate){

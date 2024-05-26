@@ -25,6 +25,7 @@ export function NotePin({note: noteToPin ,onPinNote}){
                 if(note.id){
                         noteService.save({...note, isPinned: stat})
                         .then(onPinNote)
+                       
                 }
                 else onPinNote(stat)        
         }

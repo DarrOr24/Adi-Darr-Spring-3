@@ -24,9 +24,10 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
         }
         
         else{
-            noteService.save({...note, updatedAt: Date.now()})
+            console.log(note.isPinned)
+            noteService.save({...note, updatedAt: Date.now(),})
             .then((note) => {
-                // console.log(note.info.title)
+                console.log(note.isPinned)
                 onEdit(note)
                 onClose()
             })

@@ -27,6 +27,7 @@ export function NoteIndex() {
     }
 
     function addEditNote(noteToEdit){ //Note already saved to service
+        console.log(noteToEdit.isPinned)
         noteService.save(noteToEdit)
         .then (placeNote)
 
@@ -50,7 +51,7 @@ export function NoteIndex() {
     }
 
     function pinNote(noteFromPin){
-        noteService.save({...noteFromPin, pinTime: (noteFromPin.isPinned) ? Date.now() : ''})
+        noteService.save({...noteFromPin, isPinned: noteFromPin.isPinned, pinTime: (noteFromPin.isPinned) ? Date.now() : ''})
         .then(placeNote)
 
     }

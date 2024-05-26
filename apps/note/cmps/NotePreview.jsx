@@ -29,7 +29,8 @@ export function NotePreview({ note, onRemove, onEdit, onPinNote, onDuplicate}){
         navigate('/note')
     }
 
-    function editPreview(noteFromEditing){
+    function editPreview(noteFromEditing){ 
+        console.log('note from editing:', noteFromEditing.isPinned)
         setUpdatedNote(noteFromEditing)
         onEdit(noteFromEditing)
     }

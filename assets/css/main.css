@@ -37,8 +37,10 @@
 @import './apps/mail/cmps/MailFilter.css';
 @import './apps/mail/cmps/MailList.css';
 @import './apps/mail/cmps/MailPreview.css';
+@import './apps/mail/cmps/MailDetails.css';
 @import './apps/mail/cmps/MailSideMenu.css';
 @import './apps/mail/cmps/AddMail.css';
+@import './apps/mail/cmps/ActionBtnsMail.css';
 
 /* Cmps */
 @import './cmps/UserMsg.css';

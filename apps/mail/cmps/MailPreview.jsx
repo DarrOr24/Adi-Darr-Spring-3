@@ -9,11 +9,12 @@ export function MailPreview({ mail }) {
     const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: true }
     const formattedTime = sentDate.toLocaleTimeString('en-IL', timeOptions).toLocaleUpperCase()
     
+    const { from, subject, body, isRead } = mail
     return (
         <article className="mail-preview">
-            <h3>{mail.from}</h3>
-            <h3>{mail.subject}</h3>
-            <p>{mail.body}</p>
+            <h3>{from}</h3>
+            <h3>{subject}</h3>
+            <p>{body}</p>
             <p>{monthName} {day} {formattedTime}</p>
         </article>
     )

@@ -1,5 +1,4 @@
 const { useState, useEffect } = React
-// const { Outlet, useSearchParams } = ReactRouterDOM
 const { Outlet, useSearchParams, Routes, Route } = ReactRouterDOM
 
 import { mailService } from '../services/mail.service.js'
@@ -33,6 +32,24 @@ export function MailIndex() {
             })
     }
 
+
+    function toggleReadStatus(mailId) {
+        const mail = mails.find(mail => mail.id === mailId)
+        if (!mail) return
+
+        const updatedMail = { ...mail, isRead: !mail.isRead }
+
+        mailService.save(updatedMail)
+            .then(savedMail => {
+                setMails(prevMails => prevMails.map(mail => mail.id === savedMail.id ? savedMail : mail))
+                console.log('Mail has successfully saved!', savedMail)
+            })
+            .catch(() => {
+                console.log(`Couldn't save mail`)
+            })
+    }
+    
+
     function onSetFilterBy(newFilter) {
         setFilterBy(newFilter)
     }
@@ -49,10 +66,9 @@ export function MailIndex() {
                 <section className="mail-list">
                     {/* <Outlet context={{ mails, removeMail }} /> */}
                     <Routes>
-                        <Route path="/" element={<MailList mails={mails} removeMail={removeMail} />} />
-                        <Route path=":mailId" element={<MailDetails />} />
+                        <Route path="/" element={<MailList mails={mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus}/>} />
+                        <Route path=":mailId" element={<MailDetails toggleReadStatus={toggleReadStatus}/>} />
                     </Routes>
-                    {/* <MailList mails={mails} onRemove={removeMail} /> */}
                 </section>
             </main>
         </section>

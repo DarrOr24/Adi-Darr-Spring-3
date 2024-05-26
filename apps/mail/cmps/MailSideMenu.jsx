@@ -1,6 +1,6 @@
 const { Link } = ReactRouterDOM
 
-export function MailSideMenu(){
+export function MailSideMenu({ unreadCount }){
     
     return (
         <section className = "mail-side-menu">
@@ -11,9 +11,14 @@ export function MailSideMenu(){
                 </button>
             </Link>
             <ul className = "menu">
-                <li className="selected">
-                    <p>Inbox</p>
-                </li>
+                <Link to="/mail">
+                    <li className="selected">
+                        <i class="fa-solid fa-inbox"></i>
+                        <span>Inbox</span>
+                        <span>{unreadCount()}</span>
+                    </li>
+                </Link>
+                    
                 <li>
                     <p>Sent</p>
                 </li>

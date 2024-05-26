@@ -54,6 +54,10 @@ export function MailIndex() {
         setFilterBy(newFilter)
     }
 
+    function unreadCount() {
+        return mails.filter(mail => !mail.isRead).length
+    }
+
     if (!mails) return <div>Loading...</div>
     return (
         <section className="mail-index">
@@ -61,7 +65,7 @@ export function MailIndex() {
             <MailFilter filterBy={filterBy} onFilter={onSetFilterBy}/>
             <main>
                 <section className="mail-side-menu">
-                    <MailSideMenu />
+                    <MailSideMenu unreadCount={unreadCount} />
                 </section>
                 <section className="mail-list">
                     {/* <Outlet context={{ mails, removeMail }} /> */}

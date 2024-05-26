@@ -2,13 +2,14 @@ import { NoteColorMenu } from "./NoteColorMenu.jsx"
 
 const { useState } = React
 
-export function ActionBtns( {note, onRemove, onSetNoteColor} ){
+export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate} ){
 
     const [ colorMenu, setColorMenu ] = useState(false)
 
-    function onClickMore(ev){
+    function onDuplicateNote(ev){
        ev.stopPropagation()
        console.log('oh yeah')
+       onDuplicate(note)
         
     }
 
@@ -47,9 +48,9 @@ export function ActionBtns( {note, onRemove, onSetNoteColor} ){
                         <img src="assets\img\trash.svg" alt="" />
                         <span className="action-name">Delete</span>
                     </div>
-                    <div onClick = {onClickMore}className="action-icon">
-                        <img height="24" width="24" src="assets\img\more.svg" alt="" />
-                        <span  className="action-name">More</span>
+                    <div onClick = {onDuplicateNote}className="action-icon duplicate">
+                        <img height="24" width="24" src="assets\img\duplicate.png" alt="" />
+                        <span  className="action-name">Duplicate</span>
                     </div>
                     
             </section>

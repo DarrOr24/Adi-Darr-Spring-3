@@ -9,7 +9,7 @@ import { NoteImg } from "./NoteImg.jsx";
 import { NotePin } from "./NotePin.jsx"
 import { NoteTxt } from "./NoteTxt.jsx";
 
-export function NotePreview({ note, onRemove, onEdit, onPinNote}){
+export function NotePreview({ note, onRemove, onEdit, onPinNote, onDuplicate}){
     
     const navigate = useNavigate()
     const [ openNote, setOpenNote ] = useState(false)
@@ -45,14 +45,13 @@ export function NotePreview({ note, onRemove, onEdit, onPinNote}){
    }
 
    
-
     return  <section>
                 {!openNote && 
                     <article onClick = {openEdit} className="note-preview" style={{backgroundColor: backgroundColor}} >
                         
                         <DynamicCmp note={note} />
                         <NotePin note={note} onPinNote ={onPinNote}/>
-                        <ActionBtns note={note} onRemove={onRemove} onSetNoteColor={setNoteColor} />
+                        <ActionBtns note={note} onRemove={onRemove} onSetNoteColor={setNoteColor} onDuplicate={onDuplicate} />
                     </article>}
 
                 {openNote && <NoteEdit2 noteToEdit = {updatedNote} onClose={closeNoteEdit} onEdit={editPreview} onSetColorNote={setNoteColor} onPinNote={onPinNote} />}

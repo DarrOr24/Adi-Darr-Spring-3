@@ -9,7 +9,7 @@ import { AddNoteSideMenu } from "./AddNoteSideMenu.jsx";
 import { NoteForm } from "./NoteForm.jsx";
 import { NotePin } from "./NotePin.jsx";
 
-export function AddNote({onAdd, onPinNote}){
+export function AddNote({onAdd}){
     
     const emptyNote = {
         info: {title: '', txt: '' },

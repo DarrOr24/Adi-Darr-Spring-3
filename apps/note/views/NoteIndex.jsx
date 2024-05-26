@@ -81,6 +81,19 @@ export function NoteIndex() {
         
     }
 
+    function duplicateNote(noteToDuplicate){
+        const newNote = structuredClone(noteToDuplicate)
+        console.log(newNote)
+        newNote.id = ''
+        newNote.time = Date.now()
+        newNote.isPinned = false
+        newNote.info.title += ' - copy'
+        noteService.save(newNote)
+        .then((note) => setNotes([...notes, note]))
+        
+        
+    }
+
     function onSetFilterBy(newFilter) {
         setFilterBy({ ...newFilter })
     }
@@ -97,7 +110,7 @@ export function NoteIndex() {
         <main>
             <NoteSideMenu />
             <AddNote notes={notes} onAdd={addNewNote} onPinNote ={pinNote} />
-            {isNotes && <NoteList notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} />}
+            {isNotes && <NoteList notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} onDuplicate={duplicateNote} />}
             {!isNotes && <h2>No notes!!  Done with the chores for today...</h2>} 
         </main>
         

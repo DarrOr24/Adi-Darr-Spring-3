@@ -34,7 +34,7 @@
     width: 200px;
 }
 
-.add-note .trash, .add-note .select {
+.add-note .trash, .add-note .select, .add-note .duplicate {
     display: none;
 }
 

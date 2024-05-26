@@ -37,7 +37,7 @@
     left: 0;
 }
 
-.note-edit .trash, .note-edit .select {
+.note-edit .trash, .note-edit .select, .note-edit .duplicate {
     display:none;
 }
 

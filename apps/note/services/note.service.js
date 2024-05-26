@@ -25,6 +25,8 @@ function query(filterBy = {}) {
             }
 
             const pinnedNotes = notes.filter(note => note.isPinned === true)
+            pinnedNotes.sort((note2, note1) => note1.pinTime - note2.pinTime)
+            console.log(pinnedNotes)
             const unpinnedNotes =notes.filter(note => note.isPinned === false)
             notes = [...pinnedNotes, ...unpinnedNotes]
 
@@ -75,6 +77,7 @@ function _createNote(type, isPinned, style, info){
                     id:  utilService.makeId(),        
                     type, 
                     isPinned, 
+                    pinTime: (isPinned)? Date.now() : '',
                     style, 
                     info,
                     time: Date.now(),

@@ -50,7 +50,8 @@ export function NoteIndex() {
     }
 
     function pinNote(noteToEdit){
-        //First update the notes without rendering from the storage
+        console.log(noteToEdit.isPinned)
+        // if(noteToEdit.id) noteService.save({...noteToEdit, pinTime: Date.now()})
         const notesCopy = notes.slice()
         
         if(noteToEdit.isPinned){

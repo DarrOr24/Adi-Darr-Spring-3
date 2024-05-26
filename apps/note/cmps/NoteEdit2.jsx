@@ -48,6 +48,14 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
         onSetColorNote(color) 
     }
 
+    function isNotePinned(noteFromPin){
+        setNote(prevNote => ({
+            ...prevNote,
+            isPinned: noteFromPin.isPinned,
+            pinTime: noteFromPin.pinTime
+        }))
+    }
+
     function handleChangeInfo({ target }) {
         const { type, name: prop } = target
         let { value } = target
@@ -77,7 +85,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
 
             <div className="screen"></div>
             <article style={{backgroundColor: note.style.backgroundColor}}>
-                <NotePin note={note} onPinNote ={onPinNote}/>
+                <NotePin note={note} onPinNote ={isNotePinned}/>
         
                 <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/> 
                 <ActionBtns note={note} onSetNoteColor={setNoteColor} />       

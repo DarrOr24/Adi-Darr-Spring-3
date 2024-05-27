@@ -8,6 +8,7 @@ import { NoteEdit2 } from "./NoteEdit2.jsx"
 import { NoteImg } from "./NoteImg.jsx";
 import { NotePin } from "./NotePin.jsx"
 import { NoteTxt } from "./NoteTxt.jsx";
+import { NoteVideo } from "./NoteVideo.jsx";
 
 export function NotePreview({ note, onRemove, onEdit, onPinNote, onDuplicate}){
     
@@ -19,7 +20,6 @@ export function NotePreview({ note, onRemove, onEdit, onPinNote, onDuplicate}){
     const { backgroundColor } = style
 
     function openEdit(){ 
-        
         setOpenNote(true)
         navigate(`/note/edit/${note.id}`) 
     }
@@ -29,13 +29,15 @@ export function NotePreview({ note, onRemove, onEdit, onPinNote, onDuplicate}){
         navigate('/note')
     }
 
-    function editPreview(noteFromEditing){
+    function editPreview(noteFromEditing){ 
+        console.log('note from editing:', noteFromEditing.isPinned)
         setUpdatedNote(noteFromEditing)
         onEdit(noteFromEditing)
     }
 
 
    function setNoteColor(color){
+
         setUpdatedNote(prevNote => ({
             ...prevNote,
             style: { ...prevNote.style, backgroundColor: color }
@@ -44,17 +46,24 @@ export function NotePreview({ note, onRemove, onEdit, onPinNote, onDuplicate}){
         onEdit({...updatedNote, style: {...updatedNote.style, backgroundColor:color}}) 
    }
 
+   function pinNote(noteFromPin){
+   
+        console.log('note from preview', noteFromPin.isPinned)
+        setUpdatedNote(noteFromPin)
+        onPinNote(noteFromPin)
+   }
+
    
     return  <section>
                 {!openNote && 
                     <article onClick = {openEdit} className="note-preview" style={{backgroundColor: backgroundColor}} >
                         
-                        <DynamicCmp note={note} />
-                        <NotePin note={note} onPinNote ={onPinNote}/>
-                        <ActionBtns note={note} onRemove={onRemove} onSetNoteColor={setNoteColor} onDuplicate={onDuplicate} />
+                        <DynamicCmp note={updatedNote} />
+                        <NotePin note={updatedNote} onPinNote ={pinNote}/>
+                        <ActionBtns note={updatedNote} onRemove={onRemove} onSetNoteColor={setNoteColor} onDuplicate={onDuplicate} />
                     </article>}
 
-                {openNote && <NoteEdit2 noteToEdit = {updatedNote} onClose={closeNoteEdit} onEdit={editPreview} onSetColorNote={setNoteColor} onPinNote={onPinNote} />}
+                { openNote && <NoteEdit2 noteToEdit = {updatedNote} onClose={closeNoteEdit} onEdit={editPreview} onSetColorNote={setNoteColor} onPinNote={onPinNote} />}
                 
     </section>
     
@@ -67,6 +76,8 @@ function DynamicCmp({note}){
             return <NoteTxt note={note} />
         case 'NoteImg':
             return <NoteImg note={note}/>
+        case 'NoteVideo':
+            return <NoteVideo note = {note} />
     }
 }
 

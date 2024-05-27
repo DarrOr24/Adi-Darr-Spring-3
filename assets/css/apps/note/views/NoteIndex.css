@@ -6,7 +6,7 @@
 .note-index-header {
     display: grid;
     grid-auto-flow: column;
-    grid-template-columns: 80px 150px 650px; 
+    grid-template-columns: 90px 150px 650px; 
     align-items: center;
     border-bottom: 2px solid lightgrey;
 }
@@ -26,6 +26,7 @@
     display: grid;
     grid-template-areas: "side-menu add-note"
                         "side-menu note-list";
+    grid-template-columns: 1fr, 400px;
 }
 
 .note-index main .side-menu {

@@ -5,7 +5,8 @@
 .note-list ul{
     justify-self: center;
     grid-area: node-list;
-    margin-block-start: 1em;
+    /* margin-block-start: 1em; */
+    margin-inline-end: 1em;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1em;

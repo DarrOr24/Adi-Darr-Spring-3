@@ -6,6 +6,7 @@ const { useNavigate } = ReactRouter
 import { noteService } from "../services/note.service.js";
 import { ActionBtns } from "./ActionBtns.jsx";
 import { NoteForm } from "./NoteForm.jsx";
+import { NoteImgAdd } from "./NoteImgAdd.jsx";
 import { NotePin } from "./NotePin.jsx";
 
 export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNote }){
@@ -24,9 +25,10 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
         }
         
         else{
-            noteService.save({...note, updatedAt: Date.now()})
+            
+            noteService.save({...note, updatedAt: Date.now(),})
             .then((note) => {
-                // console.log(note.info.title)
+                console.log(note.isPinned)
                 onEdit(note)
                 onClose()
             })
@@ -39,6 +41,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
         }
         
     }
+
 
     function setNoteColor(color){
         setNote(prevNote => ({
@@ -54,6 +57,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
             isPinned: noteFromPin.isPinned,
             pinTime: noteFromPin.pinTime
         }))
+
     }
 
     function handleChangeInfo({ target }) {
@@ -87,7 +91,8 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
             <article style={{backgroundColor: note.style.backgroundColor}}>
                 <NotePin note={note} onPinNote ={isNotePinned}/>
         
-                <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/> 
+                {/* <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/>  */}
+                <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> 
                 <ActionBtns note={note} onSetNoteColor={setNoteColor} />       
 
             </article>
@@ -95,9 +100,21 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
             
         </section>
     )
-
-
     
+}
+
+
+function DynamicCmp(props){
+    
+    switch (props.note.type) {
+        case 'NoteTxt':
+            return <NoteForm  {...props}/>
+        case 'NoteImg':
+            return <NoteImgAdd {...props}/>
+        case 'NoteVideo':
+            return <NoteImgAdd {...props}/>
+           
+    }
 }
 
 

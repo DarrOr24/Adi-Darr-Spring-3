@@ -9,6 +9,7 @@ import { noteService } from "../services/note.service.js"
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 
+
 export function NoteIndex() {
 
     const [notes, setNotes] = useState([])
@@ -27,9 +28,10 @@ export function NoteIndex() {
     }
 
     function addEditNote(noteToEdit){ //Note already saved to service
+        console.log(noteToEdit.isPinned)
         noteService.save(noteToEdit)
-        const idx =  notes.findIndex(note => note.id === noteToEdit.id)
-        setNotes(notes.toSpliced(idx, 1, noteToEdit)) 
+        .then (placeNote)
+
     }
 
     function removeNote(ev, noteId){
@@ -49,42 +51,40 @@ export function NoteIndex() {
         
     }
 
-    function pinNote(noteToEdit){
-        console.log(noteToEdit.isPinned)
-        // if(noteToEdit.id) noteService.save({...noteToEdit, pinTime: Date.now()})
-        const notesCopy = notes.slice()
-        
-        if(noteToEdit.isPinned){
-            //note already saved to storage in NotePin
-            var newNotes = notesCopy.filter(note => note.id !== noteToEdit.id)
-            newNotes.unshift(noteToEdit)
-            // noteService.saveAll(newNotes)
-            setNotes(newNotes)
-        }
-        
-        if(!noteToEdit.isPinned){
-            //Not updated on the notes
-            var newNotes = notesCopy.filter(note => note.id !== noteToEdit.id) //get the note out of the array
-            const unpinnedNotes = newNotes.filter(note => note.isPinned === false)
-            unpinnedNotes.push(noteToEdit) //add the note to the unpinned notes
-            unpinnedNotes.sort((note1, note2) => note1.time - note2.time)
-            const pinnedNotes = newNotes.filter(note => note.isPinned === true)
-            newNotes =[...pinnedNotes, ...unpinnedNotes]
-            // noteService.saveAll(newNotes)
-            setNotes(newNotes)
-        }     
+    function pinNote(noteFromPin){
+        noteService.save({...noteFromPin, isPinned: noteFromPin.isPinned, pinTime: (noteFromPin.isPinned) ? Date.now() : ''})
+        .then(placeNote)
+
     }
+
+    
+    
+    function placeNote(noteToPlace){
+        console.log('note reached index', noteToPlace.isPinned)
+        //Note already saved in the service
+
+        //First take her out and set her again with all the notes
+        const restOfNotes = notes.filter(note => note.id !== noteToPlace.id)
+        
+        const unsortedNotes = [...restOfNotes, noteToPlace]
+        
+        // Now sort the array
+        // const sortedNotes = sortNotes(unsortedNotes)
+        const sortedNotes = noteService.sortNotes(unsortedNotes)
+
+        setNotes(sortedNotes)
+    }
+
 
     function duplicateNote(noteToDuplicate){
         const newNote = structuredClone(noteToDuplicate)
-        console.log(newNote)
+       
         newNote.id = ''
         newNote.time = Date.now()
         newNote.isPinned = false
         newNote.info.title += ' - copy'
         noteService.save(newNote)
         .then((note) => setNotes([...notes, note]))
-        
         
     }
 
@@ -95,7 +95,7 @@ export function NoteIndex() {
     const isNotes = notes.length > 0
     
     if (isLoading) return <div className="loader"></div>
-    return <section className = "note-index main-layout">
+    return <section className = "note-index full">
         <header className="note-index-header">
             <img height="50" src="assets\img\keep-icon.png" alt="" />
             <h1>Keep</h1>
@@ -103,7 +103,7 @@ export function NoteIndex() {
         </header>
         <main>
             <NoteSideMenu />
-            <AddNote notes={notes} onAdd={addNewNote} onPinNote ={pinNote} />
+            <AddNote notes={notes} onAdd={addNewNote} onPinNote ={placeNote} />
             {isNotes && <NoteList notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} onDuplicate={duplicateNote} />}
             {!isNotes && <h2>No notes!!  Done with the chores for today...</h2>} 
         </main>

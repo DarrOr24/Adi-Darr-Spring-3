@@ -21,7 +21,7 @@ export function NoteForm({note, handleChangeInfo, onSave}){
                 type="txt" 
                 placeholder="Take a note..."
                 cols='20'
-                rows='10'
+                rows='4'
                 value={note.info.txt}
                 onChange={handleChangeInfo}
             ></textarea> } 

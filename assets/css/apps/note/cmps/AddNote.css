@@ -24,6 +24,7 @@
 .take-a-note p{
     display: grid;
     align-items: center;
+    font-size: 0.9em;
 }
 
 

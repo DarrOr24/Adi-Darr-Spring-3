@@ -1,6 +1,6 @@
 import { noteService } from "../services/note.service.js"
 
-const { useState, useEffect } = React
+const { useState } = React
 
 export function NotePin({note: noteToPin ,onPinNote}){
         
@@ -20,11 +20,12 @@ export function NotePin({note: noteToPin ,onPinNote}){
                         stat = true
                 }
 
-                setNote(prevNote =>({...prevNote, isPinned: stat}) )
+                setNote(prevNote =>({...prevNote, isPinned: stat, pinTime: (stat = 'pinned')? Date.now() : ''}) )
                 
                 if(note.id){
-                        noteService.save({...note, isPinned: stat})
+                        noteService.save({...note, isPinned: stat, pinTime: (stat = 'pinned')? Date.now() : ''})
                         .then(onPinNote)
+                       
                 }
                 else onPinNote(stat)        
         }

@@ -5,7 +5,7 @@ const { useState } = React
 export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate} ){
 
     const [ colorMenu, setColorMenu ] = useState(false)
-
+    
     function onDuplicateNote(ev){
        ev.stopPropagation()
        console.log('oh yeah')
@@ -18,6 +18,11 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate} ){
         // (colorMenu) ? setColorMenu(false) : setColorMenu(true)
         if(!colorMenu) setColorMenu(true)
         else setColorMenu(false)
+    }
+
+    function onAddImg(ev){
+        ev.stopPropagation()
+
     }
 
     
@@ -40,7 +45,7 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate} ){
                         <span className="action-name">Background options</span>
                         {colorMenu && <NoteColorMenu onSetNoteColor={onSetNoteColor} />}
                     </div>
-                    <div className="action-icon">
+                    <div className="action-icon" >
                         <img src="assets\img\add_image.svg" alt="" />
                         <span className="action-name">Add image</span>
                     </div>

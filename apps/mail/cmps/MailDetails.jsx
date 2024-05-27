@@ -5,7 +5,7 @@ const { useParams, useNavigate, Link } = ReactRouterDOM
 import { utilService } from "../../../services/util.service.js"
 import { mailService } from "../services/mail.service.js"
 
-export function MailDetails({ toggleReadStatus }) {
+export function MailDetails({ toggleReadStatus, status }) {
     const [mail, setMail] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
 
@@ -47,12 +47,15 @@ export function MailDetails({ toggleReadStatus }) {
         const time = dayName + ', ' + monthName + ' ' + day + ', ' + formattedTime
         return time
     }
-    
+
     if (isLoading) return <h3>Loading...</h3>
     return (
         <section className="mail-details">
-            <div>
-                <Link to="/mail"><button>Back to Inbox</button></Link>
+            <div className="action-icon back">
+                <Link to="/mail">
+                    <img src="assets/img/back.svg" alt="" />
+                    <span className="action-name">Back to {status}</span>
+                </Link>
             </div>
             <div className="subject">{mail.subject}</div>
             <div className="details">

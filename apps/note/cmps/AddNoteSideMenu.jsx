@@ -13,7 +13,7 @@ export function AddNoteSideMenu({onAddNoteImg, onAddNoteVideo}){
                     <span className="action-name">New note with drawing</span>
                 </div>
                 <div className="action-icon" onClick={onAddNoteVideo}>
-                    <img height="24" width="24" src="assets\img\video.png" alt="" />      
+                    <img height="19" width="19" src="assets\img\video.png" alt="" />      
                     <span className="action-name">New note with video</span>
                 </div>
                 <div className="action-icon" onClick={onAddNoteImg}>

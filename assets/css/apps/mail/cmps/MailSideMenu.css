@@ -1,4 +1,4 @@
-.mail-side-menu .add-book {
+.mail-side-menu .mail-compose {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -12,22 +12,27 @@
 
 .mail-side-menu .menu {
     display: grid;
-    grid-template-rows: repeat(5, 50px);
     margin-inline-end: 1em;
 }
 
 .mail-side-menu .menu li {
     display: grid;
-    grid-template-columns: 30px 1fr;
+   
+    grid-template-columns: 30px 1fr 20px; 
     column-gap: 1em;
-    align-items: center;
-    width: 200px;
+    align-items: center; 
+    width: 100%;
+    /* width: 200px; */
+    padding: 10px;
     color: #202124;
+    font-size: 0.875em;
+    cursor: pointer;
 }
 
 .mail-side-menu .menu .selected {
     background-color: #d3e3fd;
     color: #001d35;
+    font-weight: bold;
     border-bottom-right-radius: 25px;
     border-top-right-radius: 25px;
 }
@@ -36,5 +41,4 @@
     background-color: var(--chalk); 
     border-bottom-right-radius: 25px;
     border-top-right-radius: 25px;
-    cursor: pointer;
 }

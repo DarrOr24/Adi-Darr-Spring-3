@@ -1,11 +1,10 @@
 const { useState, useEffect } = React
-const { Outlet, useSearchParams, Routes, Route } = ReactRouterDOM
+const { useSearchParams, Routes, Route } = ReactRouterDOM
 
 import { mailService } from '../services/mail.service.js'
 
 import { MailList } from '../cmps/MailList.jsx'
 import { MailDetails } from '../cmps/MailDetails.jsx'
-// 
 import { MailHeader } from '../cmps/MailHeader.jsx'
 import { MailSideMenu } from '../cmps/MailSideMenu.jsx'
 import { MailFilter } from '../cmps/MailFilter.jsx'
@@ -13,19 +12,31 @@ import { MailFilter } from '../cmps/MailFilter.jsx'
 export function MailIndex() {
     
     const [ mails, setMails ] = useState([])
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [ searchParams, setSearchParams ] = useSearchParams()
     const [ filterBy, setFilterBy ] = useState(mailService.getFilterFromSearchParams(searchParams))
+    const [ status, setStatus ] = useState('inbox')
+    const [unreadCount, setUnreadCount] = useState(0)
+    const [sortBy, setSortBy] = useState('date')
+   
 
     useEffect(() => {
         setSearchParams(filterBy)
-        mailService.query(filterBy)
+        const criteria = { ...filterBy, status, sortBy }
+        // const criteria = { ...filterBy, status }
+        mailService.query(criteria)
             .then(mails => setMails(mails))
-    }, [filterBy])
+        
+        mailService.countUnreadInboxMails()
+            .then(count => setUnreadCount(count))
+    }, [filterBy, status, sortBy])
+    // }, [filterBy, status])
 
     function removeMail(mailId) {
-        mailService.remove(mailId)
+        mailService.moveToTrash(mailId)
             .then(() => {
                 setMails(prevMails => prevMails.filter(mail => mail.id !== mailId))
+                mailService.countUnreadInboxMails()
+                    .then(count => setUnreadCount(count))
             })
             .catch(err => {
                 console.log('err:', err)
@@ -42,6 +53,8 @@ export function MailIndex() {
         mailService.save(updatedMail)
             .then(savedMail => {
                 setMails(prevMails => prevMails.map(mail => mail.id === savedMail.id ? savedMail : mail))
+                mailService.countUnreadInboxMails()
+                    .then(count => setUnreadCount(count))
                 console.log('Mail has successfully saved!', savedMail)
             })
             .catch(() => {
@@ -54,20 +67,30 @@ export function MailIndex() {
         setFilterBy(newFilter)
     }
 
+    function onSetStatus(newStatus) {
+        setStatus(newStatus)
+    }
+
+    function onSetSortBy(newSortBy) {
+        setSortBy(newSortBy)
+    }
+
     if (!mails) return <div>Loading...</div>
     return (
         <section className="mail-index">
             <MailHeader />
-            <MailFilter filterBy={filterBy} onFilter={onSetFilterBy}/>
+            <MailFilter filterBy={filterBy} onFilter={onSetFilterBy} onSort={onSetSortBy}/>
             <main>
                 <section className="mail-side-menu">
-                    <MailSideMenu />
+                    <MailSideMenu unreadCount={unreadCount} onSetStatus={onSetStatus} />
                 </section>
                 <section className="mail-list">
-                    {/* <Outlet context={{ mails, removeMail }} /> */}
                     <Routes>
-                        <Route path="/" element={<MailList mails={mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus}/>} />
-                        <Route path=":mailId" element={<MailDetails toggleReadStatus={toggleReadStatus}/>} />
+                        <Route path="/" element={<MailList mails={mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus} status={status} sortBy={sortBy}/>} />
+                        <Route path=":mailId" element={<MailDetails toggleReadStatus={toggleReadStatus} status={status}/>} />
+                        <Route path="sent" element={<MailList mails={mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus} status={status} sortBy={sortBy} />} />
+                        <Route path="sent/:mailId" element={<MailDetails toggleReadStatus={toggleReadStatus} status={status}/>} />
+                        <Route path="trash" element={<MailList mails={mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus} status={status} sortBy={sortBy} />} />  
                     </Routes>
                 </section>
             </main>

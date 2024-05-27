@@ -9,7 +9,7 @@ import { UserMsg } from "./cmps/UserMsg.jsx"
 import { eventBusService } from "./services/event-bus.service.js"
 
 import { MailIndex } from "./apps/mail/views/MailIndex.jsx"
-import { AddMail } from "./apps/mail/cmps/AddMail.jsx"
+import { MailCompose } from "./apps/mail/cmps/MailCompose.jsx"
 
 import { NoteIndex } from "./apps/note/views/NoteIndex.jsx"
 import { AddNote } from "./apps/note/cmps/AddNote.jsx"
@@ -27,7 +27,7 @@ export function App() {
                     <Route path="/about" element={<About />} />
             
                     <Route path="/mail/*" element={<MailIndex />} />
-                    <Route path='/mail/new' element={<AddMail />} />
+                    <Route path='/mail/new' element={<MailCompose />} />
                   
                     <Route path="/note" element={<NoteIndex />}>
                         <Route path="/note/add" element={<AddNote />} />   

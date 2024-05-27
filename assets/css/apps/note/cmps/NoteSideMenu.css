@@ -6,14 +6,18 @@
 
 .side-menu li {
     display: grid;
+    grid-template-columns: 50px minmax(auto, 1fr);
     grid-auto-flow: column;
     align-items: center;
-    grid-template-columns: 30px minmax(auto, 1fr);
+    /* grid-template-columns: 30px minmax(auto, 1fr); */
 }
 
 .side-menu li img{
-    width: max-content;
-    justify-self: start;
+    justify-self: end;
+}
+
+.side-menu li >* {
+    padding-inline-end: 10px;
 }
 
 .side-menu .selected {

@@ -53,14 +53,15 @@ export function NotePreview({ note, onRemove, onEdit, onPinNote, onDuplicate}){
         onPinNote(noteFromPin)
    }
 
-   
+
+
     return  <section>
                 {!openNote && 
                     <article onClick = {openEdit} className="note-preview" style={{backgroundColor: backgroundColor}} >
                         
                         <DynamicCmp note={updatedNote} />
                         <NotePin note={updatedNote} onPinNote ={pinNote}/>
-                        <ActionBtns note={updatedNote} onRemove={onRemove} onSetNoteColor={setNoteColor} onDuplicate={onDuplicate} />
+                        <ActionBtns note={updatedNote} onRemove={onRemove} onSetNoteColor={setNoteColor} onDuplicate={onDuplicate} onChangeImg={editPreview} />
                     </article>}
                 
                 { openNote && <NoteEdit2 noteToEdit = {updatedNote} onClose={closeNoteEdit} onEdit={editPreview} onSetColorNote={setNoteColor} onPinNote={onPinNote} />}

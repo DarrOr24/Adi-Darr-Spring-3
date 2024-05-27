@@ -1,10 +1,12 @@
 import { NoteColorMenu } from "./NoteColorMenu.jsx"
+import { NoteImgAdd } from "./NoteImgAdd.jsx"
 
 const { useState } = React
 
-export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate} ){
+export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onChangeImg} ){
 
     const [ colorMenu, setColorMenu ] = useState(false)
+    const [ addImg, setAddImg ] = useState(false)
     
     function onDuplicateNote(ev){
        ev.stopPropagation()
@@ -22,9 +24,20 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate} ){
 
     function onAddImg(ev){
         ev.stopPropagation()
+        if(!addImg) setAddImg(true)
+        
+        console.log(addImg)
 
     }
 
+    function changeImg(noteFromImg){
+        console.log(noteFromImg)
+        console.log('Reached action buttons')
+        setAddImg(false)
+        onChangeImg(noteFromImg)
+    }
+
+    
     
     return <section className ="action-icons">
                     <div className="action-icon select">
@@ -45,9 +58,11 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate} ){
                         <span className="action-name">Background options</span>
                         {colorMenu && <NoteColorMenu onSetNoteColor={onSetNoteColor} />}
                     </div>
-                    <div className="action-icon" >
+                    <div onClick={onAddImg}  className="action-icon img" >
                         <img src="assets\img\add_image.svg" alt="" />
                         <span className="action-name">Add image</span>
+                        {addImg && <NoteImgAdd note={note} onReturn={() => setAddImg(false)} onChangeImg={changeImg} />}
+                        
                     </div>
                     <div onClick={(ev) => onRemove(ev, note.id) } className="action-icon trash">
                         <img src="assets\img\trash.svg" alt="" />

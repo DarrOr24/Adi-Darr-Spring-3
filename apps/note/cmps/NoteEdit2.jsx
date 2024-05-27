@@ -60,6 +60,13 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
 
     }
 
+    function addImg(noteFromAddImg){
+        console.log(noteFromAddImg)
+        
+        console.log('Reached add note img')
+
+    }
+
     function handleChangeInfo({ target }) {
         const { type, name: prop } = target
         let { value } = target
@@ -93,7 +100,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
         
                 <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/> 
                 {/* <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   />  */}
-                <ActionBtns note={note} onSetNoteColor={setNoteColor} />       
+                <ActionBtns note={note} onSetNoteColor={setNoteColor} onChangeImg={addImg}  />       
 
             </article>
             
@@ -108,7 +115,7 @@ function DynamicCmp(props){
     
     switch (props.note.type) {
         case 'NoteTxt':
-            return <NoteForm  {...props}/>
+            return <NoteEditForm  {...props}/>
         case 'NoteImg':
             return <NoteImgAdd {...props}/>
         case 'NoteVideo':

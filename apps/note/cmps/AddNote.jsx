@@ -28,13 +28,11 @@ export function AddNote({onAdd}){
 
     function addNoteImg(){
         setNote({...note, type: 'NoteImg'})
-        setOpenNote(true)
         console.log('Reached add note img')
 
     }
     function addNoteVideo(){
         setNote({...note, type: 'NoteVideo'})
-        setOpenNote(true)
         console.log('Reached add note video')
 
     }
@@ -79,15 +77,6 @@ export function AddNote({onAdd}){
                 }   
         }
 
-
-        // if((!note.info.title)&&(!note.info.txt)){ //if note is empty
-        //     setOpenNote(false)
-        //     setNote(emptyNote)
-        //     navigate(`/note`)
-        //     return 
-        // }
-        
-        // else{
             noteService.save(note)
             .then((newNote) => {
                 onAdd(newNote)
@@ -100,7 +89,7 @@ export function AddNote({onAdd}){
                 // showErrorMsg('Couldnt save')
             })
             .finally(() => navigate('/note'))
-        // }
+       
         
     }
 
@@ -141,7 +130,8 @@ export function AddNote({onAdd}){
 
             {openNote && <NotePin note={note} onPinNote ={isPinned}/>}
         
-            {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> }
+            {/* {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> } */}
+            {openNote && <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> }
                     
             {openNote &&  <ActionBtns note={note}  onSetNoteColor={setNoteColor}  />} 
            

@@ -37,6 +37,7 @@ export function NotePreview({ note, onRemove, onEdit, onPinNote, onDuplicate}){
 
 
    function setNoteColor(color){
+
         setUpdatedNote(prevNote => ({
             ...prevNote,
             style: { ...prevNote.style, backgroundColor: color }
@@ -46,6 +47,7 @@ export function NotePreview({ note, onRemove, onEdit, onPinNote, onDuplicate}){
    }
 
    function pinNote(noteFromPin){
+   
         console.log('note from preview', noteFromPin.isPinned)
         setUpdatedNote(noteFromPin)
         onPinNote(noteFromPin)

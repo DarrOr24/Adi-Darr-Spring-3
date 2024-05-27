@@ -78,14 +78,13 @@ export function NoteIndex() {
 
     function duplicateNote(noteToDuplicate){
         const newNote = structuredClone(noteToDuplicate)
-        console.log(newNote)
+       
         newNote.id = ''
         newNote.time = Date.now()
         newNote.isPinned = false
         newNote.info.title += ' - copy'
         noteService.save(newNote)
         .then((note) => setNotes([...notes, note]))
-        
         
     }
 

@@ -85,14 +85,14 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
     
 
     return (
-        <section className="note-edit" >
+        <section className="note-edit video" >
 
             <div className="screen"></div>
             <article style={{backgroundColor: note.style.backgroundColor}}>
                 <NotePin note={note} onPinNote ={isNotePinned}/>
         
-                {/* <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/>  */}
-                <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> 
+                <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/> 
+                {/* <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   />  */}
                 <ActionBtns note={note} onSetNoteColor={setNoteColor} />       
 
             </article>

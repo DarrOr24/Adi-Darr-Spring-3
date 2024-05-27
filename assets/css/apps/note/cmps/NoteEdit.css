@@ -14,11 +14,18 @@
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.548);
     border-radius: 8px;
     z-index: 2;
-    height: 250px;
-    width: 300px;
+    /* height: 250px; */
+    width: 400px;
+    
     font: Robotica;
     
 }
+
+.note-edit .note-form iframe {
+    width: 360px;
+    height: 200px;
+}
+
 
 .note-edit .note-form form input {
     border: none;
@@ -33,7 +40,7 @@
 .note-edit .action-icons-new-note{
     width: 220px;
     position: absolute;
-    bottom: 0;
+    bottom: -0;
     left: 0;
 }
 

@@ -2,6 +2,7 @@ export function NoteForm({note, handleChangeInfo, onSave}){
 
     const isNoteTxt = (note.type === 'NoteTxt')
     const isNoteImg = (note.type === 'NoteImg')
+    const isNoteVideo = (note.type === 'NoteVideo')
 
 
     return <section className = "note-form">
@@ -26,7 +27,12 @@ export function NoteForm({note, handleChangeInfo, onSave}){
                 onChange={handleChangeInfo}
             ></textarea> } 
 
-            {isNoteImg && <img height="150" src={note.info.url} alt="" />}
+            {isNoteImg && <img width="200" src={note.info.url} alt="" />}
+            <div className="video">
+                {isNoteVideo && <iframe  width="200"src={note.info.url}></iframe>}
+            </div>
+            
+            
 
             <button>Close</button>
         </form>    

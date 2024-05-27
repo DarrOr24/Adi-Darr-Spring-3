@@ -5,7 +5,7 @@ const { useParams, useNavigate, Link } = ReactRouterDOM
 import { utilService } from "../../../services/util.service.js"
 import { mailService } from "../services/mail.service.js"
 
-export function MailDetails({ toggleReadStatus }) {
+export function MailDetails({ toggleReadStatus, status }) {
     const [mail, setMail] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
 
@@ -48,27 +48,13 @@ export function MailDetails({ toggleReadStatus }) {
         return time
     }
 
-    function getBackBtnTxt (mail){
-        let backText = ''
-
-        if (mailService.getMailLocation(mail) === 'inbox') {
-            backText = 'Back to Inbox'
-        } else if (mailService.getMailLocation(mail) === 'sent') {
-            backText = 'Back to Sent Mail'
-        }    
-        console.log('backText:', backText)
-        console.log(mailService.getMailLocation(mail))
-        
-        return backText
-    }
-
     if (isLoading) return <h3>Loading...</h3>
     return (
         <section className="mail-details">
             <div className="action-icon back">
                 <Link to="/mail">
                     <img src="assets/img/back.svg" alt="" />
-                    <span className="action-name">{getBackBtnTxt(mail)}</span>
+                    <span className="action-name">Back to {status}</span>
                 </Link>
             </div>
             <div className="subject">{mail.subject}</div>

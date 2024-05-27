@@ -33,10 +33,17 @@ export function MailSideMenu({ unreadCount, onSetStatus }){
                             <p>Sent</p>
                         </Link>
                 </li>
-                <li className={selectedFolder === 'trash' ? 'selected' : ''} 
+                {/* <li className={selectedFolder === 'trash' ? 'selected' : ''} 
                     onClick={() => handleFolderClick('trash')}>
                         <img src="assets\img\trash.svg" alt="" />
                         <p>Trash</p>
+                </li> */}
+                <li className={selectedFolder === 'trash' ? 'selected' : ''} 
+                    onClick={() => handleFolderClick('trash')}>
+                    <Link to="/mail/trash">
+                        <img src="assets/img/trash.svg" alt="" />
+                        <p>Trash</p>
+                    </Link>
                 </li>
             </ul>
         </section>

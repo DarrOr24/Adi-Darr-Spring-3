@@ -17,9 +17,8 @@ export const mailService = {
     save,
     getEmptyMail,
     getFilterFromSearchParams,
-    loggedinUser,
     countUnreadInboxMails,
-    getMailLocation,
+    moveToTrash,
 }
 
 function query(filterBy = {}) {
@@ -30,6 +29,8 @@ function query(filterBy = {}) {
                     mails = mails.filter(mail => mail.to === loggedinUser.email && !mail.removedAt)
                 } else if (filterBy.status === 'sent') {
                     mails = mails.filter(mail => mail.from === loggedinUser.email && !mail.removedAt)
+                } else if (filterBy.status === 'trash') {
+                    mails = mails.filter(mail => mail.removedAt)
                 }
             }
 
@@ -40,6 +41,13 @@ function query(filterBy = {}) {
             if (filterBy.isRead !== undefined && filterBy.isRead !== '') {
                 mails = mails.filter(mail => mail.isRead === (filterBy.isRead === 'true'))
             }
+
+            if (filterBy.sortBy === 'title') {
+                mails.sort((a, b) => a.subject.localeCompare(b.subject))
+            } else {
+                mails.sort((a, b) => b.sentAt - a.sentAt)
+            }
+            
             return mails
         })
 }
@@ -110,12 +118,14 @@ function _createMails() {
     }
 }
 
-function getMailLocation(mail) {
-    if (mail.to === loggedinUser.email) {
-        return 'inbox'
-    } else if (mail.from === loggedinUser.email) {
-        return 'sent'
-    } else {
-        return 'unknown'
-    }
+function moveToTrash(mailId) {
+    return get(mailId)
+        .then(mail => {
+            if (!mail.removedAt) {
+                mail.removedAt = Date.now()
+                return save(mail)
+            } else {
+                return remove(mailId)
+            }
+        })
 }

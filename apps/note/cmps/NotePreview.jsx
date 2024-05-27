@@ -62,7 +62,7 @@ export function NotePreview({ note, onRemove, onEdit, onPinNote, onDuplicate}){
                         <NotePin note={updatedNote} onPinNote ={pinNote}/>
                         <ActionBtns note={updatedNote} onRemove={onRemove} onSetNoteColor={setNoteColor} onDuplicate={onDuplicate} />
                     </article>}
-
+                
                 { openNote && <NoteEdit2 noteToEdit = {updatedNote} onClose={closeNoteEdit} onEdit={editPreview} onSetColorNote={setNoteColor} onPinNote={onPinNote} />}
                 
     </section>

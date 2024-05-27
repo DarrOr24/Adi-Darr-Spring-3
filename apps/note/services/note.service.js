@@ -10,7 +10,8 @@ export const noteService = {
     sortNotes,
     get,
     remove,
-    save
+    save,
+    createNote
 }
 
 window.ns = noteService
@@ -51,17 +52,17 @@ function _createNotes() {
             const noteTitle = noteTitles[i]
             const noteColor =noteColors[i]
             
-            notes.push(_createNote('NoteTxt', false, {'backgroundColor': noteColor}, {'title': noteTitle, 'txt': utilService.makeLorem(20)}, Date.now()+i))
+            notes.push(createNote('NoteTxt', false, {'backgroundColor': noteColor}, {'title': noteTitle, 'txt': utilService.makeLorem(20)}, Date.now()+i))
             notes.forEach(note => note.id = utilService.makeId())
         }
 
         const url = `assets/img/sweet_noga.png`
-        const noteImg = _createNote('NoteImg', true, {'backgroundColor': '#aeccdc'}, {'url':url, 'title': 'My Sweet Noga'}, Date.now()+2)
+        const noteImg = createNote('NoteImg', true, {'backgroundColor': '#aeccdc'}, {'url':url, 'title': 'My Sweet Noga'}, Date.now()+2)
         noteImg.id = utilService.makeId()
         notes.push(noteImg)
                 
         const videoUrl = `https://www.youtube.com/embed/aUgtMaAZzW0?`
-        const noteVideo =  _createNote('NoteVideo', true, {'backgroundColor': '#e9e3d4'}, {'url':videoUrl, 'title': 'Ashtanga Primary Series'}, Date.now()+3)
+        const noteVideo =  createNote('NoteVideo', true, {'backgroundColor': '#e9e3d4'}, {'url':videoUrl, 'title': 'Ashtanga Primary Series'}, Date.now()+3)
         noteVideo.id = utilService.makeId()
         notes.push(noteVideo)
         utilService.saveToStorage(NOTE_KEY, notes)
@@ -69,7 +70,7 @@ function _createNotes() {
 }
 
 
-function _createNote(type, isPinned, style, info, time = Date.now()){
+function createNote(type, isPinned, style, info, time = Date.now()){
     const note = {
                     // id:  utilService.makeId(),        
                     type, 

@@ -10,16 +10,9 @@ import { NoteForm } from "./NoteForm.jsx";
 import { NotePin } from "./NotePin.jsx";
 
 export function AddNote({onAdd}){
-    
-    const emptyNote = {
-        info: {title: '', txt: '' },
-        isPinned: false,
-        style: {backgroundColor: 'white'},
-        type: 'NoteTxt',
-        time: Date.now(),
-        updatedAt: Date.now()
-    }
 
+    const emptyNote = noteService.createNote('NoteTxt', false, {backgroundColor: 'white'}, {title: '', txt: '' }, Date.now())
+    
     const navigate = useNavigate()
     const [ openNote, setOpenNote ] = useState(false)
     const [ note, setNote ] = useState(emptyNote)

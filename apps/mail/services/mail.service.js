@@ -19,6 +19,7 @@ export const mailService = {
     getFilterFromSearchParams,
     loggedinUser,
     countUnreadInboxMails,
+    getMailLocation,
 }
 
 function query(filterBy = {}) {
@@ -106,5 +107,15 @@ function _createMails() {
             mails.push(mail)
         }
         utilService.saveToStorage(MAIL_KEY, mails)
+    }
+}
+
+function getMailLocation(mail) {
+    if (mail.to === loggedinUser.email) {
+        return 'inbox'
+    } else if (mail.from === loggedinUser.email) {
+        return 'sent'
+    } else {
+        return 'unknown'
     }
 }

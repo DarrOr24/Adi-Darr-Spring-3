@@ -62,8 +62,8 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
 
     function addImg(noteFromAddImg){
         console.log(noteFromAddImg)
-        
-        console.log('Reached add note img')
+        setNote(noteFromAddImg)
+        onEdit(noteFromAddImg)
 
     }
 
@@ -109,6 +109,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
     )
     
 }
+
 
 
 function DynamicCmp(props){

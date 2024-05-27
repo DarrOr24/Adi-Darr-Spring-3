@@ -4,7 +4,7 @@ export function NoteVideo({note}){
     return <section className="note-video">
                 <h2>{note.info.title}</h2>
                 {/* <iframe width="420" height="315" */}
-                <iframe  height="200"
+                <iframe  width="200"
                 src={note.info.url}>
                 </iframe>
                 

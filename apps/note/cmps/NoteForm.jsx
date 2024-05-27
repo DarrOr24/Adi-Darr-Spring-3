@@ -17,7 +17,7 @@ export function NoteForm({note, handleChangeInfo, onSave}){
                 placeholder="Title"
                  />
 
-           {isNoteTxt && <textarea
+           <textarea
                 name="txt"
                 type="txt" 
                 placeholder="Take a note..."
@@ -25,7 +25,7 @@ export function NoteForm({note, handleChangeInfo, onSave}){
                 rows='4'
                 value={note.info.txt}
                 onChange={handleChangeInfo}
-            ></textarea> } 
+            ></textarea> 
 
             {isNoteImg && <img width="200" src={note.info.url} alt="" />}
             <div className="video">

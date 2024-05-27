@@ -93,6 +93,10 @@ export function AddNote({onAdd}){
         
     }
 
+    function addImg(noteFromAddImg){
+        setNote(noteFromAddImg)
+    }
+
     
 
     function handleChangeInfo({ target }) {
@@ -133,7 +137,7 @@ export function AddNote({onAdd}){
             {/* {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> } */}
             {openNote && <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> }
                     
-            {openNote &&  <ActionBtns note={note}  onSetNoteColor={setNoteColor}  />} 
+            {openNote &&  <ActionBtns note={note}  onSetNoteColor={setNoteColor} onChangeImg={addImg}  />} 
            
         
     </section>

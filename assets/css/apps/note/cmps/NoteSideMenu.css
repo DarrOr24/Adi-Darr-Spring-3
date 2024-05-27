@@ -2,18 +2,25 @@
     display: grid;
     grid-template-rows: repeat(5, 50px);
     margin-inline-end: 1em;
+    font-size: 0.8em;
 }
 
 .side-menu li {
     display: grid;
-    grid-template-columns: 50px minmax(auto, 1fr);
+    column-gap: 0.5em;
+    grid-template-columns: 50px auto;
     grid-auto-flow: column;
     align-items: center;
-    /* grid-template-columns: 30px minmax(auto, 1fr); */
+    width: max-content;
+    
 }
 
 .side-menu li img{
     justify-self: end;
+}
+
+.side-menu li p{
+    width: 80px;
 }
 
 .side-menu li >* {

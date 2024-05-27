@@ -20,7 +20,6 @@ export function NotePreview({ note, onRemove, onEdit, onPinNote, onDuplicate}){
     const { backgroundColor } = style
 
     function openEdit(){ 
-        
         setOpenNote(true)
         navigate(`/note/edit/${note.id}`) 
     }
@@ -62,7 +61,7 @@ export function NotePreview({ note, onRemove, onEdit, onPinNote, onDuplicate}){
                         <ActionBtns note={updatedNote} onRemove={onRemove} onSetNoteColor={setNoteColor} onDuplicate={onDuplicate} />
                     </article>}
 
-                {openNote && <NoteEdit2 noteToEdit = {updatedNote} onClose={closeNoteEdit} onEdit={editPreview} onSetColorNote={setNoteColor} onPinNote={onPinNote} />}
+                { openNote && <NoteEdit2 noteToEdit = {updatedNote} onClose={closeNoteEdit} onEdit={editPreview} onSetColorNote={setNoteColor} onPinNote={onPinNote} />}
                 
     </section>
     

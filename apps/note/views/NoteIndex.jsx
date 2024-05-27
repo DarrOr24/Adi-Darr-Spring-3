@@ -95,7 +95,7 @@ export function NoteIndex() {
     const isNotes = notes.length > 0
     
     if (isLoading) return <div className="loader"></div>
-    return <section className = "note-index main-layout">
+    return <section className = "note-index full">
         <header className="note-index-header">
             <img height="50" src="assets\img\keep-icon.png" alt="" />
             <h1>Keep</h1>

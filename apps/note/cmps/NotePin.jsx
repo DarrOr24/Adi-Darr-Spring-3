@@ -1,6 +1,6 @@
 import { noteService } from "../services/note.service.js"
 
-const { useState, useEffect } = React
+const { useState } = React
 
 export function NotePin({note: noteToPin ,onPinNote}){
         

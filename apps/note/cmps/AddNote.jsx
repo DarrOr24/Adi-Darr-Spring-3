@@ -57,23 +57,37 @@ export function AddNote({onAdd}){
  
     }
 
-    function onReturn(){
-        setOpenNote(false)
-        setNote(emptyNote)
-        navigate(`/note`)
-
-    }
 
     function onSave(ev) {
         ev.preventDefault()
-        if((!note.info.title)&&(!note.info.txt)){ //if note is empty
-            setOpenNote(false)
-            setNote(emptyNote)
-            navigate(`/note`)
-            return 
+        switch (note.type) {
+            case 'NoteTxt':
+                if ((!note.info.title)&&(!note.info.txt)){
+                    setOpenNote(false)
+                    setNote(emptyNote)
+                    navigate(`/note`)
+                    return 
+                }
+                
+            case 'NoteImg':
+            case 'NoteVideo':
+                if ((!note.info.title)&&(!note.info.url)){
+                    setOpenNote(false)
+                    setNote(emptyNote)
+                    navigate(`/note`)
+                    return 
+                }   
         }
+
+
+        // if((!note.info.title)&&(!note.info.txt)){ //if note is empty
+        //     setOpenNote(false)
+        //     setNote(emptyNote)
+        //     navigate(`/note`)
+        //     return 
+        // }
         
-        else{
+        // else{
             noteService.save(note)
             .then((newNote) => {
                 onAdd(newNote)
@@ -86,28 +100,11 @@ export function AddNote({onAdd}){
                 // showErrorMsg('Couldnt save')
             })
             .finally(() => navigate('/note'))
-        }
+        // }
         
     }
 
     
-
-    function onSaveNoteImg(ev){
-        ev.preventDefault()
-        console.log(note)
-        noteService.save(note)
-            .then((newNote) => {
-                onAdd(newNote)
-                setOpenNote(false)
-                setNote(emptyNote)
-            })
-            
-            .catch(() => {
-                console.log('error')
-                // showErrorMsg('Couldnt save')
-            })
-            .finally(() => navigate('/note'))
-    }
 
     function handleChangeInfo({ target }) {
         console.log(target)
@@ -144,7 +141,7 @@ export function AddNote({onAdd}){
 
             {openNote && <NotePin note={note} onPinNote ={isPinned}/>}
         
-            {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave} onSaveNoteImg={onSaveNoteImg} onReturn={onReturn}  /> }
+            {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> }
                     
             {openNote &&  <ActionBtns note={note}  onSetNoteColor={setNoteColor}  />} 
            
@@ -152,7 +149,7 @@ export function AddNote({onAdd}){
     </section>
 }
 
-// function DynamicCmp({note, handleChangeInfo, onSave}){
+
 function DynamicCmp(props){
     
     switch (props.note.type) {
@@ -162,9 +159,7 @@ function DynamicCmp(props){
             return <NoteImgAdd {...props}/>
         case 'NoteVideo':
             return <NoteImgAdd {...props}/>
-           
             
-       
     }
 }
 

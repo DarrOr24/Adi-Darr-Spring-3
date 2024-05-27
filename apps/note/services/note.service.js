@@ -66,6 +66,7 @@ function _createNotes() {
         noteVideo.id = utilService.makeId()
         notes.push(noteVideo)
         utilService.saveToStorage(NOTE_KEY, notes)
+        
     }
 }
 

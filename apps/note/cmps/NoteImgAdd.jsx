@@ -1,8 +1,8 @@
 
-export function NoteImgAdd({note, handleChangeInfo, onSaveNoteImg, onReturn}){
+export function NoteImgAdd({note, handleChangeInfo, onSave}){
   
     return <section className = "note-img-add">
-        <form onSubmit = {onSaveNoteImg}>
+        <form onSubmit = {onSave}>
            
             <input
                 onChange={handleChangeInfo} 
@@ -13,6 +13,8 @@ export function NoteImgAdd({note, handleChangeInfo, onSaveNoteImg, onReturn}){
                 placeholder="Title"
                  />
 
+            {(note.info.url) && <img src={note.info.url} alt="" />    }
+
             <label htmlFor="url">Enter an https:// URL:</label>
            <input
                 onChange={handleChangeInfo} 
@@ -21,13 +23,14 @@ export function NoteImgAdd({note, handleChangeInfo, onSaveNoteImg, onReturn}){
                 name="url"
                 type="url" 
                 placeholder="https://example.com"
-                pattern="https://.*" size="30" required
+                // pattern="https://.*" size="30" required
+                pattern="https://.*" size="30" 
             /> 
 
             
 
-            <button>Save</button>
-            <button onClick={onReturn} type="button">Return</button>
+            <button>Close</button>
+            
         </form>    
     </section >
     

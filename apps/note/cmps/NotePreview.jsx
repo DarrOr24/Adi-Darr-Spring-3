@@ -8,6 +8,7 @@ import { NoteEdit2 } from "./NoteEdit2.jsx"
 import { NoteImg } from "./NoteImg.jsx";
 import { NotePin } from "./NotePin.jsx"
 import { NoteTxt } from "./NoteTxt.jsx";
+import { NoteVideo } from "./NoteVideo.jsx";
 
 export function NotePreview({ note, onRemove, onEdit, onPinNote, onDuplicate}){
     
@@ -74,6 +75,8 @@ function DynamicCmp({note}){
             return <NoteTxt note={note} />
         case 'NoteImg':
             return <NoteImg note={note}/>
+        case 'NoteVideo':
+            return <NoteVideo note = {note} />
     }
 }
 

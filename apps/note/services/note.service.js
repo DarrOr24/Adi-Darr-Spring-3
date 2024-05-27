@@ -35,7 +35,7 @@ function sortNotes(notesArr){
     pinnedNotes.sort((note2, note1) => note1.pinTime - note2.pinTime)
     const unpinnedNotes =notesArr.filter(note => note.isPinned === false)
     unpinnedNotes.sort((note1, note2) => note1.time - note2.time)
-    console.log(unpinnedNotes)
+    
     return [...pinnedNotes, ...unpinnedNotes]
 }
 
@@ -45,30 +45,25 @@ function _createNotes() {
         notes = []
         const noteTitles = ['Shopping List', 'Workout schedule', 'Passwords', 'Cookies', 'Important']
 
-        const coral = '#faafa8'
-        const peach = '#f39f76'
-        const sand = '#fff8b8'
-        const mint = '#e2f6d3'
-        const sage = '#b4ddd3'
-        const fog =  '#d4e4ed'
-        const storm= '#aeccdc'
-        const dusk= '#d3bfdb'
-        const blossom= '#f6e2dd'
-        const clay= '#e9e3d4'
-        const chalk= '#efeff1'
-        const white = 'white'
-        const noteColors = [chalk, white, storm, clay, white]
+        const noteColors = ['#efeff1', 'white', '#aeccdc', '#e9e3d4', '#f6e2dd']
       
         for (let i = 0; i < 2; i++){
             const noteTitle = noteTitles[i]
             const noteColor =noteColors[i]
+            
             notes.push(_createNote('NoteTxt', false, {'backgroundColor': noteColor}, {'title': noteTitle, 'txt': utilService.makeLorem(20)}, Date.now()+i))
+            notes.forEach(note => note.id = utilService.makeId())
         }
 
         const url = `assets/img/sweet_noga.png`
-        const noteImg = _createNote('NoteImg', true, {'backgroundColor': chalk}, {'url':url, 'title': 'My Sweet Noga'}, Date.now()+2)
+        const noteImg = _createNote('NoteImg', true, {'backgroundColor': '#aeccdc'}, {'url':url, 'title': 'My Sweet Noga'}, Date.now()+2)
+        noteImg.id = utilService.makeId()
         notes.push(noteImg)
-     
+                
+        const videoUrl = `https://www.youtube.com/embed/aUgtMaAZzW0?`
+        const noteVideo =  _createNote('NoteVideo', true, {'backgroundColor': '#e9e3d4'}, {'url':videoUrl, 'title': 'Ashtanga Primary Series'}, Date.now()+3)
+        noteVideo.id = utilService.makeId()
+        notes.push(noteVideo)
         utilService.saveToStorage(NOTE_KEY, notes)
     }
 }
@@ -76,7 +71,7 @@ function _createNotes() {
 
 function _createNote(type, isPinned, style, info, time = Date.now()){
     const note = {
-                    id:  utilService.makeId(),        
+                    // id:  utilService.makeId(),        
                     type, 
                     isPinned, 
                     pinTime: (isPinned)? Date.now() : '',

@@ -34,8 +34,8 @@ export function VideoList({searchValue, onSelectVideo}){
             {videos.map(({id, snippet}) => 
                 <li  key={id.videoId }  >
                     <div onClick={(event)=>selectVideo(event,id.videoId)}>
-                        <h2> {snippet.title}</h2>
                         <img src={snippet.thumbnails.default.url} alt=""></img> 
+                        <h2> {snippet.title}</h2>
                     </div>
                           
                 </li>)}

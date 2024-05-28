@@ -40,7 +40,7 @@
 }
 
 .note-preview .action-icons {
-    opacity: 0;
+    opacity: 1;
 }
 
 .note-preview:hover .note-pin{

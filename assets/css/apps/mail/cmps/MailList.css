@@ -3,19 +3,35 @@
     border-radius: 1em;
 }
 
-.mail-list li .mail-action-btn {
-    opacity: 0;
+.mail-list li {
+    padding: 1em;
+    box-shadow: rgba(100, 121, 143, 0.12) 0px -1px 0px 0px inset;
+    position: relative; 
+    
 }
+/* .mail-list li .mail-action-btn {
+    opacity: 0;
+} */
 
 .mail-list li:hover .mail-action-btn {
     opacity: 1;
     cursor: pointer;
-} */
+} 
 
-.mail-list li {
-    padding: 1em;
-    box-shadow: rgba(100, 121, 143, 0.12) 0px -1px 0px 0px inset;
+.mail-list li .mail-action-btn {
+    display: flex;
+    justify-content: end;
+    opacity: 0;
+    transition: 500ms;
+    position: absolute; 
+    top: 50%; 
+    right: 1em; 
+    transform: translateY(-50%); 
+    z-index: 1; 
+    background-color: rgb(226, 238, 241);
+    padding: 0.3em; 
 }
+
 
 .mail-list li:hover {
     background-color: rgb(226, 238, 241);

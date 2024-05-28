@@ -11,12 +11,13 @@
     place-items: center;
     height: 35px; 
     width: 35px;
-    margin: 10px;
+    /* color: #595959; */
     
 }
 
 .mail-action-btn .action-icon img {
     width: 65%;
+    /* color: #595959; */
 }
 
 .action-name {

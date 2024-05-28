@@ -11,6 +11,11 @@ import { MailCompose } from '../cmps/MailCompose.jsx'
 import { MailCompose2 } from '../cmps/MailCompose2.jsx'
 
 export function MailIndex() {
+
+    const loggedinUser = {
+        email: 'user@appsus.com',
+        fullname: 'Mahatma Appsus'
+    }
     
     const [ mails, setMails ] = useState([])
     const [ searchParams, setSearchParams ] = useSearchParams()
@@ -18,20 +23,38 @@ export function MailIndex() {
     // const [ status, setStatus ] = useState('inbox')
     const [unreadCount, setUnreadCount] = useState(0)
     const [sortBy, setSortBy] = useState('date')
-    const [showCompose, setShowCompose] = useState(true)
+    const [showCompose, setShowCompose] = useState(false)
+    const [mailType, setMailType] = useState('inbox')
+    const [ mailList, setMailList ] = useState([])
+
     const navigate = useNavigate()
     
 
    
+    useEffect(() => {
+        // setSearchParams(filterBy)
+        const criteria = { ...filterBy ,sortBy }
+        mailService.query(criteria)
+            .then(mails => {
+                setMails(mails)
+                setMailList(mails.filter(mail => mail.to === loggedinUser.email))})
+           
+        mailService.countUnreadInboxMails()
+            .then(count => setUnreadCount(count))
+
+        
+    }, [filterBy,  sortBy])
 
     useEffect(() => {
         // setSearchParams(filterBy)
         const criteria = { ...filterBy ,sortBy }
         mailService.query(criteria)
             .then(mails => setMails(mails))
-        
+           
         mailService.countUnreadInboxMails()
             .then(count => setUnreadCount(count))
+
+        
     }, [filterBy,  sortBy])
     
 
@@ -92,6 +115,12 @@ export function MailIndex() {
         navigate(`/mail`)
     }
 
+    function setMailStatus(status){
+        console.log('statuts from side menu:',status)
+        setMailType(status)
+        console.log('mailType', mailType)
+    }
+
     
 
     return (
@@ -104,8 +133,8 @@ export function MailIndex() {
             </header>
             <main>
                 
-                {/* <MailSideMenu unreadCount={unreadCount}  handleComposeClick={onComposeMail}  /> */}
-                {/* <MailList mails = {mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus}  /> */}
+                <MailSideMenu unreadCount={unreadCount}  handleComposeClick={onComposeMail} onSetStatus={setMailStatus}  />
+                <MailList mails = {mailList} removeMail={removeMail} toggleReadStatus={toggleReadStatus} />
                 {/* {showCompose && <MailCompose />} */}
                 
                 {showCompose && <MailCompose2 onClose={onCloseCompose}/>}

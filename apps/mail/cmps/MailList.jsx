@@ -4,6 +4,8 @@ import { MailPreview } from './MailPreview.jsx'
 import { ActionBtnsMail } from './ActionBtnsMail.jsx'
 
 export function MailList({ mails, removeMail, toggleReadStatus }) {
+
+   
     if (mails.length === 0) {
         return (
             <div className="no-mails">

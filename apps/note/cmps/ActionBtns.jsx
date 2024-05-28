@@ -3,7 +3,7 @@ import { NoteImgAdd } from "./NoteImgAdd.jsx"
 
 const { useState } = React
 
-export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onChangeImg} ){
+export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoadImgOrVid} ){
 
     const [ colorMenu, setColorMenu ] = useState(false)
     const [ addImg, setAddImg ] = useState(false)
@@ -39,12 +39,12 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onChan
 
     function changeImg(noteFromImg){
         setAddImg(false)
-        onChangeImg(noteFromImg)
+        onLoadImgOrVid(noteFromImg)
     }
     function changeVideo(noteFromVideo){
         console.log('third step video reached action buttons again')
         setAddVideo(false)
-        onChangeImg(noteFromVideo)
+        onLoadImgOrVid(noteFromVideo)
     }
 
     

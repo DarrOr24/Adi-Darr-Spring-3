@@ -100,7 +100,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
         
                 {/* <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/>  */}
                 <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> 
-                <ActionBtns note={note} onSetNoteColor={setNoteColor} onChangeImg={addImgOrVideo}  />       
+                <ActionBtns note={note} onSetNoteColor={setNoteColor} onLoadImgOrVid={addImgOrVideo}  />       
 
             </article>
             

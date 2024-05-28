@@ -129,7 +129,7 @@ export function AddNote({onAdd}){
             {!openNote && 
                 <div className="take-a-note">
                     <p  onClick={onClickNote}>Take a note...</p>
-                    <ActionBtns note={note}  onSetNoteColor={setNoteColor} onChangeImg={addImg}  />
+                    <ActionBtns note={note}  onSetNoteColor={setNoteColor} onLoadImgOrVid={addImg}  />
                 </div> }
 
             {openNote && <NotePin note={note} onPinNote ={isPinned}/>}
@@ -137,7 +137,7 @@ export function AddNote({onAdd}){
             {/* {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> } */}
             {openNote && <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> }
                     
-            {openNote &&  <ActionBtns note={note}  onSetNoteColor={setNoteColor} onChangeImg={addImg}  />} 
+            {openNote &&  <ActionBtns note={note}  onSetNoteColor={setNoteColor} onLoadImgOrVid={addImg}  />} 
            
         
     </section>

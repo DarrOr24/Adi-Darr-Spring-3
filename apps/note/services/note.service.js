@@ -63,16 +63,22 @@ function _createNotes() {
 
         const url2 ='https://i.pinimg.com/originals/12/0b/ce/120bce4262601e926378c1a4d02b47e8.jpg'
         const noteImg2 = createNote('NoteImg', false, {'backgroundColor': ' #b4ddd3'}, {'url':url2, 'title': 'How to scorpion handstand'}, Date.now()+2)
-        noteImg.id = utilService.makeId()
+        noteImg2.id = utilService.makeId()
         notes.push(noteImg2)
 
         const videoUrl = `https://www.youtube.com/embed/aUgtMaAZzW0?`
-        const noteVideo =  createNote('NoteVideo', true, {'backgroundColor': '#e9e3d4'}, {'url':videoUrl, 'title': 'Ashtanga Primary Series'}, Date.now()+3)
+        const noteVideo =  createNote('NoteVideo', false, {'backgroundColor': '#e9e3d4'}, {'url':videoUrl, 'title': 'Ashtanga Primary Series'}, Date.now()+3)
         noteVideo.id = utilService.makeId()
         notes.push(noteVideo)
+
+        const videoUrl2 = 'https://www.youtube.com/embed/8gECJx6YWCI' 
+        const noteVideo2 =  createNote('NoteVideo', true, {'backgroundColor': '#fff8b8'}, {'url':videoUrl2, 'title': 'Ashtanga Intermediate Series'}, Date.now()+4)
+        noteVideo2.id = utilService.makeId()
+        notes.push(noteVideo2)
+
         utilService.saveToStorage(NOTE_KEY, notes)
 
-        // "https://www.youtube.com/embed/8gECJx6YWCI" 
+        
         
     }
 }

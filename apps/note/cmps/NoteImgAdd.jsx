@@ -2,9 +2,7 @@ import { noteService } from "../services/note.service.js"
 
 const { useState } = React
 
-export function NoteImgAdd({note: noteToEdit, onReturn, onChangeImg}){
-
-    console.log(noteToEdit)
+export function NoteImgAdd({note: noteToEdit, onChangeImg, onReturn}){
 
     const [ note, setNote ] = useState(noteToEdit)
 
@@ -17,6 +15,7 @@ export function NoteImgAdd({note: noteToEdit, onReturn, onChangeImg}){
     }
 
     function handleChangeInfo({ target }) {
+        
         const { type, name: prop } = target
         let { value } = target
 
@@ -37,19 +36,14 @@ export function NoteImgAdd({note: noteToEdit, onReturn, onChangeImg}){
             updatedAt: Date.now(),
             info: { ...prevNote.info, [prop]: value }
         }))
-
-       
-
-        
-
-        
+  
     }
     
   
     return <section className = "note-img-add">
-        <form onSubmit = {onSave}>
+        <form onSubmit = {onSave} >
            
-            <label htmlFor="url">Enter an https:// URL:</label>
+            {/* <label htmlFor="url">Enter an https:// URL:</label> */}
            <input
                 onChange={handleChangeInfo} 
                 // value={noteToEdit.info.url}
@@ -59,9 +53,12 @@ export function NoteImgAdd({note: noteToEdit, onReturn, onChangeImg}){
                 placeholder="https://example.com"
                 pattern="https://.*" size="30" 
             /> 
-
-            <button>Close</button>
-            <button onClick={onReturn} type="button">Return</button>
+           
+            <button>Save</button>
+            <button type="button" onClick={onReturn}>Return</button>
+            
+           
+            
             
         </form>    
     </section >

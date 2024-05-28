@@ -7,6 +7,7 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onChan
 
     const [ colorMenu, setColorMenu ] = useState(false)
     const [ addImg, setAddImg ] = useState(false)
+    const [ buttonClass, setButtonClass ] = useState('')
     
     function onDuplicateNote(ev){
        ev.stopPropagation()
@@ -25,9 +26,6 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onChan
     function onAddImg(ev){
         ev.stopPropagation()
         if(!addImg) setAddImg(true)
-        
-        console.log(addImg)
-
     }
 
     function changeImg(noteFromImg){
@@ -40,7 +38,7 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onChan
     
     
     return <section className ="action-icons">
-                    <div className="action-icon select">
+                    <div className={`action-icon select `}>
                         <img  src="assets\img\check.svg" alt="" />
                         <span className="action-name select">Select Note</span>
                     </div>
@@ -58,8 +56,8 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onChan
                         <span className="action-name">Background options</span>
                         {colorMenu && <NoteColorMenu onSetNoteColor={onSetNoteColor} />}
                     </div>
-                    <div onClick={onAddImg}  className="action-icon img" >
-                        <img src="assets\img\add_image.svg" alt="" />
+                    <div onClick={onAddImg}  className="action-icon add-img" >
+                        <img  src="assets\img\add_image.svg" alt="" />
                         <span className="action-name">Add image</span>
                         {addImg && <NoteImgAdd note={note} onReturn={() => setAddImg(false)} onChangeImg={changeImg} />}
                         

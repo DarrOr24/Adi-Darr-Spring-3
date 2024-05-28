@@ -1,10 +1,13 @@
 import { noteService } from "../services/note.service.js"
+import { youtubeService } from "../services/youtube.service.js"
+import { VideoList } from "./VideoList.jsx"
 
 const { useState } = React
 
 export function NoteVideoAdd({note: noteToEdit, onChangeVideo, onReturn}){
 
     const [ note, setNote ] = useState(noteToEdit)
+    const [ videoList, setVideoList ] = useState([])
 
     function onSave(ev){
         console.log('second step - submitted')
@@ -13,53 +16,32 @@ export function NoteVideoAdd({note: noteToEdit, onChangeVideo, onReturn}){
         .then(onChangeVideo)
     }
 
-    function handleChangeInfo({ target }) {
+    function getVideos({ target }) {
         
-        const { type, name: prop } = target
+        
         let { value } = target
 
-        switch (type) {
-            case 'range':
-            case 'number':
-                value = +value
-                break;
-
-            case 'checkbox':
-                value = target.checked
-                break;
-        }
-
-        
-        setNote(prevNote => ({
-            ...prevNote,
-            updatedAt: Date.now(),
-            info: { ...prevNote.info, [prop]: value }
-        }))
+        setVideoList(youtubeService.getVideos(value))        
   
     }
     
   
-    return <section className = "note-img-add">
-        <form onSubmit = {onSave} >
-           
-            {/* <label htmlFor="url">Enter an https:// URL:</label> */}
-           <input
-                onChange={handleChangeInfo} 
-                // value={noteToEdit.info.url}
-                id="url" 
-                name="url"
-                type="url" 
-                placeholder="https://example.com"
-                pattern="https://.*" size="30" 
-            /> 
-           
-            <button>Save</button>
+    return <section className = "note-video-add">
+        <form onSubmit={onSave}>
+            <input 
+            onChange={getVideos}
+            type="text" 
+            placeholder="Search..."
+            id="txt" 
+            name="txt"
+             />
+ 
+            <button>Search</button>
+        </form>   
             <button type="button" onClick={onReturn}>Return</button>
-            
-           
-            
-            
-        </form>    
+
+        <VideoList videos = {videoList} />
+
     </section >
     
 }

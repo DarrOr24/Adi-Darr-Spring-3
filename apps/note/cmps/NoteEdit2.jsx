@@ -98,8 +98,8 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
             <article style={{backgroundColor: note.style.backgroundColor}}>
                 <NotePin note={note} onPinNote ={isNotePinned}/>
         
-                <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/> 
-                {/* <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   />  */}
+                {/* <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/>  */}
+                <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> 
                 <ActionBtns note={note} onSetNoteColor={setNoteColor} onChangeImg={addImgOrVideo}  />       
 
             </article>
@@ -115,12 +115,14 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
 function DynamicCmp(props){
     
     switch (props.note.type) {
-        case 'NoteTxt':
-            return <NoteEditForm  {...props}/>
-        case 'NoteImg':
-            return <NoteImgAdd {...props}/>
         case 'NoteVideo':
-            return <NoteImgAdd {...props}/>
+        case 'NoteImg':
+        case 'NoteTxt':
+            return <NoteForm  {...props}/>
+        case 'NoteList':
+            return <div>NOTE LIST</div>
+        
+            
            
     }
 }

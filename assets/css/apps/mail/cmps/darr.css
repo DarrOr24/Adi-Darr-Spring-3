@@ -1,0 +1,9 @@
+.mail-index .darr {
+    height: 500px;
+    width: 500px;
+    background-color: red;
+    color: black;
+    
+    bottom:0;
+    right: 0;
+}

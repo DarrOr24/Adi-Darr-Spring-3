@@ -3,11 +3,11 @@ const { Link } = ReactRouterDOM
 import { MailPreview } from './MailPreview.jsx'
 import { ActionBtnsMail } from './ActionBtnsMail.jsx'
 
-export function MailList({ mails, removeMail, toggleReadStatus, status }) {
+export function MailList({ mails, removeMail, toggleReadStatus }) {
     if (mails.length === 0) {
         return (
             <div className="no-mails">
-                No conversations in {status}.
+                No conversations
             </div>
         )
     }
@@ -17,9 +17,9 @@ export function MailList({ mails, removeMail, toggleReadStatus, status }) {
             <ul>
                 {mails.map(mail => (
                     <li key={mail.id} className={`${mail.isRead ? '' : 'un-read'}`}> 
-                        <Link to={`/mail/${status}/${mail.id}`}>
-                            <MailPreview mail={mail} />
-                        </Link>
+                        
+                        <MailPreview mail={mail} />
+                        
                         <ActionBtnsMail mail={mail} removeMail={removeMail} toggleReadStatus={toggleReadStatus} />
 
                     </li>))}

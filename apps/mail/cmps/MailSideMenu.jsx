@@ -1,7 +1,7 @@
 const { useState } = React
 const { Link, useNavigate, useSearchParams } = ReactRouterDOM
 
-export function MailSideMenu({ unreadCount, onSetStatus }){
+export function MailSideMenu({ unreadCount, handleComposeClick }){
     const [selectedFolder, setSelectedFolder] = useState('inbox')
     const [searchParams, setSearchParams] = useSearchParams()
     const [ isClosed, setIsClosed ] = useState(true)
@@ -17,17 +17,14 @@ export function MailSideMenu({ unreadCount, onSetStatus }){
     }
 
     
-    function handleComposeClick() {
-        searchParams.set('compose', 'new')
-        setSearchParams(searchParams)
-    }
+    // function handleComposeClick() {
+    //     searchParams.set('compose', 'new')
+    //     setSearchParams(searchParams)
+    // }
 
     return (
         <section className = "mail-side-menu">
-            {/* <button className='mail-compose' onClick={handleComposeClick}>
-                <img src="assets\img\edit_labels.svg" alt="" />
-                Compose
-            </button> */}
+            
             <ul className = "menu">
                 <li onClick={toggleSideMenu} className="hamburger">
                     <img src="assets\img\hamburger.svg" alt="" />

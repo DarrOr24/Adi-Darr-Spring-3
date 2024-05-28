@@ -8,27 +8,31 @@ import { MailDetails } from '../cmps/MailDetails.jsx'
 import { MailSideMenu } from '../cmps/MailSideMenu.jsx'
 import { MailFilter } from '../cmps/MailFilter.jsx'
 import { MailCompose } from '../cmps/MailCompose.jsx'
+import { MailCompose2 } from '../cmps/MailCompose2.jsx'
 
 export function MailIndex() {
     
     const [ mails, setMails ] = useState([])
     const [ searchParams, setSearchParams ] = useSearchParams()
     const [ filterBy, setFilterBy ] = useState(mailService.getFilterFromSearchParams(searchParams))
-    const [ status, setStatus ] = useState('inbox')
+    // const [ status, setStatus ] = useState('inbox')
     const [unreadCount, setUnreadCount] = useState(0)
     const [sortBy, setSortBy] = useState('date')
+    const [showCompose, setShowCompose] = useState(true)
     const navigate = useNavigate()
     
 
+   
+
     useEffect(() => {
-        setSearchParams(filterBy)
-        const criteria = { ...filterBy ,status, sortBy }
+        // setSearchParams(filterBy)
+        const criteria = { ...filterBy ,sortBy }
         mailService.query(criteria)
             .then(mails => setMails(mails))
         
         mailService.countUnreadInboxMails()
             .then(count => setUnreadCount(count))
-    }, [filterBy, status, sortBy])
+    }, [filterBy,  sortBy])
     
 
     function removeMail(mailId) {
@@ -67,18 +71,28 @@ export function MailIndex() {
         setFilterBy(newFilter)
     }
 
-    function onSetStatus(newStatus) {
-        setStatus(newStatus)
-        navigate(`/mail/${newStatus}`)
-    }
+    // function onSetStatus(newStatus) {
+    //     setStatus(newStatus)
+    //     navigate(`/mail/${newStatus}`)
+    // }
 
     function onSetSortBy(newSortBy) {
         setSortBy(newSortBy)
     }
 
+    function onComposeMail(){
+        setShowCompose(true)
+        // navigate(`/mail/compose`)
+    }
+
     if (!mails) return <div>Loading...</div>
 
-    const showCompose = searchParams.get('compose') === 'new'
+    function onCloseCompose(){
+        setShowCompose(false)
+        navigate(`/mail`)
+    }
+
+    
 
     return (
         <section className="mail-index full">
@@ -86,20 +100,19 @@ export function MailIndex() {
                 {/* <img src="assets/img/hamburger.svg" alt="" /> */}
                 <img src="assets/img/gmail.svg"></img>
                 <h1>Gmail</h1>
-                <MailFilter filterBy={filterBy} onFilter={onSetFilterBy} onSort={onSetSortBy}/>
+                {/* <MailFilter filterBy={filterBy} onFilter={onSetFilterBy} onSort={onSetSortBy}/> */}
             </header>
             <main>
-                <section className="mail-side-menu">
-                    <MailSideMenu unreadCount={unreadCount} onSetStatus={onSetStatus} />
-                </section>
-                <section className="mail-list">
-                    <Routes>
-                        <Route path=":status" element={<MailList mails={mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus} status={status} sortBy={sortBy}/>} />
-                        <Route path=":status/:mailId" element={<MailDetails toggleReadStatus={toggleReadStatus} status={status}/>} />
-                    </Routes>
-                </section>
+                
+                {/* <MailSideMenu unreadCount={unreadCount}  handleComposeClick={onComposeMail}  /> */}
+                {/* <MailList mails = {mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus}  /> */}
+                {/* {showCompose && <MailCompose />} */}
+                
+                {showCompose && <MailCompose2 onClose={onCloseCompose}/>}
+
+                
             </main>
-            {showCompose && <MailCompose />}
+           
         </section>
     )
 }

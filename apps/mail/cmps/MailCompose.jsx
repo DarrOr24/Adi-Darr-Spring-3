@@ -1,10 +1,11 @@
 const { useState } = React
-const { useNavigate } = ReactRouter
+const { useNavigate, useSearchParams } = ReactRouterDOM
 
 import { mailService } from "../services/mail.service.js"
 
 export function MailCompose() {
     const [mail, setMail] = useState(mailService.getEmptyMail())
+    const [searchParams, setSearchParams] = useSearchParams()
     const navigate = useNavigate()
 
     function handleChange({ target }) {
@@ -29,11 +30,17 @@ export function MailCompose() {
         mailService.save(mail)
             .then(() => console.log('Mail has successfully saved!'))
             .catch(() => console.log(`couldn't save mail`))
-            .finally(() => navigate('/mail'))
+            .finally(() => closeForm())
     }
 
+
     function closeForm() {
-        navigate('/mail')
+        searchParams.delete('compose')
+        setSearchParams(searchParams)
+    }
+
+    if (!searchParams.get('compose')) {
+        return null
     }
 
     return (

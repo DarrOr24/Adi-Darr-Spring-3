@@ -7,3 +7,14 @@
     grid-template-columns: 1fr 4fr;
 }
 
+.mail-header {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.mail-header img {
+    height: 30px;
+    margin-inline-end: 20px;
+}

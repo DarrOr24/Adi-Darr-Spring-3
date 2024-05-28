@@ -17,7 +17,7 @@ export function MailList({ mails, removeMail, toggleReadStatus, status }) {
             <ul>
                 {mails.map(mail => (
                     <li key={mail.id} className={`${mail.isRead ? '' : 'un-read'}`}> 
-                        <Link to={`/mail/${mail.id}`}>
+                        <Link to={`/mail/${status}/${mail.id}`}>
                             <MailPreview mail={mail} />
                         </Link>
                         <ActionBtnsMail mail={mail} removeMail={removeMail} toggleReadStatus={toggleReadStatus} />

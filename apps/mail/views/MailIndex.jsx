@@ -1,13 +1,13 @@
 const { useState, useEffect } = React
-const { useSearchParams, Routes, Route } = ReactRouterDOM
+const { Routes, Route, useSearchParams, useNavigate, useParams } = ReactRouterDOM
 
 import { mailService } from '../services/mail.service.js'
 
 import { MailList } from '../cmps/MailList.jsx'
 import { MailDetails } from '../cmps/MailDetails.jsx'
-import { MailHeader } from '../cmps/MailHeader.jsx'
 import { MailSideMenu } from '../cmps/MailSideMenu.jsx'
 import { MailFilter } from '../cmps/MailFilter.jsx'
+import { MailCompose } from '../cmps/MailCompose.jsx'
 
 export function MailIndex() {
     
@@ -17,19 +17,19 @@ export function MailIndex() {
     const [ status, setStatus ] = useState('inbox')
     const [unreadCount, setUnreadCount] = useState(0)
     const [sortBy, setSortBy] = useState('date')
-   
+    const navigate = useNavigate()
+    
 
     useEffect(() => {
         setSearchParams(filterBy)
-        const criteria = { ...filterBy, status, sortBy }
-        // const criteria = { ...filterBy, status }
+        const criteria = { ...filterBy ,status, sortBy }
         mailService.query(criteria)
             .then(mails => setMails(mails))
         
         mailService.countUnreadInboxMails()
             .then(count => setUnreadCount(count))
     }, [filterBy, status, sortBy])
-    // }, [filterBy, status])
+    
 
     function removeMail(mailId) {
         mailService.moveToTrash(mailId)
@@ -69,6 +69,7 @@ export function MailIndex() {
 
     function onSetStatus(newStatus) {
         setStatus(newStatus)
+        navigate(`/mail/${newStatus}`)
     }
 
     function onSetSortBy(newSortBy) {
@@ -76,24 +77,36 @@ export function MailIndex() {
     }
 
     if (!mails) return <div>Loading...</div>
+
+    const showCompose = searchParams.get('compose') === 'new'
+
     return (
         <section className="mail-index">
-            <MailHeader />
-            <MailFilter filterBy={filterBy} onFilter={onSetFilterBy} onSort={onSetSortBy}/>
+            <header className="mail-header">
+                <img src="assets/img/hamburger.svg" alt="" />
+                <img src="assets/img/gmail.svg"></img>
+                <h1>Gmail</h1>
+                <MailFilter filterBy={filterBy} onFilter={onSetFilterBy} onSort={onSetSortBy}/>
+            </header>
             <main>
                 <section className="mail-side-menu">
                     <MailSideMenu unreadCount={unreadCount} onSetStatus={onSetStatus} />
                 </section>
                 <section className="mail-list">
                     <Routes>
-                        <Route path="/" element={<MailList mails={mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus} status={status} sortBy={sortBy}/>} />
+                        {/* <Route path="/mail/:status" element={<MailList mails={mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus} status={status} sortBy={sortBy}/>} />
+                        <Route path="/mail/:status/:mailId" element={<MailDetails toggleReadStatus={toggleReadStatus} status={status}/>} /> */}
+                        <Route path=":status" element={<MailList mails={mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus} status={status} sortBy={sortBy}/>} />
+                        <Route path=":status/:mailId" element={<MailDetails toggleReadStatus={toggleReadStatus} status={status}/>} />
+                        {/* <Route path="/" element={<MailList mails={mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus} status={status} sortBy={sortBy}/>} />
                         <Route path=":mailId" element={<MailDetails toggleReadStatus={toggleReadStatus} status={status}/>} />
                         <Route path="sent" element={<MailList mails={mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus} status={status} sortBy={sortBy} />} />
                         <Route path="sent/:mailId" element={<MailDetails toggleReadStatus={toggleReadStatus} status={status}/>} />
-                        <Route path="trash" element={<MailList mails={mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus} status={status} sortBy={sortBy} />} />  
+                        <Route path="trash" element={<MailList mails={mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus} status={status} sortBy={sortBy} />} />   */}
                     </Routes>
                 </section>
             </main>
+            {showCompose && <MailCompose />}
         </section>
     )
 }

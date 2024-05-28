@@ -1,4 +1,4 @@
-const { Route, Routes } = ReactRouterDOM
+const { Route, Routes, Navigate } = ReactRouterDOM
 const Router = ReactRouterDOM.HashRouter
 
 import { AppHeader } from "./cmps/AppHeader.jsx"
@@ -9,7 +9,6 @@ import { UserMsg } from "./cmps/UserMsg.jsx"
 import { eventBusService } from "./services/event-bus.service.js"
 
 import { MailIndex } from "./apps/mail/views/MailIndex.jsx"
-import { MailCompose } from "./apps/mail/cmps/MailCompose.jsx"
 
 import { NoteIndex } from "./apps/note/views/NoteIndex.jsx"
 import { AddNote } from "./apps/note/cmps/AddNote.jsx"
@@ -18,6 +17,7 @@ import { NoteEdit2 } from "./apps/note/cmps/NoteEdit2.jsx"
 
 
 export function App() {
+   
     return (
         <Router>
             <section className="app main-layout full">
@@ -25,9 +25,9 @@ export function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
-            
-                    <Route path="/mail/*" element={<MailIndex />} />
-                    <Route path='/mail/new' element={<MailCompose />} />
+
+                    <Route path="/mail/*" element={<MailIndex />} /> 
+                    <Route path="/mail" element={<Navigate to="/mail/inbox" />} />
                   
                     <Route path="/note" element={<NoteIndex />}>
                         <Route path="/note/add" element={<AddNote />} />   

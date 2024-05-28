@@ -52,7 +52,8 @@ export function MailDetails({ toggleReadStatus, status }) {
     return (
         <section className="mail-details">
             <div className="action-icon back">
-                <Link to="/mail">
+                {/* <Link to="/mail"> */}
+                <Link to={`/mail/${status}`}>
                     <img src="assets/img/back.svg" alt="" />
                     <span className="action-name">Back to {status}</span>
                 </Link>

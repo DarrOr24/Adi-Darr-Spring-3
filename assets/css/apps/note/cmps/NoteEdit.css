@@ -51,3 +51,7 @@
 .note-edit .action-icons {
     width: 170px;
 }
+
+.note-edit .action-icons .drawing, .note-edit .action-icons .list {
+    display:none;
+}

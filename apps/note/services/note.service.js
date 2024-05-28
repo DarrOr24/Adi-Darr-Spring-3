@@ -57,10 +57,15 @@ function _createNotes() {
         }
 
         const url = `assets/img/sweet_noga.png`
-        const noteImg = createNote('NoteImg', true, {'backgroundColor': '#aeccdc'}, {'url':url, 'title': 'My Sweet Noga'}, Date.now()+2)
+        const noteImg = createNote('NoteImg', true, {'backgroundColor': '#aeccdc'}, {'url':url, 'title': 'My Sweet Noga', 'txt': 'Birthday party even on June 7'}, Date.now()+2)
         noteImg.id = utilService.makeId()
         notes.push(noteImg)
-                
+
+        const url2 ='https://i.pinimg.com/originals/12/0b/ce/120bce4262601e926378c1a4d02b47e8.jpg'
+        const noteImg2 = createNote('NoteImg', false, {'backgroundColor': ' #b4ddd3'}, {'url':url2, 'title': 'How to scorpion handstand'}, Date.now()+2)
+        noteImg.id = utilService.makeId()
+        notes.push(noteImg2)
+
         const videoUrl = `https://www.youtube.com/embed/aUgtMaAZzW0?`
         const noteVideo =  createNote('NoteVideo', true, {'backgroundColor': '#e9e3d4'}, {'url':videoUrl, 'title': 'Ashtanga Primary Series'}, Date.now()+3)
         noteVideo.id = utilService.makeId()

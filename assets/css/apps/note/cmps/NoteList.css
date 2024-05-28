@@ -6,6 +6,7 @@
     justify-self: center;
     grid-area: node-list;
     columns: 250px auto;
+    margin: 0;
 }
 
 .note-list h2 {
@@ -18,6 +19,7 @@
     break-inside: avoid;
     display: grid;
     justify-items: center;
+    padding-block: 20px;
    
 }
 

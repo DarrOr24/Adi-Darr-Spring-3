@@ -5,7 +5,6 @@ const { useNavigate } = ReactRouter
 
 import { noteService } from "../services/note.service.js";
 import { ActionBtns } from "./ActionBtns.jsx";
-import { AddNoteSideMenu } from "./AddNoteSideMenu.jsx";
 import { NoteForm } from "./NoteForm.jsx";
 import { NoteImg } from "./NoteImg.jsx";
 import { NoteImgAdd } from "./NoteImgAdd.jsx";
@@ -94,6 +93,7 @@ export function AddNote({onAdd}){
     }
 
     function addImg(noteFromAddImg){
+        setOpenNote(true)
         setNote(noteFromAddImg)
     }
 
@@ -129,7 +129,7 @@ export function AddNote({onAdd}){
             {!openNote && 
                 <div className="take-a-note">
                     <p  onClick={onClickNote}>Take a note...</p>
-                    <AddNoteSideMenu onAddNoteImg={addNoteImg} onAddNoteVideo={addNoteVideo} />
+                    <ActionBtns note={note}  onSetNoteColor={setNoteColor} onChangeImg={addImg}  />
                 </div> }
 
             {openNote && <NotePin note={note} onPinNote ={isPinned}/>}

@@ -27,12 +27,12 @@
     font-size: 0.9em;
 }
 
+.add-note .take-a-note .action-icons {
+    width: 170px;
+}
 
-.take-a-note .side-bar {
-    display: grid;
-    grid-auto-flow: column;
-    place-items: center;
-    width: 200px;
+.take-a-note .action-icons .email, .take-a-note .action-icons .color {
+    display:none;
 }
 
 .add-note .trash, .add-note .select, .add-note .duplicate {

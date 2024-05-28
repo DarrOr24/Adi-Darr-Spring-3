@@ -53,6 +53,10 @@
     cursor: pointer;
 }
 
+.note-preview .action-icons .drawing, .note-preview .action-icons .list {
+    display:none;
+}
+
 
 
 

@@ -61,7 +61,7 @@ export function NotePreview({ note, onRemove, onEdit, onPinNote, onDuplicate}){
                         
                         <DynamicCmp note={updatedNote} />
                         <NotePin note={updatedNote} onPinNote ={pinNote}/>
-                        <ActionBtns note={updatedNote} onRemove={onRemove} onSetNoteColor={setNoteColor} onDuplicate={onDuplicate} onChangeImg={editPreview} />
+                        <ActionBtns note={updatedNote} onRemove={onRemove} onSetNoteColor={setNoteColor} onDuplicate={onDuplicate} onLoadImgOrVid={editPreview} />
                     </article>}
                 
                 { openNote && <NoteEdit2 noteToEdit = {updatedNote} onClose={closeNoteEdit} onEdit={editPreview} onSetColorNote={setNoteColor} onPinNote={onPinNote} />}

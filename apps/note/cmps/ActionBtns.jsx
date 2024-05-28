@@ -1,9 +1,10 @@
 import { NoteColorMenu } from "./NoteColorMenu.jsx"
 import { NoteImgAdd } from "./NoteImgAdd.jsx"
+import { NoteVideoAdd } from "./NoteVideoAdd.jsx"
 
 const { useState } = React
 
-export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onChangeImg} ){
+export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoadImgOrVid} ){
 
     const [ colorMenu, setColorMenu ] = useState(false)
     const [ addImg, setAddImg ] = useState(false)
@@ -33,18 +34,19 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onChan
     function onAddVideo(ev){
         console.log('first step pressed on add video')
         ev.stopPropagation()
+        
         note.type = 'NoteVideo'
         if(!addVideo) setAddVideo(true)
     }
 
     function changeImg(noteFromImg){
         setAddImg(false)
-        onChangeImg(noteFromImg)
+        onLoadImgOrVid(noteFromImg)
     }
     function changeVideo(noteFromVideo){
         console.log('third step video reached action buttons again')
         setAddVideo(false)
-        onChangeImg(noteFromVideo)
+        onLoadImgOrVid(noteFromVideo)
     }
 
     
@@ -88,10 +90,10 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onChan
                         {addImg && <NoteImgAdd note={note} onReturn={() => setAddImg(false)} onChangeImg={changeImg} />}
                     </div>
 
-                    <div onClick={onAddVideo} className="action-icon add-img" >
+                    <div onClick={onAddVideo} className="action-icon add-video" >
                         <img height="24" width="24" src="assets\img\video.svg" alt="" />      
-                        <span className="action-name">Add video</span>
-                        {addVideo && <NoteImgAdd note={note} onReturn={() => setAddVideo(false)} onChangeImg={changeVideo} />}
+                        <span className="action-name">Add video</span> 
+                        {addVideo && <NoteVideoAdd note={note} onReturn={() => setAddVideo(false)} onChangeVideo={changeVideo} />}
                     </div>
 
                     <div onClick = {onDuplicateNote}className="action-icon duplicate">

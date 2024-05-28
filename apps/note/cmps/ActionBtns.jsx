@@ -1,5 +1,6 @@
 import { NoteColorMenu } from "./NoteColorMenu.jsx"
 import { NoteImgAdd } from "./NoteImgAdd.jsx"
+import { NoteVideoAdd } from "./NoteVideoAdd.jsx"
 
 const { useState } = React
 
@@ -90,8 +91,8 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoad
 
                     <div onClick={onAddVideo} className="action-icon add-img" >
                         <img height="24" width="24" src="assets\img\video.svg" alt="" />      
-                        <span className="action-name">Add video</span>
-                        {addVideo && <NoteImgAdd note={note} onReturn={() => setAddVideo(false)} onChangeImg={changeVideo} />}
+                        <span className="action-name">Add video</span> 
+                        {addVideo && <NoteVideoAdd note={note} onReturn={() => setAddVideo(false)} onChangeVideo={changeVideo} />}
                     </div>
 
                     <div onClick = {onDuplicateNote}className="action-icon duplicate">

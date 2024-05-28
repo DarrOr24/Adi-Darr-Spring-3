@@ -10,9 +10,10 @@
 
 .video-list ul li div {
     display: grid;
+    
 
     grid-auto-flow: column;
-    
+    column-gap: 0.1em;
     /* padding-block: 0.2em; */
     /* width: max-content; */
     border-radius: 8px;
@@ -20,7 +21,7 @@
 }
 
 .video-list ul li div img{
-    width: 100px;
+    width: 70px;
     justify-self: start;
     align-self: center;
 }

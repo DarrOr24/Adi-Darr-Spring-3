@@ -20,7 +20,8 @@ export function VideoList({searchValue, onSelectVideo}){
     function selectVideo(ev,videoId){
         ev.stopPropagation()
 
-        const videoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`
+        // const videoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`
+        const videoUrl = `https://www.youtube.com/embed/${videoId}`
         onSelectVideo(videoUrl)
         setIsReady(false)
         
@@ -35,7 +36,7 @@ export function VideoList({searchValue, onSelectVideo}){
                 <li  key={id.videoId }  >
                     <div onClick={(event)=>selectVideo(event,id.videoId)}>
                         <img src={snippet.thumbnails.default.url} alt=""></img> 
-                        <h2> {snippet.title}</h2>
+                        <h2> {snippet.title.substring(0, 50)}</h2>
                     </div>
                           
                 </li>)}

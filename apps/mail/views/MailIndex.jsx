@@ -119,6 +119,16 @@ export function MailIndex() {
         console.log('statuts from side menu:',status)
         setMailType(status)
         console.log('mailType', mailType)
+        if (status === 'inbox') {
+            setMailList(mails.filter(mail => mail.to === loggedinUser.email && !mail.removedAt)) 
+        } 
+        if (status === 'sent') {
+            setMailList(mails.filter(mail => mail.from === loggedinUser.email && !mail.removedAt))
+        } 
+        if (status === 'trash') {
+            setMailList(mails.filter(mail => mail.removedAt))
+        }
+
     }
 
     

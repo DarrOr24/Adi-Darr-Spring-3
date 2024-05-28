@@ -12,15 +12,16 @@
     opacity: 1;
     z-index: 3;
     
-    
 }
 
-.note-video-add form {
+
+.note-video-add .search-video {
     display: grid;
-    width: max-content;
     grid-auto-flow: column;
     column-gap: 0.2em;
+
 }
+
 
 .note-video-add input {
     border: none;
@@ -47,11 +48,6 @@
     
 }
 
-.note-video-add form:last-child{
-    justify-self: end;
-    grid-column: 2;
-}
-
-.note-preview .action-icons .note-video-add {
+.note-preview .action-icons .note-img-add {
     opacity: 1;
 }

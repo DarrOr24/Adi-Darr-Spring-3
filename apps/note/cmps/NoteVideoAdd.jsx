@@ -47,17 +47,19 @@ export function NoteVideoAdd({note: noteToEdit, onChangeVideo, onReturn}){
   
     return <section className = "note-video-add">
             {/* <form onSubmit = {onSearch}> */}
-           
-           <input
-               onChange={handleChange} 
-               id="title" 
-               name="title"
-               type="text" 
-               placeholder="Search..."
-                />
+                <section className="search-video">
+                    <input
+                    onChange={handleChange} 
+                    id="title" 
+                    name="title"
+                    type="text" 
+                    placeholder="Search..."
+                    />
 
-           <button onClick={onSearch}>Search</button>
-           <button type="button" onClick={onReturn}>Return</button>
+                    <button onClick={onSearch}>Search</button>
+                    <button type="button" onClick={onReturn}>Return</button>
+                </section>
+           
        {/* </form>   */}
 
        {(isReady)&& <VideoList searchValue={finalValue} onSelectVideo={onSelectVideo} />}  

@@ -5,7 +5,6 @@ const { useNavigate } = ReactRouter
 
 import { noteService } from "../services/note.service.js";
 import { ActionBtns } from "./ActionBtns.jsx";
-import { AddNoteSideMenu } from "./AddNoteSideMenu.jsx";
 import { NoteForm } from "./NoteForm.jsx";
 import { NoteImg } from "./NoteImg.jsx";
 import { NoteImgAdd } from "./NoteImgAdd.jsx";
@@ -28,13 +27,11 @@ export function AddNote({onAdd}){
 
     function addNoteImg(){
         setNote({...note, type: 'NoteImg'})
-        setOpenNote(true)
         console.log('Reached add note img')
 
     }
     function addNoteVideo(){
         setNote({...note, type: 'NoteVideo'})
-        setOpenNote(true)
         console.log('Reached add note video')
 
     }
@@ -79,15 +76,6 @@ export function AddNote({onAdd}){
                 }   
         }
 
-
-        // if((!note.info.title)&&(!note.info.txt)){ //if note is empty
-        //     setOpenNote(false)
-        //     setNote(emptyNote)
-        //     navigate(`/note`)
-        //     return 
-        // }
-        
-        // else{
             noteService.save(note)
             .then((newNote) => {
                 onAdd(newNote)
@@ -100,8 +88,13 @@ export function AddNote({onAdd}){
                 // showErrorMsg('Couldnt save')
             })
             .finally(() => navigate('/note'))
-        // }
+       
         
+    }
+
+    function addImg(noteFromAddImg){
+        setOpenNote(true)
+        setNote(noteFromAddImg)
     }
 
     
@@ -136,14 +129,15 @@ export function AddNote({onAdd}){
             {!openNote && 
                 <div className="take-a-note">
                     <p  onClick={onClickNote}>Take a note...</p>
-                    <AddNoteSideMenu onAddNoteImg={addNoteImg} onAddNoteVideo={addNoteVideo} />
+                    <ActionBtns note={note}  onSetNoteColor={setNoteColor} onChangeImg={addImg}  />
                 </div> }
 
             {openNote && <NotePin note={note} onPinNote ={isPinned}/>}
         
-            {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> }
+            {/* {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> } */}
+            {openNote && <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> }
                     
-            {openNote &&  <ActionBtns note={note}  onSetNoteColor={setNoteColor}  />} 
+            {openNote &&  <ActionBtns note={note}  onSetNoteColor={setNoteColor} onChangeImg={addImg}  />} 
            
         
     </section>

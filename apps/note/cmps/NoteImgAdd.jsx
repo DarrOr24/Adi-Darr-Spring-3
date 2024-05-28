@@ -1,35 +1,63 @@
+import { noteService } from "../services/note.service.js"
 
-export function NoteImgAdd({note, handleChangeInfo, onSave}){
+const { useState } = React
+
+export function NoteImgAdd({note: noteToEdit, onChangeImg, onReturn}){
+
+    const [ note, setNote ] = useState(noteToEdit)
+
+    function onSave(ev){
+        console.log('second step - submitted')
+        ev.preventDefault()
+        noteService.save(note)
+        .then(onChangeImg)
+    }
+
+    function handleChangeInfo({ target }) {
+        
+        const { type, name: prop } = target
+        let { value } = target
+
+        switch (type) {
+            case 'range':
+            case 'number':
+                value = +value
+                break;
+
+            case 'checkbox':
+                value = target.checked
+                break;
+        }
+
+        
+        setNote(prevNote => ({
+            ...prevNote,
+            updatedAt: Date.now(),
+            info: { ...prevNote.info, [prop]: value }
+        }))
+  
+    }
+    
   
     return <section className = "note-img-add">
-        <form onSubmit = {onSave}>
+        <form onSubmit = {onSave} >
            
-            <input
-                onChange={handleChangeInfo} 
-                value={note.info.title}
-                id="title" 
-                name="title"
-                type="text" 
-                placeholder="Title"
-                 />
-
-            {(note.info.url) && <img src={note.info.url} alt="" />    }
-
-            <label htmlFor="url">Enter an https:// URL:</label>
+            {/* <label htmlFor="url">Enter an https:// URL:</label> */}
            <input
                 onChange={handleChangeInfo} 
-                value={note.info.url}
+                // value={noteToEdit.info.url}
                 id="url" 
                 name="url"
                 type="url" 
                 placeholder="https://example.com"
-                // pattern="https://.*" size="30" required
                 pattern="https://.*" size="30" 
             /> 
-
+           
+            <button>Save</button>
+            <button type="button" onClick={onReturn}>Return</button>
             
-
-            <button>Close</button>
+           
+            
             
         </form>    
     </section >

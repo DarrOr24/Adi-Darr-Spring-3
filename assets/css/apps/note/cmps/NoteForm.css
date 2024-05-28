@@ -1,5 +1,10 @@
 .note-form {
     font: Roboto;
+    display: grid;
+}
+
+.note-form img{
+    place-self: center;
 }
 .note-form button {
     position: absolute;
@@ -24,7 +29,6 @@
 
 .note-form form input {
     border: none;
-    width: 400px;
 }
 
 .note-form form input:first-of-type{
@@ -38,3 +42,4 @@
 .note-form form input:focus, .note-form form textarea:focus{
     outline: none;
 }
+

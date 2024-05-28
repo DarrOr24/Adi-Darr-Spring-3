@@ -1,15 +1,34 @@
 .note-list {
     display:grid;
+    margin-inline-end: 2em;
 }
 
 .note-list ul{
+   
     justify-self: center;
     grid-area: node-list;
-    /* margin-block-start: 1em; */
-    margin-inline-end: 1em;
+    columns: 250px auto;
+    /* columns: 250px; */
+    margin: 0;
+}
+
+.note-list h2 {
+    font-size: 0.7em;
+    font-weight: 100;
+    color: gray;
+}
+
+.note-list ul li {
+    break-inside: avoid;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1em;
+    justify-items: center;
+    padding-block: 20px;
+    max-width: 300px;
+   
+}
+
+.note-list .pinned-notes .empty li {
+    padding: 0;
 }
 
 

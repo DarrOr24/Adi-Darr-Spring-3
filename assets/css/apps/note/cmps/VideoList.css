@@ -1,0 +1,14 @@
+.video-list li {
+    display: grid;
+    grid-auto-flow: column;
+    width: 200px;
+
+}
+
+.video-list li img {
+    height: 30px;
+}
+
+.video-list li h2 {
+    font-size: 0.7em;
+}

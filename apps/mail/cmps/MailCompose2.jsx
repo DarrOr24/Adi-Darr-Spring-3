@@ -34,14 +34,15 @@ export function MailCompose2({onClose}){
     function onSave(ev) {
         ev.preventDefault()
         mailService.save(mail)
+            .then(closeForm)
             .then(() => console.log('Mail has successfully saved!'))
             .catch(() => console.log(`couldn't save mail`))
-            .finally(() => closeForm())
+            .finally((mail) => closeForm(mail))
     }
 
 
-    function closeForm() {
-        onClose()
+    function closeForm(mail) {
+        onClose(mail)
     }
 
     

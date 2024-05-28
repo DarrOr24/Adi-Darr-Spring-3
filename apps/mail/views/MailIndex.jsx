@@ -47,7 +47,24 @@ export function MailIndex() {
             .then(count => setUnreadCount(count))
 
         
-    }, [filterBy,  sortBy])
+    }, [])
+    
+    useEffect(() => {
+
+        
+        // setSearchParams(filterBy)
+        const criteria = { ...filterBy ,sortBy }
+        mailService.query(criteria)
+            .then(mails => {
+                setMails(mails)})
+           
+        mailService.countUnreadInboxMails()
+            .then(count => setUnreadCount(count))
+
+        
+    }, [filterBy, sortBy])
+
+  
 
     
     
@@ -100,7 +117,9 @@ export function MailIndex() {
 
     if (!mails) return <div>Loading...</div>
 
-    function onCloseCompose(){
+    function onCloseCompose(mail){
+        console.log(mail)
+        setMails([...mails, mail])
         setShowCompose(false)
         navigate(`/mail`)
     }

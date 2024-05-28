@@ -30,7 +30,7 @@ export function App() {
 
                     
                     <Route path="/mail" element={<MailIndex />}>
-                        <Route path="/mail/details/:mailId" element={<MailDetails />} /> 
+                        {/* <Route path="/mail/details/:mailId" element={<MailDetails />} />  */}
                         <Route path="/mail/compose" element={<MailCompose />} /> 
                     </Route>
                     

@@ -18,14 +18,17 @@ export function MailIndex() {
     }
     
     const [ mails, setMails ] = useState([])
+    const [mailToView, setMailToView] = useState({})
     const [ searchParams, setSearchParams ] = useSearchParams()
     const [ filterBy, setFilterBy ] = useState(mailService.getFilterFromSearchParams(searchParams))
-    // const [ status, setStatus ] = useState('inbox')
+    
     const [unreadCount, setUnreadCount] = useState(0)
     const [sortBy, setSortBy] = useState('date')
     const [showCompose, setShowCompose] = useState(false)
     const [mailType, setMailType] = useState('inbox')
     const [ mailList, setMailList ] = useState([])
+
+    const [openDetails, setOpenDetails] = useState(false)
 
     const navigate = useNavigate()
     
@@ -131,6 +134,17 @@ export function MailIndex() {
 
     }
 
+    function onClickMail(mail){
+        console.log(mail)
+        setOpenDetails(true)
+        setMailToView(mail)
+    }
+
+    function onCloseMailDetails(){
+        // navigate(`/mail`)
+        setOpenDetails(false)
+    }
+
     
 
     return (
@@ -139,14 +153,16 @@ export function MailIndex() {
                 {/* <img src="assets/img/hamburger.svg" alt="" /> */}
                 <img src="assets/img/gmail.svg"></img>
                 <h1>Gmail</h1>
-                {/* <MailFilter filterBy={filterBy} onFilter={onSetFilterBy} onSort={onSetSortBy}/> */}
+                <MailFilter filterBy={filterBy} onFilter={onSetFilterBy} onSort={onSetSortBy}/>
             </header>
             <main>
                 
                 <MailSideMenu unreadCount={unreadCount}  handleComposeClick={onComposeMail} onSetStatus={setMailStatus}  />
-                <MailList mails = {mailList} removeMail={removeMail} toggleReadStatus={toggleReadStatus} />
-                {/* {showCompose && <MailCompose />} */}
+
+               {(!openDetails) && <MailList mails = {mailList} removeMail={removeMail} toggleReadStatus={toggleReadStatus} onClickMail={onClickMail} />} 
                 
+                {/* {openDetails && <MailDetails toggleReadStatus={toggleReadStatus} mail={mailToView} onReturn={onCloseMailDetails} />} */}
+                {openDetails && <MailDetails2  mail={mailToView}  />}
                 {showCompose && <MailCompose2 onClose={onCloseCompose}/>}
 
                 

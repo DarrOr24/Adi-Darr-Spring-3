@@ -3,7 +3,7 @@ const { Link } = ReactRouterDOM
 import { MailPreview } from './MailPreview.jsx'
 import { ActionBtnsMail } from './ActionBtnsMail.jsx'
 
-export function MailList({ mails, removeMail, toggleReadStatus }) {
+export function MailList({ mails, removeMail, toggleReadStatus, onClickMail }) {
 
    
     if (mails.length === 0) {
@@ -20,7 +20,7 @@ export function MailList({ mails, removeMail, toggleReadStatus }) {
                 {mails.map(mail => (
                     <li key={mail.id} className={`${mail.isRead ? '' : 'un-read'}`}> 
                         
-                        <MailPreview mail={mail} />
+                        <MailPreview mail={mail} onClickMail={onClickMail} />
                         
                         <ActionBtnsMail mail={mail} removeMail={removeMail} toggleReadStatus={toggleReadStatus} />
 

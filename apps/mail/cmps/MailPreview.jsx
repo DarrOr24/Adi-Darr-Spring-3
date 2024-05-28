@@ -1,6 +1,6 @@
 import { utilService } from '../../../services/util.service.js'
 
-export function MailPreview({ mail }) {
+export function MailPreview({ mail, onClickMail }) {
     const sentDate = new Date(mail.sentAt)
     const currentDate = new Date()
     const day = sentDate.getDate()
@@ -17,7 +17,7 @@ export function MailPreview({ mail }) {
 
     const { from, subject, body, isRead } = mail
     return (
-        <article className="mail-preview">
+        <article className="mail-preview" onClick={()=> onClickMail(mail)}>
             <div className="from">{from}</div>
             <div className="txt">
                 <p className="subject">{subject}</p>

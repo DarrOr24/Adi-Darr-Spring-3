@@ -18,7 +18,7 @@ export function MailIndex() {
     }
     
     const [ mails, setMails ] = useState([])
-    const [mailToView, setMailToView] = useState({})
+   
     const [ searchParams, setSearchParams ] = useSearchParams()
     const [ filterBy, setFilterBy ] = useState(mailService.getFilterFromSearchParams(searchParams))
     
@@ -28,13 +28,14 @@ export function MailIndex() {
     const [mailType, setMailType] = useState('inbox')
     const [ mailList, setMailList ] = useState([])
 
-    const [openDetails, setOpenDetails] = useState(false)
+    
 
     const navigate = useNavigate()
     
 
-   
     useEffect(() => {
+
+        
         // setSearchParams(filterBy)
         const criteria = { ...filterBy ,sortBy }
         mailService.query(criteria)
@@ -48,17 +49,7 @@ export function MailIndex() {
         
     }, [filterBy,  sortBy])
 
-    useEffect(() => {
-        // setSearchParams(filterBy)
-        const criteria = { ...filterBy ,sortBy }
-        mailService.query(criteria)
-            .then(mails => setMails(mails))
-           
-        mailService.countUnreadInboxMails()
-            .then(count => setUnreadCount(count))
-
-        
-    }, [filterBy,  sortBy])
+    
     
 
     function removeMail(mailId) {
@@ -97,10 +88,6 @@ export function MailIndex() {
         setFilterBy(newFilter)
     }
 
-    // function onSetStatus(newStatus) {
-    //     setStatus(newStatus)
-    //     navigate(`/mail/${newStatus}`)
-    // }
 
     function onSetSortBy(newSortBy) {
         setSortBy(newSortBy)
@@ -134,19 +121,8 @@ export function MailIndex() {
 
     }
 
-    function onClickMail(mail){
-        console.log(mail)
-        setOpenDetails(true)
-        setMailToView(mail)
-    }
-
-    function onCloseMailDetails(){
-        // navigate(`/mail`)
-        setOpenDetails(false)
-    }
-
+   
     
-
     return (
         <section className="mail-index full">
             <header className="mail-header">
@@ -159,10 +135,10 @@ export function MailIndex() {
                 
                 <MailSideMenu unreadCount={unreadCount}  handleComposeClick={onComposeMail} onSetStatus={setMailStatus}  />
 
-               {(!openDetails) && <MailList mails = {mailList} removeMail={removeMail} toggleReadStatus={toggleReadStatus} onClickMail={onClickMail} />} 
+               <MailList mails = {mailList} removeMail={removeMail} toggleReadStatus={toggleReadStatus}  /> 
                 
-                {/* {openDetails && <MailDetails toggleReadStatus={toggleReadStatus} mail={mailToView} onReturn={onCloseMailDetails} />} */}
-                {openDetails && <MailDetails2  mail={mailToView}  />}
+                
+                
                 {showCompose && <MailCompose2 onClose={onCloseCompose}/>}
 
                 

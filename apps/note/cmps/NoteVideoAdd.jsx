@@ -32,6 +32,17 @@ export function NoteVideoAdd({note: noteToEdit, onChangeVideo, onReturn}){
         
         
     }
+
+    function onSelectVideo(videoUrl){
+        setNote(prevNote => ({
+            ...prevNote,
+            info: { ...prevNote.info, url: videoUrl }
+        }))
+        noteService.save({...note, info: { ...note.info, url: videoUrl } })
+            .then(onChangeVideo)
+            .finally(setIsReady(false))
+        
+    }
     
   
     return <section className = "note-video-add">
@@ -49,7 +60,7 @@ export function NoteVideoAdd({note: noteToEdit, onChangeVideo, onReturn}){
            <button type="button" onClick={onReturn}>Return</button>
        {/* </form>   */}
 
-       {(isReady)&& <VideoList searchValue={finalValue} />}  
+       {(isReady)&& <VideoList searchValue={finalValue} onSelectVideo={onSelectVideo} />}  
 
     </section >
     

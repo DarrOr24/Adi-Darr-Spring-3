@@ -34,6 +34,7 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoad
     function onAddVideo(ev){
         console.log('first step pressed on add video')
         ev.stopPropagation()
+        
         note.type = 'NoteVideo'
         if(!addVideo) setAddVideo(true)
     }
@@ -89,7 +90,7 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoad
                         {addImg && <NoteImgAdd note={note} onReturn={() => setAddImg(false)} onChangeImg={changeImg} />}
                     </div>
 
-                    <div onClick={onAddVideo} className="action-icon add-img" >
+                    <div onClick={onAddVideo} className="action-icon add-video" >
                         <img height="24" width="24" src="assets\img\video.svg" alt="" />      
                         <span className="action-name">Add video</span> 
                         {addVideo && <NoteVideoAdd note={note} onReturn={() => setAddVideo(false)} onChangeVideo={changeVideo} />}

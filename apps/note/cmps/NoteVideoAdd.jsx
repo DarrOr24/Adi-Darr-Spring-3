@@ -7,7 +7,9 @@ const { useState } = React
 export function NoteVideoAdd({note: noteToEdit, onChangeVideo, onReturn}){
 
     const [ note, setNote ] = useState(noteToEdit)
-    const [ videoList, setVideoList ] = useState([])
+    const [ isReady, setIsReady ] = useState(false)
+    const [searchValue, setSearchValue] = useState('')
+    const [finalValue, setFinalValue] = useState('')
 
     function onSave(ev){
         console.log('second step - submitted')
@@ -16,31 +18,38 @@ export function NoteVideoAdd({note: noteToEdit, onChangeVideo, onReturn}){
         .then(onChangeVideo)
     }
 
-    function getVideos({ target }) {
-        
+    function handleChange({ target }) {
         
         let { value } = target
+        setSearchValue(prevSearchValue => prevSearchValue = value)
 
-        setVideoList(youtubeService.getVideos(value))        
-  
+    }
+
+    function onSearch(ev){
+        ev.stopPropagation()
+        setFinalValue(searchValue)
+        setIsReady(true)
+        
+        
     }
     
   
     return <section className = "note-video-add">
-        <form onSubmit={onSave}>
-            <input 
-            onChange={getVideos}
-            type="text" 
-            placeholder="Search..."
-            id="txt" 
-            name="txt"
-             />
- 
-            <button>Search</button>
-        </form>   
-            <button type="button" onClick={onReturn}>Return</button>
+            {/* <form onSubmit = {onSearch}> */}
+           
+           <input
+               onChange={handleChange} 
+               id="title" 
+               name="title"
+               type="text" 
+               placeholder="Search..."
+                />
 
-        <VideoList videos = {videoList} />
+           <button onClick={onSearch}>Search</button>
+           <button type="button" onClick={onReturn}>Return</button>
+       {/* </form>   */}
+
+       {(isReady)&& <VideoList searchValue={finalValue} />}  
 
     </section >
     

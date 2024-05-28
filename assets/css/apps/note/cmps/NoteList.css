@@ -1,11 +1,14 @@
 .note-list {
     display:grid;
+    margin-inline-end: 2em;
 }
 
 .note-list ul{
+   
     justify-self: center;
     grid-area: node-list;
     columns: 250px auto;
+    /* columns: 250px; */
     margin: 0;
 }
 
@@ -20,7 +23,12 @@
     display: grid;
     justify-items: center;
     padding-block: 20px;
+    max-width: 300px;
    
+}
+
+.note-list .pinned-notes .empty li {
+    padding: 0;
 }
 
 

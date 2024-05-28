@@ -5,7 +5,7 @@
     padding: 10px;
     margin-inline-start: 20px;
 
-    background-color: #efeff1;
+    background-color: #eaf1fb;
     border-radius: 2em;
     height: 40px;
     width: 400px;
@@ -19,7 +19,8 @@
 }
 
 .mail-filter input{
-    background-color: #efeff1;
+    background-color: #eaf1fb;
+    width: 100%;
     border: 0;
 }
 

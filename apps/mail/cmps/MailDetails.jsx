@@ -27,7 +27,7 @@ export function MailDetails({ toggleReadStatus, status }) {
             })
             .catch(() => {
                 alert('Couldnt get mail...')
-                navigate('/mail')
+                navigate('/mail/inbox')
             })
             .finally(() => {
                 setIsLoading(false)

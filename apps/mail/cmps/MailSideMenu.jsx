@@ -4,7 +4,12 @@ const { Link, useNavigate, useSearchParams } = ReactRouterDOM
 export function MailSideMenu({ unreadCount, onSetStatus }){
     const [selectedFolder, setSelectedFolder] = useState('inbox')
     const [searchParams, setSearchParams] = useSearchParams()
-    const navigate = useNavigate()
+    const [ isClosed, setIsClosed ] = useState(true)
+
+    function toggleSideMenu(){
+        console.log('isClosed:', isClosed)
+        setIsClosed(prevIsClosed => !prevIsClosed)
+    }
     
     function handleFolderClick(folder) {
         setSelectedFolder(folder)
@@ -19,19 +24,25 @@ export function MailSideMenu({ unreadCount, onSetStatus }){
 
     return (
         <section className = "mail-side-menu">
-            {/* <button className='mail-compose'> */}
-            <button className='mail-compose' onClick={handleComposeClick}>
+            {/* <button className='mail-compose' onClick={handleComposeClick}>
                 <img src="assets\img\edit_labels.svg" alt="" />
                 Compose
-            </button>
+            </button> */}
             <ul className = "menu">
+                <li onClick={toggleSideMenu} className="hamburger">
+                    <img src="assets\img\hamburger.svg" alt="" />
+                    {/* <span className="action-name">Main Menu</span> */}
+                </li>
+                <li className='mail-compose' onClick={handleComposeClick}>
+                    <img src="assets\img\edit_labels.svg" alt="" />
+                    Compose
+                </li>
                 <li className={selectedFolder === 'inbox' ? 'selected' : ''} 
                     onClick={() => handleFolderClick('inbox')} >
-                        {/* <Link to="/mail"> */}
                         <Link to="/mail/inbox">
                             <i className="fa-solid fa-inbox"></i>
-                            <span>Inbox</span>
-                            <span>{unreadCount}</span>
+                            <p>Inbox</p>
+                            <p>{unreadCount}</p>
                         </Link>
                 </li>
                     
@@ -40,6 +51,7 @@ export function MailSideMenu({ unreadCount, onSetStatus }){
                         <Link to="/mail/sent">
                             <i className="fa-solid fa-paper-plane"></i>
                             <p>Sent</p>
+                            <p></p>
                         </Link>
                 </li>
                 <li className={selectedFolder === 'trash' ? 'selected' : ''} 
@@ -47,6 +59,7 @@ export function MailSideMenu({ unreadCount, onSetStatus }){
                     <Link to="/mail/trash">
                         <img src="assets/img/trash.svg" alt="" />
                         <p>Trash</p>
+                        <p></p>
                     </Link>
                 </li>
             </ul>

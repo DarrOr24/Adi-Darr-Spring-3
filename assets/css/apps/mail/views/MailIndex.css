@@ -1,8 +1,9 @@
 .mail-index {
     background-color: #f6f8fc;
+    position: relative;
 }
 
-.mail-index main {
+.mail-index main{
     display: grid;
     grid-template-columns: 1fr 4fr;
 }
@@ -12,9 +13,11 @@
     align-items: center;
     border-radius: 5px;
     padding: 10px;
+    margin-inline-start: 40px;
 }
 
 .mail-header img {
     height: 30px;
     margin-inline-end: 20px;
-}
+} 
+

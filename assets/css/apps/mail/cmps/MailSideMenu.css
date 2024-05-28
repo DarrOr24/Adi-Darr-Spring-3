@@ -2,29 +2,25 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    margin:  10px auto;
+    /* margin:  10px auto; */
+    margin: 10px;
     background-color: #c2e7ff;
-    border: 0;
     border-radius: 1em;
     height: 56px;
     padding: 24px;
 }
 
-.mail-side-menu .menu {
-    display: grid;
-    margin-inline-end: 1em;
-}
 
-.mail-side-menu .menu li {
+.mail-side-menu li:not(.hamburger, .mail-compose) {
     display: grid;
    
     grid-template-columns: 30px 1fr 20px; 
     column-gap: 1em;
     align-items: center; 
-    width: 100%;
-    /* width: 200px; */
+    /* width: 100%; */
+    width: 200px;
     padding: 10px;
-    color: #202124;
+    /* color: #202124; */
     font-size: 0.875em;
     cursor: pointer;
 }
@@ -37,8 +33,24 @@
     border-top-right-radius: 25px;
 }
 
-.mail-side-menu .menu li:not(.selected):hover{
+.mail-side-menu .menu li:not(.selected, .hamburger, .mail-compose):hover{
     background-color: var(--chalk); 
     border-bottom-right-radius: 25px;
     border-top-right-radius: 25px;
+}
+
+.mail-side-menu .hamburger{
+    display: grid;
+    grid-template-columns: 30px 1fr 20px; 
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;  
+}
+
+.mail-side-menu .hamburger:hover {
+    background-color: lightgray;
+    width: 50px;
+    border-radius: 50%;
+    
 }

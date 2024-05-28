@@ -7,7 +7,8 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onChan
 
     const [ colorMenu, setColorMenu ] = useState(false)
     const [ addImg, setAddImg ] = useState(false)
-    const [ buttonClass, setButtonClass ] = useState('')
+    const [ addVideo, setAddVideo ] = useState(false)
+   
     
     function onDuplicateNote(ev){
        ev.stopPropagation()
@@ -25,14 +26,25 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onChan
 
     function onAddImg(ev){
         ev.stopPropagation()
+        note.type = 'NoteImg'
         if(!addImg) setAddImg(true)
     }
 
+    function onAddVideo(ev){
+        console.log('first step pressed on add video')
+        ev.stopPropagation()
+        note.type = 'NoteVideo'
+        if(!addVideo) setAddVideo(true)
+    }
+
     function changeImg(noteFromImg){
-        console.log(noteFromImg)
-        console.log('Reached action buttons')
         setAddImg(false)
         onChangeImg(noteFromImg)
+    }
+    function changeVideo(noteFromVideo){
+        console.log('third step video reached action buttons again')
+        setAddVideo(false)
+        onChangeImg(noteFromVideo)
     }
 
     
@@ -76,9 +88,10 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onChan
                         {addImg && <NoteImgAdd note={note} onReturn={() => setAddImg(false)} onChangeImg={changeImg} />}
                     </div>
 
-                    <div className="action-icon" >
+                    <div onClick={onAddVideo} className="action-icon add-img" >
                         <img height="24" width="24" src="assets\img\video.svg" alt="" />      
                         <span className="action-name">Add video</span>
+                        {addVideo && <NoteImgAdd note={note} onReturn={() => setAddVideo(false)} onChangeImg={changeVideo} />}
                     </div>
 
                     <div onClick = {onDuplicateNote}className="action-icon duplicate">

@@ -60,10 +60,10 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
 
     }
 
-    function addImg(noteFromAddImg){
-        console.log(noteFromAddImg)
-        setNote(noteFromAddImg)
-        onEdit(noteFromAddImg)
+    function addImgOrVideo(returnedNote){
+        console.log(returnedNote)
+        setNote(returnedNote)
+        onEdit(returnedNote)
 
     }
 
@@ -100,7 +100,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
         
                 <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/> 
                 {/* <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   />  */}
-                <ActionBtns note={note} onSetNoteColor={setNoteColor} onChangeImg={addImg}  />       
+                <ActionBtns note={note} onSetNoteColor={setNoteColor} onChangeImg={addImgOrVideo}  />       
 
             </article>
             

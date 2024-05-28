@@ -71,6 +71,8 @@ function _createNotes() {
         noteVideo.id = utilService.makeId()
         notes.push(noteVideo)
         utilService.saveToStorage(NOTE_KEY, notes)
+
+        // "https://www.youtube.com/embed/8gECJx6YWCI" 
         
     }
 }

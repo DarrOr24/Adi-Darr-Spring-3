@@ -7,11 +7,10 @@ export function NoteImgAdd({note: noteToEdit, onChangeImg, onReturn}){
     const [ note, setNote ] = useState(noteToEdit)
 
     function onSave(ev){
+        console.log('second step - submitted')
         ev.preventDefault()
         noteService.save(note)
         .then(onChangeImg)
-        
-        console.log('Submitted at NoteImg Add')
     }
 
     function handleChangeInfo({ target }) {
@@ -29,10 +28,10 @@ export function NoteImgAdd({note: noteToEdit, onChangeImg, onReturn}){
                 value = target.checked
                 break;
         }
+
         
         setNote(prevNote => ({
             ...prevNote,
-            type: 'NoteImg',
             updatedAt: Date.now(),
             info: { ...prevNote.info, [prop]: value }
         }))

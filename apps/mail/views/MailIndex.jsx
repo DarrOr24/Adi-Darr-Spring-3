@@ -20,7 +20,7 @@ export function MailIndex() {
     const [ mails, setMails ] = useState([])
    
     const [ searchParams, setSearchParams ] = useSearchParams()
-    const [ filterBy, setFilterBy ] = useState({})
+    const [ filterBy, setFilterBy ] = useState({status:'inbox'})
     
     const [unreadCount, setUnreadCount] = useState(0)
     const [sortBy, setSortBy] = useState('date')
@@ -39,9 +39,8 @@ export function MailIndex() {
         // setSearchParams(filterBy)
         const criteria = { ...filterBy ,sortBy }
         mailService.query(criteria)
-            .then(mails => {
-                setMails(mails)
-                setMailList(mails.filter(mail => mail.to === loggedinUser.email))})
+            .then(mails => setMails(mails))
+                
            
         mailService.countUnreadInboxMails()
             .then(count => setUnreadCount(count))

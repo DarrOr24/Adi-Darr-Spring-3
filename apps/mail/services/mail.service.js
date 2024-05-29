@@ -21,7 +21,8 @@ export const mailService = {
     moveToTrash,
 }
 
-function query(filterBy = {}) {
+function query(filterBy = {status: 'inbox'}) {
+    console.log(filterBy)
     return storageService.query(MAIL_KEY)
         .then(mails => {
             if (filterBy.status) {

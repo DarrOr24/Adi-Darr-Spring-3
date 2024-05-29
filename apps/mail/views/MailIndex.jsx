@@ -12,11 +12,6 @@ import { MailCompose2 } from '../cmps/MailCompose2.jsx'
 
 export function MailIndex() {
 
-    const loggedinUser = {
-        email: 'user@appsus.com',
-        fullname: 'Mahatma Appsus'
-    }
-    
     const [ mails, setMails ] = useState([])
    
     const [ searchParams, setSearchParams ] = useSearchParams()
@@ -26,48 +21,30 @@ export function MailIndex() {
     const [sortBy, setSortBy] = useState('date')
     const [showCompose, setShowCompose] = useState(false)
     const [mailType, setMailType] = useState('inbox')
-    const [ mailList, setMailList ] = useState([])
-
+    const [isLoading, setIsLoading] = useState(false)
     
-
     const navigate = useNavigate()
     
 
     useEffect(() => {
 
-        
         // setSearchParams(filterBy)
         const criteria = { ...filterBy ,sortBy }
-        mailService.query(criteria)
-            .then(mails => setMails(mails))
-                
-           
-        mailService.countUnreadInboxMails()
-            .then(count => setUnreadCount(count))
-
         
-    }, [])
-    
-    useEffect(() => {
-
-        // setSearchParams(filterBy)
-        const criteria = { ...filterBy ,sortBy }
         mailService.query(criteria)
             .then(mails => {
                 setMails(mails)})
            
         mailService.countUnreadInboxMails()
             .then(count => setUnreadCount(count))
+            
 
         
     }, [filterBy, sortBy])
 
-  
-
-    
-    
 
     function removeMail(mailId) {
+        setIsLoading(true)
         mailService.moveToTrash(mailId)
             .then(() => {
                 setMails(prevMails => prevMails.filter(mail => mail.id !== mailId))
@@ -77,6 +54,7 @@ export function MailIndex() {
             .catch(err => {
                 console.log('err:', err)
             })
+            .finally(()=>setIsLoading(false))
     }
 
 
@@ -113,7 +91,7 @@ export function MailIndex() {
         // navigate(`/mail/compose`)
     }
 
-    if (!mails) return <div>Loading...</div>
+    
 
     function closeCompose(){
         
@@ -147,8 +125,8 @@ export function MailIndex() {
     }
 
    
-    
-    return (
+    if (isLoading) return <div className="loader"></div>
+    else return (
         <section className="mail-index full">
             <header className="mail-header">
                 {/* <img src="assets/img/hamburger.svg" alt="" /> */}

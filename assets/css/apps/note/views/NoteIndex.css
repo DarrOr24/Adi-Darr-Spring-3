@@ -24,7 +24,7 @@
     display: grid;
     grid-template-areas: "side-menu add-note"
                         "side-menu note-list";
-    grid-template-columns: 200px minmax(500px, auto);
+    grid-template-columns: 160px minmax(500px, auto);
 }
 
 .note-index main .side-menu {

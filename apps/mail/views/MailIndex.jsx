@@ -1,5 +1,5 @@
 const { useState, useEffect } = React
-const { Routes, Route, useSearchParams, useNavigate, useParams } = ReactRouterDOM
+const { useNavigate } = ReactRouterDOM
 
 import { mailService } from '../services/mail.service.js'
 
@@ -13,10 +13,7 @@ import { MailCompose2 } from '../cmps/MailCompose2.jsx'
 export function MailIndex() {
 
     const [ mails, setMails ] = useState([])
-   
-    const [ searchParams, setSearchParams ] = useSearchParams()
     const [ filterBy, setFilterBy ] = useState({status:'inbox'})
-    
     const [unreadCount, setUnreadCount] = useState(0)
     const [sortBy, setSortBy] = useState('date')
     const [showCompose, setShowCompose] = useState(false)
@@ -27,19 +24,13 @@ export function MailIndex() {
     
 
     useEffect(() => {
-
-        // setSearchParams(filterBy)
+        console.log('filterBy:', filterBy)
         const criteria = { ...filterBy ,sortBy }
-        
         mailService.query(criteria)
-            .then(mails => {
-                setMails(mails)})
+            .then(mails => setMails(mails))
            
         mailService.countUnreadInboxMails()
             .then(count => setUnreadCount(count))
-            
-
-        
     }, [filterBy, sortBy])
 
 
@@ -75,12 +66,10 @@ export function MailIndex() {
                 console.log(`Couldn't save mail`)
             })
     }
-    
 
     function onSetFilterBy(newFilter) {
         setFilterBy(newFilter)
     }
-
 
     function onSetSortBy(newSortBy) {
         setSortBy(newSortBy)
@@ -91,33 +80,25 @@ export function MailIndex() {
         // navigate(`/mail/compose`)
     }
 
-    
-
     function closeCompose(){
-        
         setShowCompose(false)
         navigate(`/mail`)
     }
 
     function setMailStatus(status){
-        console.log('statuts from side menu:',status)
         setMailType(status)
-        console.log('mailType', mailType)
+        
         if (status === 'inbox') {
             setFilterBy(prevFilterBy => ({...prevFilterBy, status: 'inbox'}) )
-        } 
-        if (status === 'sent') {
+        } else if (status === 'sent') {
             setFilterBy(prevFilterBy => ({...prevFilterBy, status: 'sent'}) )
-            
-        } 
-        if (status === 'trash') {
+        } else if (status === 'trash') {
             setFilterBy(prevFilterBy => ({...prevFilterBy, status: 'trash'}) )
         }
 
     }
 
     function saveNewMail(mailFromCompose){
-        console.log(mailFromCompose)
         setMails(prevMails => [...prevMails, mailFromCompose])
         setShowCompose(false)
         navigate(`/mail`)
@@ -135,18 +116,10 @@ export function MailIndex() {
                 <MailFilter filterBy={filterBy} onFilter={onSetFilterBy} onSort={onSetSortBy}/>
             </header>
             <main>
-                
                 <MailSideMenu unreadCount={unreadCount}  handleComposeClick={onComposeMail} onSetStatus={setMailStatus}  />
-
-               <MailList mails = {mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus}  /> 
-                
-                
-                
+                <MailList mails = {mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus} /> 
                 {showCompose && <MailCompose2 onComposeMail={saveNewMail} onClose={closeCompose}/>}
-
-                
             </main>
-           
         </section>
     )
 }

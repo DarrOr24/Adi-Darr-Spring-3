@@ -4,12 +4,9 @@ const { useState, useEffect } = React
 const {  useNavigate } = ReactRouterDOM
 
 export function MailCompose2({onComposeMail, onClose}){
-
-    
-
     const [mail, setMail] = useState(mailService.getEmptyMail())
     const navigate = useNavigate()
-    // const navigate = useNavigate()
+    
     useEffect(() => {
         navigate(`/mail/compose`)
     }, [])
@@ -34,19 +31,16 @@ export function MailCompose2({onComposeMail, onClose}){
     function onSave(ev) {
         ev.preventDefault()
         console.log(mail)
-        mailService.save(mail).then((savedMail) => onComposeMail(savedMail))
-        //     .then(onComposeMail)
-        //     .then(() => console.log('Mail has successfully saved!'))
-        //     .catch(() => console.log(`couldn't save mail`))
+        mailService.save(mail)
+            .then((savedMail) => onComposeMail(savedMail))
+            .then(() => console.log('Mail has successfully saved!'))
+            .catch(() => console.log(`couldn't save mail`))
             
     }
-
 
     function closeForm() {
         onClose()
     }
-
-    
 
     return (
         <section className="mail-compose">
@@ -76,5 +70,4 @@ export function MailCompose2({onComposeMail, onClose}){
             </form>
         </section>
     )
-    // return <h2 className="darr">Mail Compose 2</h2>
 }

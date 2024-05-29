@@ -4,15 +4,11 @@
     
 }
 
-.mail-list li .mail-preview{
-    /* padding: 1em; */
+.mail-list li {
     box-shadow: rgba(100, 121, 143, 0.12) 0px -1px 0px 0px inset;
     position: relative; 
     
 }
-/* .mail-list li .mail-action-btn {
-    opacity: 0;
-} */
 
 .mail-list li:hover .mail-action-btn {
     opacity: 1;

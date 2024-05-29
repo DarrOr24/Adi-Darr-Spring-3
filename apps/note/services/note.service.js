@@ -127,7 +127,7 @@ function save(note) {
 function saveToTrash(note){
     let notes = utilService.loadFromStorage(TRASH_NOTE_KEY)
     if(!notes) notes = []
-    notes.push(note)
+    notes.unshift(note)
     utilService.saveToStorage(TRASH_NOTE_KEY, notes)
 }
 

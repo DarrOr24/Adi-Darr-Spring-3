@@ -108,6 +108,25 @@ export function NoteIndex() {
         setMainDisplay(prevMainDisplay => prevMainDisplay = status)
     }
 
+    function permanentDelete(noteToDelete){
+        const noteId = noteToDelete.id
+        
+        setIsLoading(true)
+        
+        noteService.removeFromTrash(noteId)
+            .then(() => {
+                setTrashNotes(prevTrashNotes => prevTrashNotes.filter(note => note.id !== noteId))
+                
+            })
+            .catch(err => {
+                console.log('err:', err)
+                
+            })
+            .finally(() => setIsLoading(false)) 
+    }
+
+    function restoreTrash(noteToRestore){}
+
     
     if (isLoading) return <div className="loader"></div>
     return <section className = "note-index full">
@@ -121,7 +140,7 @@ export function NoteIndex() {
             
             {(mainDisplay==='notes')&& <AddNote notes={notes} onAdd={addNewNote} onPinNote ={placeNote} />}
                     
-            <DynamicCmp trashNotes={trashNotes} status={mainDisplay} notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} onDuplicate={duplicateNote} />
+            <DynamicCmp onRestoreTrash={restoreTrash} onPermanentDelete={permanentDelete} trashNotes={trashNotes} status={mainDisplay} notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} onDuplicate={duplicateNote} />
             
         </main>
         
@@ -131,7 +150,7 @@ export function NoteIndex() {
 function DynamicCmp(props){
     switch (props.status) {
         case 'trash': 
-            return <TrashNoteList trashNotes={props.trashNotes} />
+            return <TrashNoteList {...props} />
             
             
         case 'notes':

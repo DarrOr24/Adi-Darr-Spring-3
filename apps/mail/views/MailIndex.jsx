@@ -20,7 +20,7 @@ export function MailIndex() {
     const [ mails, setMails ] = useState([])
    
     const [ searchParams, setSearchParams ] = useSearchParams()
-    const [ filterBy, setFilterBy ] = useState(mailService.getFilterFromSearchParams(searchParams))
+    const [ filterBy, setFilterBy ] = useState({})
     
     const [unreadCount, setUnreadCount] = useState(0)
     const [sortBy, setSortBy] = useState('date')
@@ -51,7 +51,6 @@ export function MailIndex() {
     
     useEffect(() => {
 
-        
         // setSearchParams(filterBy)
         const criteria = { ...filterBy ,sortBy }
         mailService.query(criteria)
@@ -129,13 +128,14 @@ export function MailIndex() {
         setMailType(status)
         console.log('mailType', mailType)
         if (status === 'inbox') {
-            setMailList(mails.filter(mail => mail.to === loggedinUser.email && !mail.removedAt)) 
+            setFilterBy(prevFilterBy => ({...prevFilterBy, status: 'inbox'}) )
         } 
         if (status === 'sent') {
-            setMailList(mails.filter(mail => mail.from === loggedinUser.email && !mail.removedAt))
+            setFilterBy(prevFilterBy => ({...prevFilterBy, status: 'sent'}) )
+            
         } 
         if (status === 'trash') {
-            setMailList(mails.filter(mail => mail.removedAt))
+            setFilterBy(prevFilterBy => ({...prevFilterBy, status: 'trash'}) )
         }
 
     }
@@ -154,7 +154,7 @@ export function MailIndex() {
                 
                 <MailSideMenu unreadCount={unreadCount}  handleComposeClick={onComposeMail} onSetStatus={setMailStatus}  />
 
-               <MailList mails = {mailList} removeMail={removeMail} toggleReadStatus={toggleReadStatus}  /> 
+               <MailList mails = {mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus}  /> 
                 
                 
                 

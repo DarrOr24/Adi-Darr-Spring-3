@@ -9,12 +9,12 @@ import { UserMsg } from "./cmps/UserMsg.jsx"
 import { eventBusService } from "./services/event-bus.service.js"
 
 import { MailIndex } from "./apps/mail/views/MailIndex.jsx"
+import { MailDetails } from "./apps/mail/cmps/MailDetails.jsx"
+import { MailCompose } from "./apps/mail/cmps/MailCompose.jsx"
 
 import { NoteIndex } from "./apps/note/views/NoteIndex.jsx"
 import { AddNote } from "./apps/note/cmps/AddNote.jsx"
 import { NoteEdit2 } from "./apps/note/cmps/NoteEdit2.jsx"
-import { MailDetails } from "./apps/mail/cmps/MailDetails.jsx"
-import { MailCompose } from "./apps/mail/cmps/MailCompose.jsx"
 
 
 

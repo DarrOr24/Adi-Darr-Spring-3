@@ -9,7 +9,6 @@ export function MailPreview({ mail }) {
     const day = sentDate.getDate()
     const monthName =  utilService.getMonthName(sentDate)
 
-    // const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true }
     const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: true }
     const formattedTime = sentDate.toLocaleTimeString('en-IL', timeOptions).toLocaleUpperCase()
     
@@ -24,18 +23,15 @@ export function MailPreview({ mail }) {
 
     return ( 
         <article className="mail-preview" >
-            {(to ==='user@appsus.com')&&<div className="from">{from}</div>}
-            {(from ==='user@appsus.com')&&<div className="from">{to}</div>}
+            {(to ==='user@appsus.com') && <div className="from">{from}</div>}
+            {(from ==='user@appsus.com') && <div className="from">To: {to}</div>}
             <div className="txt">
                 <p className="subject">{subject}</p>
-                <p className="body">{body.substring(0,70)}</p>    
+                <p className="body">{body}</p>    
             </div>
             <div className="time">
                 {hasDayPassed ? `${monthName} ${day}` : formattedTime}
             </div>
-            {/* <p>{monthName} {day} {formattedTime}</p> */}
-        </article> 
-
-        
+        </article>   
     )
 }

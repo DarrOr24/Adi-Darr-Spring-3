@@ -1,4 +1,4 @@
-const { Link, useNavigate } = ReactRouterDOM
+const { useNavigate } = ReactRouterDOM
 const { useState } = React
 
 
@@ -12,45 +12,35 @@ export function MailList({ mails, removeMail, toggleReadStatus }) {
     const navigate = useNavigate()
 
     function openMail(mail){
-        console.log(mail)
         setMail(prevMail => prevMail = mail)
         setOpenDetails(true)
     }
 
     function onReturn(){
         setOpenDetails(false)
-        navigate(`/mail`)
-        
+        navigate(`/mail`) 
     }
 
-   
     if (mails.length === 0) {
         return (
-            <div className="no-mails">
-                No conversations
-            </div>
+            <div className="no-mails">No conversations</div>
         )
     }
+
     return (
         <section className="mail-list">
             <ul>
                 {mails.map(mail => (
                     <li key={mail.id} className={`${mail.isRead ? '' : 'un-read'}`}> 
                         <div onClick={()=>openMail(mail)}>
-                            
                             {(!openDetails) && <section>
                                     <MailPreview mail={mail} />
-                        
                                     <ActionBtnsMail mail={mail} removeMail={removeMail} toggleReadStatus={toggleReadStatus} />
                                 </section>}
-                            
-                            
                         </div>
                     </li>))}
 
-                    
                     {openDetails && <MailDetails mail={mail} onReturn={onReturn} />}
-                   
             </ul>
         </section>
     )

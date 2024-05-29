@@ -7,45 +7,11 @@ import { mailService } from "../services/mail.service.js"
 
 export function MailDetails({mail, onReturn}) {
 
-    
-    
-
-    // console.log('reached mail details')
-    // const [mail, setMail] = useState(null)
-    // const [isLoading, setIsLoading] = useState(true)
-
-    
     const navigate = useNavigate()
 
     useEffect(() => {
-        
-        
         navigate(`/mail/details/${mail.id}`)
-        
-        
     }, [])
-    // useEffect(() => {
-    //     setIsLoading(true)
-    //     mailService.get(params.mailId)
-    //         .then(mail => {
-    //             setMail(mail)
-    //             if (!mail.isRead) {
-    //                 const updatedMail = { ...mail, isRead: true }
-    //                 mailService.save(updatedMail)
-    //                     .then(() => {
-    //                         toggleReadStatus(updatedMail.id)
-    //                     })
-    //             }
-    //         })
-    //         .catch(() => {
-    //             alert('Couldnt get mail...')
-    //             navigate('/mail/inbox')
-    //         })
-    //         .finally(() => {
-    //             setIsLoading(false)
-    //         })
-    // }, [params.mailId])
-
 
     function getTime(mail) {
         const sentDate = new Date(mail.sentAt)
@@ -64,11 +30,8 @@ export function MailDetails({mail, onReturn}) {
     return (
         <section className="mail-details">
             <div onClick={onReturn} className="action-icon back">
-                
-                
                     <img src="assets/img/back.svg" alt="" />
-                    <span className="action-name">Back to</span>
-                
+                    <span className="action-name">Back</span>
             </div>
             <div className="subject">{mail.subject}</div>
             <div className="details">

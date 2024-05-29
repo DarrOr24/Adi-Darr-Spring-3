@@ -20,9 +20,7 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoad
 
     function openColorMenu(ev){
         ev.stopPropagation()
-        // (colorMenu) ? setColorMenu(false) : setColorMenu(true)
-        if(!colorMenu) setColorMenu(true)
-        else setColorMenu(false)
+        setColorMenu(prevColorMenu => !prevColorMenu)
     }
 
     function onAddImg(ev){

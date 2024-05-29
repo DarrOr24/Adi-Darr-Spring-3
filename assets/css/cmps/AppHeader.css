@@ -9,6 +9,16 @@
     z-index: 3;
 }
 
+.app-header .main-nav-icon.clicked {
+    background-color: var(--coral);
+    border-radius: 50%;
+
+}
+.app-header .main-nav-icon.clicked span {
+    opacity:0;
+
+}
+
 
 
 

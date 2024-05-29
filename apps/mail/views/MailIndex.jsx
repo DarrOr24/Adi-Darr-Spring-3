@@ -8,27 +8,65 @@ import { MailDetails } from '../cmps/MailDetails.jsx'
 import { MailSideMenu } from '../cmps/MailSideMenu.jsx'
 import { MailFilter } from '../cmps/MailFilter.jsx'
 import { MailCompose } from '../cmps/MailCompose.jsx'
+import { MailCompose2 } from '../cmps/MailCompose2.jsx'
 
 export function MailIndex() {
+
+    const loggedinUser = {
+        email: 'user@appsus.com',
+        fullname: 'Mahatma Appsus'
+    }
     
     const [ mails, setMails ] = useState([])
+   
     const [ searchParams, setSearchParams ] = useSearchParams()
     const [ filterBy, setFilterBy ] = useState(mailService.getFilterFromSearchParams(searchParams))
-    const [ status, setStatus ] = useState('inbox')
+    
     const [unreadCount, setUnreadCount] = useState(0)
     const [sortBy, setSortBy] = useState('date')
+    const [showCompose, setShowCompose] = useState(false)
+    const [mailType, setMailType] = useState('inbox')
+    const [ mailList, setMailList ] = useState([])
+
+    
+
     const navigate = useNavigate()
     
 
     useEffect(() => {
-        setSearchParams(filterBy)
-        const criteria = { ...filterBy ,status, sortBy }
-        mailService.query(criteria)
-            .then(mails => setMails(mails))
+
         
+        // setSearchParams(filterBy)
+        const criteria = { ...filterBy ,sortBy }
+        mailService.query(criteria)
+            .then(mails => {
+                setMails(mails)
+                setMailList(mails.filter(mail => mail.to === loggedinUser.email))})
+           
         mailService.countUnreadInboxMails()
             .then(count => setUnreadCount(count))
-    }, [filterBy, status, sortBy])
+
+        
+    }, [])
+    
+    useEffect(() => {
+
+        
+        // setSearchParams(filterBy)
+        const criteria = { ...filterBy ,sortBy }
+        mailService.query(criteria)
+            .then(mails => {
+                setMails(mails)})
+           
+        mailService.countUnreadInboxMails()
+            .then(count => setUnreadCount(count))
+
+        
+    }, [filterBy, sortBy])
+
+  
+
+    
     
 
     function removeMail(mailId) {
@@ -67,19 +105,43 @@ export function MailIndex() {
         setFilterBy(newFilter)
     }
 
-    function onSetStatus(newStatus) {
-        setStatus(newStatus)
-        navigate(`/mail/${newStatus}`)
-    }
 
     function onSetSortBy(newSortBy) {
         setSortBy(newSortBy)
     }
 
+    function onComposeMail(){
+        setShowCompose(true)
+        // navigate(`/mail/compose`)
+    }
+
     if (!mails) return <div>Loading...</div>
 
-    const showCompose = searchParams.get('compose') === 'new'
+    function onCloseCompose(mail){
+        console.log(mail)
+        setMails([...mails, mail])
+        setShowCompose(false)
+        navigate(`/mail`)
+    }
 
+    function setMailStatus(status){
+        console.log('statuts from side menu:',status)
+        setMailType(status)
+        console.log('mailType', mailType)
+        if (status === 'inbox') {
+            setMailList(mails.filter(mail => mail.to === loggedinUser.email && !mail.removedAt)) 
+        } 
+        if (status === 'sent') {
+            setMailList(mails.filter(mail => mail.from === loggedinUser.email && !mail.removedAt))
+        } 
+        if (status === 'trash') {
+            setMailList(mails.filter(mail => mail.removedAt))
+        }
+
+    }
+
+   
+    
     return (
         <section className="mail-index full">
             <header className="mail-header">
@@ -89,17 +151,18 @@ export function MailIndex() {
                 <MailFilter filterBy={filterBy} onFilter={onSetFilterBy} onSort={onSetSortBy}/>
             </header>
             <main>
-                <section className="mail-side-menu">
-                    <MailSideMenu unreadCount={unreadCount} onSetStatus={onSetStatus} />
-                </section>
-                <section className="mail-list">
-                    <Routes>
-                        <Route path=":status" element={<MailList mails={mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus} status={status} sortBy={sortBy}/>} />
-                        <Route path=":status/:mailId" element={<MailDetails toggleReadStatus={toggleReadStatus} status={status}/>} />
-                    </Routes>
-                </section>
+                
+                <MailSideMenu unreadCount={unreadCount}  handleComposeClick={onComposeMail} onSetStatus={setMailStatus}  />
+
+               <MailList mails = {mailList} removeMail={removeMail} toggleReadStatus={toggleReadStatus}  /> 
+                
+                
+                
+                {showCompose && <MailCompose2 onClose={onCloseCompose}/>}
+
+                
             </main>
-            {showCompose && <MailCompose />}
+           
         </section>
     )
 }

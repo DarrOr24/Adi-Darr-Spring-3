@@ -5,34 +5,46 @@ const { useParams, useNavigate, Link } = ReactRouterDOM
 import { utilService } from "../../../services/util.service.js"
 import { mailService } from "../services/mail.service.js"
 
-export function MailDetails({ toggleReadStatus, status }) {
-    const [mail, setMail] = useState(null)
-    const [isLoading, setIsLoading] = useState(true)
+export function MailDetails({mail, onReturn}) {
 
-    const params = useParams()
+    
+    
+
+    // console.log('reached mail details')
+    // const [mail, setMail] = useState(null)
+    // const [isLoading, setIsLoading] = useState(true)
+
+    
     const navigate = useNavigate()
 
     useEffect(() => {
-        setIsLoading(true)
-        mailService.get(params.mailId)
-            .then(mail => {
-                setMail(mail)
-                if (!mail.isRead) {
-                    const updatedMail = { ...mail, isRead: true }
-                    mailService.save(updatedMail)
-                        .then(() => {
-                            toggleReadStatus(updatedMail.id)
-                        })
-                }
-            })
-            .catch(() => {
-                alert('Couldnt get mail...')
-                navigate('/mail/inbox')
-            })
-            .finally(() => {
-                setIsLoading(false)
-            })
-    }, [params.mailId])
+        
+        
+        navigate(`/mail/details/${mail.id}`)
+        
+        
+    }, [])
+    // useEffect(() => {
+    //     setIsLoading(true)
+    //     mailService.get(params.mailId)
+    //         .then(mail => {
+    //             setMail(mail)
+    //             if (!mail.isRead) {
+    //                 const updatedMail = { ...mail, isRead: true }
+    //                 mailService.save(updatedMail)
+    //                     .then(() => {
+    //                         toggleReadStatus(updatedMail.id)
+    //                     })
+    //             }
+    //         })
+    //         .catch(() => {
+    //             alert('Couldnt get mail...')
+    //             navigate('/mail/inbox')
+    //         })
+    //         .finally(() => {
+    //             setIsLoading(false)
+    //         })
+    // }, [params.mailId])
 
 
     function getTime(mail) {
@@ -48,15 +60,15 @@ export function MailDetails({ toggleReadStatus, status }) {
         return time
     }
 
-    if (isLoading) return <h3>Loading...</h3>
+    
     return (
         <section className="mail-details">
-            <div className="action-icon back">
-                {/* <Link to="/mail"> */}
-                <Link to={`/mail/${status}`}>
+            <div onClick={onReturn} className="action-icon back">
+                
+                
                     <img src="assets/img/back.svg" alt="" />
-                    <span className="action-name">Back to {status}</span>
-                </Link>
+                    <span className="action-name">Back to</span>
+                
             </div>
             <div className="subject">{mail.subject}</div>
             <div className="details">
@@ -66,5 +78,7 @@ export function MailDetails({ toggleReadStatus, status }) {
             <div className="mail-body">{mail.body}</div>
         </section>
     )
+
+    
 }
 

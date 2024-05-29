@@ -1,4 +1,4 @@
-.mail-Compose {
+.mail-compose {
     position: fixed;
     z-index: 10;
     inset: 0;
@@ -13,7 +13,7 @@
     align-items: center;
 }
 
-.mail-Compose .mail-modal {
+.mail-compose .mail-modal {
     position: relative;
     /* display: grid; */
     background-color: #fefefe;

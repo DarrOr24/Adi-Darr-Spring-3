@@ -1,6 +1,7 @@
 .side-menu {
     display: grid;
     grid-template-rows: repeat(5, 50px);
+    /* row-gap:0.1em; */
     margin-inline-end: 1em;
     font-size: 0.8em;
 }

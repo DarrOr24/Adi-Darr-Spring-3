@@ -18,13 +18,14 @@ export function MailPreview({ mail }) {
     const oneDayInMilliseconds = 24 * 60 * 60 * 1000
     const hasDayPassed = timeDifference >= oneDayInMilliseconds
 
-    const { from, subject, body, isRead } = mail
+    const { to, from, subject, body, isRead } = mail
 
     
 
     return ( 
         <article className="mail-preview" >
-            <div className="from">{from}</div>
+            {(to ==='user@appsus.com')&&<div className="from">{from}</div>}
+            {(from ==='user@appsus.com')&&<div className="from">{to}</div>}
             <div className="txt">
                 <p className="subject">{subject}</p>
                 <p className="body">{body}</p>    

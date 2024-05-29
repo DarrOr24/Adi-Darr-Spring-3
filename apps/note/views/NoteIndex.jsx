@@ -8,6 +8,7 @@ import { NoteSideMenu } from "../cmps/NoteSideMenu.jsx"
 import { noteService } from "../services/note.service.js"
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import { TrashNoteList } from "../cmps/TrashNoteList.jsx"
 
 
 export function NoteIndex() {
@@ -49,6 +50,9 @@ export function NoteIndex() {
         setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
         
         noteService.saveToTrash(noteToTrash)
+        setTrashNotes(prevTrashNotes => [...prevTrashNotes, noteToTrash])
+        console.log(trashNotes)
+
         noteService.remove(noteId)
             .then(() => {
                 setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
@@ -125,10 +129,9 @@ export function NoteIndex() {
 }
 
 function DynamicCmp(props){
-    let {notes, trashNotes} = props
     switch (props.status) {
-        case 'trash': notes = {...trashNotes}
-            return <NoteList {...props} />
+        case 'trash': 
+            return <TrashNoteList trashNotes={props.trashNotes} />
             
             
         case 'notes':

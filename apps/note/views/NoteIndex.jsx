@@ -13,10 +13,16 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 export function NoteIndex() {
 
     const [notes, setNotes] = useState([])
+    const [trashNotes, setTrashNotes] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [ filterBy, setFilterBy ] = useState({})
     const [ mainDisplay, setMainDisplay ] = useState('notes')
     
+
+    useEffect(() => {
+        noteService.loadFromTrash()
+            .then(trashNotes => setTrashNotes(trashNotes))
+    }, [])
 
     useEffect(() => {
         noteService.query(filterBy)
@@ -111,7 +117,7 @@ export function NoteIndex() {
             
             {(mainDisplay==='notes')&& <AddNote notes={notes} onAdd={addNewNote} onPinNote ={placeNote} />}
                     
-            <DynamicCmp status={mainDisplay} notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} onDuplicate={duplicateNote} />
+            <DynamicCmp trashNotes={trashNotes} status={mainDisplay} notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} onDuplicate={duplicateNote} />
             
         </main>
         
@@ -119,9 +125,12 @@ export function NoteIndex() {
 }
 
 function DynamicCmp(props){
-    
+    let {notes, trashNotes} = props
     switch (props.status) {
-        case 'trash':
+        case 'trash': notes = {...trashNotes}
+            return <NoteList {...props} />
+            
+            
         case 'notes':
             return  <NoteList {...props} />
                 

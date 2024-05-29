@@ -13,7 +13,8 @@ export const noteService = {
     remove,
     save,
     createNote,
-    saveToTrash
+    saveToTrash,
+    loadFromTrash
 }
 
 window.ns = noteService
@@ -127,6 +128,10 @@ function saveToTrash(note){
     if(!notes) notes = []
     notes.push(note)
     utilService.saveToStorage(TRASH_NOTE_KEY, notes)
+}
+
+function loadFromTrash(){
+    return storageService.query(TRASH_NOTE_KEY)
 }
 
 

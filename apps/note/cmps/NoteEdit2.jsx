@@ -91,16 +91,10 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
     }
 
     function getUpdatedDate(){
-        if(note.updateAt){
-            return new Date(note.updatedAt).toDateString(3)
-        }
-        else {
-            return new Date(note.time).toDateString(3)
-        }
+        if(note.updateAt) return new Date(note.updatedAt).toDateString(3)
         
-
-
-
+        else return new Date(note.time).toDateString(3)
+         
     }
     
 

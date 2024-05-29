@@ -126,10 +126,12 @@ export function NoteIndex() {
     }
 
     function restoreTrash(noteToRestore){
-        permanentDelete(noteToRestore)
+         
+
         setNotes(prevNotes => [...prevNotes, noteToRestore])
-        noteService.save(noteToRestore)
+        noteService.save({...noteToRestore, id:''})
             .then(note => setNotes(prevNotes => [...prevNotes, note]))
+            .finally(permanentDelete(noteToRestore))
     }
 
     

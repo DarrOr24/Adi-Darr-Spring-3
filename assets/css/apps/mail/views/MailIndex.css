@@ -1,6 +1,7 @@
 .mail-index {
     background-color: #f6f8fc;
     position: relative;
+    min-height: 85vh;
 }
 
 .mail-index main{
@@ -20,4 +21,5 @@
     height: 30px;
     margin-inline-end: 20px;
 } 
+
 

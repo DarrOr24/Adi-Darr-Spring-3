@@ -6,8 +6,9 @@ export function MailFilter({ filterBy, onFilter, onSort }) {
     const [showSearchOptions, setShowSearchOptions] = useState(false)
 
     useEffect(() => {
-        onFilter(filterByToEdit)
-        // onFilter({ ...filterByToEdit })
+        // onFilter(filterByToEdit)
+        onFilter({ ...filterByToEdit })
+        // console.log('filterByToEdit:', filterByToEdit)
     }, [filterByToEdit])
 
     useEffect(() => {
@@ -17,7 +18,6 @@ export function MailFilter({ filterBy, onFilter, onSort }) {
     function handleChange({ target }) {
         const { name, type } = target
         const value = (type === 'number') ? +target.value : target.value
-
         setFilterByToEdit(prevFilterBy => ({ ...prevFilterBy, [name]: value }))
     }
 
@@ -38,7 +38,7 @@ export function MailFilter({ filterBy, onFilter, onSort }) {
                     <img src="assets/img/magnifying_glass.svg" alt="" />
                     <input 
                         onChange={handleChange} 
-                        value={filterByToEdit.txt} 
+                        value={filterByToEdit.txt || ''} 
                         name="txt" 
                         type="text" 
                         placeholder="Search mail"
@@ -57,7 +57,7 @@ export function MailFilter({ filterBy, onFilter, onSort }) {
                         <select
                             id="read-status"
                             name="isRead"
-                            value={filterByToEdit.isRead}
+                            value={filterByToEdit.isRead || ''}
                             onChange={handleChange}
                         >
                             <option value="">All</option>

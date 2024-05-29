@@ -2,19 +2,16 @@
 .mail-preview {
     display: grid;
     gap: 10px;
-    grid-template-columns: 168px 1fr 40px;
-    /* grid-template-columns: 1.5fr 7fr 1fr; */
+    /* grid-template-columns: 10px 168px 1fr 40px; */
+    grid-template-columns: 0.5fr 1.5fr 7fr 1fr;
     font-size: 0.87em;
     height: 50px;
     align-items: center;
     /* padding-inline-start: 1em; */
-    padding-inline: 20px
+    padding-inline: 10px
    
 
 }
-
-
-
 
 .mail-preview .body {
     color: #5f6368;
@@ -61,3 +58,8 @@
 .mail-preview .body {
     max-width: 100%; 
 } */
+
+.fa-solid.fa-star {
+    color: yellow;
+}
+

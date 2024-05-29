@@ -15,6 +15,7 @@ export function NoteIndex() {
     const [notes, setNotes] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [ filterBy, setFilterBy ] = useState({})
+    const [ mainDisplay, setMainDisplay ] = useState('notes')
     
 
     useEffect(() => {
@@ -57,8 +58,6 @@ export function NoteIndex() {
 
     }
 
-    
-    
     function placeNote(noteToPlace){
         console.log('note reached index', noteToPlace.isPinned)
         //Note already saved in the service
@@ -68,13 +67,10 @@ export function NoteIndex() {
         
         const unsortedNotes = [...restOfNotes, noteToPlace]
         
-        // Now sort the array
-        // const sortedNotes = sortNotes(unsortedNotes)
         const sortedNotes = noteService.sortNotes(unsortedNotes)
 
         setNotes(sortedNotes)
     }
-
 
     function duplicateNote(noteToDuplicate){
         const newNote = structuredClone(noteToDuplicate)
@@ -92,7 +88,11 @@ export function NoteIndex() {
         setFilterBy({ ...newFilter })
     }
 
-    const isNotes = notes.length > 0
+    function onMainDisplay(status){
+        console.log(status)
+        setMainDisplay(prevMainDisplay => prevMainDisplay = status)
+    }
+
     
     if (isLoading) return <div className="loader"></div>
     return <section className = "note-index full">
@@ -102,11 +102,28 @@ export function NoteIndex() {
             <NoteFilter filterBy={filterBy} onFilter={onSetFilterBy} />
         </header>
         <main>
-            <NoteSideMenu />
-            <AddNote notes={notes} onAdd={addNewNote} onPinNote ={placeNote} />
-            {isNotes && <NoteList notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} onDuplicate={duplicateNote} />}
-            {!isNotes && <h2>No notes!!  Done with the chores for today...</h2>} 
+            <NoteSideMenu onMainDisplay={onMainDisplay} />
+            
+            {(mainDisplay==='notes')&& <AddNote notes={notes} onAdd={addNewNote} onPinNote ={placeNote} />}
+                    
+            <DynamicCmp status={mainDisplay} notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} onDuplicate={duplicateNote} />
+            
         </main>
         
     </section>
+}
+
+function DynamicCmp(props){
+    
+    switch (props.status) {
+        case 'trash':
+        case 'notes':
+            return  <NoteList {...props} />
+                
+        case 'reminders':
+        case 'labels':
+        case 'archive':
+            return <h1>IN CONSTRUCTION</h1>
+       
+    }
 }

@@ -1,6 +1,6 @@
 const { useState } = React
 
-export function NoteSideMenu(){
+export function NoteSideMenu({onMainDisplay}){
 
     const [ isClosed, setIsClosed ] = useState(true)
     const [ isNoteSelected, setIsNoteSelected ] = useState('selected')
@@ -16,26 +16,32 @@ export function NoteSideMenu(){
     function onNotesClicked(){
         unselectAll()
         setIsNoteSelected('selected')
+        onMainDisplay('notes')
+
     }
     
     function onRemindersClicked(){
         unselectAll()
         setIsRemindersSelected('selected')
+        onMainDisplay('reminders')
     }
 
     function onLabelsClicked(){
         unselectAll()
         setIsLabelsSelected('selected')
+        onMainDisplay('labels')
     }
 
     function onArchiveClicked(){
         unselectAll()
         setIsArchiveSelected('selected')
+        onMainDisplay('archive')
     }
 
     function onTrashClicked(){
         unselectAll()
         setIsTrashSelected('selected')
+        onMainDisplay('trash')
     }
 
     function unselectAll(){

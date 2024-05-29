@@ -46,6 +46,7 @@ export function NoteVideoAdd({note: noteToEdit, onChangeVideo, onReturn}){
     
   
     return <section className = "note-video-add">
+        {(isReady)&& <VideoList searchValue={finalValue} onSelectVideo={onSelectVideo} />} 
             {/* <form onSubmit = {onSearch}> */}
                 <section className="search-video">
                     <input
@@ -62,7 +63,7 @@ export function NoteVideoAdd({note: noteToEdit, onChangeVideo, onReturn}){
            
        {/* </form>   */}
 
-       {(isReady)&& <VideoList searchValue={finalValue} onSelectVideo={onSelectVideo} />}  
+        
 
     </section >
     

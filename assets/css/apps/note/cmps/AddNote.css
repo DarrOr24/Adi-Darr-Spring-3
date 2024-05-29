@@ -19,6 +19,7 @@
     display: grid;
     grid-template-columns: 3fr 1fr;
     
+    
 }
 
 .take-a-note p{
@@ -41,6 +42,22 @@
 
 .add-note .action-icons {
     width: 250px;
+}
+
+
+
+.add-note .take-a-note .note-video-add {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: max-content;
+    display:grid;  
+}
+.add-note .take-a-note .video-list {
+    grid-row: 2;
+}
+.add-note .take-a-note .search-video {
+    grid-row: 1;
 }
 
 

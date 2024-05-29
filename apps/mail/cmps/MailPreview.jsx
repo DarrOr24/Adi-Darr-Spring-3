@@ -27,7 +27,7 @@ export function MailPreview({ mail }) {
             {(from ==='user@appsus.com') && <div className="from">To: {to}</div>}
             <div className="txt">
                 <p className="subject">{subject}</p>
-                <p className="body">{body.substring(0,70)}</p>    
+                <p className="body">{body}</p>    
             </div>
             <div className="time">
                 {hasDayPassed ? `${monthName} ${day}` : formattedTime}

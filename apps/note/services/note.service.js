@@ -3,6 +3,7 @@ import { storageService } from "../../../services/async-storage.service.js"
 
 
 const NOTE_KEY = 'noteDB'
+const TRASH_NOTE_KEY = 'trashNoteDB'
 _createNotes()
 
 export const noteService = {
@@ -11,7 +12,8 @@ export const noteService = {
     get,
     remove,
     save,
-    createNote
+    createNote,
+    saveToTrash
 }
 
 window.ns = noteService
@@ -115,9 +117,16 @@ function save(note) {
     if (note.id) {
         return storageService.put(NOTE_KEY, note)
     } else {
-        // if(note.isPinned) return storageService.postFirst(NOTE_KEY, note)
+        
         return storageService.post(NOTE_KEY, note)
     }
+}
+
+function saveToTrash(note){
+    let notes = utilService.loadFromStorage(TRASH_NOTE_KEY)
+    if(!notes) notes = []
+    notes.push(note)
+    utilService.saveToStorage(TRASH_NOTE_KEY, notes)
 }
 
 

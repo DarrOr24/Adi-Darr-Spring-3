@@ -101,7 +101,7 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoad
                         <span  className="action-name">Duplicate</span>
                     </div>
 
-                    <div onClick={(ev) => onRemove(ev, note.id) } className="action-icon trash">
+                    <div onClick={(ev) => onRemove(ev, note) } className="action-icon trash">
                         <img src="assets\img\trash.svg" alt="" />
                         <span className="action-name">Delete</span>
                     </div>

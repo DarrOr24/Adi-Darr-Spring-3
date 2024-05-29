@@ -35,10 +35,14 @@ export function NoteIndex() {
 
     }
 
-    function removeNote(ev, noteId){
+    function removeNote(ev, noteToTrash){
         ev.stopPropagation()
+        const noteId = noteToTrash.id
         console.log('oh yeah!!  triple callback!!')
         setIsLoading(true)
+        setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
+        
+        noteService.saveToTrash(noteToTrash)
         noteService.remove(noteId)
             .then(() => {
                 setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
@@ -49,6 +53,7 @@ export function NoteIndex() {
                 // showErrorMsg('There was a problem')
             })
             .finally(() => setIsLoading(false))
+        
         
     }
 

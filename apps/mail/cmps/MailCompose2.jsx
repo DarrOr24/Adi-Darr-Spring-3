@@ -3,7 +3,7 @@ import { mailService } from "../services/mail.service.js"
 const { useState, useEffect } = React
 const {  useNavigate } = ReactRouterDOM
 
-export function MailCompose2({onClose}){
+export function MailCompose2({onComposeMail, onClose}){
 
     
 
@@ -34,15 +34,15 @@ export function MailCompose2({onClose}){
     function onSave(ev) {
         ev.preventDefault()
         mailService.save(mail)
-            .then(closeForm)
+            .then(onComposeMail)
             .then(() => console.log('Mail has successfully saved!'))
             .catch(() => console.log(`couldn't save mail`))
-            .finally((mail) => closeForm(mail))
+            
     }
 
 
-    function closeForm(mail) {
-        onClose(mail)
+    function closeForm() {
+        onClose()
     }
 
     

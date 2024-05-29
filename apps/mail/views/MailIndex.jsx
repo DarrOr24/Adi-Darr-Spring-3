@@ -116,9 +116,8 @@ export function MailIndex() {
 
     if (!mails) return <div>Loading...</div>
 
-    function onCloseCompose(mail){
-        console.log(mail)
-        setMails([...mails, mail])
+    function closeCompose(){
+        
         setShowCompose(false)
         navigate(`/mail`)
     }
@@ -140,6 +139,11 @@ export function MailIndex() {
 
     }
 
+    function saveNewMail(mailFromCompose){
+        console.log(mail)
+
+    }
+
    
     
     return (
@@ -158,7 +162,7 @@ export function MailIndex() {
                 
                 
                 
-                {showCompose && <MailCompose2 onClose={onCloseCompose}/>}
+                {showCompose && <MailCompose2 onComposeMail={saveNewMail} onClose={closeCompose}/>}
 
                 
             </main>

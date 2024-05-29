@@ -1,4 +1,4 @@
-.note-list {
+.note-list, .trash-note-list {
     display:grid;
     margin-inline-end: 2em;
 }
@@ -6,7 +6,7 @@
 .note-list ul{
    
     justify-self: center;
-    grid-area: node-list;
+    grid-area: note-list;
     columns: 250px auto;
     /* columns: 250px; */
     margin: 0;

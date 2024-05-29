@@ -33,10 +33,11 @@ export function MailCompose2({onComposeMail, onClose}){
 
     function onSave(ev) {
         ev.preventDefault()
-        mailService.save(mail)
-            .then(onComposeMail)
-            .then(() => console.log('Mail has successfully saved!'))
-            .catch(() => console.log(`couldn't save mail`))
+        console.log(mail)
+        mailService.save(mail).then((savedMail) => onComposeMail(savedMail))
+        //     .then(onComposeMail)
+        //     .then(() => console.log('Mail has successfully saved!'))
+        //     .catch(() => console.log(`couldn't save mail`))
             
     }
 

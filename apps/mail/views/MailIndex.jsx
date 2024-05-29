@@ -140,7 +140,10 @@ export function MailIndex() {
     }
 
     function saveNewMail(mailFromCompose){
-        console.log(mail)
+        console.log(mailFromCompose)
+        setMails(prevMails => [...prevMails, mailFromCompose])
+        setShowCompose(false)
+        navigate(`/mail`)
 
     }
 

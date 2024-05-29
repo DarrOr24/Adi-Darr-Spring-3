@@ -125,7 +125,12 @@ export function NoteIndex() {
             .finally(() => setIsLoading(false)) 
     }
 
-    function restoreTrash(noteToRestore){}
+    function restoreTrash(noteToRestore){
+        permanentDelete(noteToRestore)
+        setNotes(prevNotes => [...prevNotes, noteToRestore])
+        noteService.save(noteToRestore)
+            .then(note => setNotes(prevNotes => [...prevNotes, note]))
+    }
 
     
     if (isLoading) return <div className="loader"></div>

@@ -50,7 +50,7 @@ export function NoteIndex() {
         setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
         
         noteService.saveToTrash(noteToTrash)
-        setTrashNotes(prevTrashNotes => [...prevTrashNotes, noteToTrash])
+        setTrashNotes(prevTrashNotes => [noteToTrash, ...prevTrashNotes ])
         console.log(trashNotes)
 
         noteService.remove(noteId)
@@ -126,10 +126,12 @@ export function NoteIndex() {
     }
 
     function restoreTrash(noteToRestore){
-        permanentDelete(noteToRestore)
+         
+
         setNotes(prevNotes => [...prevNotes, noteToRestore])
-        noteService.save(noteToRestore)
+        noteService.save({...noteToRestore, id:''})
             .then(note => setNotes(prevNotes => [...prevNotes, note]))
+            .finally(permanentDelete(noteToRestore))
     }
 
     

@@ -89,10 +89,17 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
 
         
     }
+
+    function getUpdatedDate(){
+        if(note.updateAt) return new Date(note.updatedAt).toDateString(3)
+        
+        else return new Date(note.time).toDateString(3)
+         
+    }
     
 
     return (
-        <section className="note-edit video" >
+        <section className="note-edit " >
 
             <div className="screen"></div>
             <article style={{backgroundColor: note.style.backgroundColor}}>
@@ -100,7 +107,8 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
         
                 {/* <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/>  */}
                 <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> 
-                <ActionBtns note={note} onSetNoteColor={setNoteColor} onLoadImgOrVid={addImgOrVideo}  />       
+                <p>EDITED: {getUpdatedDate()}</p>       
+                <ActionBtns note={note} onSetNoteColor={setNoteColor} onLoadImgOrVid={addImgOrVideo}  />
 
             </article>
             

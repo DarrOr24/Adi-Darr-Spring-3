@@ -9,6 +9,8 @@
     grid-template-columns: 90px 150px 650px; 
     align-items: center;
     border-bottom: 2px solid lightgrey;
+    padding-block: 0.5em;
+    
 }
 
 .note-index-header img {

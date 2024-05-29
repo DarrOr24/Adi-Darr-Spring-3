@@ -1,9 +1,7 @@
 const { useState } = React
-const { Link, useNavigate, useSearchParams } = ReactRouterDOM
 
 export function MailSideMenu({ unreadCount, handleComposeClick , onSetStatus }){
     const [selectedFolder, setSelectedFolder] = useState('inbox')
-    const [searchParams, setSearchParams] = useSearchParams()
     const [ isClosed, setIsClosed ] = useState(true)
 
     function toggleSideMenu(){
@@ -43,7 +41,7 @@ export function MailSideMenu({ unreadCount, handleComposeClick , onSetStatus }){
                        
                             <i className="fa-solid fa-paper-plane"></i>
                             <p>Sent</p>
-                            <p></p>
+                            {/* <p></p> */}
                         
                 </li>
                 <li className={selectedFolder === 'trash' ? 'selected' : ''} 
@@ -51,7 +49,15 @@ export function MailSideMenu({ unreadCount, handleComposeClick , onSetStatus }){
                    
                         <img src="assets/img/trash.svg" alt="" />
                         <p>Trash</p>
-                        <p></p>
+                        {/* <p></p> */}
+                    
+                </li>
+                <li className={selectedFolder === 'starred' ? 'selected' : ''} 
+                    onClick={() => handleFolderClick('starred')}>
+                   
+                   <    i className="fa-regular fa-star"></i>
+                        <p>starred</p>
+                        {/* <p></p> */}
                     
                 </li>
             </ul>

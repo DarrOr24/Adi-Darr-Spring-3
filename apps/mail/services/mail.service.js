@@ -16,22 +16,28 @@ export const mailService = {
     remove,
     save,
     getEmptyMail,
-    getFilterFromSearchParams,
+    // getFilterFromSearchParams,
     countUnreadInboxMails,
     moveToTrash,
 }
 
-function query(filterBy = {status: 'inbox'}) {
-    console.log(filterBy)
+// function query(filterBy = {status: 'inbox'}) {
+function query(filterBy) {
+    console.log('filterBy from Servic', filterBy)
     return storageService.query(MAIL_KEY)
         .then(mails => {
             if (filterBy.status) {
                 if (filterBy.status === 'inbox') {
                     mails = mails.filter(mail => mail.to === loggedinUser.email && !mail.removedAt)
-                } else if (filterBy.status === 'sent') {
+                } 
+                if (filterBy.status === 'sent') {
                     mails = mails.filter(mail => mail.from === loggedinUser.email && !mail.removedAt)
-                } else if (filterBy.status === 'trash') {
+                } 
+                if (filterBy.status === 'trash') {
                     mails = mails.filter(mail => mail.removedAt)
+                }
+                if (filterBy.status === 'starred') {
+                    mails = mails.filter(mail => mail.isStarred)
                 }
             }
 
@@ -42,13 +48,14 @@ function query(filterBy = {status: 'inbox'}) {
             if (filterBy.isRead !== undefined && filterBy.isRead !== '') {
                 mails = mails.filter(mail => mail.isRead === (filterBy.isRead === 'true'))
             }
+            
 
             if (filterBy.sortBy === 'title') {
                 mails.sort((a, b) => a.subject.localeCompare(b.subject))
             } else {
                 mails.sort((a, b) => b.sentAt - a.sentAt)
             }
-            
+            console.log('mails', mails);
             return mails
         })
 }
@@ -82,6 +89,7 @@ function getEmptyMail() {
         subject: '',
         body: '',
         isRead: true,
+        isStarred: false,
         sentAt : Date.now(),
         removedAt : null,
         from: loggedinUser.email,
@@ -91,11 +99,7 @@ function getEmptyMail() {
     return mail
 } 
 
-function getFilterFromSearchParams(searchParams) {
-    return {
-        txt: searchParams.get('txt') || '',
-    }
-}
+
 
 function _createMails() {
     let mails = utilService.loadFromStorage(MAIL_KEY)
@@ -108,6 +112,7 @@ function _createMails() {
                 subject: utilService.makeLorem(2),
                 body: utilService.makeLorem(20),
                 isRead: Math.random() > 0.7,
+                isStarred: Math.random() > 0.7,
                 sentAt : 1551133930594,
                 removedAt : null,
                 from: 'momo@momo.com',

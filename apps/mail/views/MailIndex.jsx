@@ -17,14 +17,13 @@ export function MailIndex() {
     const [unreadCount, setUnreadCount] = useState(0)
     const [sortBy, setSortBy] = useState('date')
     const [showCompose, setShowCompose] = useState(false)
-    const [mailType, setMailType] = useState('inbox')
+    // const [mailType, setMailType] = useState('inbox')
     const [isLoading, setIsLoading] = useState(false)
     
     const navigate = useNavigate()
     
-
     useEffect(() => {
-        console.log('filterBy:', filterBy)
+        console.log('filterBy Index:', filterBy)
         const criteria = { ...filterBy ,sortBy }
         mailService.query(criteria)
             .then(mails => setMails(mails))
@@ -67,36 +66,59 @@ export function MailIndex() {
             })
     }
 
+    function toggleSraredStatus(mailId){
+        console.log('mailId:', mailId)
+        const mail = mails.find(mail => mail.id === mailId)
+        if (!mail) return
+        
+        const updatedMail = { ...mail, isStarred: !mail.isStarred }
+
+        mailService.save(updatedMail)
+            .then(savedMail => {
+                setMails(prevMails => prevMails.map(mail => mail.id === savedMail.id ? savedMail : mail))
+                console.log('Mail has successfully saved!', savedMail)
+            })
+            .catch(() => {
+                console.log(`Couldn't save mail`)
+            })
+    }
+
     function onSetFilterBy(newFilter) {
-        setFilterBy(newFilter)
+        setFilterBy(prevFilter => ({...prevFilter, ...newFilter}))
+        // setFilterBy(newFilter)
     }
 
     function onSetSortBy(newSortBy) {
         setSortBy(newSortBy)
     }
-
+    
     function onComposeMail(){
         setShowCompose(true)
         // navigate(`/mail/compose`)
     }
-
+    
     function closeCompose(){
         setShowCompose(false)
         navigate(`/mail`)
     }
-
-    function setMailStatus(status){
-        setMailType(status)
-        
-        if (status === 'inbox') {
-            setFilterBy(prevFilterBy => ({...prevFilterBy, status: 'inbox'}) )
-        } else if (status === 'sent') {
-            setFilterBy(prevFilterBy => ({...prevFilterBy, status: 'sent'}) )
-        } else if (status === 'trash') {
-            setFilterBy(prevFilterBy => ({...prevFilterBy, status: 'trash'}) )
-        }
-
+    
+    function setMailStatus(status) {
+        setFilterBy(prevFilterBy => ({...prevFilterBy, status}))
     }
+    
+
+    // function setMailStatus(status){
+    //     setMailType(status)
+        
+    //     if (status === 'inbox') {
+    //         setFilterBy(prevFilterBy => ({...prevFilterBy, status: 'inbox'}) )
+    //     } else if (status === 'sent') {
+    //         setFilterBy(prevFilterBy => ({...prevFilterBy, status: 'sent'}) )
+    //     } else if (status === 'trash') {
+    //         setFilterBy(prevFilterBy => ({...prevFilterBy, status: 'trash'}) )
+    //     }
+
+    // }
 
     function saveNewMail(mailFromCompose){
         setMails(prevMails => [...prevMails, mailFromCompose])
@@ -117,7 +139,7 @@ export function MailIndex() {
             </header>
             <main>
                 <MailSideMenu unreadCount={unreadCount}  handleComposeClick={onComposeMail} onSetStatus={setMailStatus}  />
-                <MailList mails = {mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus} /> 
+                <MailList mails = {mails} removeMail={removeMail} toggleReadStatus={toggleReadStatus} toggleSraredStatus={toggleSraredStatus}/> 
                 {showCompose && <MailCompose2 onComposeMail={saveNewMail} onClose={closeCompose}/>}
             </main>
         </section>

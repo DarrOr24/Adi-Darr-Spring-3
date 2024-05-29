@@ -1,7 +1,7 @@
 import { utilService } from '../../../services/util.service.js'
 
 
-export function MailPreview({ mail }) {
+export function MailPreview({ mail, toggleSraredStatus }) {
     
 
     const sentDate = new Date(mail.sentAt)
@@ -17,12 +17,20 @@ export function MailPreview({ mail }) {
     const oneDayInMilliseconds = 24 * 60 * 60 * 1000
     const hasDayPassed = timeDifference >= oneDayInMilliseconds
 
-    const { to, from, subject, body, isRead } = mail
-
     
+    const { to, from, subject, body, isStarred } = mail
+
+    function handleToggleSraredStatus(ev, mailId){
+        ev.stopPropagation()
+        toggleSraredStatus(mailId) 
+    }
 
     return ( 
         <article className="mail-preview" >
+            <div className="action-icon" onClick={(ev) => handleToggleSraredStatus(ev, mail.id)}>
+                {isStarred ? <i className="fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>}
+                <span className="action-name">{isStarred ? '' : 'Not'} Starred</span>
+            </div>
             {(to ==='user@appsus.com') && <div className="from">{from}</div>}
             {(from ==='user@appsus.com') && <div className="from">To: {to}</div>}
             <div className="txt">

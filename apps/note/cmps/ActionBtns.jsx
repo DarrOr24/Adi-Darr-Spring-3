@@ -4,7 +4,7 @@ import { NoteVideoAdd } from "./NoteVideoAdd.jsx"
 
 const { useState } = React
 
-export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoadImgOrVid} ){
+export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoadImgOrVid, onAddTodos} ){
 
     const [ colorMenu, setColorMenu ] = useState(false)
     const [ addImg, setAddImg ] = useState(false)
@@ -37,6 +37,10 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoad
         if(!addVideo) setAddVideo(true)
     }
 
+    function onClickTodos(){
+        console.log('hi')
+    }
+
     function changeImg(noteFromImg){
         setAddImg(false)
         onLoadImgOrVid(noteFromImg)
@@ -55,7 +59,7 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoad
                         <span className="action-name select">Select Note</span>
                     </div>
 
-                    <div className="action-icon list">
+                    <div onClick={onAddTodos} className="action-icon list">
                         <img src="assets\img\new_list.svg" alt="" />    
                         <span className="action-name">New list</span>
                     </div>

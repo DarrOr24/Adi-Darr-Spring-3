@@ -9,6 +9,7 @@ import { NoteForm } from "./NoteForm.jsx";
 import { NoteImg } from "./NoteImg.jsx";
 import { NoteImgAdd } from "./NoteImgAdd.jsx";
 import { NotePin } from "./NotePin.jsx";
+import { NoteToDos } from "./NoteToDos.jsx";
 
 export function AddNote({onAdd}){
 
@@ -25,16 +26,15 @@ export function AddNote({onAdd}){
         if (!openNote)  setOpenNote(true)
     }
 
-    function addNoteImg(){
-        setNote({...note, type: 'NoteImg'})
-        console.log('Reached add note img')
+    function addTodosNote(){
+        console.log('HI')
+        navigate(`/note/add`)
+        setNote({...note, type: 'NoteList'})
+        setOpenNote(true)
 
     }
-    function addNoteVideo(){
-        setNote({...note, type: 'NoteVideo'})
-        console.log('Reached add note video')
 
-    }
+   
 
     function setNoteColor(color){
         setNote(prevNote => ({
@@ -129,13 +129,13 @@ export function AddNote({onAdd}){
             {!openNote && 
                 <div className="take-a-note">
                     <p  onClick={onClickNote}>Take a note...</p>
-                    <ActionBtns note={note}  onSetNoteColor={setNoteColor} onLoadImgOrVid={addImg}  />
+                    <ActionBtns note={note}  onSetNoteColor={setNoteColor} onLoadImgOrVid={addImg} onAddTodos = {addTodosNote}  />
                 </div> }
 
             {openNote && <NotePin note={note} onPinNote ={isPinned}/>}
         
-            {/* {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> } */}
-            {openNote && <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> }
+            {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> }
+            {/* {openNote && <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> } */}
                     
             {openNote &&  <ActionBtns note={note}  onSetNoteColor={setNoteColor} onLoadImgOrVid={addImg}  />} 
            
@@ -147,12 +147,13 @@ export function AddNote({onAdd}){
 function DynamicCmp(props){
     
     switch (props.note.type) {
+        case 'NoteVideo':
+        case 'NoteImg':
         case 'NoteTxt':
             return <NoteForm  {...props}/>
-        case 'NoteImg':
-            return <NoteImgAdd {...props}/>
-        case 'NoteVideo':
-            return <NoteImgAdd {...props}/>
+        case 'NoteList':
+            return <NoteToDos {...props}/>
+               
             
     }
 }

@@ -1,8 +1,6 @@
 import { TrashNotePreview } from "./TrashNotePreview.jsx";
 
 export function TrashNoteList ({trashNotes, onRestoreTrash, onPermanentDelete}){
-   
-    
     
     return <section className="note-list trash-note-list">
     

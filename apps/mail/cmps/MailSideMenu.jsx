@@ -29,36 +29,31 @@ export function MailSideMenu({ unreadCount, handleComposeClick , onSetStatus }){
                 </li>
                 <li className={selectedFolder === 'inbox' ? 'selected' : ''} 
                     onClick={() => handleFolderClick('inbox')} >
-                        
-                            <i className="fa-solid fa-inbox"></i>
-                            <p>Inbox</p>
-                            <p>{unreadCount}</p>
-                        
+                        <i className="fa-solid fa-inbox"></i>
+                        <p>Inbox</p>
+                        <p>{unreadCount}</p>
                 </li>
                     
                 <li className={selectedFolder === 'sent' ? 'selected' : ''} 
                     onClick={() => handleFolderClick('sent')}>
-                       
-                            <i className="fa-solid fa-paper-plane"></i>
-                            <p>Sent</p>
-                            {/* <p></p> */}
-                        
+                        <i className="fa-solid fa-paper-plane"></i>
+                        <p>Sent</p>  
                 </li>
                 <li className={selectedFolder === 'trash' ? 'selected' : ''} 
                     onClick={() => handleFolderClick('trash')}>
-                   
                         <img src="assets/img/trash.svg" alt="" />
                         <p>Trash</p>
-                        {/* <p></p> */}
-                    
+
                 </li>
                 <li className={selectedFolder === 'starred' ? 'selected' : ''} 
                     onClick={() => handleFolderClick('starred')}>
-                   
-                   <    i className="fa-regular fa-star"></i>
-                        <p>starred</p>
-                        {/* <p></p> */}
-                    
+                        <i className="fa-regular fa-star"></i>
+                        <p>Starred</p>
+                </li>
+                <li className={selectedFolder === 'drafts' ? 'selected' : ''} 
+                    onClick={() => handleFolderClick('drafts')}>
+                        <i className="fa-regular fa-file"></i>
+                        <p>Drafts</p>
                 </li>
             </ul>
         </section>

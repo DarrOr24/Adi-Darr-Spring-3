@@ -182,7 +182,6 @@ export function NoteToDosEdit({note,  onHandleTodos}){
             <button>Close</button>
         </form>    
     </section >
-   
     
 
 }

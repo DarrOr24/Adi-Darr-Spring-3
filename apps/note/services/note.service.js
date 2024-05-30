@@ -15,7 +15,8 @@ export const noteService = {
     createNote,
     saveToTrash,
     loadFromTrash,
-    removeFromTrash
+    removeFromTrash,
+    getFilterFromSearchParams
 }
 
 window.ns = noteService
@@ -137,6 +138,13 @@ function loadFromTrash(){
 
 function removeFromTrash(noteId) {
     return storageService.remove(TRASH_NOTE_KEY, noteId)
+}
+
+function getFilterFromSearchParams(searchParams) {
+    return {
+        // title: searchParams.get('title') || '',
+        txt: searchParams.get('txt') || '',
+    }
 }
 
 

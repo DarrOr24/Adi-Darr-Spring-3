@@ -9,7 +9,6 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoad
     const [ colorMenu, setColorMenu ] = useState(false)
     const [ addImg, setAddImg ] = useState(false)
     const [ addVideo, setAddVideo ] = useState(false)
-   
     
     function onDuplicateNote(ev){
        ev.stopPropagation()
@@ -74,7 +73,7 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoad
                         <img src="assets\img\remind_me.svg" alt="" />
                         <span className="action-name">Remind Me</span>
                     </div> */}
-
+                    
                     <div className="action-icon email">
                         <img height="24" width="24" src="assets\img\email.svg" alt="" />
                         <span className="action-name">Send as mail</span>

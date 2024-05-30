@@ -1,13 +1,13 @@
 const { useState, useEffect } = React
-const { useNavigate } = ReactRouterDOM
+const { useNavigate, useSearchParams } = ReactRouterDOM
 
 import { mailService } from '../services/mail.service.js'
 
 import { MailList } from '../cmps/MailList.jsx'
-import { MailDetails } from '../cmps/MailDetails.jsx'
+// import { MailDetails } from '../cmps/MailDetails.jsx'
 import { MailSideMenu } from '../cmps/MailSideMenu.jsx'
 import { MailFilter } from '../cmps/MailFilter.jsx'
-import { MailCompose } from '../cmps/MailCompose.jsx'
+// import { MailCompose } from '../cmps/MailCompose.jsx'
 import { MailCompose2 } from '../cmps/MailCompose2.jsx'
 
 export function MailIndex() {
@@ -18,9 +18,11 @@ export function MailIndex() {
     const [sortBy, setSortBy] = useState('date')
     const [showCompose, setShowCompose] = useState(false)
     // const [mailType, setMailType] = useState('inbox')
+    const [searchParams, setSearchParams] = useSearchParams()
     const [isLoading, setIsLoading] = useState(false)
     
     const navigate = useNavigate()
+    
     
     useEffect(() => {
         console.log('filterBy Index:', filterBy)
@@ -32,6 +34,13 @@ export function MailIndex() {
             .then(count => setUnreadCount(count))
     }, [filterBy, sortBy])
 
+    useEffect(() => {
+        if (searchParams.has('subject') || searchParams.has('body')) {
+            setShowCompose(true)
+        } else {
+            setShowCompose(false)
+        }
+    }, [])
 
     function removeMail(mailId) {
         setIsLoading(true)

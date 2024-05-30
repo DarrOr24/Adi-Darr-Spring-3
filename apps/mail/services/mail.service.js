@@ -16,9 +16,10 @@ export const mailService = {
     remove,
     save,
     getEmptyMail,
-    // getFilterFromSearchParams,
     countUnreadInboxMails,
     moveToTrash,
+    getMailFromSearchParams, // changeQueryStringParams
+    getNoteFromSearchParams, // changeQueryStringParams
 }
 
 // function query(filterBy = {status: 'inbox'}) {
@@ -104,7 +105,21 @@ function getEmptyMail() {
     return mail
 } 
 
+// changeQueryStringParams
+function getMailFromSearchParams(searchParams) {
+    return {
+        subject: searchParams.get('subject') || '',
+        body: searchParams.get('body') || '',
+    }
+}
 
+// changeQueryStringParams
+function getNoteFromSearchParams(searchParams) {
+    return {
+        title: searchParams.get('title') || '',
+        txt: searchParams.get('txt') || '',
+    }
+}
 
 function _createMails() {
     let mails = utilService.loadFromStorage(MAIL_KEY)

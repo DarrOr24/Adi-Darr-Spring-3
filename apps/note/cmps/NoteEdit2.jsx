@@ -16,6 +16,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote}){
     const [ note, setNote ] = useState(noteToEdit)
 
 
+
     function onSave(ev) {
         ev.preventDefault()
         if((!note.info.title)&&(!note.info.txt)){ //if note is empty
@@ -38,14 +39,9 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote}){
 
 
     function handleTodos(infoObj){
-        
-        const infoObjCopy = structuredClone(infoObj)
-        
-        
-         console.log(note.style.backgroundColor)
-
-        noteService.save({...note, info: infoObjCopy })
+        noteService.save({...note, info: infoObj, updateAt:Date.now() })
             .then((note)=>{
+                setNote(prevNote => prevNote = note)
                 onEdit(note)
                 onClose()
             })

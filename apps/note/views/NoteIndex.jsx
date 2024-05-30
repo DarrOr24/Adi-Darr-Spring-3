@@ -38,7 +38,7 @@ export function NoteIndex() {
     }
 
     function addEditNote(noteToEdit){ //Note already saved to service
-        console.log(noteToEdit.isPinned)
+        placeNote(noteToEdit)
         noteService.save(noteToEdit)
         .then (placeNote)
 

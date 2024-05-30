@@ -48,7 +48,7 @@ function _createNotes() {
     let notes = utilService.loadFromStorage(NOTE_KEY)
     if (!notes || !notes.length){
         notes = []
-        const noteTitles = ['Shopping List', 'Workout schedule', 'Passwords', 'Cookies', 'Important']
+        const noteTitles = ['Passwords', 'Important']
 
         const noteColors = ['#efeff1', 'white', '#aeccdc', '#e9e3d4', '#f6e2dd']
       

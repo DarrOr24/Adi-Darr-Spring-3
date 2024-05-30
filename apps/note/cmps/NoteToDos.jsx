@@ -42,6 +42,8 @@ export function NoteTodos({note}){
                                      </li> } 
                     
                     </ul>
+
+                    
             </section>
                   
 }

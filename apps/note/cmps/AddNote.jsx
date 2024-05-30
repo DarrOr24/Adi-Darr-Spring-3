@@ -100,16 +100,13 @@ export function AddNote({onAdd}){
         onAdd(TodosNote)
         setOpenNote(false)
         setNote(emptyNote)
-        navigate('/note')
-        
+        navigate('/note')  
     }
 
     function handleChangeInfo({ target }) {
-
         const { type, name: prop } = target
         let { value } = target
 
-        
         switch (type) {
             case 'range':
             case 'number':
@@ -120,12 +117,10 @@ export function AddNote({onAdd}){
                 value = target.checked
                 break;
         }
-
-       
-            setNote(prevNote => ({
-                ...prevNote,
-                info: { ...prevNote.info, [prop]: value }
-            }))
+        setNote(prevNote => ({
+            ...prevNote,
+            info: { ...prevNote.info, [prop]: value }
+        }))
            
     }
 

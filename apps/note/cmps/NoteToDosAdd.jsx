@@ -31,7 +31,7 @@ export function NoteToDosAdd({note: incomingNote,  onSaveTodosNote}){
 
     function onSubmit(ev){
         ev.preventDefault()
-        
+        console.log(item1.current.value)
         const todoTitle = noteTitle.current.value
 
         const todo1 = {'txt': item1.current.value}

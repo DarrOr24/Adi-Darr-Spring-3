@@ -1,26 +1,18 @@
-import { noteService } from "../services/note.service.js"
-
-const { useState, useRef} = React
+const { useState} = React
 
 
-export function NoteToDosAdd({note: incomingNote,  onSaveTodosNote}){
+export function NoteToDosAdd({note: incomingNote, handleChangeInfo, onSave, onHandleTodos}){
 
-    const [ note, setNote ] =useState(incomingNote)
+    
+    const [ todosObj, setTodosObj ] = useState({})
+   
     const [ listItem1, setListItem1 ] = useState(false)
     const [ listItem2, setListItem2 ] = useState(false)
     const [ listItem3, setListItem3 ] = useState(false)
     const [ listItem4, setListItem4 ] = useState(false)
     const [ listItem5, setListItem5 ] = useState(false)
 
-    const noteTitle = useRef()
-    const item1 = useRef()
-    const item2 = useRef()
-    const item3 = useRef()
-    const item4 = useRef()
-    const item5 = useRef()
     
-
-
     function openListItem(){
         setListItem1(true)
         if (listItem1) setListItem2(true)
@@ -29,72 +21,98 @@ export function NoteToDosAdd({note: incomingNote,  onSaveTodosNote}){
         if (listItem4) setListItem5(true)
     }
 
-    function onSubmit(ev){
-        ev.preventDefault()
-        console.log(item1.current.value)
-        const todoTitle = noteTitle.current.value
+    function handleChangeTodo({ target }) {
+        const { type, name: prop } = target
+        let { value } = target
 
-        const todo1 = {'txt': item1.current.value}
-        const todo2 = {'txt': item2.current.value}
-        const todo3 = {'txt': item3.current.value}
-        const todo4 = {'txt': item4.current.value}
-        const todo5 = {'txt': item5.current.value}
-        const todosArr = [todo1, todo2, todo3, todo4, todo5]
-        
-        setNote(prevNote => ({
-            ...prevNote,
-            info: { ...prevNote.info, 'title': todoTitle, 'todos': todosArr }
-        }))
+        switch (type) {
+            case 'range':
+            case 'number':
+                value = +value
+                break;
 
-        noteService.save({...note, info: {...note.info, 'title': todoTitle, 'todos': todosArr}})
-            .then(onSaveTodosNote)
+            case 'checkbox':
+                value = target.checked
+                break;
+        }
+         
+        setTodosObj(prevTodosObj => (
+                {...prevTodosObj, [prop]: value }
+            ))
+
+        const todosArr = Object.values(todosObj).map(value => value = {'txt': value})
+
+        onHandleTodos(todosArr)   
     }
-
-    
+        
+           
     return <section className = "note-form list">
-        <form onSubmit = {onSubmit}>
+        <form onSubmit = {onSave}>
            
             <input
-                ref={noteTitle} 
+                onChange={handleChangeInfo} 
+                // value={note.info.title}
+                id="title" 
+                name="title"
+                type="text" 
                 placeholder="Title"
                  />
 
             {listItem1 && <div>
                 <input type="checkbox"/>
                 <input
-                 ref={item1}
-                placeholder="List item"
-                />
+                onChange={handleChangeTodo} 
+                // value={note.info.todos[0].txt}
+                id="todo1" 
+                name="todo1"
+                type="text" 
+                placeholder="List item"/>
             </div>} 
 
             {listItem2 && <div>
                 <input type="checkbox"/>
                 <input
-                ref={item2}
-                placeholder="List item"
-                />
-            </div>}            
+                onChange={handleChangeTodo} 
+                // value={note.info.todos[1].txt}
+                id="todo2" 
+                name="todo2"
+                type="text" 
+                placeholder="List item"/>
+            </div>} 
+
             {listItem3 && <div>
                 <input type="checkbox"/>
                 <input
-                ref={item3}
-                placeholder="List item"
-                />
-            </div>}            
+                onChange={handleChangeTodo} 
+                // value={note.info.todos[1].txt}
+                id="todo3" 
+                name="todo3"
+                type="text" 
+                placeholder="List item"/>
+            </div>} 
+
             {listItem4 && <div>
                 <input type="checkbox"/>
                 <input
-                ref={item4}
-                placeholder="List item"
-                />
-            </div>}            
+                onChange={handleChangeTodo} 
+                // value={note.info.todos[1].txt}
+                id="todo4" 
+                name="todo4"
+                type="text" 
+                placeholder="List item"/>
+            </div>} 
+
             {listItem5 && <div>
                 <input type="checkbox"/>
                 <input
-                ref={item5}
-                placeholder="List item"
-                />
+                onChange={handleChangeTodo} 
+                // value={note.info.todos[1].txt}
+                id="todo5" 
+                name="todo5"
+                type="text" 
+                placeholder="List item"/>
             </div>}            
+                      
                 
             <div onClick={openListItem}>+</div>
 

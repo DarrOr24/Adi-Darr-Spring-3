@@ -36,11 +36,18 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote}){
         } 
     }
 
-    function saveTodosNote(todosNote){
-        setNote(prevNote => prevNote = todosNote)
+   
+    function handleTodos(todosArr){
+        
+        setNote(prevNote => ({
+            ...prevNote,
+            info: {...prevNote.info, todos: [...todosArr]}
+        }))
+
         onEdit(note)
         onClose()
         navigate('/note')
+        
     }
 
   
@@ -108,7 +115,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote}){
             <article style={{backgroundColor: note.style.backgroundColor}}>
                 <NotePin note={note} onPinNote ={isNotePinned}/>
         
-                <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave} onSaveTodosNote={saveTodosNote}   /> 
+                <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave} onHandleTodos={handleTodos}   /> 
                 <p>EDITED: {getUpdatedDate()}</p>       
                 <ActionBtns note={note} onSetNoteColor={setNoteColor} onLoadImgOrVid={addImgOrVideo}  />
 

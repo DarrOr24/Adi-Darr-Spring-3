@@ -96,21 +96,20 @@ export function AddNote({onAdd}){
         setNote(noteFromAddImg)
     }
 
+    function saveTodosNote(TodosNote){
+        onAdd(TodosNote)
+        setOpenNote(false)
+        setNote(emptyNote)
+        navigate('/note')
+        
+    }
+
     function handleChangeInfo({ target }) {
 
         const { type, name: prop } = target
         let { value } = target
 
-        const {info} = note
-        const {todos} = info
         
-        if(prop === 'todos'){
-            const todo = [{'txt': value}]
-            
-            value = [...todos, todo]
-            
-        }
-       
         switch (type) {
             case 'range':
             case 'number':
@@ -144,7 +143,7 @@ export function AddNote({onAdd}){
 
             {openNote && <NotePin note={note} onPinNote ={isPinned}/>}
         
-            {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}  /> }
+            {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave} onSaveTodosNote={saveTodosNote}  /> }
                   
             {openNote &&  <ActionBtns note={note}  onSetNoteColor={setNoteColor} onLoadImgOrVid={addImg}  />} 
            

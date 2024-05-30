@@ -1,15 +1,33 @@
 import { mailService } from "../services/mail.service.js"
 
 const { useState, useEffect } = React
-const {  useNavigate } = ReactRouterDOM
+const {  useNavigate,useParams, useSearchParams } = ReactRouterDOM
 
 export function MailCompose2({onComposeMail, onClose}){
     const [mail, setMail] = useState(mailService.getEmptyMail())
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [noteMailContent, setNoteMailContent] = useState({ subject: '', body: '' })
+    
+    const params = useParams()
     const navigate = useNavigate()
     
     useEffect(() => {
         navigate(`/mail/compose`)
+        const subject = searchParams.get('subject') || ''
+        const body = searchParams.get('body') || ''
+        setMail(prevMail => ({ ...prevMail, subject, body }))
     }, [])
+
+    useEffect(() => {
+        const updatedMail = mailService.getMailFromSearchParams(searchParams)
+        setNoteMailContent(updatedMail)
+    }, [searchParams])
+
+    useEffect(() => {
+        if (mail.subject || mail.body) {
+            setSearchParams({ subject: mail.subject, body: mail.body })
+        }
+    }, [mail.subject, mail.body])
 
     function handleChange({ target }) {
         const { type, name: prop } = target
@@ -44,6 +62,12 @@ export function MailCompose2({onComposeMail, onClose}){
 
     function sendNote(){
         console.log('soon..' )
+        const noteContent = {
+            title: mail.subject,
+            txt: mail.body,
+        }
+        console.log('noteContent:', noteContent)
+        setNoteMailContent({subject: '', body: ''})
         closeForm()
     }
 

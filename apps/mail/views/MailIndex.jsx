@@ -1,5 +1,5 @@
 const { useState, useEffect } = React
-const { useNavigate } = ReactRouterDOM
+const { useNavigate, useSearchParams } = ReactRouterDOM
 
 import { mailService } from '../services/mail.service.js'
 
@@ -18,9 +18,11 @@ export function MailIndex() {
     const [sortBy, setSortBy] = useState('date')
     const [showCompose, setShowCompose] = useState(false)
     // const [mailType, setMailType] = useState('inbox')
+    const [searchParams, setSearchParams] = useSearchParams()
     const [isLoading, setIsLoading] = useState(false)
     
     const navigate = useNavigate()
+    
     
     useEffect(() => {
         console.log('filterBy Index:', filterBy)
@@ -32,6 +34,13 @@ export function MailIndex() {
             .then(count => setUnreadCount(count))
     }, [filterBy, sortBy])
 
+    useEffect(() => {
+        if (searchParams.has('subject') || searchParams.has('body')) {
+            setShowCompose(true)
+        } else {
+            setShowCompose(false)
+        }
+    }, [])
 
     function removeMail(mailId) {
         setIsLoading(true)

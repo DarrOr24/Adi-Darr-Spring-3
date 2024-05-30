@@ -3,12 +3,15 @@ import { NoteImgAdd } from "./NoteImgAdd.jsx"
 import { NoteVideoAdd } from "./NoteVideoAdd.jsx"
 
 const { useState } = React
+const {  useNavigate } = ReactRouterDOM // queryStringParams
 
 export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoadImgOrVid, onAddTodos} ){
 
     const [ colorMenu, setColorMenu ] = useState(false)
     const [ addImg, setAddImg ] = useState(false)
     const [ addVideo, setAddVideo ] = useState(false)
+
+    const navigate = useNavigate() // queryStringParams
    
     
     function onDuplicateNote(ev){
@@ -51,6 +54,16 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoad
         onLoadImgOrVid(noteFromVideo)
     }
 
+    // queryStringParams
+    function sendAsMail(){
+        // const mailContent = {
+        //     subject: note.info.title,
+        //     body: note.info.txt,
+        // }
+        // navigate(`/mail/compose?subject=${mailContent.subject}&body=${mailContent.body}`)
+        navigate(`/mail/compose?subject=${note.info.title}&body=${note.info.txt}`)
+    }
+
     
     
     return <section className ="action-icons">
@@ -75,7 +88,9 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoad
                         <span className="action-name">Remind Me</span>
                     </div> */}
 
-                    <div className="action-icon email">
+                {/* queryStringParams */}
+                    <div onClick={sendAsMail} className="action-icon email" > 
+                    {/* <div className="action-icon email"> */}
                         <img height="24" width="24" src="assets\img\email.svg" alt="" />
                         <span className="action-name">Send as mail</span>
                     </div>

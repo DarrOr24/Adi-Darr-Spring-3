@@ -36,21 +36,20 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote}){
         } 
     }
 
-   
-    function handleTodos(todosObj){
+
+    function handleTodos(infoObj){
         
-        setNote(prevNote => ({
-            ...prevNote,
-            info: {...prevNote.info, todos: {...todosObj}}
-        }))
-        noteService.save({...note, info: {...note.info, todos:{...todosObj}}})
-            .then((note) => {
+        const infoObjCopy = structuredClone(infoObj)
+        
+        
+         console.log(note.style.backgroundColor)
+
+        noteService.save({...note, info: infoObjCopy })
+            .then((note)=>{
                 onEdit(note)
                 onClose()
             })
-            .catch(() => console.log('error'))
-            .finally(() => navigate('/note'))
-        
+       
     }
 
   

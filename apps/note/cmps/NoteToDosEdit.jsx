@@ -1,8 +1,9 @@
-const { useState, useRef} = React
+const { useState} = React
 
+export function NoteToDosEdit({note,  onHandleTodos}){
 
-export function NoteToDosEdit({note,  onSave}){
     const noteToEdit = note
+    // const [note, setNote] = useState(noteToEdit)
 
     if(noteToEdit){
         const todoValArr = Object.values(noteToEdit.info.todos)
@@ -14,7 +15,11 @@ export function NoteToDosEdit({note,  onSave}){
         todosLength = 0
     }
 
-    const [ todosObj, setTodosObj ] = useState({})
+    const {info} = noteToEdit
+    const {todos} = info
+
+    const [ todosObj, setTodosObj ] = useState(todos)
+    const [ infoObj, setInfoObj ] = useState(info)
    
     const [ listItem1, setListItem1 ] = useState((todosLength>=1) ? true : false)
     const [ listItem2, setListItem2 ] = useState((todosLength>=2) ? true : false)
@@ -28,6 +33,11 @@ export function NoteToDosEdit({note,  onSave}){
         if (listItem2) setListItem3(true)
         if (listItem3) setListItem4(true)
         if (listItem4) setListItem5(true)
+    }
+
+    function onSave(ev){
+        ev.preventDefault()
+        onHandleTodos(infoObj)
     }
 
     function handleChangeTodo({ target }) {
@@ -49,19 +59,11 @@ export function NoteToDosEdit({note,  onSave}){
                 {...prevTodosObj, [prop]: value }
             ))
 
-        handleTodos(todosObj)  
+        setInfoObj(prevInfoObj => (
+            {...prevInfoObj, todos: {...todosObj} }
+        ))
     }
-
-    function handleTodos(todosObj){
-        
-        
-        setNote(prevNote => ({
-            ...prevNote,
-            info: {...prevNote.info, todos: {...todosObj}}
-        }))
-        
-    }
-
+  
     function handleChangeInfo({ target }) {
         const { type, name: prop } = target
         let { value } = target
@@ -76,10 +78,9 @@ export function NoteToDosEdit({note,  onSave}){
                 value = target.checked
                 break;
         }
-        setNote(prevNote => ({
-            ...prevNote,
-            info: { ...prevNote.info, [prop]: value }
-        }))
+        setInfoObj(prevInfoObj => (
+            {...prevInfoObj, [prop]: value }
+        ))
            
     }
         
@@ -89,11 +90,11 @@ export function NoteToDosEdit({note,  onSave}){
            
             <input
                 onChange={handleChangeInfo} 
-                value={noteToEdit.info.title}
+                // value={noteToEdit.info.title}
                 id="title" 
                 name="title"
                 type="text" 
-                placeholder="Title"
+                placeholder={(noteToEdit.info.title) ? noteToEdit.info.title : 'Title'}
                  />
 
             {listItem1 && <div>
@@ -176,10 +177,6 @@ export function NoteToDosEdit({note,  onSave}){
                 placeholder={(todosLength>=5) ? note.info.todos.todo5 : 'List item'}/>
             </div>} 
 
-          
-         
-                      
-                
             <div className="add-list-item" onClick={openListItem}>+</div>
 
             <button>Close</button>

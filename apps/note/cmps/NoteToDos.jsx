@@ -2,12 +2,12 @@ export function NoteTodos({note}){
 
     const {info} = note
     const {todos} = info
-    return <section className="note-text">
+    return <section className="note-todos">
                 <h2>{note.info.title}</h2>
-                <ul> 
+                <ul className="to-do-list"> 
                     {todos.map(todo => 
                     <li  key={note.id }   >
-                        {todo.txt}
+                        <span>☑️</span>{todo.txt}
                     </li>)}
                     </ul>
             </section>

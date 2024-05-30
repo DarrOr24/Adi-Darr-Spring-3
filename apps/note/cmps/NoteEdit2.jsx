@@ -7,6 +7,7 @@ import { noteService } from "../services/note.service.js";
 import { ActionBtns } from "./ActionBtns.jsx";
 import { NoteForm } from "./NoteForm.jsx";
 import { NotePin } from "./NotePin.jsx";
+import { NoteToDosAdd } from "./NoteToDosAdd.jsx";
 
 export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNote }){
 
@@ -104,7 +105,6 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
             <article style={{backgroundColor: note.style.backgroundColor}}>
                 <NotePin note={note} onPinNote ={isNotePinned}/>
         
-                {/* <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}/>  */}
                 <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> 
                 <p>EDITED: {getUpdatedDate()}</p>       
                 <ActionBtns note={note} onSetNoteColor={setNoteColor} onLoadImgOrVid={addImgOrVideo}  />
@@ -126,11 +126,9 @@ function DynamicCmp(props){
         case 'NoteImg':
         case 'NoteTxt':
             return <NoteForm  {...props}/>
-        case 'NoteList':
-            return <div>NOTE LIST</div>
-        
-            
-           
+        case 'NoteTodo':
+            return <NoteToDosAdd {...props}/>
+             
     }
 }
 

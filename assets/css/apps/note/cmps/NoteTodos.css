@@ -1,0 +1,18 @@
+.note-preview .note-to-dos ul {
+    display: grid;
+   
+    
+}
+
+.note-preview .to-do-list {
+    display: grid;
+}
+
+.note-preview .to-do-list li {
+    justify-self: start;
+    font-size: 0.8em;
+    padding: 0;
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 1em;
+}

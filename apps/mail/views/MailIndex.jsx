@@ -4,10 +4,10 @@ const { useNavigate, useSearchParams } = ReactRouterDOM
 import { mailService } from '../services/mail.service.js'
 
 import { MailList } from '../cmps/MailList.jsx'
-// import { MailDetails } from '../cmps/MailDetails.jsx'
+
 import { MailSideMenu } from '../cmps/MailSideMenu.jsx'
 import { MailFilter } from '../cmps/MailFilter.jsx'
-// import { MailCompose } from '../cmps/MailCompose.jsx'
+
 import { MailCompose2 } from '../cmps/MailCompose2.jsx'
 
 export function MailIndex() {
@@ -15,7 +15,9 @@ export function MailIndex() {
     const [ mails, setMails ] = useState([])
     const [ filterBy, setFilterBy ] = useState({status:'inbox'})
     const [unreadCount, setUnreadCount] = useState(0)
-    const [sortBy, setSortBy] = useState('date')
+    const [sortBy, setSortBy] = useState({sortBy:'date'})
+
+    
     const [showCompose, setShowCompose] = useState(false)
     // const [mailType, setMailType] = useState('inbox')
     const [searchParams, setSearchParams] = useSearchParams()

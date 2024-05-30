@@ -28,9 +28,7 @@ export function NoteVideoAdd({note: noteToEdit, onChangeVideo, onReturn}){
     function onSearch(ev){
         ev.stopPropagation()
         setFinalValue(searchValue)
-        setIsReady(true)
-        
-        
+        setIsReady(true)  
     }
 
     function onSelectVideo(videoUrl){

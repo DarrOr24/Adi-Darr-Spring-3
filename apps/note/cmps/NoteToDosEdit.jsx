@@ -1,27 +1,23 @@
-import { noteService } from "../services/note.service"
-
-const { useState, useEffect } = React
+const { useState } = React
 
 
-export function NoteToDosAdd({note: incomingNote,  handleChangeInfo, onSave}){
+export function NoteToDosEdit({note, handleChangeInfo, onSave}){
 
+    console.log('HI YOU REACHED NOTODOSEDIT')
     const [ listItem1, setListItem1 ] = useState(false)
-
-
+    
     function openListItem(){
         console.log('hi')
         setListItem1(true)
     }
 
-    
 
-    
     return <section className = "note-form list">
         <form onSubmit = {onSave}>
            
             <input
                 onChange={handleChangeInfo} 
-                value={incomingNote.info.title}
+                value={note.info.title}
                 id="title" 
                 name="title"
                 type="text" 
@@ -33,7 +29,7 @@ export function NoteToDosAdd({note: incomingNote,  handleChangeInfo, onSave}){
             {listItem1 && <div>
                 <input type="checkbox"/>
                 <input
-                onInput={handleChangeInfo} 
+                onChange={handleChangeInfo} 
                 
                 id="title" 
                 name="todos"

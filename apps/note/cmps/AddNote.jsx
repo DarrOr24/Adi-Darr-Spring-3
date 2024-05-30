@@ -18,7 +18,8 @@ export function AddNote({onAdd}){
     const navigate = useNavigate()
     const [ openNote, setOpenNote ] = useState(false)
     const [ note, setNote ] = useState(emptyNote)
-
+    
+    
    
     function onClickNote(){
          navigate(`/note/add`)
@@ -29,9 +30,8 @@ export function AddNote({onAdd}){
     function addTodosNote(){
         console.log('HI')
         navigate(`/note/add`)
-        setNote({...note, type: 'NoteList'})
+        setNote({...note, type: 'NoteTodo'})
         setOpenNote(true)
-
     }
 
 
@@ -55,6 +55,7 @@ export function AddNote({onAdd}){
 
 
     function onSave(ev) {
+        
         ev.preventDefault()
         switch (note.type) {
             case 'NoteTxt':
@@ -75,21 +76,20 @@ export function AddNote({onAdd}){
                 }   
         }
 
-            noteService.save(note)
+        noteService.save(note)
             .then((newNote) => {
                 onAdd(newNote)
                 setOpenNote(false)
                 setNote(emptyNote)
-            })
+        })
             
             .catch(() => {
                 console.log('error')
                 // showErrorMsg('Couldnt save')
             })
             .finally(() => navigate('/note'))
-       
-        
     }
+
 
     function addImg(noteFromAddImg){
         setOpenNote(true)
@@ -97,9 +97,20 @@ export function AddNote({onAdd}){
     }
 
     function handleChangeInfo({ target }) {
+
         const { type, name: prop } = target
         let { value } = target
 
+        const {info} = note
+        const {todos} = info
+        
+        if(prop === 'todos'){
+            const todo = [{'txt': value}]
+            
+            value = [...todos, todo]
+            
+        }
+       
         switch (type) {
             case 'range':
             case 'number':
@@ -111,32 +122,18 @@ export function AddNote({onAdd}){
                 break;
         }
 
-        if(prop==='todos'){
-
-            handleChangeTodos(value)
-            return
-        } 
-    
-        setNote(prevNote => ({
-            ...prevNote,
-            info: { ...prevNote.info, [prop]: value }
-        }))
+       
+            setNote(prevNote => ({
+                ...prevNote,
+                info: { ...prevNote.info, [prop]: value }
+            }))
+           
     }
 
-    function handleChangeTodos(value){
-        
-        setNote(prevNote => ({
-            ...prevNote,
-            info: { ...prevNote.info, 
-             todos: [...prevNote.info.todos, value]
-            }
-        }))
-        
-    }
-
-  
-
     
+
+   
+
     return <section className = "add-note" style={{backgroundColor: note.style.backgroundColor}}>
             
             {!openNote && 
@@ -147,12 +144,10 @@ export function AddNote({onAdd}){
 
             {openNote && <NotePin note={note} onPinNote ={isPinned}/>}
         
-            {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> }
-            {/* {openNote && <NoteForm  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}   /> } */}
-                    
+            {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave}  /> }
+                  
             {openNote &&  <ActionBtns note={note}  onSetNoteColor={setNoteColor} onLoadImgOrVid={addImg}  />} 
            
-        
     </section>
 }
 
@@ -164,10 +159,8 @@ function DynamicCmp(props){
         case 'NoteImg':
         case 'NoteTxt':
             return <NoteForm  {...props}/>
-        case 'NoteList':
-            return <NoteToDosAdd {...props}/>
-               
-            
+        case 'NoteTodo':
+            return <NoteToDosAdd {...props}/>     
     }
 }
 

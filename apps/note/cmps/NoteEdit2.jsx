@@ -7,7 +7,7 @@ import { noteService } from "../services/note.service.js";
 import { ActionBtns } from "./ActionBtns.jsx";
 import { NoteForm } from "./NoteForm.jsx";
 import { NotePin } from "./NotePin.jsx";
-import { NoteToDosAdd } from "./NoteToDosAdd.jsx";
+import { NoteToDosEdit } from "./NoteToDosEdit.jsx";
 
 export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNote }){
 
@@ -20,26 +20,19 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
         if((!note.info.title)&&(!note.info.txt)){ //if note is empty
             console.log('note is empty')
             onClose()
-            // navigate(`/note`)
             return 
         }
         
-        else{
-            
+        else{ 
             noteService.save({...note, updatedAt: Date.now(),})
             .then((note) => {
                 console.log(note.isPinned)
                 onEdit(note)
                 onClose()
-            })
-            
-            .catch(() => {
-                console.log('error')
-                // showErrorMsg('Couldnt save')
-            })
+            }) 
+            .catch(() =>  console.log('error'))
             .finally(() => navigate('/note'))
-        }
-        
+        } 
     }
 
 
@@ -82,12 +75,14 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNo
                 break;
         }
         
-        setNote(prevNote => ({
-            ...prevNote,
-            info: { ...prevNote.info, [prop]: value }
-        }))
-
+        if(prop !== 'todos'){
+            setNote(prevNote => ({
+                ...prevNote,
+                info: { ...prevNote.info, [prop]: value }
+            }))
+        }
         
+    
     }
 
     function getUpdatedDate(){
@@ -127,7 +122,7 @@ function DynamicCmp(props){
         case 'NoteTxt':
             return <NoteForm  {...props}/>
         case 'NoteTodo':
-            return <NoteToDosAdd {...props}/>
+            return <NoteToDosEdit {...props}/>
              
     }
 }

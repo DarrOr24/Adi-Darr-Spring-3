@@ -9,11 +9,11 @@ import { NoteForm } from "./NoteForm.jsx";
 import { NoteImg } from "./NoteImg.jsx";
 import { NoteImgAdd } from "./NoteImgAdd.jsx";
 import { NotePin } from "./NotePin.jsx";
-import { NoteToDos } from "./NoteToDos.jsx";
+import { NoteToDosAdd } from "./NoteToDosAdd.jsx";
 
 export function AddNote({onAdd}){
 
-    const emptyNote = noteService.createNote('NoteTxt', false, {backgroundColor: 'white'}, {title: '', txt: '', url:'' }, Date.now())
+    const emptyNote = noteService.createNote('NoteTxt', false, {backgroundColor: 'white'}, {title: '', txt: '', url:'', todos:[] }, Date.now())
     
     const navigate = useNavigate()
     const [ openNote, setOpenNote ] = useState(false)
@@ -34,7 +34,6 @@ export function AddNote({onAdd}){
 
     }
 
-   
 
     function setNoteColor(color){
         setNote(prevNote => ({
@@ -97,10 +96,7 @@ export function AddNote({onAdd}){
         setNote(noteFromAddImg)
     }
 
-    
-
     function handleChangeInfo({ target }) {
-        console.log(target)
         const { type, name: prop } = target
         let { value } = target
 
@@ -114,11 +110,28 @@ export function AddNote({onAdd}){
                 value = target.checked
                 break;
         }
-        
+
+        if(prop==='todos'){
+
+            handleChangeTodos(value)
+            return
+        } 
+    
         setNote(prevNote => ({
             ...prevNote,
             info: { ...prevNote.info, [prop]: value }
         }))
+    }
+
+    function handleChangeTodos(value){
+        
+        setNote(prevNote => ({
+            ...prevNote,
+            info: { ...prevNote.info, 
+             todos: [...prevNote.info.todos, value]
+            }
+        }))
+        
     }
 
   
@@ -152,7 +165,7 @@ function DynamicCmp(props){
         case 'NoteTxt':
             return <NoteForm  {...props}/>
         case 'NoteList':
-            return <NoteToDos {...props}/>
+            return <NoteToDosAdd {...props}/>
                
             
     }

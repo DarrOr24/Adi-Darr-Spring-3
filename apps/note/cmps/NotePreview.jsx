@@ -1,12 +1,12 @@
 const { useState } = React
 const { useNavigate } = ReactRouter
 
-import { utilService } from "../../../services/util.service.js";
-import { noteService } from "../services/note.service.js";
+
 import { ActionBtns } from "./ActionBtns.jsx"
 import { NoteEdit2 } from "./NoteEdit2.jsx"
 import { NoteImg } from "./NoteImg.jsx";
 import { NotePin } from "./NotePin.jsx"
+import { NoteTodos } from "./NoteToDos.jsx";
 import { NoteTxt } from "./NoteTxt.jsx";
 import { NoteVideo } from "./NoteVideo.jsx";
 
@@ -79,6 +79,8 @@ function DynamicCmp({note}){
             return <NoteImg note={note}/>
         case 'NoteVideo':
             return <NoteVideo note = {note} />
+        case 'NoteTodo':
+            return  <NoteTodos note= {note} />   
     }
 }
 

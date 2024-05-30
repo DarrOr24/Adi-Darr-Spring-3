@@ -1,4 +1,4 @@
-const { useState, useEffect } = React
+const { useState } = React
 
 const { useNavigate } = ReactRouter
 
@@ -6,7 +6,6 @@ const { useNavigate } = ReactRouter
 import { noteService } from "../services/note.service.js";
 import { ActionBtns } from "./ActionBtns.jsx";
 import { NoteForm } from "./NoteForm.jsx";
-import { NoteImgAdd } from "./NoteImgAdd.jsx";
 import { NotePin } from "./NotePin.jsx";
 
 export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote, onPinNote }){

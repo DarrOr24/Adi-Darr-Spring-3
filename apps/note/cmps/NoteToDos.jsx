@@ -1,35 +1,15 @@
-export function NoteToDos({note, onSave}){
+export function NoteTodos({note}){
 
-    function handleChangeTodo(){
-        console.log('Todos')
-    }
-
-    return <section className = "note-form list">
-        <form onSubmit = {onSave}>
-           
-            <input
-                onChange={handleChangeTodo} 
-                value={note.info.title}
-                id="title" 
-                name="title"
-                type="text" 
-                placeholder="Title"
-                 />
-
-            <div>
-            <input
-                onChange={handleChangeTodo} 
-                
-                id="title" 
-                name="title"
-                type="text" 
-                placeholder="Title"
-                 />
-            </div>
-
-            
-            <button>Close</button>
-        </form>    
-    </section >
-
+    const {info} = note
+    const {todos} = info
+    return <section className="note-text">
+                <h2>{note.info.title}</h2>
+                <ul> 
+                    {todos.map(todo => 
+                    <li  key={note.id }   >
+                        {todo.txt}
+                    </li>)}
+                    </ul>
+            </section>
+                  
 }

@@ -51,8 +51,7 @@ export function NoteIndex() {
         
         noteService.saveToTrash(noteToTrash)
         setTrashNotes(prevTrashNotes => [noteToTrash, ...prevTrashNotes ])
-        console.log(trashNotes)
-
+    
         noteService.remove(noteId)
             .then(() => {
                 setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))

@@ -18,13 +18,14 @@ export const mailService = {
     getEmptyMail,
     countUnreadInboxMails,
     moveToTrash,
-    getMailFromSearchParams, // changeQueryStringParams
-    getNoteFromSearchParams, // changeQueryStringParams
+    getFilterFromSearchParams,
+    // getMailFromSearchParams, 
+    // getNoteFromSearchParams, 
 }
 
 // function query(filterBy = {status: 'inbox'}) {
 function query(filterBy) {
-    console.log('filterBy from Servic', filterBy)
+    // console.log('filterBy from Servic', filterBy)
     return storageService.query(MAIL_KEY)
         .then(mails => {
             if (filterBy.status) {
@@ -61,7 +62,7 @@ function query(filterBy) {
             } else {
                 mails.sort((a, b) => b.sentAt - a.sentAt)
             }
-            console.log('mails', mails);
+            // console.log('mails', mails);
             return mails
         })
 }
@@ -105,6 +106,11 @@ function getEmptyMail() {
     return mail
 } 
 
+function getFilterFromSearchParams(searchParams) {
+    return {
+        txt: searchParams.get('txt') || '',
+    }
+}
 // changeQueryStringParams
 function getMailFromSearchParams(searchParams) {
     return {

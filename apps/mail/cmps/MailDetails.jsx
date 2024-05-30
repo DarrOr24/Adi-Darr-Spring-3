@@ -5,13 +5,40 @@ const { useParams, useNavigate, Link } = ReactRouterDOM
 import { utilService } from "../../../services/util.service.js"
 import { mailService } from "../services/mail.service.js"
 
-export function MailDetails({mail, onReturn}) {
-
+// export function MailDetails({mail, onReturn}) {
+export function MailDetails({ toggleReadStatus, status }) {
+    const [mail, setMail] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
+    
+    const params = useParams()
     const navigate = useNavigate()
-
+    
     useEffect(() => {
-        navigate(`/mail/details/${mail.id}`)
-    }, [])
+        setIsLoading(true)
+        mailService.get(params.mailId)
+            .then(mail => {
+                setMail(mail)
+                if (!mail.isRead) {
+                    const updatedMail = { ...mail, isRead: true }
+                    mailService.save(updatedMail)
+                        .then(() => {
+                            toggleReadStatus(updatedMail.id)
+                        })
+                }
+            })
+            .catch(() => {
+                alert('Couldnt get mail...')
+                navigate('/mail')
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }, [params.mailId])
+
+
+    // useEffect(() => {
+    //     navigate(`/mail/details/${mail.id}`)
+    // }, [])
 
     function getTime(mail) {
         const sentDate = new Date(mail.sentAt)
@@ -26,12 +53,29 @@ export function MailDetails({mail, onReturn}) {
         return time
     }
 
+    if (isLoading) return <div>Loading...</div>
+
+    if (!mail) return <div>Mail not found...</div>
     
     return (
         <section className="mail-details">
-            <div onClick={onReturn} className="action-icon back">
+            {/* <div onClick={onReturn} className="action-icon back">
                     <img src="assets/img/back.svg" alt="" />
                     <span className="action-name">Back</span>
+            </div>
+            <div className="subject">{mail.subject}</div>
+            <div className="details">
+                <span className="from">{'<'}{mail.from}{'>'}</span>
+                <span>{getTime(mail)}</span>
+            </div>
+            <div className="mail-body">{mail.body}</div> */}
+            
+            <div className="action-icon back">
+                {/* <Link to="/mail"> */}
+                <Link to={`/mail/${status}`}>
+                    <img src="assets/img/back.svg" alt="" />
+                    <span className="action-name">Back to {status}</span>
+                </Link>
             </div>
             <div className="subject">{mail.subject}</div>
             <div className="details">
@@ -41,7 +85,6 @@ export function MailDetails({mail, onReturn}) {
             <div className="mail-body">{mail.body}</div>
         </section>
     )
-
-    
+  
 }
 

@@ -49,6 +49,10 @@ export function MailCompose2({onComposeMail, onClose}){
     function onSave(ev) {
         ev.preventDefault()
         console.log(mail)
+        if(!mail.to) {
+            console.log('Please specify at least one recipient.')
+            return
+        }
         mailService.save(mail)
             .then((savedMail) => onComposeMail(savedMail))
             .then(() => console.log('Mail has successfully saved!'))
@@ -61,15 +65,19 @@ export function MailCompose2({onComposeMail, onClose}){
     }
 
     function sendNote(){
-        console.log('soon..' )
         const noteContent = {
             title: mail.subject,
             txt: mail.body,
         }
         console.log('noteContent:', noteContent)
+
+        navigate(`/note/add?title=${mail.subject}&body=${mail.body}`)
+    
         setNoteMailContent({subject: '', body: ''})
         closeForm()
     }
+
+    
 
     return (
         <section className="mail-compose">

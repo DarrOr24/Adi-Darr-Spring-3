@@ -1,16 +1,18 @@
 const { useState} = React
 
 
-export function NoteToDosAdd({note: incomingNote, handleChangeInfo, onSave, onHandleTodos}){
+export function NoteToDosAdd({note, handleChangeInfo, onSave, onHandleTodos}){
 
-    
+    const todosLength = note.info.todos.length
+    console.log(todosLength)
+
     const [ todosObj, setTodosObj ] = useState({})
    
-    const [ listItem1, setListItem1 ] = useState(false)
-    const [ listItem2, setListItem2 ] = useState(false)
-    const [ listItem3, setListItem3 ] = useState(false)
-    const [ listItem4, setListItem4 ] = useState(false)
-    const [ listItem5, setListItem5 ] = useState(false)
+    const [ listItem1, setListItem1 ] = useState((todosLength>=1) ? true : false)
+    const [ listItem2, setListItem2 ] = useState((todosLength>=2) ? true : false)
+    const [ listItem3, setListItem3 ] = useState((todosLength>=3) ? true : false)
+    const [ listItem4, setListItem4 ] = useState((todosLength>=4) ? true : false)
+    const [ listItem5, setListItem5 ] = useState((todosLength>=5) ? true : false)
 
     
     function openListItem(){
@@ -51,7 +53,7 @@ export function NoteToDosAdd({note: incomingNote, handleChangeInfo, onSave, onHa
            
             <input
                 onChange={handleChangeInfo} 
-                // value={note.info.title}
+                value={note.info.title}
                 id="title" 
                 name="title"
                 type="text" 
@@ -62,18 +64,18 @@ export function NoteToDosAdd({note: incomingNote, handleChangeInfo, onSave, onHa
                 <input type="checkbox"/>
                 <input
                 onChange={handleChangeTodo} 
-                // value={note.info.todos[0].txt}
+                // value={(todosLength>=1) ? note.info.todos[0].txt : ''}
                 id="todo1" 
                 name="todo1"
                 type="text" 
-                placeholder="List item"/>
+                placeholder={(todosLength>=1) ? note.info.todos[0].txt : 'List item'}/>
             </div>} 
 
             {listItem2 && <div>
                 <input type="checkbox"/>
                 <input
                 onChange={handleChangeTodo} 
-                // value={note.info.todos[1].txt}
+                // value={(todosLength>=2) ? note.info.todos[1].txt : ''}
                 id="todo2" 
                 name="todo2"
                 type="text" 
@@ -84,7 +86,7 @@ export function NoteToDosAdd({note: incomingNote, handleChangeInfo, onSave, onHa
                 <input type="checkbox"/>
                 <input
                 onChange={handleChangeTodo} 
-                // value={note.info.todos[1].txt}
+                // value={(todosLength>=3) ? note.info.todos[2].txt : ''}
                 id="todo3" 
                 name="todo3"
                 type="text" 
@@ -95,7 +97,7 @@ export function NoteToDosAdd({note: incomingNote, handleChangeInfo, onSave, onHa
                 <input type="checkbox"/>
                 <input
                 onChange={handleChangeTodo} 
-                // value={note.info.todos[1].txt}
+                // value={(todosLength>=4) ? note.info.todos[3].txt : ''}
                 id="todo4" 
                 name="todo4"
                 type="text" 
@@ -106,11 +108,11 @@ export function NoteToDosAdd({note: incomingNote, handleChangeInfo, onSave, onHa
                 <input type="checkbox"/>
                 <input
                 onChange={handleChangeTodo} 
-                // value={note.info.todos[1].txt}
+                // value={(todosLength>=5) ? note.info.todos[4].txt : ''}
                 id="todo5" 
                 name="todo5"
                 type="text" 
-                placeholder="List item"/>
+                placeholder={(todosLength>=5) ? note.info.todos[4].txt : 'List item'}/>
             </div>}            
                       
                 

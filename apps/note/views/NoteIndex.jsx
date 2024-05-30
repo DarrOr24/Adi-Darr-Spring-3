@@ -16,6 +16,8 @@ export function NoteIndex() {
     const [notes, setNotes] = useState([])
     const [trashNotes, setTrashNotes] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+    const [searchParams, setSearchParams] = useSearchParams()
+    // const [ filterBy, setFilterBy ] = useState(noteService.getFilterFromSearchParams(searchParams))
     const [ filterBy, setFilterBy ] = useState({})
     const [ mainDisplay, setMainDisplay ] = useState('notes')
     

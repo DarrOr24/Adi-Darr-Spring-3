@@ -96,11 +96,13 @@ export function AddNote({onAdd}){
         setNote(noteFromAddImg)
     }
 
-    function saveTodosNote(TodosNote){
-        onAdd(TodosNote)
-        setOpenNote(false)
-        setNote(emptyNote)
-        navigate('/note')  
+    function handleTodos(todosArr){
+        
+        setNote(prevNote => ({
+            ...prevNote,
+            info: {...prevNote.info, todos: [...todosArr]}
+        }))
+        
     }
 
     function handleChangeInfo({ target }) {
@@ -138,7 +140,7 @@ export function AddNote({onAdd}){
 
             {openNote && <NotePin note={note} onPinNote ={isPinned}/>}
         
-            {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave} onSaveTodosNote={saveTodosNote}  /> }
+            {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave} onHandleTodos={handleTodos}  /> }
                   
             {openNote &&  <ActionBtns note={note}  onSetNoteColor={setNoteColor} onLoadImgOrVid={addImg}  />} 
            

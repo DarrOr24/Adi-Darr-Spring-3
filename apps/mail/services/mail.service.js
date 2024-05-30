@@ -39,6 +39,9 @@ function query(filterBy) {
                 if (filterBy.status === 'starred') {
                     mails = mails.filter(mail => mail.isStarred)
                 }
+                if (filterBy.status === 'drafts') {
+                    mails = []
+                }
             }
 
             if (filterBy.txt) {
@@ -52,6 +55,8 @@ function query(filterBy) {
 
             if (filterBy.sortBy === 'title') {
                 mails.sort((a, b) => a.subject.localeCompare(b.subject))
+            } else if (filterBy.status === 'trash'){
+                mails.sort((a, b) => b.removedAt - a.removedAt)
             } else {
                 mails.sort((a, b) => b.sentAt - a.sentAt)
             }

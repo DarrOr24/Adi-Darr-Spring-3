@@ -42,6 +42,11 @@ export function MailCompose2({onComposeMail, onClose}){
         onClose()
     }
 
+    function sendNote(){
+        console.log('soon..' )
+        closeForm()
+    }
+
     return (
         <section className="mail-compose">
             <form onSubmit={onSave} className='mail-form'>
@@ -64,8 +69,10 @@ export function MailCompose2({onComposeMail, onClose}){
                             value={mail.body}
                             onChange={handleChange}
                         ></textarea>
-
-                    <button className="btn-send">Send</button>
+                    <div className="btn-send-compose">
+                        <button type="submit" className="btn-send">Send</button>
+                        <button type="button" className="btn-send" onClick={sendNote}>Send as a note</button>
+                    </div>
                 </div>
             </form>
         </section>

@@ -1,7 +1,9 @@
 .mail-compose {
     position: fixed;
     z-index: 10;
-    inset: 0;
+    /* right: 0;
+    bottom: 0; */
+    /* inset: 0; */
     width: 100%;
     height: 100%;
     /* overflow: auto;
@@ -11,6 +13,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.mail-compose .mail-form {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    bottom: 0;
 }
 
 .mail-compose .mail-modal {
@@ -32,7 +41,7 @@
     color: #041e49;
     padding: 20px;
     /* font-size: 1em; */
-    font-size: 1.2em; /* Increased font size */
+    font-size: 1.2em; 
     margin: 0;
 }
 
@@ -72,14 +81,6 @@
    align-self: flex-end;
 }
 
-/* .mail-modal .btn-close {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 5px 7px;
-    margin: 0;
-    border: 0;
-} */
 
 .mail-modal .btn-close {
     position: absolute;
@@ -89,7 +90,7 @@
     margin: 0;
     border: 0;
     background: none;
-    font-size: 1.2em; /* Increased font size */
+    font-size: 1.2em;
 }
 .mail-modal .btn-close:hover {
     background-color: var(--chalk);
@@ -99,4 +100,8 @@
 .mail-modal input:focus,
 .mail-modal textarea:focus {
     outline: none;
+}
+
+.mail-modal .btn-send-compose {
+    display: flex;
 }

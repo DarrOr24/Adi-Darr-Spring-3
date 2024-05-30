@@ -140,8 +140,8 @@ function DynamicCmp(props){
         case 'NoteTxt':
             return <NoteForm  {...props}/>
         case 'NoteTodo':
-            // return <NoteToDosEdit {...props}/>
-            return <NoteToDosAdd {...props}/>
+            return <NoteToDosEdit {...props}/>
+            // return <NoteToDosAdd {...props}/>
              
     }
 }

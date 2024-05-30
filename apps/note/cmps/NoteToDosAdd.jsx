@@ -1,12 +1,20 @@
-const { useState } = React
+const { useState, useEffect } = React
 
 
 export function NoteToDosAdd({note, handleChangeInfo, onSave, onHandleTodos}){
 
     const noteToEdit = note
 
-    const todosLength = noteToEdit.info.todos.length
-    
+    if(noteToEdit){
+        const todoValArr = Object.values(noteToEdit.info.todos)
+        const todosArr = todoValArr.filter(todo => typeof(todo) === 'string')
+        var todosLength = todosArr.length
+        console.log(todosLength)
+    }
+    else{
+        todosLength = 0
+    }
+
     const [ todosObj, setTodosObj ] = useState({})
    
     const [ listItem1, setListItem1 ] = useState((todosLength>=1) ? true : false)
@@ -15,8 +23,6 @@ export function NoteToDosAdd({note, handleChangeInfo, onSave, onHandleTodos}){
     const [ listItem4, setListItem4 ] = useState((todosLength>=4) ? true : false)
     const [ listItem5, setListItem5 ] = useState((todosLength>=5) ? true : false)
 
-
-    
     function openListItem(){
         setListItem1(true)
         if (listItem1) setListItem2(true)
@@ -90,6 +96,54 @@ export function NoteToDosAdd({note, handleChangeInfo, onSave, onHandleTodos}){
                 name="todo2"
                 type="text" 
                 placeholder={(todosLength>=2) ? note.info.todos.todo2 : 'List item'}/>
+            </div>} 
+
+            {listItem3 && <div>
+                <input type="checkbox"
+                onChange={handleChangeTodo} 
+                id="doneAt3" 
+                name="doneAt3"
+                
+                />
+                <input
+                onChange={handleChangeTodo} 
+                // value={(todosLength>=2) ? note.info.todos.todo2 : 'List item'}
+                id="todo3" 
+                name="todo3"
+                type="text" 
+                placeholder={(todosLength>=3) ? note.info.todos.todo3 : 'List item'}/>
+            </div>}
+
+            {listItem4 && <div>
+                <input type="checkbox"
+                onChange={handleChangeTodo} 
+                id="doneAt4" 
+                name="doneAt4"
+                
+                />
+                <input
+                onChange={handleChangeTodo} 
+                // value={(todosLength>=4) ? note.info.todos.todo4 : 'List item'}
+                id="todo4" 
+                name="todo4"
+                type="text" 
+                placeholder={(todosLength>=4) ? note.info.todos.todo4 : 'List item'}/>
+            </div>}
+
+            {listItem5 && <div>
+                <input type="checkbox"
+                onChange={handleChangeTodo} 
+                id="doneAt5" 
+                name="doneAt5"
+                
+                />
+                <input
+                onChange={handleChangeTodo} 
+                // value={(todosLength>=5) ? note.info.todos.todo5 : 'List item'}
+                id="todo5" 
+                name="todo5"
+                type="text" 
+                placeholder={(todosLength>=5) ? note.info.todos.todo5 : 'List item'}/>
             </div>} 
 
           

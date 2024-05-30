@@ -127,9 +127,6 @@ export function AddNote({onAdd}){
            
     }
 
-    
-
-   
 
     return <section className = "add-note" style={{backgroundColor: note.style.backgroundColor}}>
             
@@ -143,7 +140,7 @@ export function AddNote({onAdd}){
         
             {openNote && <DynamicCmp  note={note} handleChangeInfo={handleChangeInfo} onSave={onSave} onHandleTodos={handleTodos}  /> }
                   
-            {openNote &&  <ActionBtns note={note}  onSetNoteColor={setNoteColor} onLoadImgOrVid={addImg}  />} 
+            {openNote &&  <ActionBtns note={note}  onSetNoteColor={setNoteColor} onLoadImgOrVid={addImg} onAddTodos = {addTodosNote}  />} 
            
     </section>
 }

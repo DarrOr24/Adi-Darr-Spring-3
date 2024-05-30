@@ -43,10 +43,13 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote}){
             ...prevNote,
             info: {...prevNote.info, todos: [...todosArr]}
         }))
-
-        onEdit(note)
-        onClose()
-        navigate('/note')
+        noteService.save({...note, infor: {...note.info, todos:[...todosArr]}})
+            .then((note) => {
+                onEdit(note)
+                onClose()
+            })
+            .catch(() => console.log('error'))
+            .finally(() => navigate('/note'))
         
     }
 

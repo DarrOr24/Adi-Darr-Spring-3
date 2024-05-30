@@ -96,11 +96,12 @@ export function AddNote({onAdd}){
         setNote(noteFromAddImg)
     }
 
-    function handleTodos(todosArr){
+    function handleTodos(todosObj){
+        
         
         setNote(prevNote => ({
             ...prevNote,
-            info: {...prevNote.info, todos: [...todosArr]}
+            info: {...prevNote.info, todos: {...todosObj}}
         }))
         
     }

@@ -81,7 +81,7 @@ function _createNotes() {
         noteVideo2.id = utilService.makeId()
         notes.push(noteVideo2)
 
-        const noteTodo = createNote('NoteTodo', true, {'backgroundColor': '#fff8b8'}, {'title':'Things to do', 'todos':{'todo1':'Make this work', 'todo2':'eat', 'todo3':'sleep'}}, Date.now()+5 )
+        const noteTodo = createNote('NoteTodo', true, {'backgroundColor': '#fff8b8'}, {'title':'Things to do', 'todos':{'todo1':'Make this work', 'todo2':'eat', 'todo3':'sleep', 'todo4':'Workout💪🏽', 'doneAt4': Date.now()}}, Date.now()+5 )
         notes.push(noteTodo)
         utilService.saveToStorage(NOTE_KEY, notes)
 

@@ -37,13 +37,13 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote}){
     }
 
    
-    function handleTodos(todosArr){
+    function handleTodos(todosObj){
         
         setNote(prevNote => ({
             ...prevNote,
-            info: {...prevNote.info, todos: [...todosArr]}
+            info: {...prevNote.info, todos: {...todosObj}}
         }))
-        noteService.save({...note, infor: {...note.info, todos:[...todosArr]}})
+        noteService.save({...note, info: {...note.info, todos:{...todosObj}}})
             .then((note) => {
                 onEdit(note)
                 onClose()

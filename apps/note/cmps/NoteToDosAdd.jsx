@@ -44,16 +44,6 @@ export function NoteToDosAdd({note, handleChangeInfo, onSave, onHandleTodos}){
                 {...prevTodosObj, [prop]: value }
             ))
 
-
-           
-        console.log(todosObj)
-        console.log('darr')
-        
-        
-        
-        
-        
-        
         onHandleTodos(todosObj)  
     }
         
@@ -79,11 +69,11 @@ export function NoteToDosAdd({note, handleChangeInfo, onSave, onHandleTodos}){
                 />
                 <input
                 onChange={handleChangeTodo} 
-                // value={(todosLength>=1) ? noteToEdit.info.todos[0].txt : ''}
+                // value={(todosLength>=1) ? note.info.todos.todo1 : 'List item'}
                 id="todo1" 
                 name="todo1"
                 type="text" 
-                placeholder={(todosLength>=1) ? note.info.todos[0].txt : 'List item'}/>
+                placeholder={(todosLength>=1) ? note.info.todos.todo1 : 'List item'}/>
             </div>} 
 
             {listItem2 && <div>
@@ -95,47 +85,15 @@ export function NoteToDosAdd({note, handleChangeInfo, onSave, onHandleTodos}){
                 />
                 <input
                 onChange={handleChangeTodo} 
-                // value={(todosLength>=1) ? noteToEdit.info.todos[0].txt : ''}
+                // value={(todosLength>=2) ? note.info.todos.todo2 : 'List item'}
                 id="todo2" 
                 name="todo2"
                 type="text" 
-                placeholder={(todosLength>=2) ? note.info.todos[0].txt : 'List item'}/>
+                placeholder={(todosLength>=2) ? note.info.todos.todo2 : 'List item'}/>
             </div>} 
 
           
-
-            {listItem3 && <div>
-                <input type="checkbox"/>
-                <input
-                onChange={handleChangeTodo} 
-                // value={(todosLength>=3) ? note.info.todos[2].txt : ''}
-                id="todo3" 
-                name="todo3"
-                type="text" 
-                placeholder="List item"/>
-            </div>} 
-
-            {listItem4 && <div>
-                <input type="checkbox"/>
-                <input
-                onChange={handleChangeTodo} 
-                // value={(todosLength>=4) ? note.info.todos[3].txt : ''}
-                id="todo4" 
-                name="todo4"
-                type="text" 
-                placeholder="List item"/>
-            </div>} 
-
-            {listItem5 && <div>
-                <input type="checkbox"/>
-                <input
-                onChange={handleChangeTodo} 
-                // value={(todosLength>=5) ? note.info.todos[4].txt : ''}
-                id="todo5" 
-                name="todo5"
-                type="text" 
-                placeholder={(todosLength>=5) ? note.info.todos[4].txt : 'List item'}/>
-            </div>}            
+         
                       
                 
             <div className="add-list-item" onClick={openListItem}>+</div>

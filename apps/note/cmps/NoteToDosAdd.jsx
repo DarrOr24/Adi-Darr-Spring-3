@@ -116,7 +116,7 @@ export function NoteToDosAdd({note, handleChangeInfo, onSave, onHandleTodos}){
             </div>}            
                       
                 
-            <div onClick={openListItem}>+</div>
+            <div className="add-list-item" onClick={openListItem}>+</div>
 
             <button>Close</button>
         </form>    

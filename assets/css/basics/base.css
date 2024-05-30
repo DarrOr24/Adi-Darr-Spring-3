@@ -49,3 +49,7 @@ object {
 .debug {
     outline: 1px solid red;
 }
+
+button:hover{
+    cursor: pointer;
+}

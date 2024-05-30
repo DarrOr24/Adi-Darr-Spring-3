@@ -51,3 +51,12 @@
 .note-preview .action-icons .note-img-add {
     opacity: 1;
 }
+
+.note-video-add button:hover {
+    cursor: pointer;
+}
+
+.add-list-item:hover{
+    cursor: pointer;
+}
+

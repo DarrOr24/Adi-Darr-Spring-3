@@ -99,7 +99,7 @@ export function NoteIndex() {
 
         </header>
 
-        <main>
+        <main >
 
             <NoteSideMenu mainDisplay={'notes'} />
 

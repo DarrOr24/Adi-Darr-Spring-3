@@ -23,7 +23,7 @@ export function NoteSideMenu({mainDisplay}){
     }
 
   
-    return <section className = "side-menu">
+    return <section className = "side-menu debug">
 
                 <div onClick={toggleSideMenu} className="hamburger side-btn">
                     <img height="20" src="assets\img\hamburger.svg" alt="" /> 

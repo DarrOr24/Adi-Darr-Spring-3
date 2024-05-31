@@ -1,12 +1,12 @@
 .side-menu {
     display: grid;
+    margin-block-start: 1em;
     grid-template-rows: repeat(5, 50px);
-    /* row-gap:0.1em; */
     margin-inline-end: 1em;
     font-size: 0.8em;
 }
 
-.side-menu li {
+.side-menu .side-btn {
     display: grid;
     column-gap: 0.5em;
     grid-template-columns: 50px auto;
@@ -16,15 +16,15 @@
     
 }
 
-.side-menu li img{
+.side-menu .side-btn img{
     justify-self: end;
 }
 
-.side-menu li p{
+.side-menu .side-btn p{
     width: 80px;
 }
 
-.side-menu li >* {
+.side-menu .side-btn >* {
     padding-inline-end: 10px;
 }
 
@@ -34,13 +34,13 @@
     border-top-right-radius: 25px;
 }
 
-.side-menu li:not(.selected, .hamburger):hover{
+.side-menu .side-btn:not(.selected, .hamburger):hover{
     background-color: var(--chalk); 
     border-bottom-right-radius: 25px;
     border-top-right-radius: 25px;
 }
 
-.side-menu li:hover{
+.side-menu .side-btn:hover{
     cursor: pointer;
 }
 

@@ -5,7 +5,6 @@ const { Link} = ReactRouterDOM
 export function NoteSideMenu({mainDisplay}){
     const [ isClosed, setIsClosed ] = useState(true)
     
-
     const [ isNoteSelected, setIsNoteSelected ] = useState('')
     const [ isRemindersSelected, setIsRemindersSelected ] = useState('')
     const [ isLabelsSelected, setIsLabelsSelected ] = useState('')
@@ -13,53 +12,46 @@ export function NoteSideMenu({mainDisplay}){
     const [ isTrashSelected, setIsTrashSelected ] = useState('')
 
     useEffect(() => {
-        // console.log(params)
         console.log(mainDisplay)
         if (mainDisplay === 'notes') setIsNoteSelected('selected')
         if (mainDisplay === 'trash') setIsTrashSelected('selected')
     }, [])
 
     
-
     function toggleSideMenu(){
         setIsClosed(prevIsClosed => !prevIsClosed)
     }
 
   
-    return <ul className = "side-menu">
+    return <section className = "side-menu">
 
-            <li onClick={toggleSideMenu} className="hamburger">
-                <img height="20" src="assets\img\hamburger.svg" alt="" /> 
-            </li>
+                <div onClick={toggleSideMenu} className="hamburger side-btn">
+                    <img height="20" src="assets\img\hamburger.svg" alt="" /> 
+                </div>
 
-        <Link to="/note"> 
-            <li className={isNoteSelected} >
-                <img src="assets\img\notes.svg" alt="" />
-                {!isClosed && <p>Notes</p>}
-            </li>
-        </Link>
+                <Link to="/note" className={`${isNoteSelected} side-btn`}> 
+                    <img src="assets\img\notes.svg" alt="" />
+                    {!isClosed && <p>Notes</p>}
+                </Link>
+            
+                <div className={`${isRemindersSelected} side-btn`}>
+                    <img src="assets\img\reminders.svg" alt="" />
+                    {!isClosed && <p>Reminders</p>}
+                </div>
 
-            <li className={isRemindersSelected}>
-                <img src="assets\img\reminders.svg" alt="" />
-                {!isClosed && <p>Reminders</p>}
-            </li>
+                <div className={`${isLabelsSelected} side-btn`} >
+                    <img src="assets\img\edit_labels.svg" alt="" />
+                    {!isClosed && <p>Edit labels</p>}
+                </div>
 
-            <li className={isLabelsSelected} >
-                <img src="assets\img\edit_labels.svg" alt="" />
-                {!isClosed && <p>Edit labels</p>}
-            </li>
+                <div className={`${isArchiveSelected} side-btn`} >
+                    <img src="assets\img\archive.svg" alt="" />
+                    {!isClosed && <p>Archive</p>}
+                </div>
 
-            <li className={isArchiveSelected} >
-                <img src="assets\img\archive.svg" alt="" />
-                {!isClosed && <p>Archive</p>}
-            </li>
-
-        <Link to="/note/trash" >
-            <li className={isTrashSelected}>
-                <img src="assets\img\trash.svg" alt="" />
-                {!isClosed && <p>Trash</p>}
-            </li>
-        </Link>
-
-    </ul>
+                <Link to="/note/trash" className={`${isTrashSelected} side-btn`}>
+                    <img src="assets\img\trash.svg" alt="" />
+                    {!isClosed && <p>Trash</p>}
+                </Link>
+    </section>
 }

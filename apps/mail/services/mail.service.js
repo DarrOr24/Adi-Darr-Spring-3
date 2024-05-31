@@ -18,50 +18,92 @@ export const mailService = {
     getEmptyMail,
     countUnreadInboxMails,
     moveToTrash,
-    getMailFromSearchParams, // changeQueryStringParams
-    getNoteFromSearchParams, // changeQueryStringParams
+    getFilterFromSearchParams,
+    // getMailFromSearchParams, 
+    // getNoteFromSearchParams, 
 }
 
-// function query(filterBy = {status: 'inbox'}) {
-function query(criteria) {
-    console.log('filterBy from Service', criteria)
+// function query(filterBy) {
+//     return storageService.query(MAIL_KEY)
+//         .then(mails => {
+//             if (criteria.status) {
+//                 if (criteria.status === 'inbox') {
+//                     mails = mails.filter(mail => mail.to === loggedinUser.email && !mail.removedAt)
+//                 } 
+//                 if (criteria.status === 'sent') {
+//                     mails = mails.filter(mail => mail.from === loggedinUser.email && !mail.removedAt)
+//                 } 
+//                 if (criteria.status === 'trash') {
+//                     mails = mails.filter(mail => mail.removedAt)
+//                 }
+//                 if (criteria.status === 'starred') {
+//                     mails = mails.filter(mail => mail.isStarred)
+//                 }
+//                 if (criteria.status === 'drafts') {
+//                     mails = []
+//                 }
+//             }
+
+//             if (criteria.txt) {
+//                 const regExp = new RegExp(criteria.txt, 'i')
+//                 mails = mails.filter(mail => regExp.test(mail.subject) || regExp.test(mail.body))
+//             }
+//             if (criteria.isRead !== undefined && criteria.isRead !== '') {
+//                 mails = mails.filter(mail => mail.isRead === (criteria.isRead === 'true'))
+//             }
+            
+
+//             if (criteria.sortBy === 'title') {
+//                 mails.sort((a, b) => a.subject.localeCompare(b.subject))
+//             } else if (criteria.status === 'trash'){
+//                 mails.sort((a, b) => b.removedAt - a.removedAt)
+//             } else {
+//                 mails.sort((a, b) => b.sentAt - a.sentAt)
+//             }
+//             // console.log('mails', mails);
+//             return mails
+//         })
+// }
+
+function query(filterBy) {
+    // console.log('filterBy from Servic', filterBy)
     return storageService.query(MAIL_KEY)
         .then(mails => {
-            if (criteria.status) {
-                if (criteria.status === 'inbox') {
+            if (filterBy.status) {
+                if (filterBy.status === 'inbox') {
                     mails = mails.filter(mail => mail.to === loggedinUser.email && !mail.removedAt)
                 } 
-                if (criteria.status === 'sent') {
+                if (filterBy.status === 'sent') {
                     mails = mails.filter(mail => mail.from === loggedinUser.email && !mail.removedAt)
                 } 
-                if (criteria.status === 'trash') {
+                if (filterBy.status === 'trash') {
                     mails = mails.filter(mail => mail.removedAt)
                 }
-                if (criteria.status === 'starred') {
+                if (filterBy.status === 'starred') {
                     mails = mails.filter(mail => mail.isStarred)
                 }
-                if (criteria.status === 'drafts') {
+                if (filterBy.status === 'drafts') {
                     mails = []
                 }
             }
 
-            if (criteria.txt) {
-                const regExp = new RegExp(criteria.txt, 'i')
+            if (filterBy.txt) {
+                const regExp = new RegExp(filterBy.txt, 'i')
                 mails = mails.filter(mail => regExp.test(mail.subject) || regExp.test(mail.body))
             }
-            if (criteria.isRead !== undefined && criteria.isRead !== '') {
-                mails = mails.filter(mail => mail.isRead === (criteria.isRead === 'true'))
+            if (filterBy.isRead !== undefined && filterBy.isRead !== '') {
+                mails = mails.filter(mail => mail.isRead === (filterBy.isRead === 'true'))
             }
             
 
-            if (criteria.sortBy === 'title') {
+            if (filterBy.sortBy === 'title') {
                 mails.sort((a, b) => a.subject.localeCompare(b.subject))
-            } else if (criteria.status === 'trash'){
+            } else if (filterBy.status === 'trash'){
                 mails.sort((a, b) => b.removedAt - a.removedAt)
             } else {
                 mails.sort((a, b) => b.sentAt - a.sentAt)
             }
-            console.log('mails', mails);
+            // console.log('mails', mails);
             return mails
         })
 }
@@ -105,6 +147,11 @@ function getEmptyMail() {
     return mail
 } 
 
+function getFilterFromSearchParams(searchParams) {
+    return {
+        txt: searchParams.get('txt') || '',
+    }
+}
 // changeQueryStringParams
 function getMailFromSearchParams(searchParams) {
     return {

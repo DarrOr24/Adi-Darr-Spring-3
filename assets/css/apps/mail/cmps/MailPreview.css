@@ -59,6 +59,10 @@
     max-width: 100%; 
 } */
 
+.mail-preview .star {
+    position: relative;
+}
+
 .fa-solid.fa-star {
     color: yellow;
 }

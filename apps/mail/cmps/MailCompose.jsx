@@ -3,31 +3,32 @@ import { mailService } from "../services/mail.service.js"
 const { useState, useEffect } = React
 const {  useNavigate,useParams, useSearchParams } = ReactRouterDOM
 
-export function MailCompose2({onComposeMail, onClose}){
+// export function MailCompose({onComposeMail, onClose}){
+export function MailCompose(){
     const [mail, setMail] = useState(mailService.getEmptyMail())
     const [searchParams, setSearchParams] = useSearchParams()
-    const [noteMailContent, setNoteMailContent] = useState({ subject: '', body: '' })
+    // const [noteMailContent, setNoteMailContent] = useState({ subject: '', body: '' })
     
-    const params = useParams()
+    // const params = useParams()
     const navigate = useNavigate()
     
-    useEffect(() => {
-        navigate(`/mail/compose`)
-        const subject = searchParams.get('subject') || ''
-        const body = searchParams.get('body') || ''
-        setMail(prevMail => ({ ...prevMail, subject, body }))
-    }, [])
+    // useEffect(() => {
+    //     navigate(`/mail/compose`)
+    //     const subject = searchParams.get('subject') || ''
+    //     const body = searchParams.get('body') || ''
+    //     setMail(prevMail => ({ ...prevMail, subject, body }))
+    // }, [])
 
-    useEffect(() => {
-        const updatedMail = mailService.getMailFromSearchParams(searchParams)
-        setNoteMailContent(updatedMail)
-    }, [searchParams])
+    // useEffect(() => {
+    //     const updatedMail = mailService.getMailFromSearchParams(searchParams)
+    //     setNoteMailContent(updatedMail)
+    // }, [searchParams])
 
-    useEffect(() => {
-        if (mail.subject || mail.body) {
-            setSearchParams({ subject: mail.subject, body: mail.body })
-        }
-    }, [mail.subject, mail.body])
+    // useEffect(() => {
+    //     if (mail.subject || mail.body) {
+    //         setSearchParams({ subject: mail.subject, body: mail.body })
+    //     }
+    // }, [mail.subject, mail.body])
 
     function handleChange({ target }) {
         const { type, name: prop } = target
@@ -46,36 +47,53 @@ export function MailCompose2({onComposeMail, onClose}){
         setMail(prevMail => ({ ...prevMail, [prop]: value }))
     }
 
+    // function onSave(ev) {
+    //     ev.preventDefault()
+    //     if(!mail.to) {
+    //         console.log('Please specify at least one recipient.')
+    //         return
+    //     }
+    //     mailService.save(mail)
+    //         .then((savedMail) => onComposeMail(savedMail))
+    //         .then(() => console.log('Mail has successfully saved!'))
+    //         .catch(() => console.log(`couldn't save mail`))
+            
+    // }
     function onSave(ev) {
         ev.preventDefault()
-        console.log(mail)
-        if(!mail.to) {
-            console.log('Please specify at least one recipient.')
-            return
-        }
         mailService.save(mail)
-            .then((savedMail) => onComposeMail(savedMail))
             .then(() => console.log('Mail has successfully saved!'))
             .catch(() => console.log(`couldn't save mail`))
-            
+            .finally(() => navigate('/mail'))
+            .finally(() => closeForm())
     }
+
+    // function closeForm() {
+    //     onClose()
+    // }
 
     function closeForm() {
-        onClose()
+        navigate('/mail')
+        searchParams.delete('compose')
+        setSearchParams(searchParams)
     }
 
-    function sendNote(){
-        const noteContent = {
-            title: mail.subject,
-            txt: mail.body,
-        }
-        console.log('noteContent:', noteContent)
+    if (!searchParams.get('compose')) {
+        return null
+    }
 
-        navigate(`/note/add?title=${mail.subject}&body=${mail.body}`)
+    // function sendNote(){
+    //     const noteContent = {
+    //         title: mail.subject,
+    //         txt: mail.body,
+    //     }
+    //     console.log('noteContent:', noteContent)
+
+    //     navigate(`/note/add?title=${mail.subject}&body=${mail.body}`)
     
-        setNoteMailContent({subject: '', body: ''})
-        closeForm()
-    }
+    //     setNoteMailContent({subject: '', body: ''})
+    //     closeForm()
+    // }
 
     
 
@@ -103,7 +121,7 @@ export function MailCompose2({onComposeMail, onClose}){
                         ></textarea>
                     <div className="btn-send-compose">
                         <button type="submit" className="btn-send">Send</button>
-                        <button type="button" className="btn-send" onClick={sendNote}>Send as a note</button>
+                        {/* <button type="button" className="btn-send" onClick={sendNote}>Send as a note</button> */}
                     </div>
                 </div>
             </form>

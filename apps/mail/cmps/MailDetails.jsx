@@ -1,17 +1,43 @@
 const { useState, useEffect } = React
-const { useParams, useNavigate, Link } = ReactRouterDOM
-
+const { useOutletContext, useParams, useNavigate, Link } = ReactRouterDOM
 
 import { utilService } from "../../../services/util.service.js"
 import { mailService } from "../services/mail.service.js"
 
-export function MailDetails({mail, onReturn}) {
-
+// export function MailDetails({ toggleReadStatus, toggleStarredStatus }) {
+export function MailDetails() {
+    const { toggleReadStatus, toggleStarredStatus } = useOutletContext()
+    const [mail, setMail] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
+    
+    const { status, mailId } = useParams()
     const navigate = useNavigate()
 
+
     useEffect(() => {
-        navigate(`/mail/details/${mail.id}`)
-    }, [])
+        setIsLoading(true)
+        mailService.get(mailId)
+        // mailService.get(params.mailId)
+            .then(mail => {
+                setMail(mail)
+                if (!mail.isRead) {
+                    const updatedMail = { ...mail, isRead: true }
+                    mailService.save(updatedMail)
+                        .then(() => {
+                            toggleReadStatus(updatedMail.id)
+                        })
+                }
+            })
+            .catch(() => {
+                alert('Couldnt get mail...')
+                navigate('/mail')
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }, [mailId])
+    // }, [params.mailId])
+
 
     function getTime(mail) {
         const sentDate = new Date(mail.sentAt)
@@ -26,12 +52,17 @@ export function MailDetails({mail, onReturn}) {
         return time
     }
 
-    
+    if (isLoading) return <div>Loading...</div>
+
+    if (!mail) return <div>Mail not found...</div>
+
     return (
         <section className="mail-details">
-            <div onClick={onReturn} className="action-icon back">
+            <div className="action-icon back">
+                <Link to={`/mail/${status}`}>
                     <img src="assets/img/back.svg" alt="" />
-                    <span className="action-name">Back</span>
+                    <span className="action-name">Back to {status}</span>
+                </Link>
             </div>
             <div className="subject">{mail.subject}</div>
             <div className="details">
@@ -41,7 +72,6 @@ export function MailDetails({mail, onReturn}) {
             <div className="mail-body">{mail.body}</div>
         </section>
     )
-
-    
+  
 }
 

@@ -1,29 +1,19 @@
-const { useNavigate } = ReactRouterDOM
-const { useState } = React
-
+const { Link, useOutletContext, useParams } = ReactRouterDOM
 
 import { MailPreview } from './MailPreview.jsx'
 import { ActionBtnsMail } from './ActionBtnsMail.jsx'
-import { MailDetails } from './MailDetails.jsx'
 
-export function MailList({ mails, removeMail, toggleReadStatus, toggleSraredStatus }) {
-    const [openDetails, setOpenDetails] = useState(false)
-    const [mail, setMail] = useState({})
-    const navigate = useNavigate()
 
-    function openMail(mail){
-        setMail(prevMail => prevMail = mail)
-        setOpenDetails(true)
-    }
-
-    function onReturn(){
-        setOpenDetails(false)
-        navigate(`/mail`) 
-    }
+// export function MailList({ mails, removeMail, toggleReadStatus, toggleStarredStatus, sortBy }) {
+export function MailList() {
+    const { status } = useParams()
+    const { mails, removeMail, toggleReadStatus, toggleStarredStatus, sortBy } = useOutletContext()
 
     if (mails.length === 0) {
         return (
-            <div className="no-mails">No conversations</div>
+            <div className="no-mails">
+                No conversations in {status}.
+            </div>
         )
     }
 
@@ -32,15 +22,11 @@ export function MailList({ mails, removeMail, toggleReadStatus, toggleSraredStat
             <ul>
                 {mails.map(mail => (
                     <li key={mail.id} className={`${mail.isRead ? '' : 'un-read'}`}> 
-                        <div onClick={()=>openMail(mail)}>
-                            {(!openDetails) && <section>
-                                    <MailPreview mail={mail} toggleSraredStatus={toggleSraredStatus}/>
-                                    <ActionBtnsMail mail={mail} removeMail={removeMail} toggleReadStatus={toggleReadStatus} />
-                                </section>}
-                        </div>
+                        <Link to={`/mail/${status}/${mail.id}`}>
+                            <MailPreview key={mail.id} mail={mail} toggleStarredStatus={toggleStarredStatus}/>
+                        </Link>
+                        <ActionBtnsMail mail={mail} removeMail={removeMail} toggleReadStatus={toggleReadStatus} toggleStarredStatus={toggleStarredStatus} />
                     </li>))}
-
-                    {openDetails && <MailDetails mail={mail} onReturn={onReturn} />}
             </ul>
         </section>
     )

@@ -7,11 +7,17 @@
     .note-list ul{
         display: grid;
         place-content: center;
+        margin-block-start: 0.2em;
     }
 
     .note-index-header {
         grid-template-columns: 90px 60px 650px; 
     } 
+
+    .note-list h2 {
+        padding-inline-start: 1em;
+        padding-block-start: 1em;
+    }
 }
 
 /* SMALL */

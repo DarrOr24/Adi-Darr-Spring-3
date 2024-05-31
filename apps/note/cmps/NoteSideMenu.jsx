@@ -3,7 +3,7 @@ const { Link} = ReactRouterDOM
 
 
 export function NoteSideMenu({mainDisplay}){
-    const [ isClosed, setIsClosed ] = useState(true)
+    const [ isClosed, setIsClosed ] = useState(false)
     
     const [ isNoteSelected, setIsNoteSelected ] = useState('')
     const [ isRemindersSelected, setIsRemindersSelected ] = useState('')

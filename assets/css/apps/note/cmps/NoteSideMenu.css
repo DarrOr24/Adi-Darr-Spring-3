@@ -4,6 +4,7 @@
     grid-template-rows: repeat(5, 50px);
     margin-inline-end: 1em;
     font-size: 0.8em;
+    width: 200px;
 }
 
 .side-menu .side-btn {
@@ -14,6 +15,10 @@
     align-items: center;
     width: max-content;
     
+}
+
+.side-menu div {
+    width: 200px;
 }
 
 .side-menu .side-btn img{

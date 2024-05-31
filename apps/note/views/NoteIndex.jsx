@@ -1,5 +1,5 @@
 const { useState, useEffect } = React
-const { Link, useSearchParams } = ReactRouterDOM
+const { useSearchParams } = ReactRouterDOM
 
 import { AddNote } from "../cmps/AddNote.jsx"
 import { NoteFilter } from "../cmps/NoteFilter.jsx"
@@ -7,21 +7,16 @@ import { NoteList } from "../cmps/NoteList.jsx"
 import { NoteSideMenu } from "../cmps/NoteSideMenu.jsx"
 import { noteService } from "../services/note.service.js"
 
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
-import { TrashNoteList } from "./TrashNoteList.jsx"
-
 
 export function NoteIndex() {
 
     const [notes, setNotes] = useState([])
-    
     const [isLoading, setIsLoading] = useState(false)
     const [searchParams, setSearchParams] = useSearchParams()
     // const [ filterBy, setFilterBy ] = useState(noteService.getFilterFromSearchParams(searchParams))
     const [ filterBy, setFilterBy ] = useState({})
-    const [ mainDisplay, setMainDisplay ] = useState('notes')
     
-
+    
     useEffect(() => {
         noteService.query(filterBy)
             .then(notes => setNotes(notes))
@@ -80,14 +75,12 @@ export function NoteIndex() {
 
     function duplicateNote(noteToDuplicate){
         const newNote = structuredClone(noteToDuplicate)
-       
         newNote.id = ''
         newNote.time = Date.now()
         newNote.isPinned = false
         newNote.info.title += ' - copy'
         noteService.save(newNote)
-        .then((note) => setNotes([...notes, note]))
-        
+            .then((note) => setNotes([...notes, note]))
     }
 
     function onSetFilterBy(newFilter) {

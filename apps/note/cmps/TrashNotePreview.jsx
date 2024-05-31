@@ -1,4 +1,5 @@
 import { NoteImg } from "./NoteImg"
+import { NoteTodos } from "./NoteToDos.jsx"
 import { NoteTxt } from "./NoteTxt.jsx"
 import { NoteVideo } from "./NoteVideo.jsx"
 
@@ -40,6 +41,8 @@ function DynamicCmp({note}){
             return <NoteImg note={note}/>
         case 'NoteVideo':
             return <NoteVideo note = {note} />
-    }
+        case 'NoteTodo':
+                return  <NoteTodos note= {note} /> 
+    } 
 }
 

@@ -4,11 +4,13 @@ import { NoteVideoAdd } from "./NoteVideoAdd.jsx"
 
 const { useState } = React
 
-export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoadImgOrVid, onAddTodos} ){
+export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoadImgOrVid, onAddTodos, onSelect} ){
 
     const [ colorMenu, setColorMenu ] = useState(false)
     const [ addImg, setAddImg ] = useState(false)
     const [ addVideo, setAddVideo ] = useState(false)
+    const [ isSelected, setIsSelected] = useState('')
+
     
     function onDuplicateNote(ev){
        ev.stopPropagation()
@@ -36,10 +38,6 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoad
         if(!addVideo) setAddVideo(true)
     }
 
-    function onClickTodos(){
-        console.log('hi')
-    }
-
     function changeImg(noteFromImg){
         setAddImg(false)
         onLoadImgOrVid(noteFromImg)
@@ -50,10 +48,25 @@ export function ActionBtns( {note, onRemove, onSetNoteColor, onDuplicate, onLoad
         onLoadImgOrVid(noteFromVideo)
     }
 
+    function onClickSelect(ev){
+        ev.stopPropagation()
+        if (isSelected === '') {
+            setIsSelected('clicked')
+            var stat = true
+        }
+        else {
+            setIsSelected('')
+            stat = false
+        }
+        onSelect(stat)
+    }
+
+    
+
     
     
     return <section className ="action-icons">
-                    <div className={`action-icon select `}>
+                    <div onClick={onClickSelect} className={`action-icon select ${isSelected}`}>
                         <img  src="assets\img\check.svg" alt="" />
                         <span className="action-name select">Select Note</span>
                     </div>

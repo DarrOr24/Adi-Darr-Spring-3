@@ -39,7 +39,7 @@
     font-weight: lighter;
 }
 
-.note-preview .action-icons {
+.note-preview .action-icons .action-icon:not(.select) {
     opacity: 0;
 }
 
@@ -48,13 +48,21 @@
     cursor: pointer;
 }
 
-.note-preview:hover .action-icons{
+.note-preview:hover .action-icons .action-icon{
     opacity: 1;
     cursor: pointer;
 }
 
 .note-preview .action-icons .drawing, .note-preview .action-icons .list {
     display:none;
+}
+
+.action-icon.select {
+    opacity:0;
+}
+
+.action-icon.select.clicked {
+    opacity: 1;
 }
 
 

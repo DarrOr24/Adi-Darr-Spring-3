@@ -46,11 +46,9 @@ export function NoteIndex() {
         noteService.remove(noteId)
             .then(() => {
                 setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
-                // showSuccessMsg(`Note (${noteId}) removed successfully!`)
             })
             .catch(err => {
                 console.log('err:', err)
-                // showErrorMsg('There was a problem')
             })
             .finally(() => setIsLoading(false))
     }

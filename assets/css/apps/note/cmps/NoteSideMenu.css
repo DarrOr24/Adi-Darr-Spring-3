@@ -45,8 +45,8 @@
 }
 
 .side-menu .hamburger{
-    position: absolute;
-    top:25px;
+    position: fixed;
+    top: 30px;
     
 }
 

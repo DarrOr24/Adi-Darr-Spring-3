@@ -1,14 +1,8 @@
-
-
-
-.trash-note-list {
-    display: grid;
-    
-    grid-template-columns: 160px minmax(500px, auto);
+.trash-note-index main.trash-index-main  {
+   
+   display: none;
 }
 
 
-.trash-note-list h2 {
-    margin-block-start: 0.5em;
-}
+
 

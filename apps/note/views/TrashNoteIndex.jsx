@@ -12,6 +12,8 @@ export function TrashNoteIndex (){
     const [isLoading, setIsLoading] = useState(false)
     const [ filterBy, setFilterBy ] = useState({})
     
+    const mainDisplay = 'trash'
+    
     useEffect(() => {
         noteService.loadFromTrash()
             .then(trashNotes => setTrashNotes(trashNotes))
@@ -43,18 +45,22 @@ export function TrashNoteIndex (){
     }
 
     if (isLoading) return <div className="loader"></div>
-    return <section className="trash-note-index">
 
-        <header className="trash-index-header">
+    return <section className="trash-note-index" >
+
+        <header className="note-index-header">
             <img height="50" src="assets\img\keep-icon.png" alt="" />
             <h1>Keep</h1>
             <NoteFilter filterBy={filterBy} onFilter={onSetFilterBy} />
         </header>
 
-        <NoteSideMenu />
+        <main className="trash-index-main">
 
-        <TrashNoteList trashNotes={trashNotes} onRestoreTrash={onRestoreTrash} onPermanentDelete={onPermanentDelete} />
+            <NoteSideMenu mainDisplay={mainDisplay}/>
 
+            <TrashNoteList trashNotes={trashNotes} onRestoreTrash={onRestoreTrash} onPermanentDelete={onPermanentDelete} />
+
+        </main>
         
     </section>
 }

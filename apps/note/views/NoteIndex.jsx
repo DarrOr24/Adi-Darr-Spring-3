@@ -97,17 +97,21 @@ export function NoteIndex() {
 
     if (isLoading) return <div className="loader"></div>
     return <section className = "note-index full">
+
         <header className="note-index-header">
+
             <img height="50" src="assets\img\keep-icon.png" alt="" />
             <h1>Keep</h1>
             <NoteFilter filterBy={filterBy} onFilter={onSetFilterBy} />
+
         </header>
+
         <main>
-            <NoteSideMenu onMainDisplay={'notes'} />
+
+            <NoteSideMenu mainDisplay={'notes'} />
 
             <AddNote notes={notes} onAdd={addNewNote} onPinNote ={placeNote} />
                     
-            {/* <DynamicCmp onRestoreTrash={restoreTrash} onPermanentDelete={permanentDelete} trashNotes={trashNotes} status={mainDisplay} notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} onDuplicate={duplicateNote} /> */}
             <NoteList notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} onDuplicate={duplicateNote} />
             
         </main>
@@ -115,19 +119,3 @@ export function NoteIndex() {
     </section>
 }
 
-function DynamicCmp(props){
-    switch (props.status) {
-        case 'trash': 
-            return <TrashNoteList {...props} />
-            
-            
-        case 'notes':
-            return  <NoteList {...props} />
-                
-        case 'reminders':
-        case 'labels':
-        case 'archive':
-            return <h1>IN CONSTRUCTION</h1>
-       
-    }
-}

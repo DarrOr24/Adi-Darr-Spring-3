@@ -4,7 +4,7 @@ export function TrashNoteList({trashNotes, onRestoreTrash, onPermanentDelete}){
 
 
 
-    return <section className="note-list">
+    return <section className="note-list trash-note-list">
             {(trashNotes.length >0)&&<h2>TRASH</h2>}
             {(trashNotes.length === 0)&&<h2>TRASH IS EMPTY</h2>}
             <ul> 

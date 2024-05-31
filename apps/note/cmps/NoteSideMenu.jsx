@@ -1,9 +1,11 @@
 const { useState, useEffect } = React
-const { Link, useSearchParams } = ReactRouterDOM
+const { Link} = ReactRouterDOM
+
 
 export function NoteSideMenu({mainDisplay}){
-
     const [ isClosed, setIsClosed ] = useState(true)
+    
+
     const [ isNoteSelected, setIsNoteSelected ] = useState('')
     const [ isRemindersSelected, setIsRemindersSelected ] = useState('')
     const [ isLabelsSelected, setIsLabelsSelected ] = useState('')
@@ -11,9 +13,13 @@ export function NoteSideMenu({mainDisplay}){
     const [ isTrashSelected, setIsTrashSelected ] = useState('')
 
     useEffect(() => {
+        // console.log(params)
+        console.log(mainDisplay)
         if (mainDisplay === 'notes') setIsNoteSelected('selected')
         if (mainDisplay === 'trash') setIsTrashSelected('selected')
     }, [])
+
+    
 
     function toggleSideMenu(){
         setIsClosed(prevIsClosed => !prevIsClosed)
@@ -21,6 +27,7 @@ export function NoteSideMenu({mainDisplay}){
 
   
     return <ul className = "side-menu">
+
             <li onClick={toggleSideMenu} className="hamburger">
                 <img height="20" src="assets\img\hamburger.svg" alt="" /> 
             </li>

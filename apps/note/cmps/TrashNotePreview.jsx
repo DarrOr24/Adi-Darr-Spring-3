@@ -27,14 +27,8 @@ export function TrashNotePreview({note, onRestoreTrash, onPermanentDelete}){
                                 <span className="action-name">Restore to notes</span>
                             </div>
                         </div>
-                        
-                       
-                       
                     </article>
-                
-              
     </section>
-
 }
 
 function DynamicCmp({note}){

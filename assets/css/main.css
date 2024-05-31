@@ -19,6 +19,7 @@
 
 @import './apps/note/views/NoteIndex.css';
 @import './apps/note/views/TrashNoteIndex.css';
+@import './apps/note/views/UnderConstruction.css';
 
 /* Keeper Cmps */
 @import './apps/note/cmps/NoteSideMenu.css';

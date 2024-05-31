@@ -34,20 +34,20 @@ export function NoteSideMenu({mainDisplay}){
                     {!isClosed && <p>Notes</p>}
                 </Link>
             
-                <div className={`${isRemindersSelected} side-btn`}>
+                <Link to="/note/soon" className={`${isRemindersSelected} side-btn`}>
                     <img src="assets\img\reminders.svg" alt="" />
                     {!isClosed && <p>Reminders</p>}
-                </div>
+                </Link>
 
-                <div className={`${isLabelsSelected} side-btn`} >
+                <Link to="/note/soon" className={`${isLabelsSelected} side-btn`} >
                     <img src="assets\img\edit_labels.svg" alt="" />
                     {!isClosed && <p>Edit labels</p>}
-                </div>
+                </Link>
 
-                <div className={`${isArchiveSelected} side-btn`} >
+                <Link to="/note/soon" className={`${isArchiveSelected} side-btn`} >
                     <img src="assets\img\archive.svg" alt="" />
                     {!isClosed && <p>Archive</p>}
-                </div>
+                </Link>
 
                 <Link to="/note/trash" className={`${isTrashSelected} side-btn`}>
                     <img src="assets\img\trash.svg" alt="" />

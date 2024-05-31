@@ -25,39 +25,38 @@ export const mailService = {
 
 // function query(filterBy = {status: 'inbox'}) {
 function query(filterBy) {
-    // console.log('filterBy from Servic', filterBy)
     return storageService.query(MAIL_KEY)
         .then(mails => {
-            if (filterBy.status) {
-                if (filterBy.status === 'inbox') {
+            if (criteria.status) {
+                if (criteria.status === 'inbox') {
                     mails = mails.filter(mail => mail.to === loggedinUser.email && !mail.removedAt)
                 } 
-                if (filterBy.status === 'sent') {
+                if (criteria.status === 'sent') {
                     mails = mails.filter(mail => mail.from === loggedinUser.email && !mail.removedAt)
                 } 
-                if (filterBy.status === 'trash') {
+                if (criteria.status === 'trash') {
                     mails = mails.filter(mail => mail.removedAt)
                 }
-                if (filterBy.status === 'starred') {
+                if (criteria.status === 'starred') {
                     mails = mails.filter(mail => mail.isStarred)
                 }
-                if (filterBy.status === 'drafts') {
+                if (criteria.status === 'drafts') {
                     mails = []
                 }
             }
 
-            if (filterBy.txt) {
-                const regExp = new RegExp(filterBy.txt, 'i')
+            if (criteria.txt) {
+                const regExp = new RegExp(criteria.txt, 'i')
                 mails = mails.filter(mail => regExp.test(mail.subject) || regExp.test(mail.body))
             }
-            if (filterBy.isRead !== undefined && filterBy.isRead !== '') {
-                mails = mails.filter(mail => mail.isRead === (filterBy.isRead === 'true'))
+            if (criteria.isRead !== undefined && criteria.isRead !== '') {
+                mails = mails.filter(mail => mail.isRead === (criteria.isRead === 'true'))
             }
             
 
-            if (filterBy.sortBy === 'title') {
+            if (criteria.sortBy === 'title') {
                 mails.sort((a, b) => a.subject.localeCompare(b.subject))
-            } else if (filterBy.status === 'trash'){
+            } else if (criteria.status === 'trash'){
                 mails.sort((a, b) => b.removedAt - a.removedAt)
             } else {
                 mails.sort((a, b) => b.sentAt - a.sentAt)

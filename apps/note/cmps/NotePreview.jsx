@@ -2,6 +2,7 @@ const { useState } = React
 const { useNavigate } = ReactRouter
 
 
+import { noteService } from "../services/note.service.js";
 import { ActionBtns } from "./ActionBtns.jsx"
 import { NoteEdit2 } from "./NoteEdit2.jsx"
 import { NoteImg } from "./NoteImg.jsx";
@@ -53,6 +54,11 @@ export function NotePreview({ note, onRemove, onEdit, onPinNote, onDuplicate}){
         onPinNote(noteFromPin)
    }
 
+   function onSelect(stat){
+    setUpdatedNote(prevUpdatedNote => ({...prevUpdatedNote, isSelected: stat}))
+    noteService.save({...updatedNote, isSelected: stat}).then((note) => console.log(note.isSelected))
+   }
+
 
 
     return  <section>
@@ -61,7 +67,7 @@ export function NotePreview({ note, onRemove, onEdit, onPinNote, onDuplicate}){
                         
                         <DynamicCmp note={updatedNote} />
                         <NotePin note={updatedNote} onPinNote ={pinNote}/>
-                        <ActionBtns note={updatedNote} onRemove={onRemove} onSetNoteColor={setNoteColor} onDuplicate={onDuplicate} onLoadImgOrVid={editPreview} />
+                        <ActionBtns note={updatedNote} onRemove={onRemove} onSetNoteColor={setNoteColor} onDuplicate={onDuplicate} onLoadImgOrVid={editPreview} onSelect={onSelect} />
                     </article>}
                 
                 { openNote && <NoteEdit2 noteToEdit = {updatedNote} onClose={closeNoteEdit} onEdit={editPreview} onSetColorNote={setNoteColor} onPinNote={onPinNote} />}

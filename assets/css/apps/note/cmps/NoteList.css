@@ -1,4 +1,4 @@
-.note-list, .trash-note-list {
+.note-list {
     display:grid;
     margin-inline-end: 2em;
 }

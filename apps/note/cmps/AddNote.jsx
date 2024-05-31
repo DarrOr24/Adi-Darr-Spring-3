@@ -10,6 +10,7 @@ import { NoteImg } from "./NoteImg.jsx";
 import { NoteImgAdd } from "./NoteImgAdd.jsx";
 import { NotePin } from "./NotePin.jsx";
 import { NoteToDosAdd } from "./NoteToDosAdd.jsx";
+import { NoteToDosEdit } from "./NoteToDosEdit.jsx";
 
 export function AddNote({onAdd}){
 
@@ -96,14 +97,30 @@ export function AddNote({onAdd}){
         setNote(noteFromAddImg)
     }
 
-    function handleTodos(todosObj){
+    // function handleTodos(todosObj){
         
         
-        setNote(prevNote => ({
-            ...prevNote,
-            info: {...prevNote.info, todos: {...todosObj}}
-        }))
+    //     setNote(prevNote => ({
+    //         ...prevNote,
+    //         info: {...prevNote.info, todos: {...todosObj}}
+    //     }))
         
+    // }
+
+    function handleTodos(infoObj){
+        
+        const infoObjCopy = structuredClone(infoObj)
+        
+        
+         console.log(note.style.backgroundColor)
+
+        noteService.save({...note, info: infoObjCopy })
+            .then((note)=>{
+                onAdd(note)
+                setOpenNote(false)
+                setNote(emptyNote)
+            })
+       
     }
 
     function handleChangeInfo({ target }) {
@@ -154,7 +171,8 @@ function DynamicCmp(props){
         case 'NoteTxt':
             return <NoteForm  {...props}/>
         case 'NoteTodo':
-            return <NoteToDosAdd {...props}/>     
+            // return <NoteToDosAdd {...props}/>     
+            return <NoteToDosEdit {...props}/>     
     }
 }
 

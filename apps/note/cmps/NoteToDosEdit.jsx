@@ -85,10 +85,11 @@ export function NoteToDosEdit({note,  onHandleTodos}){
     }
         
            
-    return <section className = "note-form list">
+    return <section className = "note-form note-todos-edit">
         <form onSubmit = {onSave}>
            
             <input
+                className='title'
                 onChange={handleChangeInfo} 
                 // value={noteToEdit.info.title}
                 id="title" 
@@ -98,13 +99,15 @@ export function NoteToDosEdit({note,  onHandleTodos}){
                  />
 
             {listItem1 && <div>
-                <input type="checkbox"
+                <input className="checkbox" 
+                type="checkbox"
                 onChange={handleChangeTodo} 
                 id="doneAt1" 
                 name="doneAt1"
                 
                 />
                 <input
+                className="todo"
                 onChange={handleChangeTodo} 
                 // value={(todosLength>=1) ? note.info.todos.todo1 : 'List item'}
                 id="todo1" 
@@ -114,13 +117,14 @@ export function NoteToDosEdit({note,  onHandleTodos}){
             </div>} 
 
             {listItem2 && <div>
-                <input type="checkbox"
+                <input className="checkbox" 
+                type="checkbox"
                 onChange={handleChangeTodo} 
                 id="doneAt2" 
                 name="doneAt2"
                 
                 />
-                <input
+                <input className="todo"
                 onChange={handleChangeTodo} 
                 // value={(todosLength>=2) ? note.info.todos.todo2 : 'List item'}
                 id="todo2" 
@@ -130,13 +134,14 @@ export function NoteToDosEdit({note,  onHandleTodos}){
             </div>} 
 
             {listItem3 && <div>
-                <input type="checkbox"
+                <input className="checkbox" 
+                type="checkbox"
                 onChange={handleChangeTodo} 
                 id="doneAt3" 
                 name="doneAt3"
                 
                 />
-                <input
+                <input className="todo"
                 onChange={handleChangeTodo} 
                 // value={(todosLength>=2) ? note.info.todos.todo2 : 'List item'}
                 id="todo3" 
@@ -146,13 +151,14 @@ export function NoteToDosEdit({note,  onHandleTodos}){
             </div>}
 
             {listItem4 && <div>
-                <input type="checkbox"
+                <input className="checkbox" 
+                type="checkbox"
                 onChange={handleChangeTodo} 
                 id="doneAt4" 
                 name="doneAt4"
                 
                 />
-                <input
+                <input className="todo"
                 onChange={handleChangeTodo} 
                 // value={(todosLength>=4) ? note.info.todos.todo4 : 'List item'}
                 id="todo4" 
@@ -162,13 +168,14 @@ export function NoteToDosEdit({note,  onHandleTodos}){
             </div>}
 
             {listItem5 && <div>
-                <input type="checkbox"
+                <input className="checkbox" 
+                type="checkbox"
                 onChange={handleChangeTodo} 
                 id="doneAt5" 
                 name="doneAt5"
                 
                 />
-                <input
+                <input className="todo"
                 onChange={handleChangeTodo} 
                 // value={(todosLength>=5) ? note.info.todos.todo5 : 'List item'}
                 id="todo5" 
@@ -182,7 +189,6 @@ export function NoteToDosEdit({note,  onHandleTodos}){
             <button>Close</button>
         </form>    
     </section >
-   
     
 
 }

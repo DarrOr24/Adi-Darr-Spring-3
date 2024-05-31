@@ -46,7 +46,7 @@ export function TrashNoteIndex (){
 
     if (isLoading) return <div className="loader"></div>
 
-    return <section className="trash-note-index full" >
+    return <section className="note-index trash-note-index full" >
 
         <header className="note-index-header">
             <img height="50" src="assets\img\keep-icon.png" alt="" />

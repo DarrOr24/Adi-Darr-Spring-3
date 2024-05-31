@@ -15,6 +15,8 @@
 
 /* Keeper */
 
+/* Keeper Views */
+
 @import './apps/note/views/NoteIndex.css';
 @import './apps/note/views/TrashNoteIndex.css';
 
@@ -36,6 +38,10 @@
 @import './apps/note/cmps/NoteTodosEdit.css';
 @import './apps/note/cmps/TrashNotePreview.css';
 @import './apps/note/cmps/TrashNoteList.css';
+
+/* Keeper Setup */
+
+@import './apps/note/setup/NoteMq.css';
 
 
 

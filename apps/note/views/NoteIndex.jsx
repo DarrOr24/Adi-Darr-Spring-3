@@ -89,7 +89,7 @@ export function NoteIndex() {
 
 
     if (isLoading) return <div className="loader"></div>
-    return <section className = "note-index full">
+    return <section className = "note-index not-trash full">
 
         <header className="note-index-header">
 

@@ -16,6 +16,7 @@
 /* Keeper */
 
 @import './apps/note/views/NoteIndex.css';
+@import './apps/note/cmps/TrashNoteIndex.css';
 
 /* Keeper Cmps */
 @import './apps/note/cmps/NoteFilter.css';
@@ -32,7 +33,6 @@
 @import './apps/note/cmps/NoteImgAdd.css';
 @import './apps/note/cmps/NoteVideoAdd.css';
 @import './apps/note/cmps/VideoList.css';
-@import './apps/note/cmps/TrashNoteList.css';
 @import './apps/note/cmps/TrashNotePreview.css';
 @import './apps/note/cmps/NoteTodos.css';
 @import './apps/note/cmps/NoteTodosEdit.css';

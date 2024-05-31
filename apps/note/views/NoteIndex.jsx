@@ -8,24 +8,19 @@ import { NoteSideMenu } from "../cmps/NoteSideMenu.jsx"
 import { noteService } from "../services/note.service.js"
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
-import { TrashNoteList } from "../cmps/TrashNoteList.jsx"
+import { TrashNoteList } from "./TrashNoteList.jsx"
 
 
 export function NoteIndex() {
 
     const [notes, setNotes] = useState([])
-    const [trashNotes, setTrashNotes] = useState([])
+    
     const [isLoading, setIsLoading] = useState(false)
     const [searchParams, setSearchParams] = useSearchParams()
     // const [ filterBy, setFilterBy ] = useState(noteService.getFilterFromSearchParams(searchParams))
     const [ filterBy, setFilterBy ] = useState({})
     const [ mainDisplay, setMainDisplay ] = useState('notes')
     
-
-    useEffect(() => {
-        noteService.loadFromTrash()
-            .then(trashNotes => setTrashNotes(trashNotes))
-    }, [])
 
     useEffect(() => {
         noteService.query(filterBy)
@@ -52,8 +47,7 @@ export function NoteIndex() {
         setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
         
         noteService.saveToTrash(noteToTrash)
-        setTrashNotes(prevTrashNotes => [noteToTrash, ...prevTrashNotes ])
-    
+        
         noteService.remove(noteId)
             .then(() => {
                 setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
@@ -64,20 +58,16 @@ export function NoteIndex() {
                 // showErrorMsg('There was a problem')
             })
             .finally(() => setIsLoading(false))
-        
-        
     }
 
     function pinNote(noteFromPin){
         noteService.save({...noteFromPin, isPinned: noteFromPin.isPinned, pinTime: (noteFromPin.isPinned) ? Date.now() : ''})
         .then(placeNote)
-
     }
 
     function placeNote(noteToPlace){
         console.log('note reached index', noteToPlace.isPinned)
         //Note already saved in the service
-
         //First take her out and set her again with all the notes
         const restOfNotes = notes.filter(note => note.id !== noteToPlace.id)
         
@@ -104,38 +94,7 @@ export function NoteIndex() {
         setFilterBy({ ...newFilter })
     }
 
-    function onMainDisplay(status){
-        console.log(status)
-        setMainDisplay(prevMainDisplay => prevMainDisplay = status)
-    }
 
-    function permanentDelete(noteToDelete){
-        const noteId = noteToDelete.id
-        
-        setIsLoading(true)
-        
-        noteService.removeFromTrash(noteId)
-            .then(() => {
-                setTrashNotes(prevTrashNotes => prevTrashNotes.filter(note => note.id !== noteId))
-                
-            })
-            .catch(err => {
-                console.log('err:', err)
-                
-            })
-            .finally(() => setIsLoading(false)) 
-    }
-
-    function restoreTrash(noteToRestore){
-         
-
-        setNotes(prevNotes => [...prevNotes, noteToRestore])
-        noteService.save({...noteToRestore, id:''})
-            .then(note => setNotes(prevNotes => [...prevNotes, note]))
-            .finally(permanentDelete(noteToRestore))
-    }
-
-    
     if (isLoading) return <div className="loader"></div>
     return <section className = "note-index full">
         <header className="note-index-header">
@@ -144,11 +103,12 @@ export function NoteIndex() {
             <NoteFilter filterBy={filterBy} onFilter={onSetFilterBy} />
         </header>
         <main>
-            <NoteSideMenu onMainDisplay={onMainDisplay} />
-            
-            {(mainDisplay==='notes')&& <AddNote notes={notes} onAdd={addNewNote} onPinNote ={placeNote} />}
+            <NoteSideMenu onMainDisplay={'notes'} />
+
+            <AddNote notes={notes} onAdd={addNewNote} onPinNote ={placeNote} />
                     
-            <DynamicCmp onRestoreTrash={restoreTrash} onPermanentDelete={permanentDelete} trashNotes={trashNotes} status={mainDisplay} notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} onDuplicate={duplicateNote} />
+            {/* <DynamicCmp onRestoreTrash={restoreTrash} onPermanentDelete={permanentDelete} trashNotes={trashNotes} status={mainDisplay} notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} onDuplicate={duplicateNote} /> */}
+            <NoteList notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} onDuplicate={duplicateNote} />
             
         </main>
         

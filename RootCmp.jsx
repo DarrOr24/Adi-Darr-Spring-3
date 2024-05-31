@@ -16,6 +16,7 @@ import { MailCompose2 } from "./apps/mail/cmps/MailCompose2.jsx"
 import { NoteIndex } from "./apps/note/views/NoteIndex.jsx"
 import { AddNote } from "./apps/note/cmps/AddNote.jsx"
 import { NoteEdit2 } from "./apps/note/cmps/NoteEdit2.jsx"
+import { TrashNoteIndex } from "./apps/note/views/TrashNoteIndex.jsx"
 
 
 
@@ -41,6 +42,8 @@ export function App() {
                         <Route path="/note/add" element={<AddNote />} />   
                         <Route path="/note/edit/:noteId" element={<NoteEdit2 />} />
                     </Route>
+                    <Route path="/note/trash" element={<TrashNoteIndex />} />
+
                 </Routes>
                 <UserMsg />
             </section>

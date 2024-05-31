@@ -8,7 +8,6 @@
     justify-self: center;
     grid-area: note-list;
     columns: 250px auto;
-    /* columns: 250px; */
     margin: 0;
 }
 

@@ -1,6 +1,13 @@
-.trash-note-list ul {
-  display: grid;
+.trash-note-list {
+  display: block;
+ 
      
 }
+
+.trash-note-list h2 {
+  margin-inline-start: 0.5em;
+}
+
+
 
 

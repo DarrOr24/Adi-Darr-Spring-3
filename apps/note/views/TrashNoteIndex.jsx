@@ -37,7 +37,7 @@ export function TrashNoteIndex (){
 
     function onRestoreTrash(noteToRestore){
         noteService.save({...noteToRestore, id:''})
-            .then(permanentDelete(noteToRestore))
+            .then(onPermanentDelete(noteToRestore))
     }
 
     function onSetFilterBy(newFilter) {

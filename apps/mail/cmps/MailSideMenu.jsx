@@ -1,21 +1,28 @@
-const { useState } = React
-const { Link, useNavigate, useSearchParams } = ReactRouterDOM
+const { useState, useEffect } = React
+const { Link, useNavigate, useSearchParams, useParams } = ReactRouterDOM
 
 // export function MailSideMenu({ unreadCount, handleComposeClick , onSetStatus }){
 export function MailSideMenu({ unreadCount, onSetStatus }){
-    const [selectedFolder, setSelectedFolder] = useState('inbox')
     const [searchParams, setSearchParams] = useSearchParams()
     const navigate = useNavigate()
+    const params = useParams()
+    const [selectedFolder, setSelectedFolder] = useState(params.status || 'inbox')
+    // const [selectedFolder, setSelectedFolder] = useState('inbox')
     // const [ isClosed, setIsClosed ] = useState(true)
 
     // function toggleSideMenu(){
     //     console.log('isClosed:', isClosed)
     //     setIsClosed(prevIsClosed => !prevIsClosed)
     // }
+    // useEffect(() => {
+    //     // if (params.status) setStatus(params.status)
+    //         console.log('params-side-menu:', params)
+    // }, [params.status])
     
     function handleFolderClick(folder) {
         setSelectedFolder(folder)
         onSetStatus(folder)
+        navigate(`/mail/${folder}`)
     }
 
     function handleComposeClick() {
@@ -26,9 +33,14 @@ export function MailSideMenu({ unreadCount, onSetStatus }){
 
     return (
         <section className = "mail-side-menu">
-            
-            {/* <ul className = "menu">
-                <li onClick={toggleSideMenu} className="hamburger">
+
+            {/* <button className='mail-compose' onClick={handleComposeClick}>
+                <img src="assets\img\edit_labels.svg" alt="" />
+                Compose
+            </button> */}
+            <ul className = "menu">
+                {/* <li onClick={toggleSideMenu} className="hamburger"> */}
+                <li className="hamburger">
                     <img src="assets\img\hamburger.svg" alt="" />
                 </li>
                 <li className='mail-compose' onClick={handleComposeClick}>
@@ -37,61 +49,40 @@ export function MailSideMenu({ unreadCount, onSetStatus }){
                 </li>
                 <li className={selectedFolder === 'inbox' ? 'selected' : ''} 
                     onClick={() => handleFolderClick('inbox')} >
-                        <i className="fa-solid fa-inbox"></i>
-                        <p>Inbox</p>
-                        <p>{unreadCount}</p>
-                </li>
-                    
-                <li className={selectedFolder === 'sent' ? 'selected' : ''} 
-                    onClick={() => handleFolderClick('sent')}>
-                        <i className="fa-solid fa-paper-plane"></i>
-                        <p>Sent</p>  
-                </li>
-                <li className={selectedFolder === 'trash' ? 'selected' : ''} 
-                    onClick={() => handleFolderClick('trash')}>
-                        <img src="assets/img/trash.svg" alt="" />
-                        <p>Trash</p>
-
-                </li>
-                <li className={selectedFolder === 'starred' ? 'selected' : ''} 
-                    onClick={() => handleFolderClick('starred')}>
-                        <i className="fa-regular fa-star"></i>
-                        <p>Starred</p>
-                </li>
-                <li className={selectedFolder === 'drafts' ? 'selected' : ''} 
-                    onClick={() => handleFolderClick('drafts')}>
-                        <i className="fa-regular fa-file"></i>
-                        <p>Drafts</p>
-                </li>
-            </ul> */}
-
-            <button className='mail-compose' onClick={handleComposeClick}>
-                <img src="assets\img\edit_labels.svg" alt="" />
-                Compose
-            </button>
-            <ul className = "menu">
-                <li className={selectedFolder === 'inbox' ? 'selected' : ''} 
-                    onClick={() => handleFolderClick('inbox')} >
-                        <Link to="/mail/inbox">
+                        {/* <Link to="/mail/inbox"> */}
                             <i className="fa-solid fa-inbox"></i>
                             <span>Inbox</span>
                             <span>{unreadCount}</span>
-                        </Link>
+                        {/* </Link> */}
                 </li>
                 <li className={selectedFolder === 'sent' ? 'selected' : ''} 
                     onClick={() => handleFolderClick('sent')}>
-                        <Link to="/mail/sent">
+                        {/* <Link to="/mail/sent"> */}
                             <i className="fa-solid fa-paper-plane"></i>
                             <p>Sent</p>
-                        </Link>
+                        {/* </Link> */}
                 </li>
                 <li className={selectedFolder === 'trash' ? 'selected' : ''} 
                     onClick={() => handleFolderClick('trash')}>
-                    <Link to="/mail/trash">
-                        <img src="assets/img/trash.svg" alt="" />
-                        <p>Trash</p>
-                    </Link>
+                        {/* <Link to="/mail/trash"> */}
+                            <img src="assets/img/trash.svg" alt="" />
+                            <p>Trash</p>
+                        {/* </Link> */}
                 </li>
+                <li className={selectedFolder === 'starred' ? 'selected' : ''} 
+                    onClick={() => handleFolderClick('starred')}>
+                        {/* <Link to="/mail/starred"> */}
+                            <i className="fa-regular fa-star"></i>
+                            <p>Starred</p>
+                        {/* </Link> */}
+                </li>
+                {/* <li className={selectedFolder === 'drafts' ? 'selected' : ''}
+                    onClick={() => handleFolderClick('drafts')}>
+                        <Link to="/mail/drafts">
+                            <i className="fa-regular fa-file"></i>
+                            <p>Drafts</p>
+                        </Link>
+                </li> */}
             </ul> 
         </section>
     )

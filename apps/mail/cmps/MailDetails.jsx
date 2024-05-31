@@ -1,21 +1,23 @@
 const { useState, useEffect } = React
-const { useParams, useNavigate, Link } = ReactRouterDOM
-
+const { useOutletContext, useParams, useNavigate, Link } = ReactRouterDOM
 
 import { utilService } from "../../../services/util.service.js"
 import { mailService } from "../services/mail.service.js"
 
-// export function MailDetails({mail, onReturn}) {
-export function MailDetails({ toggleReadStatus, status }) {
+// export function MailDetails({ toggleReadStatus, toggleStarredStatus }) {
+export function MailDetails() {
+    const { toggleReadStatus, toggleStarredStatus } = useOutletContext()
     const [mail, setMail] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     
-    const params = useParams()
+    const { status, mailId } = useParams()
     const navigate = useNavigate()
-    
+
+
     useEffect(() => {
         setIsLoading(true)
-        mailService.get(params.mailId)
+        mailService.get(mailId)
+        // mailService.get(params.mailId)
             .then(mail => {
                 setMail(mail)
                 if (!mail.isRead) {
@@ -33,12 +35,9 @@ export function MailDetails({ toggleReadStatus, status }) {
             .finally(() => {
                 setIsLoading(false)
             })
-    }, [params.mailId])
+    }, [mailId])
+    // }, [params.mailId])
 
-
-    // useEffect(() => {
-    //     navigate(`/mail/details/${mail.id}`)
-    // }, [])
 
     function getTime(mail) {
         const sentDate = new Date(mail.sentAt)
@@ -56,22 +55,10 @@ export function MailDetails({ toggleReadStatus, status }) {
     if (isLoading) return <div>Loading...</div>
 
     if (!mail) return <div>Mail not found...</div>
-    
+
     return (
         <section className="mail-details">
-            {/* <div onClick={onReturn} className="action-icon back">
-                    <img src="assets/img/back.svg" alt="" />
-                    <span className="action-name">Back</span>
-            </div>
-            <div className="subject">{mail.subject}</div>
-            <div className="details">
-                <span className="from">{'<'}{mail.from}{'>'}</span>
-                <span>{getTime(mail)}</span>
-            </div>
-            <div className="mail-body">{mail.body}</div> */}
-            
             <div className="action-icon back">
-                {/* <Link to="/mail"> */}
                 <Link to={`/mail/${status}`}>
                     <img src="assets/img/back.svg" alt="" />
                     <span className="action-name">Back to {status}</span>

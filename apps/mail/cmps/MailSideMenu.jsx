@@ -2,7 +2,7 @@ const { useState, useEffect } = React
 const { Link, useNavigate, useSearchParams, useParams } = ReactRouterDOM
 
 // export function MailSideMenu({ unreadCount, handleComposeClick , onSetStatus }){
-export function MailSideMenu({ unreadCount, onSetStatus }){
+export function MailSideMenu({ unreadCount, onSetStatus, onShowCompose }){
     const [searchParams, setSearchParams] = useSearchParams()
     const navigate = useNavigate()
     const params = useParams()
@@ -28,6 +28,7 @@ export function MailSideMenu({ unreadCount, onSetStatus }){
     function handleComposeClick() {
         searchParams.set('compose', 'new')
         setSearchParams(searchParams)
+        onShowCompose(true)
     }
 
 

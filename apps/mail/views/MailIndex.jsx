@@ -17,7 +17,8 @@ export function MailIndex() {
     const [ status, setStatus ] = useState(params.status || 'inbox')
     const [unreadCount, setUnreadCount] = useState(0)
     const [sortBy, setSortBy] = useState('date')
-    // const [showCompose, setShowCompose] = useState(false)
+    const [ newMail, setNewMail ] = useState(mailService.getEmptyMail())
+    const [showCompose, setShowCompose] = useState(false)
     // const [isLoading, setIsLoading] = useState(false)
     
     const navigate = useNavigate()
@@ -36,13 +37,13 @@ export function MailIndex() {
         if (params.status) setStatus(params.status)
     }, [params.status])
 
-    // useEffect(() => {
-    //     if (searchParams.has('subject') || searchParams.has('body')) {
-    //         setShowCompose(true)
-    //     } else {
-    //         setShowCompose(false)
-    //     }
-    // }, [])
+    useEffect(() => {
+        if (searchParams.has('compose')) {
+            setShowCompose(true)
+        } else {
+            setShowCompose(false)
+        }
+    }, [])
 
     
     function removeMail(mailId) {
@@ -103,10 +104,41 @@ export function MailIndex() {
         setSortBy(newSortBy)
     }
 
+    function onSetNewMail(newMail){
+        setNewMail(prevMail => ({...prevMail, ...newMail}))
+    }
+
+    function onSaveMailCompose(ev) {
+        ev.preventDefault()
+        if(!newMail.to) {
+            console.log('Please specify at least one recipient.')
+            return
+        }
+
+        mailService.save(newMail)
+            .then(() => console.log('Mail has successfully saved!', newMail))
+            .catch(() => console.log(`couldn't save mail`))
+            .finally(() => closeCompose())
+    }
+
+    
+
+    function onShowCompose(isShowCompose) {
+        if (isShowCompose) {
+            setNewMail(mailService.getEmptyMail())
+        }
+        setShowCompose(isShowCompose)
+    }
+    
+    function closeCompose(){
+        searchParams.delete('compose')
+        searchParams.delete('subject')
+        searchParams.delete('body')
+        setSearchParams(searchParams)
+        setShowCompose(false)
+    }
 
     if (!mails) return <div>Loading...</div>
-
-    const showCompose = searchParams.get('compose') === 'new'
 
     // if (isLoading) return <div className="loader"></div>
     return (
@@ -117,7 +149,7 @@ export function MailIndex() {
                 <MailFilter filterBy={filterBy} onFilter={onSetFilterBy} onSort={onSetSortBy}/>
             </header>
             <main>
-                <MailSideMenu unreadCount={unreadCount} onSetStatus={onSetStatus} />
+                <MailSideMenu unreadCount={unreadCount} onSetStatus={onSetStatus} onShowCompose={onShowCompose}/>
                 <Outlet context={{
                     mails,
                     removeMail,
@@ -127,7 +159,7 @@ export function MailIndex() {
                     status,
                 }} />
             </main>
-            {showCompose && <MailCompose />}
+            {showCompose && <MailCompose newMail={newMail} onNewMail={onSetNewMail} onSaveMailCompose={onSaveMailCompose} onCloseCompose={closeCompose} />}
         </section>
     )
 }

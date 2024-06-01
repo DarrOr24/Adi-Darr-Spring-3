@@ -19,7 +19,7 @@ export const mailService = {
     countUnreadInboxMails,
     moveToTrash,
     getFilterFromSearchParams,
-    // getMailFromSearchParams, 
+    getMailFromSearchParams, 
     // getNoteFromSearchParams, 
 }
 

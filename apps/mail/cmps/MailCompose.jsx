@@ -1,34 +1,36 @@
-import { mailService } from "../services/mail.service.js"
-
-const { useState, useEffect } = React
+const { useState, useEffect, useRef } = React
 const {  useNavigate,useParams, useSearchParams } = ReactRouterDOM
 
 // export function MailCompose({onComposeMail, onClose}){
-export function MailCompose(){
-    const [mail, setMail] = useState(mailService.getEmptyMail())
+// export function MailCompose({ onSaveMailCompose }){
+export function MailCompose({ newMail, onNewMail, onSaveMailCompose, onCloseCompose }){
+    const [newMailToEdit, setNewMailToEdit] = useState({...newMail})
     const [searchParams, setSearchParams] = useSearchParams()
-    // const [noteMailContent, setNoteMailContent] = useState({ subject: '', body: '' })
+    const [noteMailContent, setNoteMailContent] = useState({ subject: '', body: '' })
     
     // const params = useParams()
     const navigate = useNavigate()
     
-    // useEffect(() => {
-    //     navigate(`/mail/compose`)
-    //     const subject = searchParams.get('subject') || ''
-    //     const body = searchParams.get('body') || ''
-    //     setMail(prevMail => ({ ...prevMail, subject, body }))
-    // }, [])
+    useEffect(() => {
+        const compose = searchParams.get('compose')
+        const subject = searchParams.get('subject') || ''
+        const body = searchParams.get('body') || ''
+        
+        if (compose) {
+            setNewMailToEdit(prevMail => ({ ...prevMail, subject, body }))
+        }
+    }, [searchParams])
+    
 
-    // useEffect(() => {
-    //     const updatedMail = mailService.getMailFromSearchParams(searchParams)
-    //     setNoteMailContent(updatedMail)
-    // }, [searchParams])
-
-    // useEffect(() => {
-    //     if (mail.subject || mail.body) {
-    //         setSearchParams({ subject: mail.subject, body: mail.body })
-    //     }
-    // }, [mail.subject, mail.body])
+    useEffect(() => {
+        onNewMail({ ...newMailToEdit })
+        if (newMailToEdit.subject || newMailToEdit.body) {
+            if (newMailToEdit.subject) searchParams.set('subject', newMailToEdit.subject)
+            if (newMailToEdit.body) searchParams.set('body', newMailToEdit.body)
+            setSearchParams(searchParams)
+        }
+    }, [newMailToEdit])
+    
 
     function handleChange({ target }) {
         const { type, name: prop } = target
@@ -44,28 +46,7 @@ export function MailCompose(){
                 value = target.checked
                 break;
         }
-        setMail(prevMail => ({ ...prevMail, [prop]: value }))
-    }
-
-    // function onSave(ev) {
-    //     ev.preventDefault()
-    //     if(!mail.to) {
-    //         console.log('Please specify at least one recipient.')
-    //         return
-    //     }
-    //     mailService.save(mail)
-    //         .then((savedMail) => onComposeMail(savedMail))
-    //         .then(() => console.log('Mail has successfully saved!'))
-    //         .catch(() => console.log(`couldn't save mail`))
-            
-    // }
-    function onSave(ev) {
-        ev.preventDefault()
-        mailService.save(mail)
-            .then(() => console.log('Mail has successfully saved!'))
-            .catch(() => console.log(`couldn't save mail`))
-            .finally(() => navigate('/mail'))
-            .finally(() => closeForm())
+        setNewMailToEdit(prevMail => ({ ...prevMail, [prop]: value }))
     }
 
     // function closeForm() {
@@ -73,55 +54,59 @@ export function MailCompose(){
     // }
 
     function closeForm() {
-        navigate('/mail')
-        searchParams.delete('compose')
-        setSearchParams(searchParams)
+        console.log('close')
+        // searchParams.delete('compose')
+        // setSearchParams(searchParams)
+        // navigate('/mail')
     }
 
     if (!searchParams.get('compose')) {
         return null
     }
 
-    // function sendNote(){
-    //     const noteContent = {
-    //         title: mail.subject,
-    //         txt: mail.body,
-    //     }
-    //     console.log('noteContent:', noteContent)
+    function sendNote(){
+        // const noteContent = {
+        //     title: newMailToEdit.subject,
+        //     txt: newMailToEdit.body,
+        // }
+        // console.log('noteContent:', noteContent)
 
-    //     navigate(`/note/add?title=${mail.subject}&body=${mail.body}`)
-    
-    //     setNoteMailContent({subject: '', body: ''})
-    //     closeForm()
-    // }
-
+        navigate(`/note/add?title=${newMailToEdit.subject}&body=${newMailToEdit.body}`)
+        
+        // Link form for sending a note as an email
+        // navigate(`/mail/inbox?compose=new&subject=${note.title}&body=${note.body}`)
+        
+        
+        // setNoteMailContent({subject: '', body: ''})
+        // onCloseCompose() 
+    }
     
 
     return (
         <section className="mail-compose">
-            <form onSubmit={onSave} className='mail-form'>
+            <form onSubmit={onSaveMailCompose} className='mail-form'>
                 <div className='mail-modal'>
                     <h2>New Message</h2>
-                    <button type="button" className='btn-close' onClick={closeForm}>x</button>
+                    <button type="button" className='btn-close' onClick={onCloseCompose}>x</button>
                     <div className="mail-input">
                         <label htmlFor="to">To </label>
-                        <input onChange={handleChange} value={mail.to}
+                        <input onChange={handleChange} value={newMailToEdit.to}
                             id='to' type="text" name='to' />
                     </div>
 
-                    <input className="mail-input" onChange={handleChange} value={mail.subject}
+                    <input className="mail-input" onChange={handleChange} value={newMailToEdit.subject}
                         id='subject' type="text" name='subject' placeholder="Subject"/>
 
                     <textarea
                             name='body'
                             cols='30'
                             rows='10'
-                            value={mail.body}
+                            value={newMailToEdit.body}
                             onChange={handleChange}
                         ></textarea>
-                    <div className="btn-send-compose">
+                    <div className="btn-send-compose"> 
                         <button type="submit" className="btn-send">Send</button>
-                        {/* <button type="button" className="btn-send" onClick={sendNote}>Send as a note</button> */}
+                        <button type="button" className="btn-send" onClick={sendNote}>Send as a note</button>
                     </div>
                 </div>
             </form>

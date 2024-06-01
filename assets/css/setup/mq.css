@@ -22,7 +22,7 @@
         text-align: center;
     }
 
-    .app-header div{
+    /* .app-header div{
         
         left: 0.3em;
         top: 0.5em;
@@ -35,7 +35,7 @@
         right: 0;
         translate: 80% 40%;
         
-    }
+    } */
    
     
     
@@ -46,7 +46,7 @@
 
 @media (min-width: 640px){
     .app-header div{
-        
+       margin: 0;
         right: 0.5em;
         top: 0.5em;
         

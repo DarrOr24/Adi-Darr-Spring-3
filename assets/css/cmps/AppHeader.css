@@ -4,9 +4,10 @@
 
 .app-header div{
     position: absolute;
-    right: 0.5em;
-    top: 0.5em;
+   
     z-index: 3;
+    margin-inline-start: 0.2em;
+    margin-block-start: 0.5em;
 }
 
 .app-header .main-nav-icon.clicked {
@@ -24,7 +25,7 @@ nav {
     position: absolute;
     top: 0;
     right: 0;
-    translate: 0 40%;
+    translate: 75% 40%;
     display: grid;
     background-color: white;
     border: 5px solid var(--fog);

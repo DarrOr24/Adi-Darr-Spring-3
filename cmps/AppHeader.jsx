@@ -13,8 +13,6 @@ export function AppHeader() {
         setShowMenu(prevShowMenu => !prevShowMenu)
         if (!iconClass) setIconClass('clicked')
         else setIconClass('')
-         
-
     }
 
 

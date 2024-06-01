@@ -49,6 +49,10 @@
         margin-inline-start: 6em;
         
     }
+
+    .side-btn p{
+        display: block;
+    }
     
 }
 

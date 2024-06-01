@@ -15,10 +15,9 @@ export function NoteList({ notes, onRemove, onEdit, onPinNote, onDuplicate }) {
     return <section className="note-list">
                     <section className="pinned-notes" >
                         {pinnedNotes() && <h2>PINNED</h2>}
-                        <ul className={(!pinnedNotes()) ? 'empty' : ''}> 
+                        <ul> 
                             {notes.map(note => 
                             <li  key={note.id }   >
-                                {/* <div className="pinned-notes-list"> */}
                                 <div >
                                     {(note.isPinned)&& <NotePreview note={note} onRemove = {onRemove} onEdit={onEdit} onPinNote={onPinNote} onDuplicate={onDuplicate} />}
                                 </div>

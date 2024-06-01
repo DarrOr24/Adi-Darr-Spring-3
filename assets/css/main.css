@@ -10,13 +10,22 @@
 @import './basics/layout.css';
 @import './basics/loader.css';
 
+/* Cmps */
+@import './cmps/UserMsg.css';
+@import './cmps/AppHeader.css';
+
 /* Views */
 @import './views/home.css';
+@import './views/about.css';
+@import './setup/mq.css';
 
 /* Keeper */
 
+/* Keeper Views */
+
 @import './apps/note/views/NoteIndex.css';
-@import './apps/note/cmps/TrashNoteIndex.css';
+@import './apps/note/views/TrashNoteIndex.css';
+@import './apps/note/views/UnderConstruction.css';
 
 /* Keeper Cmps */
 @import './apps/note/cmps/NoteSideMenu.css';
@@ -37,6 +46,10 @@
 @import './apps/note/cmps/TrashNotePreview.css';
 @import './apps/note/cmps/TrashNoteList.css';
 
+/* Keeper Setup */
+
+@import './apps/note/setup/NoteMq.css';
+
 
 
 
@@ -54,7 +67,5 @@
 @import './apps/mail/cmps/ActionBtnsMail.css';
 @import './apps/mail/cmps/darr.css';
 
-/* Cmps */
-@import './cmps/UserMsg.css';
-@import './cmps/AppHeader.css';
+
 

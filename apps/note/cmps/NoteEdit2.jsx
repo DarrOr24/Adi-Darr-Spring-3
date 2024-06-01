@@ -41,7 +41,7 @@ export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote}){
     function handleTodos(infoObj){
         noteService.save({...note, info: infoObj, updateAt:Date.now() })
             .then((note)=>{
-                setNote(prevNote => prevNote = note)
+                setNote( note)
                 onEdit(note)
                 onClose()
             })

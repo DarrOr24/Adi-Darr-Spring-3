@@ -1,6 +1,6 @@
 
 export function Home() {
     return <section className="home main-layout">
-        <h1>Welcome to home page!</h1>
+        <img src="assets\img\Keep&Send.png" alt="" />
     </section>
 }

@@ -1,1 +1,12 @@
- /* home */
+.home{
+    display: grid;
+    place-items: center;
+    background-color: var(--chalk);
+    height: 100vh;
+    
+}
+
+.home img{
+    margin-block-start: 4em;
+    border-radius: 20px;
+}

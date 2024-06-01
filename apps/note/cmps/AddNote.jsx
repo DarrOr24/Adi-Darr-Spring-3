@@ -109,12 +109,9 @@ export function AddNote({onAdd}){
 
     function handleTodos(infoObj){
         
-        const infoObjCopy = structuredClone(infoObj)
-        
-        
          console.log(note.style.backgroundColor)
 
-        noteService.save({...note, info: infoObjCopy })
+        noteService.save({...note, info: infoObj })
             .then((note)=>{
                 onAdd(note)
                 setOpenNote(false)

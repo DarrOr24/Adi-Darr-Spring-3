@@ -19,6 +19,6 @@ export function NoteFilter({ filterBy, onFilter }) {
 
     return <section className="note-filter">
             <img src="assets\img\magnifying_glass.svg" alt="" />
-            <input onChange={handleChange} value={txt} name="txt" type="text" placeholder="Search..." />
+            <input size="15" onChange={handleChange} value={txt} name="txt" type="text" placeholder="Search..." />
         </section>
 }

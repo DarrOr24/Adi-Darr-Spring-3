@@ -46,11 +46,9 @@ export function NoteIndex() {
         noteService.remove(noteId)
             .then(() => {
                 setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
-                // showSuccessMsg(`Note (${noteId}) removed successfully!`)
             })
             .catch(err => {
                 console.log('err:', err)
-                // showErrorMsg('There was a problem')
             })
             .finally(() => setIsLoading(false))
     }
@@ -89,7 +87,7 @@ export function NoteIndex() {
 
 
     if (isLoading) return <div className="loader"></div>
-    return <section className = "note-index full">
+    return <section className = "note-index not-trash full">
 
         <header className="note-index-header">
 
@@ -99,7 +97,7 @@ export function NoteIndex() {
 
         </header>
 
-        <main>
+        <main >
 
             <NoteSideMenu mainDisplay={'notes'} />
 

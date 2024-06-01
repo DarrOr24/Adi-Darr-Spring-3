@@ -1,6 +1,6 @@
-.trash-note-index main {
+.trash-note-index .trash-index-main  {
    display: grid;
-   grid-template-columns: 200px 1fr;
+   grid-template-columns: 160px 1fr;
 }
 
 

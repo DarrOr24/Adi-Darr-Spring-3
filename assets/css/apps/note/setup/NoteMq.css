@@ -44,6 +44,11 @@
     .add-note {
         width: 400px;
     }
+
+    .note-index .add-note {
+        margin-inline-start: 6em;
+        
+    }
     
 }
 
@@ -59,7 +64,7 @@
         margin-block-start: 1em;
     }
 
-    .add-note {
+    .note-index .add-note {
         margin-inline-start: 12.5em;
         
     }
@@ -76,5 +81,8 @@
 
 /* LARGE */
 @media (min-width: 1100px){
-    
+    .note-index .add-note {
+        margin-inline-start: 25em;
+        
+    }
 }

@@ -44,14 +44,7 @@
     height: 300px;
 }
 
-.about .logo {
-    height: 100px;
-    border-radius: 20px;
-    box-shadow: 10px 10px 45px 0px rgba(235,205,235,1);
-    position: absolute;
-    bottom:2em;
-    right: 2em;
-}
+
 
 .about ul {
     display: grid;

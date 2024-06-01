@@ -1,7 +1,6 @@
 
 export function About() {
     return <section className="about main-layout">
-            <img className="logo" src="assets\img\keepAndSendLogo.svg" alt="" />
         
             <h1>About...  </h1>
             <img className="gif" src="assets\img\Keep&Send.gif" alt="" />

@@ -32,6 +32,10 @@
     .side-btn p{
         display: none;
     }
+
+    .side-menu .hamburger {
+        opacity: 0;
+    }
 }
 
 /* SMALL */
@@ -52,6 +56,10 @@
 
     .side-btn p{
         display: block;
+    }
+
+    .side-menu .hamburger {
+        opacity: 1;
     }
     
 }

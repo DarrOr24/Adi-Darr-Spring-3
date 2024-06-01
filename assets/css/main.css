@@ -10,6 +10,10 @@
 @import './basics/layout.css';
 @import './basics/loader.css';
 
+/* Cmps */
+@import './cmps/UserMsg.css';
+@import './cmps/AppHeader.css';
+
 /* Views */
 @import './views/home.css';
 @import './views/about.css';
@@ -63,7 +67,5 @@
 @import './apps/mail/cmps/ActionBtnsMail.css';
 @import './apps/mail/cmps/darr.css';
 
-/* Cmps */
-@import './cmps/UserMsg.css';
-@import './cmps/AppHeader.css';
+
 

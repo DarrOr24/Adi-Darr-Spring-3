@@ -12,6 +12,8 @@
 
 /* Views */
 @import './views/home.css';
+@import './views/about.css';
+@import './setup/mq.css';
 
 /* Keeper */
 

@@ -1,0 +1,33 @@
+/* MOBILE ONLY */
+@media (max-width: 920px){
+    .about{
+        
+       display: block;
+       height: 100%;
+       padding: 2em;
+        
+    }
+    
+    .about .gif {
+        margin: 1em auto;
+    }
+
+    .about .logo {
+        bottom: 230px;
+    }
+
+    .about ul {
+        padding-inline: 2em;
+    }
+
+    .about h2, .about h1 {
+        text-align: center;
+    }
+
+
+    
+   
+    
+    
+    
+}

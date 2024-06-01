@@ -5,10 +5,10 @@
     }
 
     .note-filter {
-        width: 350px;  
+        width: 200px;  
     }
     
-
+   
     .note-list ul{
         display: grid;
         place-content: center;
@@ -16,17 +16,34 @@
     }
 
     .note-index-header {
-        grid-template-columns: 90px 60px 650px; 
+        grid-template-columns: 90px 60px auto; 
     } 
 
     .note-list h2 {
         padding-inline-start: 1em;
         padding-block-start: 1em;
     }
+
+    .add-note {
+        margin-inline-start: 1em;
+        width: 300px;
+    }
+
+    .side-btn p{
+        display: none;
+    }
 }
 
 /* SMALL */
 @media (min-width: 640px){
+
+    .note-filter {
+        width: 350px;  
+    }
+
+    .add-note {
+        width: 400px;
+    }
     
 }
 
@@ -44,10 +61,16 @@
 
     .add-note {
         margin-inline-start: 12.5em;
+        
     }
 
     .note-list ul {
         columns: 270px auto;
+    }
+
+    .add-note {
+        margin-inline-start: 50px;
+        width: 400px;
     }
 }
 

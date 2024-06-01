@@ -1,11 +1,9 @@
 /* MOBILE ONLY */
 @media (max-width: 920px){
     .about{
-        
        display: block;
        height: 100%;
-       padding: 2em;
-        
+       padding: 2em; 
     }
     
     .about .gif {

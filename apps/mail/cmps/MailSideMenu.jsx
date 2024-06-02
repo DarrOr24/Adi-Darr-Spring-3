@@ -3,13 +3,13 @@ const { Link, useNavigate, useSearchParams, useParams } = ReactRouterDOM
 
 // export function MailSideMenu({ unreadCount, handleComposeClick , onSetStatus }){
 export function MailSideMenu({ unreadCount, onSetStatus, onShowCompose }){
-    const [searchParams, setSearchParams] = useSearchParams()
-    const navigate = useNavigate()
+    // const [searchParams, setSearchParams] = useSearchParams()
     const params = useParams()
+    const navigate = useNavigate()
     const [selectedFolder, setSelectedFolder] = useState(params.status || 'inbox')
+    const [ isClosed, setIsClosed ] = useState(false)
     
     // const [selectedFolder, setSelectedFolder] = useState('inbox')
-    const [ isClosed, setIsClosed ] = useState(false)
 
     function toggleSideMenu(){
         console.log('isClosed:', isClosed)
@@ -29,9 +29,11 @@ export function MailSideMenu({ unreadCount, onSetStatus, onShowCompose }){
 
     function handleComposeClick() {
         setIsClosed(false)
-        searchParams.set('compose', 'new')
-        setSearchParams(searchParams)
+        console.log('isClosed:', isClosed)
+        // searchParams.set('compose', 'new')
+        // setSearchParams(searchParams)
         onShowCompose(true)
+        
     }
 
     

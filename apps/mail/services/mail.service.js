@@ -19,7 +19,7 @@ export const mailService = {
     countUnreadInboxMails,
     moveToTrash,
     getFilterFromSearchParams,
-    // getMailFromSearchParams, 
+    getMailFromSearchParams, 
     // getNoteFromSearchParams, 
 }
 
@@ -153,12 +153,13 @@ function getFilterFromSearchParams(searchParams) {
     }
 }
 
-// function getMailFromSearchParams(searchParams) {
-//     return {
-//         subject: searchParams.get('subject') || '',
-//         body: searchParams.get('body') || '',
-//     }
-// }
+function getMailFromSearchParams(searchParams) {
+    return {
+        compose: 'new',
+        subject: searchParams.get('subject') || '',
+        body: searchParams.get('body') || '',
+    }
+}
 
 
 // function getNoteFromSearchParams(searchParams) {

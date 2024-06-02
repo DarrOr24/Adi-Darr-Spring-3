@@ -3,22 +3,27 @@ const {  useNavigate,useParams, useSearchParams } = ReactRouterDOM
 
 export function MailCompose({ newMail, onNewMail, onSaveMailCompose, onCloseCompose }){
     const [newMailToEdit, setNewMailToEdit] = useState({...newMail})
+    const navigate = useNavigate()
+
     const [searchParams, setSearchParams] = useSearchParams()
-    const [noteMailContent, setNoteMailContent] = useState({ subject: '', body: '' })
+    // const [noteMailContent, setNoteMailContent] = useState({ subject: '', body: '' })
     
     // const params = useParams()
-    const navigate = useNavigate()
-    
     
     useEffect(() => {
-        const compose = searchParams.get('compose')
-        const subject = searchParams.get('subject') || ''
-        const body = searchParams.get('body') || ''
+        onNewMail({ ...newMailToEdit })
+        console.log('newMailToEdit:', newMailToEdit)
+    }, [newMailToEdit])
+    
+    // useEffect(() => {
+    //     const compose = searchParams.get('compose')
+    //     const subject = searchParams.get('subject') || ''
+    //     const body = searchParams.get('body') || ''
         
-        if (compose) {
-            setNewMailToEdit(prevMail => ({ ...prevMail, subject, body }))
-        }
-    }, [searchParams])
+    //     if (compose) {
+    //         setNewMailToEdit(prevMail => ({ ...prevMail, subject, body }))
+    //     }
+    // }, [searchParams])
     
 
     useEffect(() => {
@@ -29,7 +34,6 @@ export function MailCompose({ newMail, onNewMail, onSaveMailCompose, onCloseComp
             setSearchParams(searchParams)
         }
     }, [newMailToEdit])
-    
     
     function handleChange({ target }) {
         const { type, name: prop } = target
@@ -47,11 +51,14 @@ export function MailCompose({ newMail, onNewMail, onSaveMailCompose, onCloseComp
         }
         setNewMailToEdit(prevMail => ({ ...prevMail, [prop]: value }))
     }
+    
 
-
-    if (!searchParams.get('compose')) {
-        return null
-    }
+    // if (!searchParams.get('compose')) {
+    //     return null
+    // }
+    // if (!newMailToEdit.compose) {
+    //     return null;
+    // }
 
     function sendNote(){
         // const noteContent = {
@@ -98,7 +105,7 @@ export function MailCompose({ newMail, onNewMail, onSaveMailCompose, onCloseComp
                         ></textarea>
                     <div className="btn-send-compose"> 
                         <button type="submit" className="btn-send">Send</button>
-                        <button type="button" className="btn-send" onClick={sendNote}>Send as a note</button>
+                        {/* <button type="button" className="btn-send" onClick={sendNote}>Send as a note</button> */}
                     </div>
                 </div>
             </form>

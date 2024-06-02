@@ -13,12 +13,12 @@ export function MailIndex() {
     const [searchParams, setSearchParams] = useSearchParams()
     const params = useParams()
     const navigate = useNavigate()
-    console.log('searchParams', searchParams);
     const [ mails, setMails ] = useState([])
     const [ filterBy, setFilterBy ] = useState(mailService.getFilterFromSearchParams(searchParams))
     const [ status, setStatus ] = useState(params.status || 'inbox')
     const [unreadCount, setUnreadCount] = useState(0)
     const [sortBy, setSortBy] = useState('date')
+    const [ newMailFromSearchParams, setNewMailFromSearchParams ] = useState(mailService.getMailFromSearchParams(searchParams))
     const [ newMail, setNewMail ] = useState(mailService.getEmptyMail())
     const [showCompose, setShowCompose] = useState(false)
     const [selectedMail, setSelectedMail] = useState(null)
@@ -43,13 +43,21 @@ export function MailIndex() {
     }, [params.status])
 
     useEffect(() => {
-        searchParamsRef.current = searchParams
-        if (searchParams.has('compose')) {
-            setShowCompose(true)
-        } else {
-            setShowCompose(false)
+        if (showCompose) {
+            setSearchParams(newMailFromSearchParams)
+            setNewMail({...newMail, ...newMailFromSearchParams})
+            console.log('newMail:', newMail)
         }
-    }, [])
+    }, [newMailFromSearchParams])
+
+    // useEffect(() => {
+    //     searchParamsRef.current = searchParams
+    //     if (searchParams.has('compose')) {
+    //         setShowCompose(true)
+    //     } else {
+    //         setShowCompose(false)
+    //     }
+    // }, [])
 
 
      useEffect(() => {
@@ -129,6 +137,9 @@ export function MailIndex() {
         setSortBy(newSortBy)
     }
 
+    // function onSetNewMailFromSearchParams(newMail){
+    //     setNewMailFromSearchParams (prevMail => ({...prevMail, ...newMail}))
+    // }
     function onSetNewMail(newMail){
         setNewMail(prevMail => ({...prevMail, ...newMail}))
     }
@@ -148,20 +159,34 @@ export function MailIndex() {
 
     
 
+    // function onShowCompose(isShowCompose) {
+    //     if (isShowCompose) {
+    //         setNewMail(mailService.getEmptyMail())
+    //     }
+    //     setShowCompose(isShowCompose)
+    // }
+
     function onShowCompose(isShowCompose) {
+        console.log('showCompose:', showCompose)
         if (isShowCompose) {
-            setNewMail(mailService.getEmptyMail())
+            // setNewMail(mailService.getEmptyMail())
+            searchParams.set('compose', 'new')
+            setSearchParams(searchParams)
+        } else {
+            closeCompose()
         }
         setShowCompose(isShowCompose)
     }
     
     function closeCompose(){
+        setNewMail(mailService.getEmptyMail())
         searchParams.delete('compose')
         searchParams.delete('subject')
         searchParams.delete('body')
         setSearchParams(searchParams)
         setShowCompose(false)
     }
+    
     function selectMail(mailId) {
         const mail = mails.find(mail => mail.id === mailId)
         if (mail) {

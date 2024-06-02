@@ -2,42 +2,14 @@ const { useState, useEffect } = React
 const { useOutletContext, useParams, useNavigate, Link } = ReactRouterDOM
 
 import { utilService } from "../../../services/util.service.js"
-import { mailService } from "../services/mail.service.js"
 import { ActionBtnsMail } from "./ActionBtnsMail.jsx"
 
-
 export function MailDetails() {
-    const { mails, removeMail, toggleReadStatus, toggleStarredStatus } = useOutletContext()
-    const [mail, setMail] = useState(null)
-    const [isLoading, setIsLoading] = useState(true)
+    const { mail, removeMail, toggleReadStatus, toggleStarredStatus } = useOutletContext()
+    // const [isLoading, setIsLoading] = useState(true)
     
-    const { status, mailId } = useParams()
-    const navigate = useNavigate()
-
-
-    useEffect(() => {
-        setIsLoading(true)
-        mailService.get(mailId)
-        // mailService.get(params.mailId)
-            .then(mail => {
-                setMail(mail)
-                if (!mail.isRead) {
-                    const updatedMail = { ...mail, isRead: true }
-                    mailService.save(updatedMail)
-                        .then(() => {
-                            toggleReadStatus(updatedMail.id)
-                        })
-                }
-            })
-            .catch(() => {
-                alert('Couldnt get mail...')
-                navigate('/mail')
-            })
-            .finally(() => {
-                setIsLoading(false)
-            })
-    }, [mailId])
-    // }, [params.mailId])
+    const { status } = useParams()
+    // const navigate = useNavigate()
 
 
     function getTime(mail) {
@@ -53,7 +25,12 @@ export function MailDetails() {
         return time
     }
 
-    if (isLoading) return <div>Loading...</div>
+    function handleToggleStarredStatus(ev, mailId){
+        ev.preventDefault()
+        ev.stopPropagation()
+        toggleStarredStatus(mailId) 
+    }
+    // if (isLoading) return <div>Loading...</div>
 
     if (!mail) return <div>Mail not found...</div>
 
@@ -66,7 +43,13 @@ export function MailDetails() {
                         <span className="action-name">Back to {status}</span>
                     </Link>
                 </div>
-                <ActionBtnsMail mail={mail} removeMail={removeMail} toggleReadStatus={toggleReadStatus} toggleStarredStatus={toggleStarredStatus} />
+                <div className="action-btn-status">
+                    <div className="action-icon star" onClick={(ev) => handleToggleStarredStatus(ev, mail.id)}>
+                        {mail.isStarred ? <i className="fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>}
+                        <span className="action-name">{mail.isStarred ? '' : 'Not'} Starred</span>
+                    </div>
+                    <ActionBtnsMail mail={mail} removeMail={removeMail} toggleReadStatus={toggleReadStatus} toggleStarredStatus={toggleStarredStatus} />
+                </div>
             </div>
             <div className="subject">{mail.subject}</div>
             <div className="details">

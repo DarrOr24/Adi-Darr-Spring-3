@@ -21,8 +21,10 @@ export function MailIndex() {
     const [sortBy, setSortBy] = useState('date')
     const [ newMail, setNewMail ] = useState(mailService.getEmptyMail())
     const [showCompose, setShowCompose] = useState(false)
+    const [selectedMail, setSelectedMail] = useState(null)
+    const [mail, setMail] = useState(null)
     // const [isSideMenuOpen, setSideMenuOpen] = useState(false)
-    // const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const searchParamsRef = useRef(searchParams)
     
     
@@ -48,6 +50,25 @@ export function MailIndex() {
             setShowCompose(false)
         }
     }, [])
+
+
+     useEffect(() => {
+        setIsLoading(true)
+        mailService.get(params.mailId)
+            .then(mail => {
+                setMail(mail)
+                if (!mail.isRead) {
+                    const updatedMail = { ...mail, isRead: true }
+                    mailService.save(updatedMail)
+                        .then(() => {
+                            toggleReadStatus(updatedMail.id)
+                        })
+                }
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }, [params.mailId])
 
     
     function removeMail(mailId) {
@@ -141,6 +162,17 @@ export function MailIndex() {
         setSearchParams(searchParams)
         setShowCompose(false)
     }
+    function selectMail(mailId) {
+        const mail = mails.find(mail => mail.id === mailId)
+        if (mail) {
+            setSelectedMail(mail)
+            if (!mail.isRead) {
+                toggleReadStatus(mailId)
+            }
+        } else {
+            navigate('/mail');
+        }
+    }
 
     // function toggleSideMenu(){
     //     setSideMenuOpen(prevIsSideMenuOpen => !prevIsSideMenuOpen)
@@ -158,6 +190,9 @@ export function MailIndex() {
     //     setSearchParams(updatedSearchParams)
     // }
 
+    if (isLoading) return <div>Loading...</div>
+
+   
     if (!mails) return <div>Loading...</div>
 
     // if (isLoading) return <div className="loader"></div>
@@ -177,6 +212,7 @@ export function MailIndex() {
                     removeMail,
                     toggleReadStatus,
                     toggleStarredStatus,
+                    mail,
                 }} />
             </main>
             {showCompose && <MailCompose newMail={newMail} onNewMail={onSetNewMail} onSaveMailCompose={onSaveMailCompose} 

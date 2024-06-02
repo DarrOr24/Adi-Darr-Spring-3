@@ -13,16 +13,18 @@ export function MailIndex() {
     const [searchParams, setSearchParams] = useSearchParams()
     const params = useParams()
     const navigate = useNavigate()
-    console.log('searchParams', searchParams);
     const [ mails, setMails ] = useState([])
     const [ filterBy, setFilterBy ] = useState(mailService.getFilterFromSearchParams(searchParams))
     const [ status, setStatus ] = useState(params.status || 'inbox')
     const [unreadCount, setUnreadCount] = useState(0)
     const [sortBy, setSortBy] = useState('date')
+    const [ newMailFromSearchParams, setNewMailFromSearchParams ] = useState(mailService.getMailFromSearchParams(searchParams))
     const [ newMail, setNewMail ] = useState(mailService.getEmptyMail())
     const [showCompose, setShowCompose] = useState(false)
+    const [selectedMail, setSelectedMail] = useState(null)
+    const [mail, setMail] = useState(null)
     // const [isSideMenuOpen, setSideMenuOpen] = useState(false)
-    // const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const searchParamsRef = useRef(searchParams)
     
     
@@ -41,13 +43,40 @@ export function MailIndex() {
     }, [params.status])
 
     useEffect(() => {
-        searchParamsRef.current = searchParams
-        if (searchParams.has('compose')) {
-            setShowCompose(true)
-        } else {
-            setShowCompose(false)
+        if (showCompose) {
+            setSearchParams(newMailFromSearchParams)
+            setNewMail({...newMail, ...newMailFromSearchParams})
+            console.log('newMail:', newMail)
         }
-    }, [])
+    }, [newMailFromSearchParams])
+
+    // useEffect(() => {
+    //     searchParamsRef.current = searchParams
+    //     if (searchParams.has('compose')) {
+    //         setShowCompose(true)
+    //     } else {
+    //         setShowCompose(false)
+    //     }
+    // }, [])
+
+
+     useEffect(() => {
+        setIsLoading(true)
+        mailService.get(params.mailId)
+            .then(mail => {
+                setMail(mail)
+                if (!mail.isRead) {
+                    const updatedMail = { ...mail, isRead: true }
+                    mailService.save(updatedMail)
+                        .then(() => {
+                            toggleReadStatus(updatedMail.id)
+                        })
+                }
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }, [params.mailId])
 
     
     function removeMail(mailId) {
@@ -108,6 +137,9 @@ export function MailIndex() {
         setSortBy(newSortBy)
     }
 
+    // function onSetNewMailFromSearchParams(newMail){
+    //     setNewMailFromSearchParams (prevMail => ({...prevMail, ...newMail}))
+    // }
     function onSetNewMail(newMail){
         setNewMail(prevMail => ({...prevMail, ...newMail}))
     }
@@ -127,19 +159,44 @@ export function MailIndex() {
 
     
 
+    // function onShowCompose(isShowCompose) {
+    //     if (isShowCompose) {
+    //         setNewMail(mailService.getEmptyMail())
+    //     }
+    //     setShowCompose(isShowCompose)
+    // }
+
     function onShowCompose(isShowCompose) {
+        console.log('showCompose:', showCompose)
         if (isShowCompose) {
-            setNewMail(mailService.getEmptyMail())
+            // setNewMail(mailService.getEmptyMail())
+            searchParams.set('compose', 'new')
+            setSearchParams(searchParams)
+        } else {
+            closeCompose()
         }
         setShowCompose(isShowCompose)
     }
     
     function closeCompose(){
+        setNewMail(mailService.getEmptyMail())
         searchParams.delete('compose')
         searchParams.delete('subject')
         searchParams.delete('body')
         setSearchParams(searchParams)
         setShowCompose(false)
+    }
+    
+    function selectMail(mailId) {
+        const mail = mails.find(mail => mail.id === mailId)
+        if (mail) {
+            setSelectedMail(mail)
+            if (!mail.isRead) {
+                toggleReadStatus(mailId)
+            }
+        } else {
+            navigate('/mail');
+        }
     }
 
     // function toggleSideMenu(){
@@ -158,6 +215,9 @@ export function MailIndex() {
     //     setSearchParams(updatedSearchParams)
     // }
 
+    if (isLoading) return <div>Loading...</div>
+
+   
     if (!mails) return <div>Loading...</div>
 
     // if (isLoading) return <div className="loader"></div>
@@ -177,6 +237,7 @@ export function MailIndex() {
                     removeMail,
                     toggleReadStatus,
                     toggleStarredStatus,
+                    mail,
                 }} />
             </main>
             {showCompose && <MailCompose newMail={newMail} onNewMail={onSetNewMail} onSaveMailCompose={onSaveMailCompose} 

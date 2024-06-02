@@ -42,3 +42,4 @@ export function MailPreview({ mail, toggleStarredStatus }) {
         </article>   
     )
 }
+

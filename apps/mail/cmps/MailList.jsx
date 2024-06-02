@@ -7,7 +7,7 @@ import { ActionBtnsMail } from './ActionBtnsMail.jsx'
 // export function MailList({ mails, removeMail, toggleReadStatus, toggleStarredStatus, sortBy }) {
 export function MailList() {
     const { status } = useParams()
-    const { mails, removeMail, toggleReadStatus, toggleStarredStatus, sortBy } = useOutletContext()
+    const { mails, removeMail, toggleReadStatus, toggleStarredStatus } = useOutletContext()
 
     if (mails.length === 0) {
         return (

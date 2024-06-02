@@ -2,6 +2,7 @@
     background-color: #f6f8fc;
     position: relative;
     min-height: 85vh;
+    
 }
 
 .mail-index main{
@@ -17,9 +18,38 @@
     margin-inline-start: 40px;
 }
 
+.mail-header .mail-logo {
+    display: flex;
+}
+
 .mail-header img {
     height: 30px;
     margin-inline-end: 20px;
 } 
 
 
+
+/* MOBILE ONLY */
+@media (max-width: 920px){
+    .mail-header {
+        display: grid;
+        grid-template-rows: auto auto;
+        gap: 10px;
+        width: 100%;
+        padding: 10px;
+        margin: 0;
+    }
+
+    .mail-header .mail-logo {
+        display: flex;
+        margin-block-start: 10px;
+        justify-content: center;
+        
+    }
+    
+    .mail-index main {
+        display: block;
+        width: 100%;
+    }
+
+}

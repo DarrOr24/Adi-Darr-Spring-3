@@ -7,47 +7,57 @@ export function MailSideMenu({ unreadCount, onSetStatus, onShowCompose }){
     const navigate = useNavigate()
     const params = useParams()
     const [selectedFolder, setSelectedFolder] = useState(params.status || 'inbox')
+    
     // const [selectedFolder, setSelectedFolder] = useState('inbox')
-    // const [ isClosed, setIsClosed ] = useState(true)
+    const [ isClosed, setIsClosed ] = useState(false)
 
-    // function toggleSideMenu(){
-    //     console.log('isClosed:', isClosed)
-    //     setIsClosed(prevIsClosed => !prevIsClosed)
-    // }
+    function toggleSideMenu(){
+        console.log('isClosed:', isClosed)
+        setIsClosed(prevIsClosed => !prevIsClosed)
+    }
     // useEffect(() => {
     //     // if (params.status) setStatus(params.status)
     //         console.log('params-side-menu:', params)
     // }, [params.status])
     
     function handleFolderClick(folder) {
+        setIsClosed(false)
         setSelectedFolder(folder)
         onSetStatus(folder)
         navigate(`/mail/${folder}`)
     }
 
     function handleComposeClick() {
+        setIsClosed(false)
         searchParams.set('compose', 'new')
         setSearchParams(searchParams)
         onShowCompose(true)
     }
 
+    
 
     return (
-        <section className = "mail-side-menu">
+        <section className="mail-side-menu">
 
             {/* <button className='mail-compose' onClick={handleComposeClick}>
                 <img src="assets\img\edit_labels.svg" alt="" />
                 Compose
             </button> */}
-            <ul className = "menu">
-                {/* <li onClick={toggleSideMenu} className="hamburger"> */}
-                <li className="hamburger">
+            <button className="hamburger" onClick={toggleSideMenu} >
+                <img src="assets\img\hamburger.svg" alt="" />
+            </button>
+            <button className='mail-compose' onClick={handleComposeClick}>
+                <img src="assets\img\edit_labels.svg" alt="" />
+                Compose
+            </button>
+            <ul className = {`menu ${isClosed ? 'show-menu' : 'close-menu'}`}>
+                {/* <li className="hamburger" onClick={toggleSideMenu} >
                     <img src="assets\img\hamburger.svg" alt="" />
                 </li>
                 <li className='mail-compose' onClick={handleComposeClick}>
                     <img src="assets\img\edit_labels.svg" alt="" />
                     Compose
-                </li>
+                </li> */}
                 <li className={selectedFolder === 'inbox' ? 'selected' : ''} 
                     onClick={() => handleFolderClick('inbox')} >
                         {/* <Link to="/mail/inbox"> */}

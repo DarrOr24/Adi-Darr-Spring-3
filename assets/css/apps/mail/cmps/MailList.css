@@ -51,3 +51,31 @@
     color: #202124;
     font-size: 1.5em;
 }
+
+/* MOBILE ONLY */
+@media (max-width: 920px){
+    
+    .mail-list li .mail-action-btn {
+        display: none;
+    }
+
+}
+
+/* SMALL */
+@media (min-width: 640px){
+   
+    .mail-list li .mail-action-btn {
+        display: flex;
+    }
+}
+
+/* MEDIUM */
+@media (min-width: 920px){
+    
+
+}
+
+/* LARGE */
+@media (min-width: 1100px){
+    
+}

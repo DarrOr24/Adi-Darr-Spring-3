@@ -1,8 +1,6 @@
 const { useState, useEffect, useRef } = React
 const {  useNavigate,useParams, useSearchParams } = ReactRouterDOM
 
-// export function MailCompose({onComposeMail, onClose}){
-// export function MailCompose({ onSaveMailCompose }){
 export function MailCompose({ newMail, onNewMail, onSaveMailCompose, onCloseCompose }){
     const [newMailToEdit, setNewMailToEdit] = useState({...newMail})
     const [searchParams, setSearchParams] = useSearchParams()
@@ -10,6 +8,7 @@ export function MailCompose({ newMail, onNewMail, onSaveMailCompose, onCloseComp
     
     // const params = useParams()
     const navigate = useNavigate()
+    
     
     useEffect(() => {
         const compose = searchParams.get('compose')
@@ -31,7 +30,7 @@ export function MailCompose({ newMail, onNewMail, onSaveMailCompose, onCloseComp
         }
     }, [newMailToEdit])
     
-
+    
     function handleChange({ target }) {
         const { type, name: prop } = target
         let { value } = target
@@ -49,16 +48,6 @@ export function MailCompose({ newMail, onNewMail, onSaveMailCompose, onCloseComp
         setNewMailToEdit(prevMail => ({ ...prevMail, [prop]: value }))
     }
 
-    // function closeForm() {
-    //     onClose()
-    // }
-
-    function closeForm() {
-        console.log('close')
-        // searchParams.delete('compose')
-        // setSearchParams(searchParams)
-        // navigate('/mail')
-    }
 
     if (!searchParams.get('compose')) {
         return null
@@ -66,15 +55,18 @@ export function MailCompose({ newMail, onNewMail, onSaveMailCompose, onCloseComp
 
     function sendNote(){
         // const noteContent = {
-        //     title: newMailToEdit.subject,
-        //     txt: newMailToEdit.body,
-        // }
-        // console.log('noteContent:', noteContent)
-
-        navigate(`/note/add?title=${newMailToEdit.subject}&body=${newMailToEdit.body}`)
-        
-        // Link form for sending a note as an email
-        // navigate(`/mail/inbox?compose=new&subject=${note.title}&body=${note.body}`)
+            //     title: newMailToEdit.subject,
+            //     txt: newMailToEdit.body,
+            // }
+            // console.log('noteContent:', noteContent)
+            
+            // navigate(`/note/add?title=${newMailToEdit.subject}&body=${newMailToEdit.body}`)
+            
+            // Link form for sending a note as an email
+    
+        navigate(`/mail/inbox?compose=new&subject=ADISABBAN&body=SSSSSSSSSSS`)
+    
+        // navigate(`/mail/inbox?compose=new&subject=${note.info.title}&body=${note.info.txt}`)
         
         
         // setNoteMailContent({subject: '', body: ''})

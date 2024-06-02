@@ -20,7 +20,7 @@
     break-inside: avoid;
     display: grid;
     justify-items: center;
-    max-width: 300px;
+    max-width: 270px;
     columns: 270px auto;
    
 }

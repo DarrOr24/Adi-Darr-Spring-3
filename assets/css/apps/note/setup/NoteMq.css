@@ -5,7 +5,7 @@
     }
 
     .note-filter {
-        width: 200px;  
+        margin-inline-end: 0.5em;  
     }
     
    
@@ -24,10 +24,6 @@
         padding-block-start: 1em;
     }
 
-    .add-note {
-        margin-inline-start: 1em;
-        width: 300px;
-    }
 
     .side-btn p{
         display: none;
@@ -36,13 +32,14 @@
     .side-menu .hamburger {
         opacity: 0;
     }
+
 }
 
 /* SMALL */
 @media (min-width: 640px){
 
     .note-filter {
-        width: 350px;  
+        width: 400px;  
     }
 
     .add-note {
@@ -51,6 +48,7 @@
 
     .note-index .add-note {
         margin-inline-start: 6em;
+        width: 400px;
         
     }
 
@@ -60,6 +58,19 @@
 
     .side-menu .hamburger {
         opacity: 1;
+    }
+
+    .note-edit article {
+        width: 400px;
+    }
+
+    .note-edit .note-form iframe {
+        width: calc(400px - 2em);
+    
+    }
+
+    .add-note .action-icons {
+        width: 250px;
     }
     
 }

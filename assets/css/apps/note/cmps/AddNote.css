@@ -1,8 +1,8 @@
 .add-note {
     position: relative;
     margin-block-start: 1em;
-    width: 400px;
-    margin-inline-start: 50px;
+    max-width: 400px;
+    margin-inline: 0.5em;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.548);
     padding: 0.5em;
     border-radius: 8px;
@@ -41,7 +41,7 @@
 }
 
 .add-note .action-icons {
-    width: 250px;
+    width: 200px;
 }
 
 

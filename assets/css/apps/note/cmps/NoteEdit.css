@@ -15,16 +15,15 @@
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.548);
     border-radius: 8px;
     z-index: 2;
-    /* height: 250px; */
-    width: 400px;
+    width: 300px;
     
     font: Robotica;
     
 }
 
 .note-edit .note-form iframe {
-    width: 360px;
-    height: 200px;
+    width: calc(300px - 2em);
+
 }
 
 

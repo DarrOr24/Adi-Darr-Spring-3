@@ -152,21 +152,21 @@ function getFilterFromSearchParams(searchParams) {
         txt: searchParams.get('txt') || '',
     }
 }
-// changeQueryStringParams
-function getMailFromSearchParams(searchParams) {
-    return {
-        subject: searchParams.get('subject') || '',
-        body: searchParams.get('body') || '',
-    }
-}
 
-// changeQueryStringParams
-function getNoteFromSearchParams(searchParams) {
-    return {
-        title: searchParams.get('title') || '',
-        txt: searchParams.get('txt') || '',
-    }
-}
+// function getMailFromSearchParams(searchParams) {
+//     return {
+//         subject: searchParams.get('subject') || '',
+//         body: searchParams.get('body') || '',
+//     }
+// }
+
+
+// function getNoteFromSearchParams(searchParams) {
+//     return {
+//         title: searchParams.get('title') || '',
+//         txt: searchParams.get('txt') || '',
+//     }
+// }
 
 function _createMails() {
     let mails = utilService.loadFromStorage(MAIL_KEY)

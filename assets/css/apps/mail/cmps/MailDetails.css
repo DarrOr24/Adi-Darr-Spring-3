@@ -1,3 +1,7 @@
+.mail-details{
+    margin-inline: 30px;
+}
+
 
 .mail-details .subject {
     font-size: 1.375em;
@@ -12,6 +16,8 @@
     padding: 20px;
 
 }
-.mail-details .back {
-    margin: 10px;
+
+.mail-details .action-btn-details{
+    display: flex;
+    justify-content: space-between;
 }

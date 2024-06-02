@@ -1,4 +1,4 @@
-const { useState, useEffect } = React
+const { useState, useEffect, useRef } = React
 const { useSearchParams, useParams, useNavigate, Outlet } = ReactRouterDOM
 
 import { mailService } from '../services/mail.service.js'
@@ -12,16 +12,20 @@ import { MailCompose } from '../cmps/MailCompose.jsx'
 export function MailIndex() {
     const [searchParams, setSearchParams] = useSearchParams()
     const params = useParams()
+    const navigate = useNavigate()
+    console.log('searchParams', searchParams);
     const [ mails, setMails ] = useState([])
     const [ filterBy, setFilterBy ] = useState(mailService.getFilterFromSearchParams(searchParams))
     const [ status, setStatus ] = useState(params.status || 'inbox')
     const [unreadCount, setUnreadCount] = useState(0)
     const [sortBy, setSortBy] = useState('date')
-    // const [showCompose, setShowCompose] = useState(false)
+    const [ newMail, setNewMail ] = useState(mailService.getEmptyMail())
+    const [showCompose, setShowCompose] = useState(false)
+    // const [isSideMenuOpen, setSideMenuOpen] = useState(false)
     // const [isLoading, setIsLoading] = useState(false)
+    const searchParamsRef = useRef(searchParams)
     
-    const navigate = useNavigate()
-
+    
     useEffect(() => {
         setSearchParams(filterBy)
         const criteria = { ...filterBy ,status, sortBy }
@@ -36,13 +40,14 @@ export function MailIndex() {
         if (params.status) setStatus(params.status)
     }, [params.status])
 
-    // useEffect(() => {
-    //     if (searchParams.has('subject') || searchParams.has('body')) {
-    //         setShowCompose(true)
-    //     } else {
-    //         setShowCompose(false)
-    //     }
-    // }, [])
+    useEffect(() => {
+        searchParamsRef.current = searchParams
+        if (searchParams.has('compose')) {
+            setShowCompose(true)
+        } else {
+            setShowCompose(false)
+        }
+    }, [])
 
     
     function removeMail(mailId) {
@@ -103,31 +108,80 @@ export function MailIndex() {
         setSortBy(newSortBy)
     }
 
+    function onSetNewMail(newMail){
+        setNewMail(prevMail => ({...prevMail, ...newMail}))
+    }
+
+    function onSaveMailCompose(ev) {
+        ev.preventDefault()
+        if(!newMail.to) {
+            console.log('Please specify at least one recipient.')
+            return
+        }
+
+        mailService.save(newMail)
+            .then(() => console.log('Mail has successfully saved!', newMail))
+            .catch(() => console.log(`couldn't save mail`))
+            .finally(() => closeCompose())
+    }
+
+    
+
+    function onShowCompose(isShowCompose) {
+        if (isShowCompose) {
+            setNewMail(mailService.getEmptyMail())
+        }
+        setShowCompose(isShowCompose)
+    }
+    
+    function closeCompose(){
+        searchParams.delete('compose')
+        searchParams.delete('subject')
+        searchParams.delete('body')
+        setSearchParams(searchParams)
+        setShowCompose(false)
+    }
+
+    // function toggleSideMenu(){
+    //     setSideMenuOpen(prevIsSideMenuOpen => !prevIsSideMenuOpen)
+    // }
+
+    // function updateSearchParams(newParams) {
+    //     const updatedSearchParams = new URLSearchParams(searchParamsRef.current)
+    //     Object.keys(newParams).forEach(key => {
+    //         if (newParams[key] !== null) {
+    //             updatedSearchParams.set(key, newParams[key])
+    //         } else {
+    //             updatedSearchParams.delete(key)
+    //         }
+    //     })
+    //     setSearchParams(updatedSearchParams)
+    // }
 
     if (!mails) return <div>Loading...</div>
-
-    const showCompose = searchParams.get('compose') === 'new'
 
     // if (isLoading) return <div className="loader"></div>
     return (
         <section className="mail-index">
             <header className="mail-header">
-                <img src="assets/img/gmail.svg"></img>
-                <h1>Gmail</h1>
+                <div className="mail-logo">
+                    <img src="assets/img/gmail.svg"></img>
+                    <h1>Gmail</h1>
+                </div>
                 <MailFilter filterBy={filterBy} onFilter={onSetFilterBy} onSort={onSetSortBy}/>
             </header>
             <main>
-                <MailSideMenu unreadCount={unreadCount} onSetStatus={onSetStatus} />
+                <MailSideMenu unreadCount={unreadCount} onSetStatus={onSetStatus} onShowCompose={onShowCompose}/>
                 <Outlet context={{
                     mails,
                     removeMail,
                     toggleReadStatus,
                     toggleStarredStatus,
-                    sortBy,
-                    status,
                 }} />
             </main>
-            {showCompose && <MailCompose />}
+            {showCompose && <MailCompose newMail={newMail} onNewMail={onSetNewMail} onSaveMailCompose={onSaveMailCompose} 
+                onCloseCompose={closeCompose} />}
+                {/* onCloseCompose={closeCompose} updateSearchParams={updateSearchParams} />} */}
         </section>
     )
 }

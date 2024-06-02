@@ -49,6 +49,7 @@
 /* Keeper Setup */
 
 @import './apps/note/setup/NoteMq.css';
+@import './apps/mail/setup/MailMq.css';
 
 
 
@@ -57,7 +58,7 @@
 @import './apps/mail/views/MailIndex.css';
 
 /* Email Cmps*/
-@import './apps/mail/cmps/MailHeader.css';
+
 @import './apps/mail/cmps/MailFilter.css';
 @import './apps/mail/cmps/MailList.css';
 @import './apps/mail/cmps/MailPreview.css';

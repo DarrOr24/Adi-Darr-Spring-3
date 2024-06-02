@@ -3,10 +3,11 @@ const { useOutletContext, useParams, useNavigate, Link } = ReactRouterDOM
 
 import { utilService } from "../../../services/util.service.js"
 import { mailService } from "../services/mail.service.js"
+import { ActionBtnsMail } from "./ActionBtnsMail.jsx"
 
-// export function MailDetails({ toggleReadStatus, toggleStarredStatus }) {
+
 export function MailDetails() {
-    const { toggleReadStatus, toggleStarredStatus } = useOutletContext()
+    const { mails, removeMail, toggleReadStatus, toggleStarredStatus } = useOutletContext()
     const [mail, setMail] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     
@@ -58,11 +59,14 @@ export function MailDetails() {
 
     return (
         <section className="mail-details">
-            <div className="action-icon back">
-                <Link to={`/mail/${status}`}>
-                    <img src="assets/img/back.svg" alt="" />
-                    <span className="action-name">Back to {status}</span>
-                </Link>
+            <div className="action-btn-details">
+                <div className="action-icon back">
+                    <Link to={`/mail/${status}`}>
+                        <img src="assets/img/back.svg" alt="" />
+                        <span className="action-name">Back to {status}</span>
+                    </Link>
+                </div>
+                <ActionBtnsMail mail={mail} removeMail={removeMail} toggleReadStatus={toggleReadStatus} toggleStarredStatus={toggleStarredStatus} />
             </div>
             <div className="subject">{mail.subject}</div>
             <div className="details">

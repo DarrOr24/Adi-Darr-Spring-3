@@ -54,7 +54,9 @@
 
 /* MOBILE ONLY */
 @media (max-width: 920px){
-    
+    .mail-list {
+        margin-inline: 10px;
+    }
     .mail-list li .mail-action-btn {
         display: none;
     }

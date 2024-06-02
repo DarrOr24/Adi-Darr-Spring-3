@@ -1,3 +1,4 @@
+
 .mail-side-menu .hamburger{
     display: none;
 }
@@ -69,8 +70,9 @@
         border: 0;
         border-radius: 50%;
         
-        right: 0.5em;
-        top: 0.5em;    
+        right: 1em;
+        top: 0.5em;
+        z-index: 1001;    
         
           
     }
@@ -78,10 +80,15 @@
     .mail-side-menu .hamburger:hover {
         background-color: lightgray;
     }
-    .mail-side-menu .mail-compose {
-        right: 20px;
-        bottom: 20px;
-    }
+
+    /* .mail-side-menu .mail-compose {
+        position: fixed;
+        right: 20px; 
+        bottom: 20px; 
+        z-index: 1000; 
+    } */
+
+    
 
     .mail-side-menu ul {
         padding: 0;
@@ -92,14 +99,12 @@
     }
 
    
-
+    
     .mail-side-menu .menu {
-        /* display: block; */
         position: absolute;
-        /* position: fixed;  */
         top: 50px; 
         bottom: 0; 
-        left: 0;
+        /* left: 0; */
         width: max-content; 
         min-width: 200px;
         background-color: white;
@@ -111,11 +116,11 @@
         padding-left: 20px; 
         box-shadow: -6px 0px 20px rgb(0 0 0 / 25%);
     }
-
     .mail-side-menu .menu.close-menu {
         display: none;
     
     }
+
     .mail-side-menu .menu.open-menu {
         display: block;
     }
@@ -127,6 +132,11 @@
         left: 0.5em;
         top: 0.5em;    
     }  
+    
+    .mail-side-menu .menu {
+        right: 0;
+    }
+    
 }
 
 /* MEDIUM */
@@ -135,6 +145,9 @@
     .mail-side-menu .mail-compose {
         left: 20px;
         top: 55px;
+    }
+    .mail-side-menu .menu {
+        left: 0;
     }
 }
 

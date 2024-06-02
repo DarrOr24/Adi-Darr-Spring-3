@@ -58,7 +58,8 @@
 @media (max-width: 920px) {
     .mail-filter {
         width: 100%;
-        min-width: unset; 
+        min-width: unset;
+        margin-inline: 10px; 
     }
 
     .additional-filter-options {

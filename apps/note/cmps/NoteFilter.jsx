@@ -2,6 +2,8 @@ const { useState, useEffect } = React
 
 export function NoteFilter({ filterBy, onFilter }) {
 
+    
+
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
 
     useEffect(() => {
@@ -12,6 +14,7 @@ export function NoteFilter({ filterBy, onFilter }) {
         const { name, type } = target
         let value = (type === 'number') ? +target.value : target.value
         setFilterByToEdit(prevFilterBy => ({ ...prevFilterBy, [name]: value }))
+        
     }
 
     const { txt } = filterByToEdit

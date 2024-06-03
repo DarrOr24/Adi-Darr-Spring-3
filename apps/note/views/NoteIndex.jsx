@@ -21,7 +21,7 @@ export function NoteIndex() {
     useEffect(() => {
         noteService.query(filterBy)
             .then(notes => setNotes(notes))
-    }, [filterBy, showFilterandAdd])
+    }, [filterBy])
 
     function mainDisplay(stat){
         setShowFilterAndAdd(stat)
@@ -88,6 +88,7 @@ export function NoteIndex() {
     }
 
     function onSetFilterBy(newFilter) {
+        
         setFilterBy({ ...newFilter })
     }
 
@@ -109,9 +110,8 @@ export function NoteIndex() {
             <NoteSideMenu mainDisplay={mainDisplay} />
 
             {showFilterandAdd && <AddNote notes={notes} onAdd={addNewNote} onPinNote ={placeNote} />} 
+           
                     
-            {/* <NoteList notes={notes} onRemove={onRemove} onEdit={onEdit} onPinNote={onPinNote} onDuplicate={onDuplicate} /> */}
-            
             <Outlet context={{
                     notes,
                     onRemove,

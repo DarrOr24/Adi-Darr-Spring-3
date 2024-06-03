@@ -21,7 +21,7 @@ export function NoteIndex() {
     useEffect(() => {
         noteService.query(filterBy)
             .then(notes => setNotes(notes))
-    }, [filterBy])
+    }, [filterBy, showFilterandAdd])
 
     function mainDisplay(stat){
         setShowFilterAndAdd(stat)

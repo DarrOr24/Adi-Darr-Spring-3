@@ -42,9 +42,9 @@ export function App() {
                         <Route path="/note" element={<NoteList />} />   
                         <Route path="/note/add" element={<AddNote />} />   
                         <Route path="/note/edit/:noteId" element={<NoteEdit2 />} />
+                        <Route path="/note/soon" element={<UnderConstruction />} />
                     </Route>
                     <Route path="/note/trash" element={<TrashNoteIndex />} />
-                    <Route path="/note/soon" element={<UnderConstruction />} />
 
                 </Routes>
                 <UserMsg />

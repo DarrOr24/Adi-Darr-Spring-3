@@ -1,16 +1,16 @@
 const { useState, useEffect } = React
 
 import { noteService } from "../services/note.service.js";
-import { NoteSideMenu } from "../cmps/NoteSideMenu.jsx";
-import { TrashNotePreview } from "../cmps/TrashNotePreview.jsx";
-import { NoteFilter } from "../cmps/NoteFilter.jsx";
-import { TrashNoteList } from "../cmps/TrashNoteList.jsx";
+import { NoteSideMenu } from "./NoteSideMenu.jsx";
+import { TrashNotePreview } from "./TrashNotePreview.jsx";
+import { NoteFilter } from "./NoteFilter.jsx";
+import { TrashNoteList } from "./TrashNoteList.jsx";
 
 
 export function TrashNoteIndex (){
     const [trashNotes, setTrashNotes] = useState([])
     const [isLoading, setIsLoading] = useState(false)
-    const [ filterBy, setFilterBy ] = useState({})
+    
     
     const mainDisplay = 'trash'
     
@@ -40,27 +40,21 @@ export function TrashNoteIndex (){
             .then(onPermanentDelete(noteToRestore))
     }
 
-    function onSetFilterBy(newFilter) {
-        setFilterBy({ ...newFilter })
-    }
+   
 
     if (isLoading) return <div className="loader"></div>
 
     return <section className="note-index trash-note-index full" >
 
-        <header className="note-index-header">
-            <img height="50" src="assets\img\keep-icon.png" alt="" />
-            <h1>Keep</h1>
-            <NoteFilter filterBy={filterBy} onFilter={onSetFilterBy} />
-        </header>
+       
 
-        <main className="trash-index-main">
+        {/* <main className="trash-index-main"> */}
 
-            <NoteSideMenu mainDisplay={mainDisplay}/>
+            
 
             <TrashNoteList trashNotes={trashNotes} onRestoreTrash={onRestoreTrash} onPermanentDelete={onPermanentDelete} />
 
-        </main>
+        {/* </main> */}
         
     </section>
 }

@@ -51,9 +51,9 @@ export function NoteSideMenu({mainDisplay}){
                     {!isClosed && <p>Archive</p>}
                 </div>
 
-                <Link to="/note/trash" className={`${isTrashSelected} side-btn`}>
+                <div onClick={()=> navigate('/note/trash')} className={`${isTrashSelected} side-btn`}>
                     <img src="assets\img\trash.svg" alt="" />
                     {!isClosed && <p>Trash</p>}
-                </Link>
+                </div>
     </section>
 }

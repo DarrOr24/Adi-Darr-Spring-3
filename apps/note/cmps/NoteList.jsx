@@ -1,7 +1,11 @@
+const { Link, useOutletContext, useParams } = ReactRouterDOM
+
 import { NotePreview } from "./NotePreview.jsx"
 
 
-export function NoteList({ notes, onRemove, onEdit, onPinNote, onDuplicate }) {
+export function NoteList() {
+
+    const { notes, onRemove, onEdit, onPinNote, onDuplicate, } = useOutletContext()
 
     function pinnedNotes(){
         return notes.filter(note => note.isPinned === true).length > 0

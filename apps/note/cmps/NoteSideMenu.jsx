@@ -1,5 +1,5 @@
 const { useState, useEffect } = React
-const { Link} = ReactRouterDOM
+const { Link, useNavigate} = ReactRouterDOM
 
 
 export function NoteSideMenu({mainDisplay}){
@@ -10,6 +10,8 @@ export function NoteSideMenu({mainDisplay}){
     const [ isLabelsSelected, setIsLabelsSelected ] = useState('')
     const [ isArchiveSelected, setIsArchiveSelected ] = useState('')
     const [ isTrashSelected, setIsTrashSelected ] = useState('')
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         console.log(mainDisplay)
@@ -29,10 +31,10 @@ export function NoteSideMenu({mainDisplay}){
                     <img height="20" src="assets\img\hamburger.svg" alt="" /> 
                 </div>
 
-                <Link to="/note" className={`${isNoteSelected} side-btn`}> 
+                <div onClick={()=> navigate('/note')} className={`${isNoteSelected} side-btn`}> 
                     <img src="assets\img\notes.svg" alt="" />
                     {!isClosed && <p>Notes</p>}
-                </Link>
+                </div>
             
                 <Link to="/note/soon" className={`${isRemindersSelected} side-btn`}>
                     <img src="assets\img\reminders.svg" alt="" />

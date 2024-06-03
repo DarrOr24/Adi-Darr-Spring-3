@@ -1,5 +1,5 @@
 const { useState, useEffect } = React
-const { useSearchParams } = ReactRouterDOM
+const { useSearchParams, Outlet } = ReactRouterDOM
 
 import { AddNote } from "../cmps/AddNote.jsx"
 import { NoteFilter } from "../cmps/NoteFilter.jsx"
@@ -27,14 +27,14 @@ export function NoteIndex() {
         else setNotes([note, ...notes])
     }
 
-    function addEditNote(noteToEdit){ //Note already saved to service
+    function onEdit(noteToEdit){ //Note already saved to service
         placeNote(noteToEdit)
         noteService.save(noteToEdit)
         .then (placeNote)
 
     }
 
-    function removeNote(ev, noteToTrash){
+    function onRemove(ev, noteToTrash){
         ev.stopPropagation()
         const noteId = noteToTrash.id
         console.log('oh yeah!!  triple callback!!')
@@ -53,7 +53,7 @@ export function NoteIndex() {
             .finally(() => setIsLoading(false))
     }
 
-    function pinNote(noteFromPin){
+    function onPinNote(noteFromPin){
         noteService.save({...noteFromPin, isPinned: noteFromPin.isPinned, pinTime: (noteFromPin.isPinned) ? Date.now() : ''})
         .then(placeNote)
     }
@@ -71,7 +71,7 @@ export function NoteIndex() {
         setNotes(sortedNotes)
     }
 
-    function duplicateNote(noteToDuplicate){
+    function onDuplicate(noteToDuplicate){
         const newNote = structuredClone(noteToDuplicate)
         newNote.id = ''
         newNote.time = Date.now()
@@ -103,8 +103,15 @@ export function NoteIndex() {
 
             <AddNote notes={notes} onAdd={addNewNote} onPinNote ={placeNote} />
                     
-            <NoteList notes={notes} onRemove={removeNote} onEdit={addEditNote} onPinNote={pinNote} onDuplicate={duplicateNote} />
+            {/* <NoteList notes={notes} onRemove={onRemove} onEdit={onEdit} onPinNote={onPinNote} onDuplicate={onDuplicate} /> */}
             
+            <Outlet context={{
+                    notes,
+                    onRemove,
+                    onEdit,
+                    onPinNote,
+                    onDuplicate,
+                }} />
         </main>
         
     </section>

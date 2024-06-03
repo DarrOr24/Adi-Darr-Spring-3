@@ -17,6 +17,7 @@ import { AddNote } from "./apps/note/cmps/AddNote.jsx"
 import { NoteEdit2 } from "./apps/note/cmps/NoteEdit2.jsx"
 import { TrashNoteIndex } from "./apps/note/views/TrashNoteIndex.jsx"
 import { UnderConstruction } from "./apps/note/cmps/UnderConstruction.jsx"
+import { NoteList } from "./apps/note/cmps/NoteList.jsx"
 
 
 
@@ -37,6 +38,8 @@ export function App() {
                     </Route>
                     
                     <Route path="/note" element={<NoteIndex />}>
+
+                        <Route path="/note" element={<NoteList />} />   
                         <Route path="/note/add" element={<AddNote />} />   
                         <Route path="/note/edit/:noteId" element={<NoteEdit2 />} />
                     </Route>

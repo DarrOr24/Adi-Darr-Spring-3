@@ -49,17 +49,10 @@ function _createNotes() {
     let notes = utilService.loadFromStorage(NOTE_KEY)
     if (!notes || !notes.length){
         notes = []
-        const noteTitles = ['Passwords', 'Important']
-
-        const noteColors = ['#efeff1', 'white', '#aeccdc', '#e9e3d4', '#f6e2dd']
-      
-        for (let i = 0; i < 2; i++){
-            const noteTitle = noteTitles[i]
-            const noteColor =noteColors[i]
-            
-            notes.push(createNote('NoteTxt', false, {'backgroundColor': noteColor}, {'title': noteTitle, 'txt': utilService.makeLorem(20)}, Date.now()+i))
-            notes.forEach(note => note.id = utilService.makeId())
-        }
+        const txt = 'Number 1 rule: when something is working well, do NOT mess it up!!!'
+        const noteTxt = createNote('NoteImg', false, {'backgroundColor': '#efeff1'}, {'title': 'Important', 'txt': txt}, Date.now()+1)
+        noteTxt.id = utilService.makeId()
+        notes.push(noteTxt)
 
         const url = `assets/img/sweet_noga.png`
         const noteImg = createNote('NoteImg', true, {'backgroundColor': '#aeccdc'}, {'url':url, 'title': 'My Sweet Noga', 'txt': 'Birthday party even on June 7'}, Date.now()+2)
@@ -67,7 +60,7 @@ function _createNotes() {
         notes.push(noteImg)
 
         const url2 ='https://i.pinimg.com/originals/12/0b/ce/120bce4262601e926378c1a4d02b47e8.jpg'
-        const noteImg2 = createNote('NoteImg', false, {'backgroundColor': ' #b4ddd3'}, {'url':url2, 'title': 'How to scorpion handstand'}, Date.now()+2)
+        const noteImg2 = createNote('NoteImg', false, {'backgroundColor': ' #b4ddd3'}, {'url':url2, 'title': 'Scorpion Handstand'}, Date.now()+2)
         noteImg2.id = utilService.makeId()
         notes.push(noteImg2)
 
@@ -77,7 +70,7 @@ function _createNotes() {
         notes.push(noteVideo)
 
         const videoUrl2 = 'https://www.youtube.com/embed/8gECJx6YWCI' 
-        const noteVideo2 =  createNote('NoteVideo', true, {'backgroundColor': '#fff8b8'}, {'url':videoUrl2, 'title': 'Ashtanga Intermediate Series'}, Date.now()+4)
+        const noteVideo2 =  createNote('NoteVideo', true, {'backgroundColor': '#d3bfdb'}, {'url':videoUrl2, 'title': 'Ashtanga Intermediate Series'}, Date.now()+4)
         noteVideo2.id = utilService.makeId()
         notes.push(noteVideo2)
 

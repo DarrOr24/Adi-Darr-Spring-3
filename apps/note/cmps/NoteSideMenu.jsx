@@ -24,6 +24,14 @@ export function NoteSideMenu({mainDisplay}){
         setIsClosed(prevIsClosed => !prevIsClosed)
     }
 
+    function resetAll(){
+        setIsNoteSelected('')
+        setIsRemindersSelected('')
+        setIsArchiveSelected('')
+        setIsLabelsSelected('')
+        setIsTrashSelected('')
+    }
+
   
     return <section className = "side-menu">
 
@@ -31,27 +39,47 @@ export function NoteSideMenu({mainDisplay}){
                     <img height="20" src="assets\img\hamburger.svg" alt="" /> 
                 </div>
 
-                <div onClick={()=> navigate('/note')} className={`${isNoteSelected} side-btn`}> 
+                <div onClick={()=> {resetAll()
+                                    setIsNoteSelected('selected')
+                                    mainDisplay(true)
+                                    navigate('/note')}} 
+                                    className={`${isNoteSelected} side-btn`}> 
                     <img src="assets\img\notes.svg" alt="" />
                     {!isClosed && <p>Notes</p>}
                 </div>
             
-                <div onClick={()=> navigate('/note/soon')} className={`${isRemindersSelected} side-btn`}>
+                <div onClick={()=> {resetAll()
+                                    setIsRemindersSelected('selected')
+                                    mainDisplay(false)
+                                    navigate('/note/soon')}}  
+                                    className={`${isRemindersSelected} side-btn`}>
                     <img src="assets\img\reminders.svg" alt="" />
                     {!isClosed && <p>Reminders</p>}
                 </div>
 
-                <div onClick={()=> navigate('/note/soon')} className={`${isLabelsSelected} side-btn`} >
+                <div onClick={()=> {resetAll()
+                                    setIsLabelsSelected('selected')
+                                    mainDisplay(false)
+                                    navigate('/note/soon')}} 
+                                    className={`${isLabelsSelected} side-btn`} >
                     <img src="assets\img\edit_labels.svg" alt="" />
                     {!isClosed && <p>Edit labels</p>}
                 </div>
 
-                <div onClick={()=> navigate('/note/soon')} className={`${isArchiveSelected} side-btn`} >
+                <div onClick={()=> {resetAll()
+                                    setIsArchiveSelected('selected')
+                                    mainDisplay(false)
+                                    navigate('/note/soon')}}  
+                                    className={`${isArchiveSelected} side-btn`} >
                     <img src="assets\img\archive.svg" alt="" />
                     {!isClosed && <p>Archive</p>}
                 </div>
 
-                <div onClick={()=> navigate('/note/trash')} className={`${isTrashSelected} side-btn`}>
+                <div onClick={()=> {resetAll()
+                                    setIsTrashSelected('selected')
+                                    mainDisplay(false)
+                                    navigate('/note/trash')}}  
+                                    className={`${isTrashSelected} side-btn`}>
                     <img src="assets\img\trash.svg" alt="" />
                     {!isClosed && <p>Trash</p>}
                 </div>

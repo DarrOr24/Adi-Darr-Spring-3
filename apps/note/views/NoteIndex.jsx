@@ -15,12 +15,18 @@ export function NoteIndex() {
     const [searchParams, setSearchParams] = useSearchParams()
     // const [ filterBy, setFilterBy ] = useState(noteService.getFilterFromSearchParams(searchParams))
     const [ filterBy, setFilterBy ] = useState({})
+    const [ showFilterandAdd, setShowFilterAndAdd ] = useState(true) 
     
     
     useEffect(() => {
         noteService.query(filterBy)
             .then(notes => setNotes(notes))
     }, [filterBy])
+
+    function mainDisplay(stat){
+        setShowFilterAndAdd(stat)
+
+    }
 
     function addNewNote(note){//Note already saved to service
         if (!note.isPinned) setNotes([...notes, note])
@@ -93,15 +99,16 @@ export function NoteIndex() {
 
             <img height="50" src="assets\img\keep-icon.png" alt="" />
             <h1>Keep</h1>
-            <NoteFilter filterBy={filterBy} onFilter={onSetFilterBy} />
+            {showFilterandAdd &&  <NoteFilter filterBy={filterBy} onFilter={onSetFilterBy} />}
+            
 
         </header>
 
         <main >
 
-            <NoteSideMenu mainDisplay={'notes'} />
+            <NoteSideMenu mainDisplay={mainDisplay} />
 
-            <AddNote notes={notes} onAdd={addNewNote} onPinNote ={placeNote} />
+            {showFilterandAdd && <AddNote notes={notes} onAdd={addNewNote} onPinNote ={placeNote} />} 
                     
             {/* <NoteList notes={notes} onRemove={onRemove} onEdit={onEdit} onPinNote={onPinNote} onDuplicate={onDuplicate} /> */}
             

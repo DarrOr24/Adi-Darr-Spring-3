@@ -2,12 +2,10 @@ const { useState } = React
 
 const { useNavigate } = ReactRouter
 
-
 import { noteService } from "../services/note.service.js";
 import { ActionBtns } from "./ActionBtns.jsx";
 import { NoteForm } from "./NoteForm.jsx";
 import { NotePin } from "./NotePin.jsx";
-import { NoteToDosAdd } from "./NoteToDosAdd.jsx";
 import { NoteToDosEdit } from "./NoteToDosEdit.jsx";
 
 export function NoteEdit2({ noteToEdit, onClose, onEdit, onSetColorNote}){

@@ -1,18 +1,12 @@
 const { useState, useEffect } = React
 
 import { noteService } from "../services/note.service.js";
-import { NoteSideMenu } from "./NoteSideMenu.jsx";
-import { TrashNotePreview } from "./TrashNotePreview.jsx";
-import { NoteFilter } from "./NoteFilter.jsx";
 import { TrashNoteList } from "./TrashNoteList.jsx";
 
 
 export function TrashNoteIndex (){
     const [trashNotes, setTrashNotes] = useState([])
     const [isLoading, setIsLoading] = useState(false)
-    
-    
-    const mainDisplay = 'trash'
     
     useEffect(() => {
         noteService.loadFromTrash()
@@ -41,20 +35,10 @@ export function TrashNoteIndex (){
     }
 
    
-
     if (isLoading) return <div className="loader"></div>
-
     return <section className="note-index trash-note-index full" >
 
-       
+        <TrashNoteList trashNotes={trashNotes} onRestoreTrash={onRestoreTrash} onPermanentDelete={onPermanentDelete} />
 
-        {/* <main className="trash-index-main"> */}
-
-            
-
-            <TrashNoteList trashNotes={trashNotes} onRestoreTrash={onRestoreTrash} onPermanentDelete={onPermanentDelete} />
-
-        {/* </main> */}
-        
     </section>
 }

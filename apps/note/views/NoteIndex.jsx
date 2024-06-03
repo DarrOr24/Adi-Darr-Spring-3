@@ -101,7 +101,6 @@ export function NoteIndex() {
             <img height="50" src="assets\img\keep-icon.png" alt="" />
             <h1>Keep</h1>
             {showFilterandAdd &&  <NoteFilter filterBy={filterBy} onFilter={onSetFilterBy} />}
-            
 
         </header>
 
@@ -110,8 +109,7 @@ export function NoteIndex() {
             <NoteSideMenu mainDisplay={mainDisplay} />
 
             {showFilterandAdd && <AddNote notes={notes} onAdd={addNewNote} onPinNote ={placeNote} />} 
-           
-                    
+                  
             <Outlet context={{
                     notes,
                     onRemove,

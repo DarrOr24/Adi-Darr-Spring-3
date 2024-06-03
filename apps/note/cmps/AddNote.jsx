@@ -6,10 +6,7 @@ const { useNavigate } = ReactRouter
 import { noteService } from "../services/note.service.js";
 import { ActionBtns } from "./ActionBtns.jsx";
 import { NoteForm } from "./NoteForm.jsx";
-import { NoteImg } from "./NoteImg.jsx";
-import { NoteImgAdd } from "./NoteImgAdd.jsx";
 import { NotePin } from "./NotePin.jsx";
-import { NoteToDosAdd } from "./NoteToDosAdd.jsx";
 import { NoteToDosEdit } from "./NoteToDosEdit.jsx";
 
 export function AddNote({onAdd}){
@@ -97,15 +94,6 @@ export function AddNote({onAdd}){
         setNote(noteFromAddImg)
     }
 
-    // function handleTodos(todosObj){
-        
-        
-    //     setNote(prevNote => ({
-    //         ...prevNote,
-    //         info: {...prevNote.info, todos: {...todosObj}}
-    //     }))
-        
-    // }
 
     function handleTodos(infoObj){
         
@@ -167,8 +155,7 @@ function DynamicCmp(props){
         case 'NoteImg':
         case 'NoteTxt':
             return <NoteForm  {...props}/>
-        case 'NoteTodo':
-            // return <NoteToDosAdd {...props}/>     
+        case 'NoteTodo':  
             return <NoteToDosEdit {...props}/>     
     }
 }

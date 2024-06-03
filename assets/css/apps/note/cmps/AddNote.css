@@ -48,7 +48,7 @@
 
 .add-note .take-a-note .note-video-add {
     position: absolute;
-    top: 0;
+    top: 35px;
     right: 0;
     height: max-content;
     display:grid;  

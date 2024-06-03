@@ -1,5 +1,5 @@
 const { useState, useEffect } = React
-const { Link, useNavigate} = ReactRouterDOM
+const { useNavigate} = ReactRouterDOM
 
 
 export function NoteSideMenu({mainDisplay}){
@@ -14,12 +14,9 @@ export function NoteSideMenu({mainDisplay}){
     const navigate = useNavigate()
 
     useEffect(() => {
-        console.log(mainDisplay)
-        if (mainDisplay === 'notes') setIsNoteSelected('selected')
-        if (mainDisplay === 'trash') setIsTrashSelected('selected')
+        setIsNoteSelected('selected')
     }, [])
 
-    
     function toggleSideMenu(){
         setIsClosed(prevIsClosed => !prevIsClosed)
     }

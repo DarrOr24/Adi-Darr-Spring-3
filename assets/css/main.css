@@ -24,14 +24,13 @@
 /* Keeper Views */
 
 @import './apps/note/views/NoteIndex.css';
-@import './apps/note/views/TrashNoteIndex.css';
-@import './apps/note/views/UnderConstruction.css';
 
 /* Keeper Cmps */
+@import './apps/note/cmps/NoteList.css';
+@import './apps/note/cmps/TrashNoteIndex.css';
 @import './apps/note/cmps/NoteSideMenu.css';
 @import './apps/note/cmps/ActionBtns.css';
 @import './apps/note/cmps/NoteFilter.css';
-@import './apps/note/cmps/NoteList.css';
 @import './apps/note/cmps/NotePreview.css';
 @import './apps/note/cmps/AddNote.css';
 @import './apps/note/cmps/NoteEdit.css';
@@ -45,6 +44,7 @@
 @import './apps/note/cmps/NoteTodosEdit.css';
 @import './apps/note/cmps/TrashNotePreview.css';
 @import './apps/note/cmps/TrashNoteList.css';
+@import './apps/note/cmps/UnderConstruction.css';
 
 /* Keeper Setup */
 
